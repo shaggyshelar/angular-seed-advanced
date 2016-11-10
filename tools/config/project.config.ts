@@ -8,8 +8,6 @@ import { SeedAdvancedConfig } from './seed-advanced.config';
 export class ProjectConfig extends SeedAdvancedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
-  FONTS_DEST = `${this.APP_DEST}/font-awesome/fonts`;
-  FONTS_SRC = ['node_modules/font-awesome/fonts/**'];
 
   constructor() {
     super();
@@ -22,9 +20,6 @@ export class ProjectConfig extends SeedAdvancedConfig {
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      { src: 'primeng/resources/primeng.min.css', inject: true },
-      { src: 'primeng/resources/themes/omega/theme.css', inject: true },
-      { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
     ];
 
     // Add `local` third-party libraries to be injected/bundled.

@@ -406,14 +406,6 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/*': '/app/*',
-
-      //Custom dependencies
-      'moment': `${this.APP_BASE}node_modules/moment`,
-      'fullcalender': `${this.APP_BASE}node_modules/fullcalender`,
-      'primeng': `${this.APP_BASE}node_modules/primeng`,
-      'font-awesome': `${this.APP_BASE}node_modules/font-awesome`,
-
-
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
@@ -489,19 +481,7 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
-      },
-      'lodash': {
-        main: 'lodash.js',
-        defaultExtension: 'js'
-      },
-      'moment': {
-        map: 'moment.js',
-        type: 'cjs',
-        defaultExtension: 'js'
-      },
-      'primeng': { 
-        defaultExtension: 'js' 
-       }		       }
+      }
     }
   };
 
