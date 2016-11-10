@@ -24,6 +24,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
+      { src: 'font-awesome/css/font-awesome.min.css', inject: true },
       // { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
     ];
 

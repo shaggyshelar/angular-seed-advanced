@@ -1,4 +1,7 @@
-'use strict';
+
+importScripts('node_modules/sw-toolbox/sw-toolbox.js');
+
+//toolbox.options.debug = true;
 
 self.addEventListener('install', function (event) {
     self.skipWaiting();
