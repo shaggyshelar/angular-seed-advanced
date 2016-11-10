@@ -409,9 +409,9 @@ export class SeedConfig {
 
       //Custom dependencies
       'moment': `${this.APP_BASE}node_modules/moment`,
-      'fullcalender': `${this.APP_BASE}node_modules/fullcalender`,
+      // 'fullcalender': `${this.APP_BASE}node_modules/fullcalender`,
       'primeng': `${this.APP_BASE}node_modules/primeng`,
-      'font-awesome': `${this.APP_BASE}node_modules/font-awesome`,
+       'font-awesome': `${this.APP_BASE}node_modules/font-awesome`,
 
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
@@ -493,12 +493,12 @@ export class SeedConfig {
         main: 'lodash.js',
         defaultExtension: 'js'
       },
+      'primeng': {
+        defaultExtension: 'js'
+      },
       'moment': {
         map: 'moment.js',
         type: 'cjs',
-        defaultExtension: 'js'
-      },
-      'primeng': {
         defaultExtension: 'js'
       }
   }
