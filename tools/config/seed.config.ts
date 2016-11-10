@@ -501,7 +501,6 @@ export class SeedConfig {
       'primeng': {
         defaultExtension: 'js'
       }
-    }
   }
 };
 
