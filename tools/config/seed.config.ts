@@ -406,6 +406,13 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/*': '/app/*',
+
+      //Custom dependencies
+      'moment': `${this.APP_BASE}node_modules/moment`,
+      'fullcalender': `${this.APP_BASE}node_modules/fullcalender`,
+      'primeng': `${this.APP_BASE}node_modules/primeng`,
+      'font-awesome': `${this.APP_BASE}node_modules/font-awesome`,
+
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
@@ -481,143 +488,156 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
+      },
+      'lodash': {
+        main: 'lodash.js',
+        defaultExtension: 'js'
+      },
+      'moment': {
+        map: 'moment.js',
+        type: 'cjs',
+        defaultExtension: 'js'
+      },
+      'primeng': {
+        defaultExtension: 'js'
       }
     }
-  };
+  }
+};
 
-  /**
-   * The Autoprefixer configuration for the application.
-   * @type {Array}
-   */
-  BROWSER_LIST = [
-    'ie >= 10',
-    'ie_mob >= 10',
-    'ff >= 30',
-    'chrome >= 34',
-    'safari >= 7',
-    'opera >= 23',
-    'ios >= 7',
-    'android >= 4.4',
-    'bb >= 10'
-  ];
+/**
+ * The Autoprefixer configuration for the application.
+ * @type {Array}
+ */
+BROWSER_LIST = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4',
+  'bb >= 10'
+];
 
-  /**
-   * White list for CSS color guard
-   * @type {[string, string][]}
-   */
-  COLOR_GUARD_WHITE_LIST: [string, string][] = [
-  ];
+/**
+ * White list for CSS color guard
+ * @type {[string, string][]}
+ */
+COLOR_GUARD_WHITE_LIST: [string, string][] = [
+];
 
   protected DEV_REWRITE_RULES = [
-    {
-      from: /^\/node_modules\/.*$/,
-      to: (context: any) => context.parsedUrl.pathname
-    },
-    {
-      from: /^\/app\/.*$/,
-      to: (context: any) => context.parsedUrl.pathname
-    },
-    {
-      from: /^\/assets\/.*$/,
-      to: (context: any) => context.parsedUrl.pathname
-    },
-    {
-      from: /^\/css\/.*$/,
-      to: (context: any) => context.parsedUrl.pathname
-    }
-  ];
+  {
+    from: /^\/node_modules\/.*$/,
+    to: (context: any) => context.parsedUrl.pathname
+  },
+  {
+    from: /^\/app\/.*$/,
+    to: (context: any) => context.parsedUrl.pathname
+  },
+  {
+    from: /^\/assets\/.*$/,
+    to: (context: any) => context.parsedUrl.pathname
+  },
+  {
+    from: /^\/css\/.*$/,
+    to: (context: any) => context.parsedUrl.pathname
+  }
+];
 
+/**
+ * Configurations for NPM module configurations. Add to or override in project.config.ts.
+ * If you like, use the mergeObject() method to assist with this.
+ */
+PLUGIN_CONFIGS: any = {
   /**
-   * Configurations for NPM module configurations. Add to or override in project.config.ts.
-   * If you like, use the mergeObject() method to assist with this.
+   * The BrowserSync configuration of the application.
+   * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
+   * running `npm start` (tested with serve.dev).
+   * Example: `npm start -- --b`
+   * @type {any}
    */
-  PLUGIN_CONFIGS: any = {
-    /**
-     * The BrowserSync configuration of the application.
-     * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
-     * running `npm start` (tested with serve.dev).
-     * Example: `npm start -- --b`
-     * @type {any}
-     */
-    'browser-sync': {
-      middleware: [require('connect-history-api-fallback')({
-        index: `${this.APP_BASE}index.html`
-      })],
-      port: this.PORT,
-      startPath: this.APP_BASE,
-      open: argv['b'] ? false : true,
-      injectChanges: false,
-      server: {
-        baseDir: `${this.DIST_DIR}/empty/`,
-        routes: {
-          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
-          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
-          [`${this.APP_BASE}node_modules`]: 'node_modules',
-          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
-        }
-      }
-    },
-
-    // Note: you can customize the location of the file
-    'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
-
-    /**
-     * The options to pass to gulp-sass (and then to node-sass).
-     * Reference: https://github.com/sass/node-sass#options
-     * @type {object}
-     */
-    'gulp-sass': {
-      includePaths: ['./node_modules/']
-    },
-
-    /**
-     * The options to pass to gulp-concat-css
-     * Reference: https://github.com/mariocasciaro/gulp-concat-css
-     * @type {object}
-     */
-    'gulp-concat-css': {
-      targetFile: this.CSS_PROD_BUNDLE,
-      options: {
-        rebaseUrls: false
+  'browser-sync': {
+    middleware: [require('connect-history-api-fallback')({
+      index: `${this.APP_BASE}index.html`
+    })],
+    port: this.PORT,
+    startPath: this.APP_BASE,
+    open: argv['b'] ? false : true,
+    injectChanges: false,
+    server: {
+      baseDir: `${this.DIST_DIR}/empty/`,
+      routes: {
+        [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
+        [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+        [`${this.APP_BASE}node_modules`]: 'node_modules',
+        [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
       }
     }
-  };
+  },
+
+  // Note: you can customize the location of the file
+  'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
 
   /**
-   * Recursively merge source onto target.
-   * @param {any} target The target object (to receive values from source)
-   * @param {any} source The source object (to be merged onto target)
+   * The options to pass to gulp-sass (and then to node-sass).
+   * Reference: https://github.com/sass/node-sass#options
+   * @type {object}
    */
-  mergeObject(target: any, source: any) {
-    const deepExtend = require('deep-extend');
-    deepExtend(target, source);
-  }
+  'gulp-sass': {
+    includePaths: ['./node_modules/']
+  },
 
   /**
-   * Locate a plugin configuration object by plugin key.
-   * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
+   * The options to pass to gulp-concat-css
+   * Reference: https://github.com/mariocasciaro/gulp-concat-css
+   * @type {object}
    */
-  getPluginConfig(pluginKey: string): any {
-    if (this.PLUGIN_CONFIGS[pluginKey]) {
-      return this.PLUGIN_CONFIGS[pluginKey];
-    }
-    return null;
-  }
-
-  getInjectableStyleExtension() {
-    return this.BUILD_TYPE === BUILD_TYPES.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
-  }
-
-  addPackageBundles(pack: ExtendPackages) {
-
-    if (pack.path) {
-      this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
-    }
-
-    if (pack.packageMeta) {
-      this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
+  'gulp-concat-css': {
+    targetFile: this.CSS_PROD_BUNDLE,
+    options: {
+      rebaseUrls: false
     }
   }
+};
+
+/**
+ * Recursively merge source onto target.
+ * @param {any} target The target object (to receive values from source)
+ * @param {any} source The source object (to be merged onto target)
+ */
+mergeObject(target: any, source: any) {
+  const deepExtend = require('deep-extend');
+  deepExtend(target, source);
+}
+
+/**
+ * Locate a plugin configuration object by plugin key.
+ * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
+ */
+getPluginConfig(pluginKey: string): any {
+  if (this.PLUGIN_CONFIGS[pluginKey]) {
+    return this.PLUGIN_CONFIGS[pluginKey];
+  }
+  return null;
+}
+
+getInjectableStyleExtension() {
+  return this.BUILD_TYPE === BUILD_TYPES.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
+}
+
+addPackageBundles(pack: ExtendPackages) {
+
+  if (pack.path) {
+    this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+  }
+
+  if (pack.packageMeta) {
+    this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
+  }
+}
 
 }
 

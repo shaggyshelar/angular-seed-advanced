@@ -45,7 +45,7 @@ tmp
 
 src/**/*.js
 src/**/*.js.map
-!src/sw.js
+!src/server/**/*.js
 !src/client/app/frameworks/test
 nativescript/app/css
 nativescript/hooks
