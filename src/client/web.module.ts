@@ -43,7 +43,7 @@ let routerModule = RouterModule.forRoot(routes);
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
   // desktop (electron) must use hash
-  routerModule = RouterModule.forRoot(routes, {useHash: true});
+  routerModule = RouterModule.forRoot(routes, { useHash: true });
 }
 
 declare var window, console;
@@ -93,3 +93,14 @@ export function cons() {
 })
 
 export class WebModule { }
+
+
+let envConfig = JSON.parse('<%= ENV_CONFIG %>');
+if (envConfig.ENV === 'PROD') {
+  if ('serviceWorker' in navigator) {
+    (<any>navigator).serviceWorker.register('./sw.js').then((registration: any) =>
+      console.log('ServiceWorker registration successful with scope: ', registration.scope))
+      .catch((err: any) =>
+        console.log('ServiceWorker registration failed: ', err));
+  }
+}
