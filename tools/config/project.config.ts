@@ -21,11 +21,15 @@ export class ProjectConfig extends SeedAdvancedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+      {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
       // { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
+      { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
+      { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
+      { src: 'bootstrap-switch/dist/js/bootstrap-switch.min.js', inject: 'libs' },
+      { src: 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css', inject: true },
     ];
 
     // Add `local` third-party libraries to be injected/bundled.

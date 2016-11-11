@@ -412,6 +412,7 @@ export class SeedConfig {
       'fullcalendar': `${this.APP_BASE}node_modules/fullcalendar`,
       'primeng': `${this.APP_BASE}node_modules/primeng`,
       'font-awesome': `${this.APP_BASE}node_modules/font-awesome`,
+      'localforage': `${this.APP_BASE}node_modules/localforage`,
 
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
