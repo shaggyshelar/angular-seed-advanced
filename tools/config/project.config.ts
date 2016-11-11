@@ -22,9 +22,10 @@ export class ProjectConfig extends SeedAdvancedConfig {
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
-      { src: 'primeng/resources/primeng.min.css', inject: true },
+      { src: 'primeng/resources/primeng.min.css', inject: 'libs' },
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
+      { src: 'simple-line-icons/css/simple-line-icons.css', inject: true },
       // { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
       { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
       { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
@@ -42,6 +43,16 @@ export class ProjectConfig extends SeedAdvancedConfig {
       { src: `${this.APP_SRC}/assets/layouts/layout4/css/layout.min.css`, inject: true, vendor: false },
       { src: `${this.APP_SRC}/assets/layouts/layout4/css/themes/default.min.css`, inject: true, vendor: false },
       { src: `${this.APP_SRC}/css/custom.css`, inject: true, vendor: false },
+
+      //TODO: Check if we can use it from npm packages
+      // { src: `${this.APP_SRC}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
+      // { src: `${this.APP_SRC}/assets/global/plugins/jquery.blockui.min.js`, inject: true, vendor: false },
+      
+      { src: `${this.APP_SRC}/assets/global/scripts/app.min.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/layout.min.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/demo.min.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-sidebar.min.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-nav.min.js`, inject: true, vendor: false },
     ];
 
     /* Add to or override NPM module configurations: */
