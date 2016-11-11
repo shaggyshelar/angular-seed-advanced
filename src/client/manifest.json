@@ -1,8 +1,9 @@
 {
     "name": "Linkup",
     "short_name": "Linkup",
-    "start_url": "./?utm_source=web_app_manifest",
+    "start_url": "/",
     "display": "standalone",
+    "scope": "/",
     "icons": [
         {
             "src": "assets/images/logo48.png",

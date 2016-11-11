@@ -3,6 +3,10 @@ importScripts('node_modules/sw-toolbox/sw-toolbox.js');
 
 //toolbox.options.debug = true;
 
+toolbox.precache(['/']);
+
+toolbox.router.get('/',toolbox.fastest);
+
 self.addEventListener('install', function (event) {
     self.skipWaiting();
     console.log('Installed Service Worker', event);
