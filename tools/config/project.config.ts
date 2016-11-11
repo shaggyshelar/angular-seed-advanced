@@ -21,7 +21,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+      { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
@@ -37,6 +37,11 @@ export class ProjectConfig extends SeedAdvancedConfig {
       ...this.APP_ASSETS,
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
+      { src: `${this.APP_SRC}/assets/global/css/components.min.css`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/global/css/plugins.min.css`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/layout4/css/layout.min.css`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/layout4/css/themes/default.min.css`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/css/custom.css`, inject: true, vendor: false },
     ];
 
     /* Add to or override NPM module configurations: */
