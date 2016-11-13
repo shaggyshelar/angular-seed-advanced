@@ -25,7 +25,7 @@ after_failure:
   - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 
 branches:
-  only: master
+  only: production
 
 notifications:
   email: true
