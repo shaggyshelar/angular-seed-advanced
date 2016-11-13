@@ -19,6 +19,7 @@ import { CoreModule } from '../../frameworks/core/core.module';
 import { AnalyticsModule } from '../../frameworks/analytics/analytics.module';
 import { MultilingualModule } from '../../frameworks/i18n/multilingual.module';
 import { HomeComponent } from './home.component';
+import { LoginService } from '../../shared/services/login.service';
 
 // test module configuration for each test
 const testModuleConfig = () => {
@@ -33,6 +34,7 @@ const testModuleConfig = () => {
     providers: [
       NameListService,
       BaseRequestOptions,
+      LoginService,
       MockBackend,
       {
         provide: Http, useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {

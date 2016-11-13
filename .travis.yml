@@ -33,9 +33,16 @@ notifications:
     on_success: change  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
+  slack: espl-ebs:l7jm7bR8edexKPPlq0Z24mWH
 
 cache:
   directories: node_modules
 
 script:
   - npm run test
+
+#deploy:
+  #provider: openshift
+  #user: "YOU USER NAME"
+  #password: "YOUR PASSWORD" # can be encrypted
+  #domain: "YOUR OPENSHIFT DOMAIN"

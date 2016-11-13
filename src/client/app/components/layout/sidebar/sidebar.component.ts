@@ -1,15 +1,15 @@
-import {Component,  trigger, transition, style, animate, state} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
-declare var $:any;
+declare var $: any;
 
 @Component({
   moduleId: module.id,
-  selector: 'sidebar',
+  selector: 'sidebar-menu',
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css'],
 })
-export class SidebarComponent  {
+export class SidebarComponent {
   isUserMenuOpen: boolean;
   constructor(private loginService: LoginService, private _router: Router) {
     this.isUserMenuOpen = false;
@@ -20,10 +20,10 @@ export class SidebarComponent  {
     this._router.navigate(['/login']);
   }
   toggleUserMenu() {
-    if(this.isUserMenuOpen) {
+    if (this.isUserMenuOpen) {
       $('.user-menu').slideUp();
-    }else {
-       $('.user-menu').slideDown();
+    } else {
+      $('.user-menu').slideDown();
     }
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
