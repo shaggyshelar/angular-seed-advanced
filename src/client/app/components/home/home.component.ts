@@ -1,10 +1,12 @@
 // libs
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
+import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // app
 import { BaseComponent, RouterExtensions } from '../../frameworks/core/index';
 import { NAME_LIST_ACTIONS } from '../../frameworks/sample/index';
+import { LoginService } from '../../shared/services/login.service';
 
 @BaseComponent({
   moduleId: module.id,
@@ -12,12 +14,18 @@ import { NAME_LIST_ACTIONS } from '../../frameworks/sample/index';
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public names$: Observable<any>;
   public newName: string = '';
 
-  constructor(private store: Store<any>, public routerext: RouterExtensions) {
+  constructor(private loginService: LoginService, private store: Store<any>, public routerext: RouterExtensions, private _router: Router) {
     this.names$ = store.select('names');
+  }
+
+  ngOnInit() {
+    if (!this.loginService.isAuthenticated()) {
+     this._router.navigate(['/login']);
+    }
   }
 
   /*
