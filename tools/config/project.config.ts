@@ -1,5 +1,6 @@
 import { join } from 'path';
 import { SeedAdvancedConfig } from './seed-advanced.config';
+// import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -54,6 +55,31 @@ export class ProjectConfig extends SeedAdvancedConfig {
       { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-sidebar.min.js`, inject: true, vendor: false },
       { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-nav.min.js`, inject: true, vendor: false },
     ];
+
+    // Add packages (e.g. lodash)
+    // let additionalPackages: ExtendPackages[] = [{
+    //   name: 'lodash',
+    //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+    //   packageMeta: {
+    //     main: 'index.js',
+    //     defaultExtension: 'js'
+    //   }
+    // }];
+    //
+    // or
+    //
+    // let additionalPackages: ExtendPackages[] = [];
+    //
+    // additionalPackages.push({
+    //   name: 'lodash',
+    //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+    //   packageMeta: {
+    //     main: 'index.js',
+    //     defaultExtension: 'js'
+    //   }
+    // });
+    //
+    // this.addPackagesBundles(additionalPackages);
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
