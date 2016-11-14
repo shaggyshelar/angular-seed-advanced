@@ -25,16 +25,13 @@ after_failure:
   - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 
 after_success:
-- echo "Starting production build..."
 - npm run build.prod
-- echo "Finished production build..."
 - cd ./dist/prod
-- eval "$(ssh-agent -s)"
-- chmod 600 .travis/deploy_key.pem
-- ssh-add .travis/deploy_key.pem
-- git remote add deploy ssh://5809e8412d5271cc910000fe@sh-sagarshelar.rhcloud.com/~/git/sh.git/
-- git push deploy
-- echo "Deployment Sucessfulllllllllllllll...."
+- ls
+- git init
+- git add .
+- git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m AutoDeployFromTravis
+- git push -f -q https://04830d9bc64e0e173cbfef3143b84e25a2f26e92@github.com/shaggyshelar/Temp.git master
 
 branches:
   only: framework
