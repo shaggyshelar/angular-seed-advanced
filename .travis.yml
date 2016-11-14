@@ -24,8 +24,20 @@ before_script:
 after_failure:
   - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 
+after_success:
+- echo "Starting production build..."
+- npm run build.prod
+- echo "Finished production build..."
+- cd ./dist/prod
+- eval "$(ssh-agent -s)"
+- chmod 600 .travis/deploy_key.pem
+- ssh-add .travis/deploy_key.pem
+- git remote add deploy ssh://5809e8412d5271cc910000fe@sh-sagarshelar.rhcloud.com/~/git/sh.git/
+- git push deploy
+- echo "Deployment Sucessfulllllllllllllll...."
+
 branches:
-  only: master
+  only: framework
 
 notifications:
   email: true
@@ -39,3 +51,11 @@ cache:
 
 script:
   - npm run test
+
+deploy:
+  provider: openshift
+  user: shaggyshelar
+  password:
+    secure: VZzgGOKWPjwmLTE+pIy6hwWI0ZPxD1V5TqEEOqajZKX26xz8mWhQLXEmcy6LInYhj/9phVxlkQE1xN5DsHAApykAMDyFbplVAlnbtKWEJWxI2MFsNgYhXlCZZjNUGuC3bM7QCntm89mfycSdgnNBgxIy33tuJ6mZ5XMVJAYBNhKjFkfRTSTAywT+hM2WitoSr7pncPqRWs4Ddy4alD1+iAVk6CrVoJEd/U9GfcApT+G0uP5aQU2yxKTsUNE/n0ffBgJWMtzDTIGwhKAdIzTEhF5sMS07Ht/dNpxunFC44aEJOMs8MBkpSfYsXTz5ZFa/yQswQOxDtNFib740JFSy7BSGJlDNyexTUIqaPBzd13KFlPiBTjnMtjaia4GLutvqCTcm+9F2o0rjzgYpOfCn72FO7ljV3oP468zJWkMPBc4FCnBpQ/LC9Baq+BdkS+gQXO9xZ9x1og9iTpXI4UXsqe6XFQW4vi7t4hJeGDH9Q5o1v8zx6LJnE8cxULLStd0YsjbXoPzsagMjMvarl4afPElDxxbM51DTgjEVNpxVuw1TZozNljP+YoQ79xrglWnlEEAVDZm+zPWeOgwrSx783ut8/VieC1huokE5UfiIFBulP737PPLjpElxedJxGYZlEMegcqvbE7oO6UMRmQD/R9i3dBZMVL8+2eEvCRNKvys=
+  app: sh
+  domain: sagarshelar
