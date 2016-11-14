@@ -25,13 +25,15 @@ after_failure:
   - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 
 after_success:
-- npm run build.prod
-- cd ./dist/prod
-- ls
-- git init
-- git add .
-- git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m AutoDeployFromTravis
-- git push -f -q https://04830d9bc64e0e173cbfef3143b84e25a2f26e92@github.com/shaggyshelar/Temp.git master
+if [ -n "$GITHUB_API_KEY" ]; then
+  - npm run build.prod
+  - cd ./dist/prod
+  - ls
+  - git init
+  - git add .
+  - git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m AutoDeployFromTravis
+  - git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
+fi
 
 branches:
   only: framework
@@ -49,10 +51,3 @@ cache:
 script:
   - npm run test
 
-deploy:
-  provider: openshift
-  user: shaggyshelar
-  password:
-    secure: VZzgGOKWPjwmLTE+pIy6hwWI0ZPxD1V5TqEEOqajZKX26xz8mWhQLXEmcy6LInYhj/9phVxlkQE1xN5DsHAApykAMDyFbplVAlnbtKWEJWxI2MFsNgYhXlCZZjNUGuC3bM7QCntm89mfycSdgnNBgxIy33tuJ6mZ5XMVJAYBNhKjFkfRTSTAywT+hM2WitoSr7pncPqRWs4Ddy4alD1+iAVk6CrVoJEd/U9GfcApT+G0uP5aQU2yxKTsUNE/n0ffBgJWMtzDTIGwhKAdIzTEhF5sMS07Ht/dNpxunFC44aEJOMs8MBkpSfYsXTz5ZFa/yQswQOxDtNFib740JFSy7BSGJlDNyexTUIqaPBzd13KFlPiBTjnMtjaia4GLutvqCTcm+9F2o0rjzgYpOfCn72FO7ljV3oP468zJWkMPBc4FCnBpQ/LC9Baq+BdkS+gQXO9xZ9x1og9iTpXI4UXsqe6XFQW4vi7t4hJeGDH9Q5o1v8zx6LJnE8cxULLStd0YsjbXoPzsagMjMvarl4afPElDxxbM51DTgjEVNpxVuw1TZozNljP+YoQ79xrglWnlEEAVDZm+zPWeOgwrSx783ut8/VieC1huokE5UfiIFBulP737PPLjpElxedJxGYZlEMegcqvbE7oO6UMRmQD/R9i3dBZMVL8+2eEvCRNKvys=
-  app: sh
-  domain: sagarshelar
