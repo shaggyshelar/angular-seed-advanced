@@ -13,6 +13,7 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start
   2>&1 &"; fi
+- chmod +x ./slacktee.sh
 after_failure:
 - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 - ./slacktee.sh -t "$TRAVIS_REPO_SLUG $TRAVIS_JOB_NUMBER build directory"

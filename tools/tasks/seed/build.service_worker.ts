@@ -1,4 +1,3 @@
-import * as gulp from 'gulp';
 import Config from '../../config';
 export = () => {
     var path = require('path');
