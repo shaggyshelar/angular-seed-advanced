@@ -21,10 +21,10 @@ after_success: |
   if [ -n "$GITHUB_API_KEY" ]; then
     npm run build.prod
     cd ./dist/prod
-    echo $TRAVIS_EVENT_TYPE
     git init
     git add .
-    git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m Build $TRAVIS_BUILD_NUMBER, ($TRAVIS_BUILD_ID), Event Type- $TRAVIS_EVENT_TYPE
+    ./slacktee.sh -t "$TRAVIS_REPO_SLUG $TRAVIS_JOB_NUMBER build directory"    
+    git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m Commit From Travis CI
     git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     cd ..
     cd ..
