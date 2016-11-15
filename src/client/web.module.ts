@@ -98,7 +98,7 @@ export class WebModule { }
 let envConfig = JSON.parse('<%= ENV_CONFIG %>');
 if (envConfig.ENV === 'PROD') {
   if ('serviceWorker' in navigator) {
-    (<any>navigator).serviceWorker.register('./sw.js').then((registration: any) =>
+    (<any>navigator).serviceWorker.register('./service-worker.js').then((registration: any) =>
       console.log('ServiceWorker registration successful with scope: ', registration.scope))
       .catch((err: any) =>
         console.log('ServiceWorker registration failed: ', err));
