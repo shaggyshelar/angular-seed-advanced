@@ -23,11 +23,11 @@ after_success: |
     cd ./dist/prod
     git init
     git add .
-    git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m Commit From Travis CI
+    git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m CommitFromTravisCI
     git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     cd ..
     cd ..
-    ls |./slacktee.sh -t "Message from Travis Build"
+    ls | ./slacktee.sh -t "Message from Travis Build"
   fi
 branches:
   only: framework
