@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.loginService.isAuthenticated()) {
-     this._router.navigate(['/login']);
-    }
+    // if (!this.loginService.isAuthenticated()) {
+    //  this._router.navigate(['/login']);
+    // }
   }
 
   /*
