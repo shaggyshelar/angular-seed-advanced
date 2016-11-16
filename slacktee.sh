@@ -7,8 +7,8 @@ webhook_url=""       # Incoming Webhooks integration URL
 upload_token=""      # The user's API authentication token, only used for file uploads
 channel="linkup"    # Default channel to post messages. '#' is prepended, if it doesn't start with '#' or '@'.
 tmp_dir="/tmp"       # Temporary file is created in this directory.
-username="slacktee"  # Default username to post messages.
-icon="ghost"         # Default emoji to post messages. Don't wrap it with ':'. See http://www.emoji-cheat-sheet.com; can be a url too.
+username="TravisBot"  # Default username to post messages.
+icon="envelope"         # Default emoji to post messages. Don't wrap it with ':'. See http://www.emoji-cheat-sheet.com; can be a url too.
 attachment=""        # Default color of the attachments. If an empty string is specified, the attachments are not used.
 
 # ----------
