@@ -15,7 +15,7 @@
     width: 60px;
     height: 60px;
     margin: 0px auto 5px;
-    background: url("../assets/layouts/layout4/img/avatar9.jpg") left top / 60px 60px no-repeat;
+    background: url("../assets/images/avatar.png") left top / 60px 60px no-repeat;
 }
  .profile .profile-name {
     display: inline-block;
