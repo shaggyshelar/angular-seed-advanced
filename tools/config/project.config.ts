@@ -9,8 +9,8 @@ import { SeedAdvancedConfig } from './seed-advanced.config';
 export class ProjectConfig extends SeedAdvancedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
-  FONTS_DEST = `${this.APP_DEST}/font-awesome/fonts`;
-  FONTS_SRC = ['node_modules/font-awesome/fonts/**'];
+  FONTS_DEST = `${this.APP_DEST}/fonts`;
+  FONTS_SRC = ['node_modules/font-awesome/fonts/**','node_modules/simple-line-icons/fonts/**'];
 
   constructor() {
     super();

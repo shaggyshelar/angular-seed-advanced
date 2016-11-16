@@ -101,7 +101,7 @@ export class CustomAnalytics extends Analytics {
 
   constructor( @Inject(AnalyticsService) public analytics: AnalyticsService, public http: Http) {
     super(analytics);
-    this.baseURL = 'http://localhost:4000/';
+    this.baseURL = '/';
   }
 
   protected toURL(apiURL: string): string {
