@@ -153,6 +153,7 @@
     "serve-static": "^1.11.1",
     "slash": "~1.0.0",
     "supports-color": "^3.1.2",
+    "sw-precache": "^4.2.1",
     "systemjs-builder": "0.15.33",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",

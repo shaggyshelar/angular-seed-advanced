@@ -54,6 +54,8 @@ gulp.task('build.prod', (done: any) =>
               'build.bundles.app',
               'minify.bundles',
               'build.index.prod',
+              'build.server.prod',
+              'build.service_worker',
               done));
 
 // --------------
