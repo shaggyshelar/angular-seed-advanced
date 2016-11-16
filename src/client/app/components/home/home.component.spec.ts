@@ -20,33 +20,49 @@ import { AnalyticsModule } from '../../frameworks/analytics/analytics.module';
 import { MultilingualModule } from '../../frameworks/i18n/multilingual.module';
 import { HomeComponent } from './home.component';
 import { LoginService } from '../../shared/services/login.service';
-
-// test module configuration for each test
-const testModuleConfig = () => {
-  TestBed.configureTestingModule({
-    imports: [
-      CoreModule, RouterTestingModule, AnalyticsModule,
-      MultilingualModule,
-      StoreModule.provideStore({ names: nameListReducer }),
-      EffectsModule.run(NameListEffects)
-    ],
-    declarations: [HomeComponent, TestComponent],
-    providers: [
-      NameListService,
-      BaseRequestOptions,
-      LoginService,
-      MockBackend,
-      {
-        provide: Http, useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
-          return new Http(backend, defaultOptions);
-        },
-        deps: [MockBackend, BaseRequestOptions]
-      }
-    ]
-  });
-};
+import { RouterExtensions } from '../../frameworks/core/index';
 
 export function main() {
+  let isAboutURLCalled = false;
+  class Router {
+    public navigate(url, timeout) {
+      if (url === '/about')
+        isAboutURLCalled = true;
+    }
+  }
+
+  class MockLoginService {
+    public isAuthenticated() {
+      return true;
+    }
+  }
+
+  // test module configuration for each test
+  const testModuleConfig = () => {
+    TestBed.configureTestingModule({
+      imports: [
+        CoreModule, RouterTestingModule, AnalyticsModule,
+        MultilingualModule,
+        StoreModule.provideStore({ names: nameListReducer }),
+        EffectsModule.run(NameListEffects)
+      ],
+      declarations: [HomeComponent, TestComponent],
+      providers: [
+        NameListService,
+        BaseRequestOptions,
+        { provide: LoginService, useValue: new MockLoginService },
+        { provide: RouterExtensions, useValue: new Router },
+        MockBackend,
+        {
+          provide: Http, useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
+            return new Http(backend, defaultOptions);
+          },
+          deps: [MockBackend, BaseRequestOptions]
+        }
+      ]
+    });
+  };
+
   t.describe('@Component: HomeComponent', () => {
 
     t.be(testModuleConfig);
