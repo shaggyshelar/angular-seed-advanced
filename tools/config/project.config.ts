@@ -10,11 +10,11 @@ export class ProjectConfig extends SeedAdvancedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
   FONTS_DEST = `${this.APP_DEST}/fonts`;
-  FONTS_SRC = ['node_modules/font-awesome/fonts/**','node_modules/simple-line-icons/fonts/**'];
+  FONTS_SRC = ['node_modules/font-awesome/fonts/**', 'node_modules/simple-line-icons/fonts/**'];
 
   constructor() {
     super();
-    // this.APP_TITLE = 'Put name of your app here';
+    this.APP_TITLE = 'Linkup';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -22,6 +22,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
+      //TODO: Check if all third party libraries are matching with template version.
       { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
       { src: 'primeng/resources/primeng.min.css', inject: 'libs' },
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
@@ -48,7 +49,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       //TODO: Check if we can use it from npm packages
       // { src: `${this.APP_SRC}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
       // { src: `${this.APP_SRC}/assets/global/plugins/jquery.blockui.min.js`, inject: true, vendor: false },
-      
+
       { src: `${this.APP_SRC}/assets/global/scripts/app.min.js`, inject: true, vendor: false },
       { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/layout.min.js`, inject: true, vendor: false },
       { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/demo.min.js`, inject: true, vendor: false },
