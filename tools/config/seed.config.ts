@@ -1,3 +1,4 @@
+const proxy = require('proxy-middleware');
 import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
@@ -488,90 +489,97 @@ export class SeedConfig {
         type: 'cjs',
         defaultExtension: 'js'
       }
-  }
-};
+    }
+  };
 
-/**
- * The Autoprefixer configuration for the application.
- * @type {Array}
- */
-BROWSER_LIST = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+  /**
+   * The Autoprefixer configuration for the application.
+   * @type {Array}
+   */
+  BROWSER_LIST = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
 
-/**
- * White list for CSS color guard
- * @type {[string, string][]}
- */
-COLOR_GUARD_WHITE_LIST: [string, string][] = [
-];
+  /**
+   * White list for CSS color guard
+   * @type {[string, string][]}
+   */
+  COLOR_GUARD_WHITE_LIST: [string, string][] = [
+  ];
 
   protected DEV_REWRITE_RULES = [
-  {
-    from: /^\/node_modules\/.*$/,
-    to: (context: any) => context.parsedUrl.pathname
-  },
-  {
-    from: /^\/app\/.*$/,
-    to: (context: any) => context.parsedUrl.pathname
-  },
-  {
-    from: /^\/assets\/.*$/,
-    to: (context: any) => context.parsedUrl.pathname
-  },
-  {
-    from: /^\/css\/.*$/,
-    to: (context: any) => context.parsedUrl.pathname
-  }
-];
-
-/**
- * Configurations for NPM module configurations. Add to or override in project.config.ts.
- * If you like, use the mergeObject() method to assist with this.
- */
-PLUGIN_CONFIGS: any = {
-  /**
-   * The BrowserSync configuration of the application.
-   * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
-   * running `npm start` (tested with serve.dev).
-   * Example: `npm start -- --b`
-   * @type {any}
-   */
-  'browser-sync': {
-    middleware: [require('connect-history-api-fallback')({
-      index: `${this.APP_BASE}index.html`
-    })],
-    port: this.PORT,
-    startPath: this.APP_BASE,
-    open: argv['b'] ? false : true,
-    injectChanges: false,
-    server: {
-      baseDir: `${this.DIST_DIR}/empty/`,
-      routes: {
-        [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
-        [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
-        [`${this.APP_BASE}node_modules`]: 'node_modules',
-        [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
-      }
+    {
+      from: /^\/node_modules\/.*$/,
+      to: (context: any) => context.parsedUrl.pathname
+    },
+    {
+      from: /^\/app\/.*$/,
+      to: (context: any) => context.parsedUrl.pathname
+    },
+    {
+      from: /^\/assets\/.*$/,
+      to: (context: any) => context.parsedUrl.pathname
+    },
+    {
+      from: /^\/css\/.*$/,
+      to: (context: any) => context.parsedUrl.pathname
     }
-  },
-
-  // Note: you can customize the location of the file
-  'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
+  ];
 
   /**
-     * The options to pass to gulp-sass (and then to node-sass).
-     * Reference: https://github.com/sass/node-sass#options
-     * @type {object}
+   * Configurations for NPM module configurations. Add to or override in project.config.ts.
+   * If you like, use the mergeObject() method to assist with this.
+   */
+  PLUGIN_CONFIGS: any = {
+    /**
+     * The BrowserSync configuration of the application.
+     * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
+     * running `npm start` (tested with serve.dev).
+     * Example: `npm start -- --b`
+     * @type {any}
      */
+    'browser-sync': {
+      middleware: [
+        proxy({
+          protocol: 'http:',
+          hostname: 'localhost',
+          port: 4000,
+          pathname: '/api',
+          route: '/api'
+        }),
+        require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })
+      ],
+      port: this.PORT,
+      startPath: this.APP_BASE,
+      open: argv['b'] ? false : true,
+      injectChanges: false,
+      server: {
+        baseDir: `${this.DIST_DIR}/empty/`,
+        routes: {
+          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
+          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+          [`${this.APP_BASE}node_modules`]: 'node_modules',
+          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+        }
+      }
+    },
+
+    // Note: you can customize the location of the file
+    'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
+
+    /**
+       * The options to pass to gulp-sass (and then to node-sass).
+       * Reference: https://github.com/sass/node-sass#options
+       * @type {object}
+       */
     'gulp-sass': {
       includePaths: ['./node_modules/']
     },
@@ -589,9 +597,9 @@ PLUGIN_CONFIGS: any = {
     }
   };
 
- /**
-   * Karma reporter configuration
-   */
+  /**
+    * Karma reporter configuration
+    */
   getKarmaReporters(): any {
     return {
       preprocessors: {
@@ -613,30 +621,30 @@ PLUGIN_CONFIGS: any = {
     };
   };
 
-/**
- * Recursively merge source onto target.
- * @param {any} target The target object (to receive values from source)
- * @param {any} source The source object (to be merged onto target)
- */
-mergeObject(target: any, source: any) {
-  const deepExtend = require('deep-extend');
-  deepExtend(target, source);
-}
-
-/**
- * Locate a plugin configuration object by plugin key.
- * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
- */
-getPluginConfig(pluginKey: string): any {
-  if (this.PLUGIN_CONFIGS[pluginKey]) {
-    return this.PLUGIN_CONFIGS[pluginKey];
+  /**
+   * Recursively merge source onto target.
+   * @param {any} target The target object (to receive values from source)
+   * @param {any} source The source object (to be merged onto target)
+   */
+  mergeObject(target: any, source: any) {
+    const deepExtend = require('deep-extend');
+    deepExtend(target, source);
   }
-  return null;
-}
 
-getInjectableStyleExtension() {
-  return this.BUILD_TYPE === BUILD_TYPES.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
-}
+  /**
+   * Locate a plugin configuration object by plugin key.
+   * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
+   */
+  getPluginConfig(pluginKey: string): any {
+    if (this.PLUGIN_CONFIGS[pluginKey]) {
+      return this.PLUGIN_CONFIGS[pluginKey];
+    }
+    return null;
+  }
+
+  getInjectableStyleExtension() {
+    return this.BUILD_TYPE === BUILD_TYPES.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
+  }
 
   addPackageBundles(pack: ExtendPackages) {
 
