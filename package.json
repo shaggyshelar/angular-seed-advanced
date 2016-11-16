@@ -146,6 +146,7 @@
     "merge-stream": "^1.0.0",
     "open": "0.0.5",
     "protractor": "^4.0.9",
+    "proxy-middleware": "^0.15.0",
     "remap-istanbul": "^0.7.0",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
