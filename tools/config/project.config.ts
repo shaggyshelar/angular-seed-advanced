@@ -50,11 +50,11 @@ export class ProjectConfig extends SeedAdvancedConfig {
       // { src: `${this.APP_SRC}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
       // { src: `${this.APP_SRC}/assets/global/plugins/jquery.blockui.min.js`, inject: true, vendor: false },
 
-      { src: `${this.APP_SRC}/assets/global/scripts/app.min.js`, inject: true, vendor: false },
-      { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/layout.min.js`, inject: true, vendor: false },
-      { src: `${this.APP_SRC}/assets/layouts/layout4/scripts/demo.min.js`, inject: true, vendor: false },
-      { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-sidebar.min.js`, inject: true, vendor: false },
-      { src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-nav.min.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/app.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/layout.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/demo.js`, inject: true, vendor: false },
+      { src: `${this.APP_SRC}/assets/layouts/quick-sidebar.min.js`, inject: true, vendor: false },
+      //{ src: `${this.APP_SRC}/assets/layouts/global/scripts/quick-nav.min.js`, inject: true, vendor: false },
     ];
 
     // Add packages (e.g. lodash)
