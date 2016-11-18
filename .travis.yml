@@ -32,7 +32,9 @@ after_success: |
   fi
 
 branches:
-  only: production
+  only: 
+  - production
+  - develop
 
 notifications:
   email: true
