@@ -28,7 +28,7 @@ after_success: |
     git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     cd ..
     cd ..
-    ls | ./slacktee.sh -t "Message from Travis Build"
+    ./slacktee.sh -t "App Successfully Deployed"
   fi
 
 branches:
