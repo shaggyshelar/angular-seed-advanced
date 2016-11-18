@@ -1,0 +1,35 @@
+.fc-today {
+     background: #FFF !important;
+     border: none !important;
+     border-top: 1px solid #ddd !important;
+     font-weight: bold;
+ } 
+
+.page-header.navbar .page-logo .logo-default {
+    margin: 17px 0px 0 !important;
+}
+
+@media only screen and (max-width: 767px){
+    .page-header.navbar .top-menu .navbar-nav>li.dropdown-notification .dropdown-menu{
+            margin-right: -165px !important;
+    }
+    .page-header.navbar .top-menu .navbar-nav>li.dropdown-inbox .dropdown-menu{
+        margin-right: -103px !important;
+    }
+    .page-header.navbar .top-menu .navbar-nav>li.dropdown-tasks .dropdown-menu{
+        margin-right: -35px !important;
+    }
+}
+
+@media only screen and (max-width: 370px){
+    .page-header.navbar .page-logo{
+        width:90px !important;
+    }
+}
+
+@media only screen and (max-width: 342px){
+    .page-header.navbar .page-logo .logo-default{
+            position: absolute;
+            clip: rect(0px,47px,50px,0px)
+    }
+}
