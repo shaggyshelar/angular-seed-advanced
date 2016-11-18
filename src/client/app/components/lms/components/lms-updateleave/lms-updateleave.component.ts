@@ -1,7 +1,8 @@
 /** Angular Dependencies */
+import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Module Level Dependencies */
 
@@ -19,6 +20,9 @@ export class LmsUpdateLeavesComponent {
   leaves: any[] = [];
   managers: any[];
 
+  constructor(
+    private router: Router
+  ) { }
   ngOnInit() {
     this.leaves = [
       { leave: { id: 0, name: 'Select' }, numDays: 1, reason: 'Personal', start: '22-09-2016', end: '22-09-2016', action: '' },
@@ -29,6 +33,10 @@ export class LmsUpdateLeavesComponent {
       { project: 'HR', manager: 'Pooja Merchant', status: 'Approved', comments: 'Approved' },
       { project: 'RMS', manager: 'Sagar Shelar', status: 'Approved', comments: 'Approved' },
     ];
+  }
+
+  closeClicked() {
+    this.router.navigate(['/my-leaves']);
   }
 
 }

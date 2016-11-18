@@ -1,7 +1,7 @@
 /** Angular Dependencies */
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Module Level Dependencies */
 
@@ -48,18 +48,18 @@ export class LmsHolidaysComponent {
   holidayDate: string;
   holidayType: string;
 
-  private holidayRecords;
+  //private holidayRecords;
 
-    //constructor(private store: Store<AppState>, private holidayService: HolidayService) {
-    //let holidayRecords = this.holidayRecords;
-    // this.subscription = store.select('holidays')
-    //   .subscribe(holidays => {
-    //     holidayRecords = holidays;
-    //     if (holidayRecords.length === 0) {
-    //       holidayService.getHolidays();
-    //     }
-    //   });
-    //}
+  //constructor(private store: Store<AppState>, private holidayService: HolidayService) {
+  //let holidayRecords = this.holidayRecords;
+  // this.subscription = store.select('holidays')
+  //   .subscribe(holidays => {
+  //     holidayRecords = holidays;
+  //     if (holidayRecords.length === 0) {
+  //       holidayService.getHolidays();
+  //     }
+  //   });
+  //}
 
   ngOnInit() {
     this.holidays = [

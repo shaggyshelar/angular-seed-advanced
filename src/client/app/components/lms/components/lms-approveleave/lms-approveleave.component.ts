@@ -1,7 +1,8 @@
 /** Angular Dependencies */
+import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Module Level Dependencies */
 
@@ -30,11 +31,17 @@ export class LmsApproveLeavesComponent implements OnInit {
   approvalRecords: ShowLeaveReq[];
   servRows = 10;
 
+  constructor(
+    private router: Router
+  ) { }
   ngOnInit() {
     this.approvalRecords = [
       { eid: 23123, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
       { eid: 23124, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' }
     ];
 
+  }
+  editBtnClicked() {
+    this.router.navigate(['/single-approval']);
   }
 }

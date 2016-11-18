@@ -98,7 +98,7 @@
                             <p-column field="comments" header="{{ 'COMMENTS' | translate }}"></p-column>
                         </p-dataTable>
                     </div>
-                    <a class="btn blue btn-outline" [routerLink]="['/my-leaves']">{{ 'CLOSE' | translate }}</a>
+                    <button class="btn blue btn-outline" (click)="closeClicked()">{{ 'CLOSE' | translate }}</button>
                 </div>
             </div>
             <!-- END HOLIDAY LIST COMPONENT BY PRIMENG -->

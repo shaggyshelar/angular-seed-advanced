@@ -1,7 +1,8 @@
 /** Angular Dependencies */
+import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Module Level Dependencies */
 
@@ -30,7 +31,9 @@ export class LmsSingleApprovalComponent {
   approved: boolean = false;
   rejected: boolean = false;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.requests = [
       { project: 'RMS', manager: 'Sagar Shelar', status: 'Pending', comments: 'Comment1 here...' },
       { project: 'PLSV 2', manager: 'Manager Name', status: 'Approved', comments: 'Comment2 here...' }
@@ -57,6 +60,7 @@ export class LmsSingleApprovalComponent {
 
   closeClicked() {
     this.model.comments = '';
+    this.router.navigate(['/approve-leave']);
   }
 
 }

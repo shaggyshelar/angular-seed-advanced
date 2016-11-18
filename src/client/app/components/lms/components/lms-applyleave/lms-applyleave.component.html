@@ -159,7 +159,7 @@
                                     <div class="pull-right">
                                         <button  class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
                                         <button [disabled]="form.invalid" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
-                                        <a type="reset" [routerLink]="['/my-leaves']" class="btn btn-outline"> {{ 'CANCEL' | translate }} </a>
+                                        <button type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
                                     </div>
                                 </div>
                             </div>

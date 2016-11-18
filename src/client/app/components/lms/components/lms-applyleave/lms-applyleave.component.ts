@@ -1,5 +1,14 @@
-import {BaseComponent} from '../views/base-component';
+/** Angular Dependencies */
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
+/** Framework Dependencies */
+import { BaseComponent } from '../views/base-component';
+
+/** Module Level Dependencies */
+
+/** Component Declaration */
+
 //import * as localForage from 'localforage';
 
 
@@ -49,7 +58,9 @@ export class LmsApplyLeavesComponent {
   ];
   model: FormFieldClass;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.model = new FormFieldClass(1, 'select', new Date(), new Date(), '');
   }
 
@@ -91,16 +102,16 @@ export class LmsApplyLeavesComponent {
   }
 
   addToLocalforage() {
-    var finalData = {
-      ID: 1,
-      start: this.model.start.getDate() + '-' + this.model.start.getMonth() + '-' + this.model.start.getFullYear(),
-      end: this.model.end.getDate() + '-' + this.model.end.getMonth() + '-' + this.model.end.getFullYear(),
-      numDays: this.model.numDays,
-      leave: this.model.leaveType,
-      reason: this.model.reason,
-      empName: 'Employee Name',
-      status: 'Pending'
-    };
+    // var finalData = {
+    //   ID: 1,
+    //   start: this.model.start.getDate() + '-' + this.model.start.getMonth() + '-' + this.model.start.getFullYear(),
+    //   end: this.model.end.getDate() + '-' + this.model.end.getMonth() + '-' + this.model.end.getFullYear(),
+    //   numDays: this.model.numDays,
+    //   leave: this.model.leaveType,
+    //   reason: this.model.reason,
+    //   empName: 'Employee Name',
+    //   status: 'Pending'
+    // };
 
     // localForage.setItem('appliedLeave', finalData, (err, value) => {
     //   alert('added');
@@ -111,4 +122,9 @@ export class LmsApplyLeavesComponent {
     this.dayCount = (Math.round((this.endDt - this.strtDt) / (1000 * 60 * 60 * 24))) + 1;
     this.model.numDays = this.dayCount;
   }
+
+  cancelClick() {
+    this.router.navigate(['/my-leaves']);
+  }
+
 }

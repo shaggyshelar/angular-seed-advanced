@@ -114,7 +114,7 @@
                                     <div class="pull-right">
                                         <button [disabled]="form.invalid" (click)="approveClicked()" class="btn"> {{ 'APPROVE' | translate }} </button>
                                         <button [disabled]="form.invalid" (click)="rejectClicked()" class="btn"> {{ 'REJECT' | translate }} </button>
-                                        <button (click)="closeClicked()" routerLink="/approve-leave" routerLinkActive="active" class="btn"> {{ 'CLOSE' | translate }} </button>
+                                        <button (click)=" closeClicked()" class="btn"> {{ 'CLOSE' | translate }} </button>
                                     </div>
                                 </div>
                             </div>

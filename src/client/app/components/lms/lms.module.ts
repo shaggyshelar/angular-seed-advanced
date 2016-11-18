@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { RouterModule  } from '@angular/router';
+//import { RouterModule  } from '@angular/router';
 
 /** Other Module Dependencies */
 import { CommonModule, TranslateModule } from '../../shared/index';
@@ -17,7 +17,7 @@ import { LmsSingleApprovalComponent } from './components/lms-singleapproval/lms-
 import { LmsUpdateLeavesComponent } from './components/lms-updateleave/lms-updateleave.component';
 
 /** Module Import Declarations */
-let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule, RouterModule];
+let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule];
 
 /** Component/Directive Declarations */
 let declarations = [
