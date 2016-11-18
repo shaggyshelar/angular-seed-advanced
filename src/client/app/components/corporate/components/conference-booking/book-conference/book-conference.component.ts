@@ -5,7 +5,7 @@ import {BaseComponent} from '../../views/base-component';
 
 /** Other Module Dependencies */
 import {SelectItem, Message} from 'primeng/primeng';
-import * as localForage from 'localforage';
+//import * as localForage from 'localforage';
 
 /** Component Declaration */
 @BaseComponent({
@@ -44,11 +44,11 @@ export class BookComponent {
     save() {
         this.conferenceModel.conference = this.selectedRoom.name;
         this.conferenceModel.color = this.selectedRoom.color;
-        localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {
-            this.msgs = [];
-            this.msgs.push({ severity: 'success', summary: 'Confirmed', detail: 'Record saved' });
-            this.router.navigate(['/conferenceBooking']);
-        });
+        // localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {
+        //     this.msgs = [];
+        //     this.msgs.push({ severity: 'success', summary: 'Confirmed', detail: 'Record saved' });
+        //     this.router.navigate(['/conferenceBooking']);
+        // });
     }
 }
 class ConferenceBooking {

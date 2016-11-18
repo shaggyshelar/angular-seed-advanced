@@ -1,7 +1,7 @@
 /** Angular Dependencies */
 import { OnInit, Inject, ElementRef } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
-import * as localForage from 'localforage';
+//import * as localForage from 'localforage';
 /** Framework Dependencies */
 import { BaseComponent } from '../../views/base-component';
 
@@ -129,12 +129,12 @@ export class ConferenceComponent implements OnInit {
                 'conference': 'Trainning Room'
             }
         ];
-       localForage.getItem('conferenceEvent').then((value) => {
-            if (value !== null) {
-                this.allEvents.push(value);
-            }
-            this.events = this.allEvents;
-        });
+    //    localForage.getItem('conferenceEvent').then((value) => {
+    //         if (value !== null) {
+    //             this.allEvents.push(value);
+    //         }
+    //         this.events = this.allEvents;
+    //     });
         this.events = this.allEvents;
         this.conferenceRooms = [{
             name: 'Bahamas',
