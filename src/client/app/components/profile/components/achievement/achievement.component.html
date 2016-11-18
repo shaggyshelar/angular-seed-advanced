@@ -1,0 +1,36 @@
+<div class="portlet-body">
+    <div *ngIf="achievements.length == 0">
+        <hr>
+        <h5> {{ 'NO_RECORDS' | translate }}</h5>
+    </div>
+    <div *ngIf="achievements.length > 0">
+        <p-dataTable [value]="achievements" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+            <p-column header="{{ 'EDIT' | translate }}">
+                <template let-achievementData="rowData" pTemplate type="body">
+                    <i class="fa fa-pencil icon-color" (click)="selectAchievement(achievementData)"></i>
+                </template>
+            </p-column>
+            <p-column header="{{ 'ACHIEVEMENTS' | translate }}" field="achievement"></p-column>
+            <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+            <p-column header="{{ 'COMMENTS' | translate }}" field="comment"></p-column>
+        </p-dataTable>
+    </div>
+    <div *ngIf="!showDiv">
+        <div class="row row-margin">
+            <div class="col-md-6 col-margin">
+                <span>{{ 'ACHIEVEMENT' | translate }}</span>
+                <span class="req-field"> *</span>
+                <div class="div-margin">
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="achivement.description">
+                </div>
+            </div>
+        </div>
+        <div class="row row-margin button-margin">
+            <button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
+            <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+        </div>
+    </div>
+    <div class="row row-margin button-margin" *ngIf="showDiv">
+        <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_ACHIEVEMENT' | translate }}"></button>
+    </div>
+</div>
