@@ -1,0 +1,45 @@
+<div class="portlet-body">
+	<div *ngIf="skillSet.length == 0">
+		<hr>
+		<h5> {{ 'NO_RECORDS' | translate }}</h5>
+	</div>
+	<div *ngIf="skillSet.length > 0">
+		<p-dataTable [value]="skillSet" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+			<p-column header="{{ 'EDIT' | translate }}">
+				<template let-skillSetData="rowData" pTemplate type="body">
+					<i class="fa fa-pencil icon-color" (click)="editSkillSetData(skillSetData)"></i>
+				</template>
+			</p-column>
+			<p-column header="{{ 'SKILL_TYPE' | translate }}" field="skillType"></p-column>
+			<p-column header="{{ 'SKILLS' | translate }}" field="skills"></p-column>
+			<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+			<p-column header="{{ 'COMMENTS' | translate }}" field="comments"></p-column>
+			<p-column header="{{ 'APPROVERS' | translate }}" field="approvers"></p-column>
+		</p-dataTable>
+	</div>
+	<div *ngIf="!showDiv">
+		<div class="row row-margin">
+			<div class="col-md-2 col-margin">
+				<span>{{ 'SKILL_TYPE' | translate }}</span>
+				<span class="skill-set-req-field"> *</span>
+				<div>
+					<p-dropdown [options]="skillTypes" [(ngModel)]="skillSetObj.type" [style]="{'width':'100%'}"></p-dropdown>
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'SKILLS' | translate }}</span>
+				<span class="skill-set-req-field"> *</span>
+				<div class="form-group">
+					<input type="text" [(ngModel)]="skillSetObj.skill" class="form-control" placeholder="">
+				</div>
+			</div>
+		</div>
+		<div class="row row-margin button-margin">
+			<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
+			<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+		</div>
+	</div>
+	<div class="row row-margin button-margin" *ngIf="showDiv">
+		<button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_SKILLSET' | translate }}"></button>
+	</div>
+</div>

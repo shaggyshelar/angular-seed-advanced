@@ -1,0 +1,88 @@
+<div class="portlet box yellow border-color">
+	<div class="portlet-title div-color">
+		<div class="caption title">
+			{{ 'NOMINEES' | translate }}
+			<i class="fa fa-pencil icon-css" (click)="add()" *ngIf="showDiv"></i>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<table class="table table-bordered detail-table">
+			<tbody>
+				<tr>
+					<td><b>{{ 'NOMINEE_NAME_1' | translate }}</b></td>
+					<td>
+						{{ nomineesData.length > 0 ? nomineesData[0].firstNomineeName : '' }}
+					</td>
+				</tr>
+				<tr>
+					<td><b>{{ 'NOMINEE_1_RELATION_EMP' | translate }}</b></td>
+					<td>
+						<span> {{ nomineesData.length > 0 ? nomineesData[0].firstNomineeRelationWithEmp : '' }}</span>
+					</td>
+				</tr>
+				<tr>
+					<td><b>{{ 'NOMINEE_NAME_2' | translate }}</b></td>
+					<td>
+						{{ nomineesData.length > 0 ? nomineesData[0].secondNomineeName : '' }}
+					</td>
+				</tr>
+				<tr>
+					<td><b>{{ 'NOMINEE_2_RELATION_EMP' | translate }}</b></td>
+					<td>
+						<span> {{ nomineesData.length > 0 ? nomineesData[0].secondNomineeRelationWithEmp : '' }}</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div *ngIf="!showDiv">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{{ 'NOMINEE_NAME_1' | translate }} </label>
+						<div class="div-margin">
+							<input type="text" [(ngModel)]="firstNomineeName" class="form-control" placeholder="">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{{ 'NOMINEE_1_RELATION_EMP' | translate }} </label>
+						<div class="div-margin">
+							<input type="text" [(ngModel)]="firstNomineeRelationWithEmp" class="form-control" placeholder="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{{ 'NOMINEE_NAME_2' | translate }} </label>
+						<div class="div-margin">
+							<input type="text" [(ngModel)]="secondNomineeName" class="form-control" placeholder="">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>{{ 'NOMINEE_2_RELATION_EMP' | translate }} </label>
+						<div class="div-margin">
+							<input type="text" [(ngModel)]="secondNomineeRelationWithEmp" class="form-control" placeholder="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="div-margin nominee-info">
+						<input type="checkbox" name="nomineesInfo"> {{ 'NOMINEE_INFO' | translate }}
+					</div>
+				</div>
+			</div>
+			<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
+			<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+		</div>
+	</div>
+</div>

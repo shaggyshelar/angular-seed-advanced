@@ -1,0 +1,91 @@
+<div class="portlet-body">
+	<div *ngIf="experience.length == 0">
+		<hr>
+		<h5> {{ 'NO_RECORDS' | translate }}</h5>
+	</div>
+	<div *ngIf="experience.length > 0">
+		<p-dataTable [value]="experience" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+			<p-column header="{{ 'EDIT' | translate }}">
+				<template let-experienceData="rowData" pTemplate type="body">
+					<i class="fa fa-pencil icon-color" (click)="editExperienceData(experienceData)"></i>
+				</template>
+			</p-column>
+			<p-column header="{{ 'PROJECT' | translate }}" field="project"></p-column>
+			<p-column header="{{ 'CLIENT' | translate }}" field="client"></p-column>
+			<p-column header="{{ 'START_DATE' | translate }}" field="startDate"></p-column>
+			<p-column header="{{ 'END_DATE' | translate }}" field="endDate"></p-column>
+			<p-column header="{{ 'ROLE' | translate }}" field="role"></p-column>
+			<p-column header="{{ 'ENVIRONMENT' | translate }}" field="environment"></p-column>
+			<p-column header="{{ 'RESPONSIBILITES' | translate }}" field="responsibilites"></p-column>
+			<p-column header="{{ 'DESCRIPTION' | translate }}" field="description"></p-column>
+		</p-dataTable>
+	</div>
+	<div *ngIf="!showDiv">
+		<div class="row row-margin">
+			<div class="alert alert-warning message-align">
+				{{ 'EXPERIENCE_MESSAGE' | translate }}
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'PROJECT' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="form-group div-margin">
+					<input type="text" [(ngModel)]="experienceObj.project" class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'CLIENT' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="form-group div-margin">
+					<input type="text" [(ngModel)]="experienceObj.client" class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'START_DATE' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="form-group div-margin">
+					<p-calendar [(ngModel)]="experienceObj.startDate" [showIcon]="true"></p-calendar>
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'END_DATE' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="div-margin">
+					<p-calendar  [(ngModel)]="experienceObj.endDate"  [showIcon]="true"></p-calendar>
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'ROLE' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="div-margin">
+					<input type="text"  [(ngModel)]="experienceObj.role"  class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'ENVIRONMENT' | translate }}</span>
+				<div class="div-margin">
+					<input type="text"  [(ngModel)]="experienceObj.environment"  class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'RESPONSIBILITES' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="div-margin">
+					<input type="text"  [(ngModel)]="experienceObj.responsibilites"  class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'DESCRIPTION' | translate }}</span>
+				<div class="div-margin">
+					<input type="text"  [(ngModel)]="experienceObj.description"  class="form-control" placeholder="">
+				</div>
+			</div>
+		</div>
+		<div class="row row-margin button-margin">
+			<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
+			<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+		</div>
+	</div>
+	<div class="row row-margin button-margin" *ngIf="showDiv">
+		<button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_EXPERIENCE' | translate }}"></button>
+	</div>
+</div>
