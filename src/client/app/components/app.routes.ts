@@ -4,6 +4,7 @@ import { AboutRoutes } from './about/about.routes';
 import { LoginRoutes } from './login/login.routes';
 import { ProfileRoutes } from './profile/profile.routes';
 import { CorporateRoutes } from './corporate/corporate.routes';
+import { TimesheetRoutes } from './timesheet/timesheet.routes';
 
 export const routes: Array<any> = [
   ...HomeRoutes,
@@ -11,4 +12,5 @@ export const routes: Array<any> = [
   ...LoginRoutes,
   ...ProfileRoutes,
   ...CorporateRoutes,
+  ...TimesheetRoutes
 ];

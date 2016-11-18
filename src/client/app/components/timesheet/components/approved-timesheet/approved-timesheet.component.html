@@ -1,0 +1,33 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" [ifAuthorize]="['Timesheet.READ']">
+        <ul class="page-breadcrumb breadcrumb hidden-xs">
+            <li>
+                <span>{{ 'LINK_UP' | translate }} </span>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">{{ 'EMPLOYEE_TIMESHEET' | translate }}</span>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="portlet light ">
+                    <div class="portlet-body">
+                        <p-dataTable [value]="approvedEmployee" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                            <p-column field="employee" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="startDate" header="{{ 'START_DATE' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="endDate" header="{{ 'END_DATE' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="billableHours" header="{{ 'BILLABLE_HOURS' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="nonBillableHours" header="{{ 'NON_BILLABLE_HOURS' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="approverUser" header="{{ 'APPROVER_USER' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="status" header="{{ 'STATUS' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="pendingApprover" header="{{ 'PENDING_APPROVER' | translate }}" [sortable]="true" [filter]="true"></p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
