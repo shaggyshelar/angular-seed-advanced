@@ -33,3 +33,13 @@
             clip: rect(0px,47px,50px,0px)
     }
 }
+
+.fc-axis.fc-time.ui-widget-content{
+     height: 30px!important; 
+}
+
+.calender-btn-add{
+  color: blue;
+  float: right; 
+  z-index: 10000000;
+}
