@@ -31,6 +31,7 @@ import { UnauthorizedAccessComponent } from './app/components/errorPages/unautho
 import { CorporateModule } from './app/components/corporate/index';
 
 import { ProfileModule } from './app/components/profile/index';
+import { TimesheetModule } from './app/components/timesheet/index';
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
@@ -93,7 +94,8 @@ export function cons() {
     EffectsModule.run(MultilingualEffects),
     EffectsModule.run(NameListEffects),
     ProfileModule,
-    CorporateModule
+    CorporateModule,
+    TimesheetModule
   ],
   declarations: [
     AppComponent,
