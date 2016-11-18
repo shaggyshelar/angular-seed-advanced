@@ -28,8 +28,10 @@ import { nameListReducer, NameListEffects } from './app/frameworks/sample/index'
 
 import { LoginComponent } from './app/components/login/login.component';
 import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
+import { CorporateModule } from './app/components/corporate/index';
 
 import { ProfileModule } from './app/components/profile/index';
+import { TimesheetModule } from './app/components/timesheet/index';
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
@@ -91,7 +93,9 @@ export function cons() {
     }),
     EffectsModule.run(MultilingualEffects),
     EffectsModule.run(NameListEffects),
-    ProfileModule
+    ProfileModule,
+    CorporateModule,
+    TimesheetModule
   ],
   declarations: [
     AppComponent,
