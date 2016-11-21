@@ -1,79 +1,99 @@
-<div class="portlet-body">
-    <div class="alert alert-warning message-align">
-        {{ 'EDUCATION_MESSAGE' | translate }}
-    </div>  
-    <div *ngIf="education.length == 0">
-        <hr>
-        <h5> {{ 'NO_RECORDS' | translate }}</h5>
-    </div>  
-    <div *ngIf="education.length > 0">
-        <p-dataTable [value]="education" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-            <p-column header="{{ 'EDIT' | translate }}">
-                <template let-educationData="rowData" pTemplate type="body">
-                    <i class="fa fa-pencil icon-color" (click)="editEducation(educationData)"></i>
-                </template>
-            </p-column>
-            <p-column header="{{ 'CLASS' | translate }}" field="class"></p-column>
-            <p-column header="{{ 'DEGREE' | translate }}" field="degree"></p-column>
-            <p-column header="{{ 'GRADE' | translate }}" field="grade"></p-column>
-            <p-column header="{{ 'PERCENTAGE' | translate }}" field="percentage"></p-column>
-            <p-column header="{{ 'YEAR_OF_PASSING' | translate }}" field="yearOfPassing"></p-column>
-            <p-column header="{{ 'CERTIFICATE' | translate }}" field="certificate"></p-column>
-            <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-            <p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComment"></p-column>
-        </p-dataTable>
-    </div>
-    <div *ngIf="!showDiv">
-        <div class="row row-margin">
-            <div class="col-md-2 col-margin">
-                <span>{{ 'CLASS' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <p-dropdown [options]="class" [(ngModel)]="educationObj.class" [style]="{'width':'100%'}"></p-dropdown>
+<form novalidate (ngSubmit)="onSubmit(educationForm)" [formGroup]="educationForm">
+    <div class="portlet-body">
+        <div class="alert alert-warning message-align">
+            {{ 'EDUCATION_MESSAGE' | translate }}
+        </div>
+        <div *ngIf="education.length == 0">
+            <hr>
+            <h5> {{ 'NO_RECORDS' | translate }}</h5>
+        </div>
+        <div *ngIf="education.length > 0">
+            <p-dataTable [value]="education" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+                <p-column header="{{ 'EDIT' | translate }}">
+                    <template let-educationData="rowData" pTemplate type="body">
+                        <i class="fa fa-pencil icon-color" (click)="editEducation(educationData)"></i>
+                    </template>
+                </p-column>
+                <p-column header="{{ 'CLASS' | translate }}" field="class"></p-column>
+                <p-column header="{{ 'DEGREE' | translate }}" field="degree"></p-column>
+                <p-column header="{{ 'GRADE' | translate }}" field="grade"></p-column>
+                <p-column header="{{ 'PERCENTAGE' | translate }}" field="percentage"></p-column>
+                <p-column header="{{ 'YEAR_OF_PASSING' | translate }}" field="yearOfPassing"></p-column>
+                <p-column header="{{ 'CERTIFICATE' | translate }}" field="certificate"></p-column>
+                <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+                <p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComment"></p-column>
+            </p-dataTable>
+        </div>
+        <div *ngIf="!showDiv">
+            <div class="row row-margin">
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'CLASS' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <p-dropdown [options]="class" [style]="{'width':'100%'}" formControlName="class"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'DEGREE' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="form-group div-margin">
+                        <input type="text" class="form-control" placeholder="" formControlName="degree">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('required') && educationForm.get('degree').touched">
+                        Degree is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('minlength') && educationForm.get('degree').touched">
+                        Minimum of 2 characters
+                    </div>
+                </div>
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'GRADE' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <p-dropdown [options]="grade" [style]="{'width':'100%'}" formControlName="grade"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'PERCENTAGE' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <input type="text" class="form-control" placeholder="" formControlName="percentage">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('required') && educationForm.get('percentage').touched">
+                        {{ 'PERCENTAGE' | translate }} is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('minlength') && educationForm.get('percentage').touched">
+                        Minimum of 2 characters
+                    </div>
+                </div>
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'YEAR_OF_PASSING' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <input type="text" class="form-control" placeholder="" formControlName="yearOfPassing">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('required') && educationForm.get('yearOfPassing').touched">
+                        {{ 'YEAR_OF_PASSING' | translate }} is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('minlength') && educationForm.get('yearOfPassing').touched">
+                        Minimum of 2 characters
+                    </div>
+                </div>
+                <div class="col-md-2 col-margin">
+                    <span>{{ 'SCANNED_COPY' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <p-fileUpload (onSelect)="onFileSelect($event)" url="http://localhost:5555/upload"></p-fileUpload>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2 col-margin">
-                <span>{{ 'DEGREE' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="form-group div-margin">                
-                     <input type="text" class="form-control" [(ngModel)]="educationObj.degree" placeholder=""> 
-                </div>
-            </div>
-            <div class="col-md-2 col-margin">
-                <span>{{ 'GRADE' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <p-dropdown [options]="grade" [(ngModel)]="educationObj.grade" [style]="{'width':'100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="col-md-2 col-margin">
-                <span>{{ 'PERCENTAGE' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <input type="text" class="form-control" [(ngModel)]="educationObj.percentage" placeholder=""> 
-                </div>
-            </div>
-            <div class="col-md-2 col-margin">
-                <span>{{ 'YEAR_OF_PASSING' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <input type="text" class="form-control" [(ngModel)]="educationObj.yearOfPassing" placeholder=""> 
-                </div>
-            </div>
-            <div class="col-md-2 col-margin">
-                <span>{{ 'SCANNED_COPY' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <input type="file" [(ngModel)]="educationObj.certificate">
-                </div>
+            <div class="row row-margin button-margin">
+                <button pButton type="submit" label="{{ 'SUBMIT' | translate }}"  [disabled]="educationForm.invalid"></button>
+                <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
             </div>
         </div>
-        <div class="row row-margin button-margin">
-            <button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
-            <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+        <div class="row row-margin button-margin" *ngIf="showDiv">
+            <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW' | translate }}"></button>
         </div>
     </div>
-    <div class="row row-margin button-margin" *ngIf="showDiv">
-        <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW' | translate }}"></button>
-    </div>
-</div>
+</form>
