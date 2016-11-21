@@ -90,6 +90,6 @@ export class ApproveTimesheetComponent implements OnInit {
   }
 
   selectEmployee() {
-    this.router.navigate(['/view-approve-timesheet']);
+    this.router.navigate(['/timesheet/view-approve']);
   }
 }

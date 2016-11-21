@@ -19,7 +19,7 @@
                             <div class="form-group">
                                 <label class="control-label">{{ 'PROJECTS' | translate }}</label>
                                 <div>
-                                    <p-dropdown [options]="projects"></p-dropdown>
+                                    <p-dropdown [options]="projects" id="reportTimesheet_projects"></p-dropdown>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label class="control-label">{{ 'EMPLOYEE' | translate }}</label>
                                 <div>
-                                    <p-dropdown [options]="employee"></p-dropdown>
+                                    <p-dropdown [options]="employee" id="reportTimesheet_employee"></p-dropdown>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class="control-label">{{ 'TIMESHEET_STATUS' | translate }}</label>
                                 <div>
-                                    <p-dropdown [options]="status"></p-dropdown>
+                                    <p-dropdown [options]="status" id="reportTimesheet_status"></p-dropdown>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label class="control-label">{{ 'FROM' | translate }}</label>
                                 <div>
-                                    <p-calendar [showIcon]="true"></p-calendar>
+                                    <p-calendar [showIcon]="true" id="reportTimesheet_from"></p-calendar>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="control-label">{{ 'TO' | translate }}</label>
                                 <div>
-                                    <p-calendar [showIcon]="true"></p-calendar>
+                                    <p-calendar [showIcon]="true" id="reportTimesheet_to"></p-calendar>
                                 </div>
                             </div>
                         </div>

@@ -24,35 +24,35 @@
                 <span>{{ 'CERTIFICATION' | translate }}</span>
                 <span class="req-field"> *</span>
                 <div class="div-margin">
-                    <p-dropdown [options]="certificationOptions" [(ngModel)]="certification.option" [style]="{'width':'100%'}"></p-dropdown>
+                    <p-dropdown [options]="certificationOptions" id="certification_option" [(ngModel)]="certification.option" [style]="{'width':'100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-2 col-margin">
                 <span>{{ 'CERTIFICATION_CODE' | translate }}</span>
                 <span class="req-field"> *</span>
                 <div class="div-margin">
-                    <p-dropdown [options]="certificationCodes" [(ngModel)]="certification.code" disabled="true" [style]="{'width':'100%'}"></p-dropdown>
+                    <p-dropdown [options]="certificationCodes" id="certification_code" [(ngModel)]="certification.code" disabled="true" [style]="{'width':'100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-2 col-margin">
                 <span>{{ 'FROM_ESPL' | translate }}</span>
                 <span class="req-field"> *</span>
                 <div class="div-margin">
-                    <p-checkbox binary="true" [(ngModel)]="certification.fromEspl"></p-checkbox>
+                    <p-checkbox binary="true" id="certification_fromEspl" [(ngModel)]="certification.fromEspl"></p-checkbox>
                 </div>
             </div>
-            <div class="col-md-2 col-margin">
+            <div class="col-md-3 col-margin">
                 <span>{{ 'CERTIFICATION_DATE' | translate }}</span>
                 <span class="req-field"> *</span>
                 <div class="div-margin">
-                    <p-calendar [showIcon]="true" [(ngModel)]="certification.date"></p-calendar>
+                    <p-calendar [showIcon]="true" id="certification_date" [(ngModel)]="certification.date"></p-calendar>
                 </div>
             </div>
             <div class="col-md-2 col-margin">
                 <span>{{ 'UPLOAD_CERTIFICATE' | translate }}</span>
                 <span class="req-field"> *</span>
                 <div class="div-margin">
-                    <input type="file" [(ngModel)]="certification.file">
+                    <input type="file" id="certification_file" [(ngModel)]="certification.file">
                 </div>
             </div>
         </div>

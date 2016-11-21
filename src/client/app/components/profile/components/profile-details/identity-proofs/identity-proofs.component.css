@@ -38,6 +38,10 @@
 }
 .no-record-table {
     background-color:White;
-    height:35px;width:97%;
+    height:35px;    
+    width:97%;
     border-collapse:collapse;
+}
+.icon-color {
+    color :#3D79A2;
 }
