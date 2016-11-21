@@ -173,7 +173,7 @@ export class ConferenceComponent implements OnInit {
         });
     };
     handleDayClick() {
-        this.router.navigate(['/newBooking']);
+        this.router.navigate(['/corporate/newBooking']);
     }
 
     handleEventClicked(event: any) {

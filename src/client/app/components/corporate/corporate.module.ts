@@ -13,9 +13,10 @@ import { BookComponent } from './components/conference-booking/book-conference/b
 import { MyBookingComponent } from './components/conference-booking/my-booking/my-booking.component';
 import { LogTicketComponent } from './components/ticket/log-ticket/log-ticket.component';
 import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-ticket.component';
+import { CorporateRoutingModule } from './corporate.routes';
 
 /** Module Import Declarations */
-let imports = [RouterModule,FormsModule,BrowserModule,CommonModule, TranslateModule];
+let imports = [CorporateRoutingModule,RouterModule,FormsModule,BrowserModule,CommonModule, TranslateModule];
 
 /** Component/Directive Declarations */
 let declarations = [ConferenceComponent,

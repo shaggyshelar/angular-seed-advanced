@@ -23,13 +23,13 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-sm-5">
-                        <button class="btn btn-default col-sm-6 selected-link" id="manageBooking" routerLink="/myBookings">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
-                        <button class="btn btn-default col-sm-6" id="manageAllRoom" [routerLink]="['/conferenceBooking', 'AllRooms']">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
+                        <button class="btn btn-default col-sm-6 selected-link" id="manageBooking" [routerLink]="['../myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
+                        <button class="btn btn-default col-sm-6" id="manageAllRoom" [routerLink]="['../conferenceBooking', 'AllRooms']">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
                     </div>
                     <div class="col-sm-7">
                         <ul class="legend">
                             <li *ngFor="let item of conferenceRooms" class="col-xs-6 col-md-4 col-sm-4">
-                                <a [routerLink]="['/conferenceBooking', item.name]" id="{{item.name}}"><span class="color-list" [style.backgroundColor]="item.color"></span> {{item.name}}</a>
+                                <a [routerLink]="['../conferenceBooking', item.name]" id="{{item.name}}"><span class="color-list" [style.backgroundColor]="item.color"></span> {{item.name}}</a>
                             </li>
                         </ul>
                     </div>
@@ -38,24 +38,24 @@
         </div>
         <div class="portlet light bordered legends-portlet">
             <nav class="container hidden-sm hidden-md hidden-lg">
-                <a class="buttons" routerLink="/newBooking" id="newEvent" tooltip="New Event" href="#"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
+                <a class="buttons"  [routerLink]="['../newBooking']" id="newEvent" tooltip="New Event" href="#"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
             </nav>
             <div class="portlet-title">
                 <div class="caption">
-                    <a routerLink="/conferenceBooking" id="conferenceRoomLink" class="portlet-link">{{"MY_BOOKING_CONFERENCE_ROOM" | translate }}</a>&nbsp;&nbsp;
-                    <a routerLink="/conferenceBooking" id="allEventLink"  class="portlet-link">{{"MY_BOOKING_ALL_EVENT" | translate }}</a>&nbsp;&nbsp;
-                    <a routerLink="/myBookings" id="myBookingLink" class="selected">{{"MY_BOOKING_TITLE" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="conferenceRoomLink" class="portlet-link">{{"MY_BOOKING_CONFERENCE_ROOM" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">{{"MY_BOOKING_ALL_EVENT" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../myBookings']" id="myBookingLink" class="selected">{{"MY_BOOKING_TITLE" | translate }}</a>&nbsp;&nbsp;
                     <a class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li *ngFor="let item of conferenceRooms">
-                                <a [routerLink]="['/conferenceBooking', item.name]">{{item.name}}</a>
+                                <a [routerLink]="['../conferenceBooking', item.name]">{{item.name}}</a>
                             </li>
                         </ul>
                     </a>
                 </div>
                 <div class="actions">
-                    <a routerLink="/newBooking" id="newEventBooking" class="btn green hidden-xs"><i class="fa fa-plus"></i> New Event</a>
+                    <a [routerLink]="['../newBooking']" id="newEventBooking" class="btn green hidden-xs"><i class="fa fa-plus"></i> New Event</a>
                 </div>
             </div>
             <div class="portlet-body">
