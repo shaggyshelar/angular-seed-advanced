@@ -105,27 +105,27 @@
 				</a>
 				<ul class="sub-menu">
 					<li class="nav-item  " [ifAuthorize]="['Holiday.READ']">
-						<a routerLink="/holidays" routerLinkActive="active">
+						<a routerLink="/leave-management/holidays" routerLinkActive="active">
 							<span class="title">Holidays</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Leave.READ']">
-						<a routerLink="/my-leaves" routerLinkActive="active">
+						<a routerLink="/leave-management/my-leaves" routerLinkActive="active">
 							<span class="title">My Leaves</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Leave.CREATE']">
-						<a routerLink="/apply-leave" routerLinkActive="active">
+						<a routerLink="/leave-management/apply-leave" routerLinkActive="active">
 							<span class="title">Apply For Leave</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['LeaveApproval.READ']">
-						<a routerLink="/approve-leave" routerLinkActive="active">
+						<a routerLink="/leave-management/approve-leave" routerLinkActive="active">
 							<span class="title">Leave Approval</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['BulkLeaveApproval.UPDATE','BulkLeaveApproval.READ']">
-						<a routerLink="/bulk-approval" routerLinkActive="active">
+						<a routerLink="/leave-management/bulk-approval" routerLinkActive="active">
 							<span class="title">Bulk Leave Approval</span>
 						</a>
 					</li>
