@@ -1,0 +1,175 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" [ifAuthorize]="['Leave.CREATE']">
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <!-- END PAGE TITLE -->
+        </div>
+        <div class="hidden-xs">
+            <ul class="page-breadcrumb breadcrumb ">
+                <li>
+                    <span>{{ 'LINK_UP' | translate }}</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span> {{ 'APPLY_LEAVES' | translate }}</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <!-- START HOLIDAY PARTICULARS COMPONENT -->
+            <div class="col-lg-4 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <h4> {{ 'REQUESTOR_DETAILS' | translate }} </h4>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td> Employee ID </td>
+                                        <td class="empInfo">24568 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Employee Name </td>
+                                        <td class="empInfo"> PERSON LNAME</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Department </td>
+                                        <td class="empInfo"> EBS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4> {{ 'ACTIVE_ON_PROJECTS' | translate }} </h4>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Manager</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> RMS </td>
+                                        <td> <span class="empInfo">Sagar Shelar</span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> PLSV 1 </td>
+                                        <td> <span class="empInfo">Some Person</span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END HOLIDAY PARTICULARS COMPONENT  -->
+
+            <!-- START HOLIDAY LIST COMPONENT BY PRIMENG -->
+            <div class="col-lg-8 col-xs-12 col-sm-12">
+                <div class="col-md-12 col-sm-12">
+                    <div class="portlet light">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Apply Leave</h4>
+                                <div class="pull-right">
+                                    <h5 class="warning">
+                                        <span>{{warning}}</span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label" [class.warning]="leaveTypeInvalid && leaveType.touched"> {{ 'LEAVE_TYPE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span></label>
+                                        <div>
+                                            <select required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType" (blur)="validateLeaveType()"
+                                                [class.validationClass]="leaveTypeInvalid && leaveType.touched">
+                                                <option value="select">Select</option>
+                                                <option *ngFor="let leave of leaves">
+                                                    {{leave.label}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label"> {{ 'NUMBER_LEAVES' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <div>
+                                            <input type="text" disabled="disabled" class="form-control" required [(ngModel)]="model.numDays" name="numDays" #numDays="ngModel"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label"> {{ 'START_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <div>
+                                            <p-calendar required dateFormat="dd/mm/yy" [showIcon]="true" (onSelect)="startChanged()" [(ngModel)]="model.start" name="start" #start="ngModel"></p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label"> {{ 'END_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <div>
+                                            <p-calendar  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group" [class.warning]="reason.invalid && reason.touched">
+                                        <label class="control-label"> {{ 'REASON' | translate }} 
+                                            <span class="warning">{{ 'ASTERISK' | translate }}</span> 
+                                        </label>
+                                        <div>
+                                            <textarea required name="reason" pattern="...+" #reason="ngModel" (keyup)="reasonTextChanged()" maxlength="600" [(ngModel)]="model.reason" class="fullWidth" [class.validationClass]="reason.invalid && reason.touched"></textarea>
+                                            <div class="charsLeft pull-right">{{charsLeft}} characters left</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <p-dataTable [value]="finalLeaveData" [responsive]="true" [hidden]="leavesHidden">
+                                            <p-column field="leave.name" header=" {{ 'LEAVE_TYPE' | translate }} " [sortable]="false"></p-column>
+                                            <p-column field="numDays" header=" {{ 'NO_LEAVES' | translate }} " [sortable]="false"></p-column>
+                                            <p-column field="reason" header=" {{ 'REASON' | translate }} " [sortable]="false"></p-column>
+                                            <p-column field="start" header=" {{ 'START_DATE' | translate }} " [sortable]="false"></p-column>
+                                            <p-column field="end" header=" {{ 'END_DATE' | translate }} " [sortable]="false"></p-column>
+                                            <p-column header=" {{ 'DELETE' | translate }} " styleClass="col-button" field="color">
+                                                <template let-day="rowData" pTemplate type="body">
+                                                    <button type="button" (click)="delLeaveRec(day)" pButton icon="fa fa-trash"></button>
+                                                </template>
+                                            </p-column>
+                                        </p-dataTable>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button id="addLeave" class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
+                                        <button id="submit" [disabled]="form.invalid" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
+                                        <button id="cancel" type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END HOLIDAY LIST COMPONENT BY PRIMENG -->
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

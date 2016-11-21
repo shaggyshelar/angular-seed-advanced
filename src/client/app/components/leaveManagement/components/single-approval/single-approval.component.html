@@ -1,0 +1,131 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" [ifAuthorize]="['LeaveApproval.READ','LeaveApproval.UPDATE']">
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <!-- END PAGE TITLE -->
+        </div>
+        <div class="hidden-xs">
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <span>{{ 'LINK_UP' | translate }}</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span> {{ 'LEAVE' | translate }}</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span> {{ 'APPROVE_LEAVE' | translate }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <!-- START HOLIDAY PARTICULARS COMPONENT -->
+            <div class="col-lg-4 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <h4>{{ 'REQUESTOR_DETAILS' | translate }}</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 'EMPLOYEE_ID' | translate }}</td>
+                                        <td> 24568 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'EMPLOYEE' | translate }}</td>
+                                        <td> Person1 LName </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'DEPARTMENT' | translate }}</td>
+                                        <td> EBS </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>{{ 'LEAVE_DETAILS' | translate }}</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 'LEAVE_TYPE' | translate }}</td>
+                                        <td> Leave </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'NO_LEAVES' | translate }}</td>
+                                        <td> 3 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'REASON' | translate }}</td>
+                                        <td> Personal </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'START_DATE' | translate }}</td>
+                                        <td> 01-10-2016 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'END_DATE' | translate }}</td>
+                                        <td> 10-10-2016 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'ACTION' | translate }}</td>
+                                        <td> - </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END HOLIDAY PARTICULARS COMPONENT  -->
+
+            <!-- START HOLIDAY LIST COMPONENT BY PRIMENG -->
+            <div class="col-lg-8 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <h4>Requestor Details</h4>
+                        <p-dataTable [value]="requests" [responsive]="true">
+                            <p-column field="project" header="{{ 'PROJECT' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="manager" header="{{ 'MANAGER' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="comments" header="{{ 'COMMENTS' | translate }}" [sortable]="true"></p-column>
+                        </p-dataTable>
+                        <form #form="ngForm" (submit)="submitForm(form)"  novalidate>
+                            <div class="form-group">
+                                <label class="control-label">{{ 'COMMENTS' | translate }}</label>
+                                <textarea autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
+                                </textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <h5 class="warning">
+                                            <span>{{validationMessage}}</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button id="approve" [disabled]="form.invalid" type="submit" name="approve" (click)="approveClicked()" class="btn"> {{ 'APPROVE' | translate }} </button>
+                                        <button id="reject" [disabled]="form.invalid" type="submit" name="reject" (click)="rejectClicked()" class="btn"> {{ 'REJECT' | translate }} </button>
+                                        <button id="close" type="reset" (click)=" closeClicked()" class="btn" > {{ 'CLOSE' | translate }} </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END HOLIDAY LIST COMPONENT BY PRIMENG -->
+
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
