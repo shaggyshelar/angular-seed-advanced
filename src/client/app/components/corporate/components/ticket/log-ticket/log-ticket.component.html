@@ -16,7 +16,7 @@
 				<div class="portlet light ">
 					<!--<button pButton type="button" class="pull-right" label="{{ 'NEW_TICKET' | translate }}" (click)="newTicket()" icon="fa fa-plus-circle"></button>-->
 					<nav class="container">
-						<a class="buttons" (click)="newTicket()" tooltip="New Ticket" href="#"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
+						<a class="buttons" [routerLink]="['../manage-ticket']" tooltip="New Ticket" href="#"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
 					</nav>
 					<div class="portlet-body">
 						<p-dataTable [value]="ticket" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -8,8 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['footer.component.css'],
 })
 export class FooterComponent {
-
-  constructor(
-    private router: Router) { }
 
 }

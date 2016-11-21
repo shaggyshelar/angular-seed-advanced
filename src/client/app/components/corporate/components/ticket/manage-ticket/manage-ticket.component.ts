@@ -43,6 +43,6 @@ export class ManageTicketComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/log-ticket']);
+    this.router.navigate(['/corporate/log-ticket']);
   }
 }

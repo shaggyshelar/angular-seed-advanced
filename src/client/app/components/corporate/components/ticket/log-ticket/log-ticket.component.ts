@@ -127,11 +127,11 @@ export class LogTicketComponent implements OnInit {
   }
 
   newTicket() {
-    this.router.navigate(['/manage-ticket']);
+    this.router.navigate(['../manage-ticket']);
   }
 
   selectTicket(ticket: Ticket) {
-    this.router.navigate(['/manage-ticket']);
+    this.router.navigate(['../manage-ticket']);
   }
 
 }

@@ -18,13 +18,13 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-sm-5">
-            <button class="btn btn-default col-sm-6" routerLink="/myBookings">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
-            <button class="btn btn-default col-sm-6" [class.selected-link]="selectedRoom=='AllRooms'" (click)="getEventByRooms('AllRooms')">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
+            <button class="btn btn-default col-sm-6" id="manageBooking" [routerLink]="['/corporate/myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
+            <button class="btn btn-default col-sm-6" id="manageAllRoom"  [class.selected-link]="selectedRoom=='AllRooms'" (click)="getEventByRooms('AllRooms')">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
           </div>
           <div class="col-sm-7">
             <ul class="legend">
               <li *ngFor="let item of conferenceRooms" class="col-xs-6 col-md-4 col-sm-4">
-                <a (click)="getEventByRooms(item.name)" [class.selected-room]="item.name==selectedRoom"><span class="color-list" [style.backgroundColor]="item.color"></span> {{item.name}}</a>
+                <a (click)="getEventByRooms(item.name)"  id="{{item.name}}" [class.selected-room]="item.name==selectedRoom"><span class="color-list" [style.backgroundColor]="item.color"></span> {{item.name}}</a>
               </li>
             </ul>
           </div>

@@ -47,7 +47,7 @@ export class BookComponent {
         // localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {
         //     this.msgs = [];
         //     this.msgs.push({ severity: 'success', summary: 'Confirmed', detail: 'Record saved' });
-        //     this.router.navigate(['/conferenceBooking']);
+        //     this.router.navigate(['../conferenceBooking']);
         // });
     }
 }
