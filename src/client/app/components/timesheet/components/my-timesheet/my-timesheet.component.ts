@@ -89,7 +89,7 @@ export class MyTimesheetComponent implements OnInit {
   }
 
   selectEmployee() {
-    this.router.navigate(['/add-edit-timesheet']);
+    this.router.navigate(['/timesheet/add-edit']);
   }
 
 }

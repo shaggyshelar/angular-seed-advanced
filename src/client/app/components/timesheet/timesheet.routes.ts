@@ -1,5 +1,6 @@
 /** Angular Dependencies */
-import { Route } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 /** Module Level Dependencies */
 import { MyTimesheetComponent } from './components/my-timesheet/my-timesheet.component';
@@ -9,43 +10,58 @@ import { ApprovedTimesheetComponent } from './components/approved-timesheet/appr
 import { ReportTimesheetComponent } from './components/report-timesheet/report-timesheet.component';
 import { ViewApproveTimesheetComponent } from './components/approve-timesheet/view-approve-timesheet.component';
 
-/** Route Definitions */
-export const TimesheetRoutes: Route[] = [
+const TimesheetRoutes: Routes = [
   {
-    path: 'my-timesheet',
-    component: MyTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
-  }, {
-    path: 'add-edit-timesheet',
-    component: AddEditTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.CREATE','Timesheet.UPDATE']
-    }
-  }, {
-    path: 'approve-timesheet',
-    component: ApproveTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
-  }, {
-    path: 'approved-timesheet',
-    component: ApprovedTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
-  }, {
-    path: 'report-timesheet',
-    component: ReportTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
-  }, {
-    path: 'view-approve-timesheet',
-    component: ViewApproveTimesheetComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
+    path: 'timesheet',
+    children: [
+      {
+        path: 'my',
+        component: MyTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.READ']
+        }
+      },
+      {
+        path: 'add-edit',
+        component: AddEditTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.CREATE', 'Timesheet.UPDATE']
+        }
+      }, {
+        path: 'approve',
+        component: ApproveTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.READ']
+        }
+      }, {
+        path: 'approved',
+        component: ApprovedTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.READ']
+        }
+      }, {
+        path: 'report',
+        component: ReportTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.READ']
+        }
+      }, {
+        path: 'view-approve',
+        component: ViewApproveTimesheetComponent,
+        data: {
+          permissions: ['Timesheet.READ']
+        }
+      }
+    ]
   }
 ];
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(TimesheetRoutes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class TimesheetRoutingModule { }

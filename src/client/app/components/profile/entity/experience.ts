@@ -6,6 +6,10 @@ export interface Experience {
     endDate;
     role;
     environment;
+    duration;
+    status;
+    currentProject;
+    comment;
     responsibilites;
     description;
 }

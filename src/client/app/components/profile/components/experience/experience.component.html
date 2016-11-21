@@ -16,8 +16,10 @@
 			<p-column header="{{ 'END_DATE' | translate }}" field="endDate"></p-column>
 			<p-column header="{{ 'ROLE' | translate }}" field="role"></p-column>
 			<p-column header="{{ 'ENVIRONMENT' | translate }}" field="environment"></p-column>
-			<p-column header="{{ 'RESPONSIBILITES' | translate }}" field="responsibilites"></p-column>
-			<p-column header="{{ 'DESCRIPTION' | translate }}" field="description"></p-column>
+			<p-column header="{{ 'DURATION' | translate }}" field="duration"></p-column>
+			<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+			<p-column header="{{ 'CURRENT_PROJECT' | translate }}" field="currentProject"></p-column>
+			<p-column header="{{ 'COMMENTS' | translate }}" field="comment"></p-column>
 		</p-dataTable>
 	</div>
 	<div *ngIf="!showDiv">
@@ -29,54 +31,62 @@
 				<span>{{ 'PROJECT' | translate }}</span>
 				<span class="req-field"> *</span>
 				<div class="form-group div-margin">
-					<input type="text" [(ngModel)]="experienceObj.project" class="form-control" placeholder="">
+					<input type="text" id="experience_project" [(ngModel)]="experienceObj.project" class="form-control" placeholder="">
 				</div>
 			</div>
 			<div class="col-md-2 col-margin">
 				<span>{{ 'CLIENT' | translate }}</span>
 				<span class="req-field"> *</span>
 				<div class="form-group div-margin">
-					<input type="text" [(ngModel)]="experienceObj.client" class="form-control" placeholder="">
-				</div>
-			</div>
-			<div class="col-md-2 col-margin">
-				<span>{{ 'START_DATE' | translate }}</span>
-				<span class="req-field"> *</span>
-				<div class="form-group div-margin">
-					<p-calendar [(ngModel)]="experienceObj.startDate" [showIcon]="true"></p-calendar>
-				</div>
-			</div>
-			<div class="col-md-2 col-margin">
-				<span>{{ 'END_DATE' | translate }}</span>
-				<span class="req-field"> *</span>
-				<div class="div-margin">
-					<p-calendar  [(ngModel)]="experienceObj.endDate"  [showIcon]="true"></p-calendar>
+					<input type="text" id="experience_client" [(ngModel)]="experienceObj.client" class="form-control" placeholder="">
 				</div>
 			</div>
 			<div class="col-md-2 col-margin">
 				<span>{{ 'ROLE' | translate }}</span>
 				<span class="req-field"> *</span>
 				<div class="div-margin">
-					<input type="text"  [(ngModel)]="experienceObj.role"  class="form-control" placeholder="">
+					<input type="text" id="experience_role" [(ngModel)]="experienceObj.role" class="form-control" placeholder="">
+				</div>
+			</div>
+			<div class="col-md-2 col-margin">
+				<span>{{ 'CURRENT_PROJECT' | translate }}</span>
+				<div class="form-group div-margin">
+					<input type="checkbox" id="experience_currentProject" [(ngModel)]="experienceObj.currentProject">
+				</div>
+			</div>
+			<div class="col-md-3 col-margin">
+				<span>{{ 'START_DATE' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="form-group div-margin">
+					<p-calendar id="experience_startDate" [(ngModel)]="experienceObj.startDate" [showIcon]="true"></p-calendar>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-margin">
+				<span>{{ 'END_DATE' | translate }}</span>
+				<span class="req-field"> *</span>
+				<div class="div-margin">
+					<p-calendar id="experience_endDate" [(ngModel)]="experienceObj.endDate" [showIcon]="true"></p-calendar>
 				</div>
 			</div>
 			<div class="col-md-2 col-margin">
 				<span>{{ 'ENVIRONMENT' | translate }}</span>
 				<div class="div-margin">
-					<input type="text"  [(ngModel)]="experienceObj.environment"  class="form-control" placeholder="">
+					<input type="text" id="experience_environment" [(ngModel)]="experienceObj.environment" class="form-control" placeholder="">
 				</div>
 			</div>
-			<div class="col-md-2 col-margin">
+			<div class="col-md-3 col-margin">
 				<span>{{ 'RESPONSIBILITES' | translate }}</span>
 				<span class="req-field"> *</span>
 				<div class="div-margin">
-					<input type="text"  [(ngModel)]="experienceObj.responsibilites"  class="form-control" placeholder="">
+					<input type="text" id="experience_responsibilites" [(ngModel)]="experienceObj.responsibilites" class="form-control" placeholder="">
 				</div>
 			</div>
-			<div class="col-md-2 col-margin">
+			<div class="col-md-3 col-margin">
 				<span>{{ 'DESCRIPTION' | translate }}</span>
 				<div class="div-margin">
-					<input type="text"  [(ngModel)]="experienceObj.description"  class="form-control" placeholder="">
+					<input type="text" id="experience_description" [(ngModel)]="experienceObj.description" class="form-control" placeholder="">
 				</div>
 			</div>
 		</div>

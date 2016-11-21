@@ -46,7 +46,7 @@
 					<div class="form-group">
 						<label>{{ 'UAN_NUMBER' | translate }} </label>
 						<div class="div-margin">
-							<input type="text" [(ngModel)]="uanNumber" class="form-control" placeholder="">
+							<input type="text" id="uan_number" [(ngModel)]="uanObj.number" class="form-control" placeholder="">
 						</div>
 					</div>
 				</div>
@@ -55,8 +55,8 @@
 					<div class="form-group">
 						<label>{{ 'FROM_ESPL' | translate }} </label>
 						<div class="div-margin">
-							<input type="radio" [(ngModel)]="fromESPL" name="espl" value="true" checked> True
-							<input type="radio" [(ngModel)]="fromESPL" name="espl" value="false"> False
+							<input type="radio" id="uan_fromESPL" [(ngModel)]="uanObj.fromESPL" name="espl" value="true" checked> True
+							<input type="radio" id="uanObj_fromESPL" [(ngModel)]="uanObj.fromESPL" name="espl" value="false"> False
 						</div>
 					</div>
 				</div>

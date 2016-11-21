@@ -24,12 +24,15 @@ export class IdentityProofsComponent implements OnInit {
     identityTypes: SelectItem[];
     showDiv: boolean;
     showSubDiv: boolean;
-    selectedIdentityType: number;
+    selectedIdentityType: any;
+    identity : any;
 
     constructor() {
         this.identityProofs = [];
-        this.showDiv = true;
+        this.showDiv = false;
         this.showSubDiv = false;
+        this.identity = {};
+        this.selectedIdentityType = {};
     }
 
     ngOnInit(): void {
@@ -41,7 +44,7 @@ export class IdentityProofsComponent implements OnInit {
         ];
     }
     addClick() {
-        this.showDiv = false;
+        this.showDiv = true;
     }
     submit() {
         this.identityProofs = [{
@@ -52,20 +55,27 @@ export class IdentityProofsComponent implements OnInit {
             status: 'pending for approval',
             hrComment: ''
         }];
-        this.showDiv = true;
+        this.showDiv = false;
         this.showSubDiv = false;
     }
     cancel() {
         this.showSubDiv = false;
-        this.selectedIdentityType = null;
+        this.selectedIdentityType = {};
     }
     cancelIdentityType() {
         this.showSubDiv = false;
-        this.showDiv = true;
-        this.selectedIdentityType = null;
+        this.showDiv = false;
+        this.selectedIdentityType = {};
     }
     onIdentityTypeChange(event) {
-        this.showSubDiv = true;
-        console.log(this.selectedIdentityType);
+        this.showSubDiv = true;       
+    }
+
+    editIdentityProof (identity) {  
+        this.showDiv = false;     
+        this.showSubDiv = true; 
+        this.selectedIdentityType = this.identityTypes[1].value;
+        this.identity.value = this.identity.value;
+        this.identity.document = this.identity.document;
     }
 }

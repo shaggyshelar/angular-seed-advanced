@@ -36,28 +36,28 @@
                     <span>{{ 'EMPLOYMENT_DETAILS' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <input type="text" class="form-control" [(ngModel)]="employmentHistoryObj.employementDetails" placeholder="">
+                        <input type="text" class="form-control" id="employmentHistory_employementDetails" [(ngModel)]="employmentHistoryObj.employementDetails" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-3 col-margin">
                     <span>{{ 'DESIGNATION' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <input type="text" class="form-control" [(ngModel)]="employmentHistoryObj.designation" placeholder="">
+                        <input type="text" class="form-control" id="employmentHistory_designation" [(ngModel)]="employmentHistoryObj.designation" placeholder="">
                     </div>
                 </div>
                 <div class="col-md-3 col-margin">
                     <span>{{ 'START_DATE' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-calendar [showIcon]="true" [(ngModel)]="employmentHistoryObj.startDate"></p-calendar>
+                        <p-calendar [showIcon]="true" id="employmentHistory_startDate" [(ngModel)]="employmentHistoryObj.startDate"></p-calendar>
                     </div>
                 </div>
                 <div class="col-md-3 col-margin">
                     <span>{{ 'END_DATE' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-calendar [showIcon]="true" [(ngModel)]="employmentHistoryObj.endDate"></p-calendar>
+                        <p-calendar [showIcon]="true" id="employmentHistory_endDate" [(ngModel)]="employmentHistoryObj.endDate"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                             <div class="form-group">
                                 <label>{{ 'FIRST_MONTH_SALARY_SLIP' | translate }} </label>
                                 <div class="div-margin">
-                                    <input type="file">
+                                    <input type="file" id="firstMonthSalarySlip">
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                             <div class="form-group">
                                 <label>{{ 'SECOND_MONTH_SALARY_SLIP' | translate }} </label>
                                 <div class="div-margin">
-                                    <input type="file">
+                                    <input type="file" id="secondMonthSalarySlip">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="form-group">
                                 <label>{{ 'THIRD_MONTH_SALARY_SLIP' | translate }} </label>
                                 <div class="div-margin">
-                                    <input type="file">
+                                    <input type="file" id="thirdMonthSalarySlip">
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             <div class="form-group">
                                 <label>{{ 'EXP_LETTER_ONE' | translate }} </label>
                                 <div class="div-margin">
-                                    <input type="file">
+                                    <input type="file" id="expLetterOne">
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                             <div class="form-group">
                                 <label>{{ 'EXP_LETTER_TWO' | translate }} </label>
                                 <div class="div-margin">
-                                    <input type="file">
+                                    <input type="file" id="expLetterTwo">
                                 </div>
                             </div>
                         </div>

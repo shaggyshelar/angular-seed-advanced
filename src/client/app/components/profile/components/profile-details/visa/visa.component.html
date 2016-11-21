@@ -16,41 +16,49 @@
 		</div>
 		<div *ngIf="visa.length > 0">
 			<p-dataTable [value]="visa" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-				<p-column header="{{ 'EDIT' | translate }}"></p-column>
+				<p-column header="{{ 'EDIT' | translate }}">
+					<template let-visaData="rowData" pTemplate type="body">
+						<i class="fa fa-pencil icon-color" (click)="editVisa(visaData)"></i>
+					</template>
+				</p-column>
 				<p-column header="{{ 'VISA_NUMBER' | translate }}" field="visaNumber"></p-column>
 				<p-column header="{{ 'VISA_EXPIRY_DATE' | translate }}" field="visaExpiryDate"></p-column>
 				<p-column header="{{ 'VISA_TYPE' | translate }}" field="visaType"></p-column>
-				<p-column header="{{ 'SCANNED_COPY' | translate }}" field="scanedCopy"></p-column>
+				<p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
+				<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+				<p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComments"></p-column>
 			</p-dataTable>
 		</div>
 		<div *ngIf="!showDiv">
 			<div class="row row-margin">
-				<div class="col-md-3 col-margin">
+				<div class="col-md-6 col-margin">
 					<span>{{ 'VISA_NUMBER' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="div-margin">
-						<input type="text" [(ngModel)]="visaNumber" class="form-control" placeholder="">
+						<input type="text" id="visa_number" [(ngModel)]="visaObj.number" class="form-control" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3 col-margin">
+				<div class="col-md-6 col-margin">
 					<span>{{ 'VISA_EXPIRY_DATE' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="div-margin">
-						<p-calendar  [(ngModel)]="visaExpiryDate" [showIcon]="true"></p-calendar>
+						<p-calendar id="visa_expiryDate" [(ngModel)]="visaObj.expiryDate" [showIcon]="true"></p-calendar>
 					</div>
 				</div>
-				<div class="col-md-3 col-margin">
+			</div>
+			<div class="row row-margin">
+				<div class="col-md-6 col-margin">
 					<span>{{ 'VISA_TYPE' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="div-margin">
-						<input type="text" [(ngModel)]="visaType" class="form-control" placeholder="">
+						<input type="text" id="visa_type" [(ngModel)]="visaObj.type" class="form-control" placeholder="">
 					</div>
 				</div>
-                <div class="col-md-3 col-margin">
+                <div class="col-md-6 col-margin">
 					<span>{{ 'SCANNED_COPY' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="div-margin">
-						<input type="file">
+						<input type="file" id="visa_document" [(ngModel)]="visaObj.document">
 					</div>
 				</div>
 			</div>
