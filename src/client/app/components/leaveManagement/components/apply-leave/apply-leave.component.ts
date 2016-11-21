@@ -82,6 +82,7 @@ export class ApplyLeaveComponent {
   }
 
   addLeaves() {
+    //TODO : Add leave fuunctinality
   }
 
   validateLeaveType() {
