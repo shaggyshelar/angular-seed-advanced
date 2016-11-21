@@ -1,14 +1,23 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Third Party Dependencies */
-import {SelectItem} from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
 
 /** Module Level Dependencies */
+
+export interface EducationForm {
+  degree: string;
+  percentage: string;
+  yearOfPassing: string;
+  class: string;
+  grade: string;
+}
 
 
 /** Component Declaration */
@@ -24,6 +33,7 @@ export class EducationComponent implements OnInit {
   grade: SelectItem[];
   showDiv: boolean;
   educationObj: any;
+  educationForm: FormGroup;
 
   constructor(
     private router: Router) {
@@ -47,6 +57,22 @@ export class EducationComponent implements OnInit {
     this.grade.push({ label: 'First Class', value: { id: 2, name: 'First Class' } });
     this.grade.push({ label: 'Second Class', value: { id: 3, name: 'Second Class' } });
     this.grade.push({ label: 'Pass', value: { id: 4, name: 'Pass' } });
+
+    this.educationForm = new FormGroup({
+      degree: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      class: new FormControl('', [Validators.required]),
+      grade: new FormControl('', [Validators.required]),
+      percentage: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      yearOfPassing: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    });
+  }
+
+  onSubmit({ value, valid }: { value: EducationForm, valid: boolean }) {
+    console.log(value, valid);
+  }
+
+  onFileSelect(event) {
+    console.log('event', event);
   }
 
   onAddClick() {
@@ -70,12 +96,12 @@ export class EducationComponent implements OnInit {
   cancel() {
     this.showDiv = true;
   }
-  editEducation (educationData) {
+  editEducation(educationData) {
     this.showDiv = false;
     this.educationObj = {
-      class:this.class[1].value,
+      class: this.class[1].value,
       degree: educationData.degree,
-      grade:this.grade[1].value,
+      grade: this.grade[1].value,
       percentage: educationData.percentage,
       yearOfPassing: educationData.yearOfPassing,
       certificate: educationData.certificate

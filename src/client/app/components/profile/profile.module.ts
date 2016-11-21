@@ -1,7 +1,7 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Other Module Dependencies */
 import { CommonModule, TranslateModule } from '../../shared/index';
@@ -23,7 +23,7 @@ import { PassportComponent } from './components/profile-details/passport/passpor
 import { NomineesComponent } from './components/profile-details/nominees/nominees.component';
 import { IdentityProofsComponent } from './components/profile-details/identity-proofs/identity-proofs.component';
 /** Module Import Declarations */
-let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule];
+let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule, ReactiveFormsModule];
 
 /** Component/Directive Declarations */
 let declarations = [
