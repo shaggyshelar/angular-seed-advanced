@@ -8,14 +8,13 @@ import { BaseComponent } from '../views/base-component';
 
 /** Component Declaration */
 
-//import * as localForage from 'localforage';
 
 @BaseComponent({
   moduleId: module.id,
-  selector: 'apply-leave',
-  templateUrl: 'lms-updateleave.component.html'
+  selector: 'update-leave',
+  templateUrl: 'update-leave.component.html'
 })
-export class LmsUpdateLeavesComponent {
+export class UpdateLeaveComponent {
 
   leaves: any[] = [];
   managers: any[];

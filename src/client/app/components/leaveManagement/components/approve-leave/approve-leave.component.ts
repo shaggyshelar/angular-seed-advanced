@@ -24,9 +24,9 @@ export class ShowLeaveReq {
 @BaseComponent({
   moduleId: module.id,
   selector: 'approve-leave',
-  templateUrl: 'lms-approveleave.component.html'
+  templateUrl: 'approve-leave.component.html'
 })
-export class LmsApproveLeavesComponent implements OnInit {
+export class ApproveLeaveComponent implements OnInit {
 
   approvalRecords: ShowLeaveReq[];
   servRows = 10;

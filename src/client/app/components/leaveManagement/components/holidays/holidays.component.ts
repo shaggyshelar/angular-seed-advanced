@@ -29,10 +29,10 @@ export class Holiday {
 @BaseComponent({
   moduleId: module.id,
   selector: 'view-holidays',
-  templateUrl: 'lms-holidays.component.html'
+templateUrl: 'holidays.component.html'
 })
 
-export class LmsHolidaysComponent {
+export class HolidaysComponent {
 
   servRows = 7;
 

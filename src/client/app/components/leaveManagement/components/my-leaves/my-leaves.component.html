@@ -59,7 +59,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a (click)="applyLeaveClicked()" class="btn green btn-outline"> {{ 'APPLY_LEAVE' | translate }} </a>
+                        <a id="applyLeave" (click)="applyLeaveClicked()" class="btn green btn-outline"> {{ 'APPLY_LEAVE' | translate }} </a>
                     </div>
 
                 </div>
@@ -77,7 +77,7 @@
                         <p-column field="status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
                         <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
                             <template let-car="rowData" pTemplate type="body">
-                                <button type="button" pButton (click)="updateBtnClicked()" icon="fa-edit"></button>
+                                <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked()" icon="fa-edit"></button>
                             </template>
                         </p-column>
                     </p-dataTable>

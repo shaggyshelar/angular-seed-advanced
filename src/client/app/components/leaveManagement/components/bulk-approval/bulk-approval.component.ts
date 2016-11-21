@@ -26,10 +26,10 @@ class FormFieldClass {
 @BaseComponent({
   moduleId: module.id,
   selector: 'bulkapproval',
-  templateUrl: 'lms-bulkapproval.component.html',
-  styleUrls: ['lms-bulkapproval.component.css']
+  templateUrl: 'bulk-approval.component.html',
+  styleUrls: ['bulk-approval.component.css']
 })
-export class LmsBulkApproveComponent {
+export class BulkApproveComponent {
 
   servRows = 5;
   requests: any[];
@@ -55,7 +55,6 @@ export class LmsBulkApproveComponent {
     this.rejected = false;
     this.approved = true;
     if (this.selectedEmployees.length > 0) {
-      alert('approved!');
       //    BACKEND CALL HERE
       return;
     }
@@ -65,8 +64,6 @@ export class LmsBulkApproveComponent {
     this.rejected = true;
     this.approved = false;
     if (this.selectedEmployees.length > 0) {
-      alert('rejected!');
-      //    BACKEND CALL HERE
       return;
     }
   }

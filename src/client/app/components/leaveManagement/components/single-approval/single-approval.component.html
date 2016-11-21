@@ -92,7 +92,7 @@
                             <p-column field="status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
                             <p-column field="comments" header="{{ 'COMMENTS' | translate }}" [sortable]="true"></p-column>
                         </p-dataTable>
-                        <form #form="ngForm" novalidate>
+                        <form #form="ngForm" (submit)="submitForm(form)"  novalidate>
                             <div class="form-group">
                                 <label class="control-label">{{ 'COMMENTS' | translate }}</label>
                                 <textarea autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
@@ -112,9 +112,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <button [disabled]="form.invalid" (click)="approveClicked()" class="btn"> {{ 'APPROVE' | translate }} </button>
-                                        <button [disabled]="form.invalid" (click)="rejectClicked()" class="btn"> {{ 'REJECT' | translate }} </button>
-                                        <button (click)=" closeClicked()" class="btn"> {{ 'CLOSE' | translate }} </button>
+                                        <button id="approve" [disabled]="form.invalid" type="submit" name="approve" (click)="approveClicked()" class="btn"> {{ 'APPROVE' | translate }} </button>
+                                        <button id="reject" [disabled]="form.invalid" type="submit" name="reject" (click)="rejectClicked()" class="btn"> {{ 'REJECT' | translate }} </button>
+                                        <button id="close" type="reset" (click)=" closeClicked()" class="btn" > {{ 'CLOSE' | translate }} </button>
                                     </div>
                                 </div>
                             </div>

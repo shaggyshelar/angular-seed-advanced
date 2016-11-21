@@ -9,8 +9,6 @@ import { BaseComponent } from '../views/base-component';
 
 /** Component Declaration */
 
-//import * as localForage from 'localforage';
-
 
 class FinalLeaveData {
   ID: number;
@@ -36,11 +34,11 @@ class FormFieldClass {
 @BaseComponent({
   moduleId: module.id,
   selector: 'apply-leave',
-  templateUrl: 'lms-applyleave.component.html',
-  styleUrls: ['lms-applyleave.component.css']
+  templateUrl: 'apply-leave.component.html',
+  styleUrls: ['apply-leave.component.css']
 })
 
-export class LmsApplyLeavesComponent {
+export class ApplyLeaveComponent {
 
   leaveTypeInvalid: boolean = true;
   strtDt: any;
@@ -65,13 +63,11 @@ export class LmsApplyLeavesComponent {
   }
 
   submitForm(form: NgForm) {
-    console.log(form);
     this.validateLeaveType();
     if (this.leaveTypeInvalid)
       return;
 
     //call to backend submit
-    //this.addToLocalforage();
   }
 
   startChanged() {
@@ -86,7 +82,6 @@ export class LmsApplyLeavesComponent {
   }
 
   addLeaves() {
-    console.log('addLeaves() was called');
   }
 
   validateLeaveType() {
@@ -99,23 +94,6 @@ export class LmsApplyLeavesComponent {
 
   reasonTextChanged() {
     this.charsLeft = 600 - this.model.reason.length;
-  }
-
-  addToLocalforage() {
-    // var finalData = {
-    //   ID: 1,
-    //   start: this.model.start.getDate() + '-' + this.model.start.getMonth() + '-' + this.model.start.getFullYear(),
-    //   end: this.model.end.getDate() + '-' + this.model.end.getMonth() + '-' + this.model.end.getFullYear(),
-    //   numDays: this.model.numDays,
-    //   leave: this.model.leaveType,
-    //   reason: this.model.reason,
-    //   empName: 'Employee Name',
-    //   status: 'Pending'
-    // };
-
-    // localForage.setItem('appliedLeave', finalData, (err, value) => {
-    //   alert('added');
-    // });
   }
 
   dayDiffCalc() {

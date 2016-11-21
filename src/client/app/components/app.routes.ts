@@ -5,7 +5,7 @@ import { LoginRoutes } from './login/login.routes';
 import { ProfileRoutes } from './profile/profile.routes';
 import { CorporateRoutes } from './corporate/corporate.routes';
 import { TimesheetRoutes } from './timesheet/timesheet.routes';
-import { LmsRoutes } from './lms/lms.routes';
+import { LeaveManagementRoutes } from './leaveManagement/leave-management.routes';
 
 export const routes: Array<any> = [
   ...HomeRoutes,
@@ -14,5 +14,5 @@ export const routes: Array<any> = [
   ...ProfileRoutes,
   ...CorporateRoutes,
   ...TimesheetRoutes,
-  ...LmsRoutes
+  ...LeaveManagementRoutes
 ];

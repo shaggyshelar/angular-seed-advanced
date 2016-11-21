@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 /** Framework Dependencies */
 import { BaseComponent } from '../views/base-component';
@@ -17,10 +18,10 @@ class FormFieldClass {
 @BaseComponent({
   moduleId: module.id,
   selector: 'singleapproval',
-  templateUrl: 'lms-singleapproval.component.html',
-  styleUrls: ['lms-singleapproval.component.css']
+  templateUrl: 'single-approval.component.html',
+  styleUrls: ['single-approval.component.css']
 })
-export class LmsSingleApprovalComponent {
+export class SingleApprovalComponent {
 
   requests: any[];
   servRows = 6;
@@ -45,7 +46,6 @@ export class LmsSingleApprovalComponent {
   approveClicked() {
     this.rejected = false;
     this.approved = true;
-    alert('approved!');
     //    BACKEND CALL HERE
     return;
   }
@@ -53,7 +53,6 @@ export class LmsSingleApprovalComponent {
   rejectClicked() {
     this.rejected = true;
     this.approved = false;
-    alert('rejected!');
     //    BACKEND CALL HERE
     return;
   }
@@ -63,4 +62,7 @@ export class LmsSingleApprovalComponent {
     this.router.navigate(['/approve-leave']);
   }
 
+  submitForm(form: NgForm) {
+    // BACKEND CALL HERE
+  }
 }

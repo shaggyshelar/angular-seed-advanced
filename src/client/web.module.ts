@@ -32,7 +32,7 @@ import { CorporateModule } from './app/components/corporate/index';
 
 import { ProfileModule } from './app/components/profile/index';
 import { TimesheetModule } from './app/components/timesheet/index';
-import { LmsModule } from './app/components/lms/index';
+import { LeaveManagementModule } from './app/components/leaveManagement/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -98,7 +98,7 @@ export function cons() {
     ProfileModule,
     CorporateModule,
     TimesheetModule,
-    LmsModule
+    LeaveManagementModule
   ],
   declarations: [
     AppComponent,

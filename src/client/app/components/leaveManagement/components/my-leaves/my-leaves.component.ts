@@ -7,14 +7,13 @@ import { BaseComponent } from '../views/base-component';
 
 /** Component Declaration */
 
-//import * as localForage from 'localforage';
 
 @BaseComponent({
   moduleId: module.id,
   selector: 'leaves',
-  templateUrl: 'lms-leaves.component.html'
+  templateUrl: 'my-leaves.component.html'
 })
-export class LmsLeavesComponent {
+export class MyLeavesComponent {
 
   servRows = 5;
   leaves: any[];

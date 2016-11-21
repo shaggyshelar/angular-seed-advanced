@@ -157,9 +157,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <button  class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
-                                        <button [disabled]="form.invalid" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
-                                        <button type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
+                                        <button id="addLeave" class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
+                                        <button id="submit" [disabled]="form.invalid" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
+                                        <button id="cancel" type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
                                     </div>
                                 </div>
                             </div>
