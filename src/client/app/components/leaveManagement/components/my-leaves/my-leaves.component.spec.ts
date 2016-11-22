@@ -73,26 +73,7 @@ export function main() {
                     });
             });
         });
-
-        // t.it('should call applyLeaveClicked()',inject([Router],(router: Router)=>{
-        //     t.async(()=>{
-        //         TestBed.compileComponents()
-        //             .then(()=>{
-        //                 let fixture = TestBed.createComponent(TestComponent);
-        //                 fixture.detectChanges();
-
-        //                 let homeInstance = fixture.debugElement.children[0].componentInstance;
-        //                 const spy = spyOn(router,'navigateByUrl');
-                        
-        //                 var btn = fixture.nativeElement.getElementsByClassName('btn green btn-outline');
-        //                 btn.click();
-        //                 const navArgs = spy.calls.first().args[0];
-
-        //                 t.e(navArgs).toBe('/leave-management/apply-leave');
-        //             });
-        //     });
-        // }));
-
+      
         t.it('should call applyLeaveClicked() original', () => {
             t.async(() => {
                 TestBed.compileComponents()

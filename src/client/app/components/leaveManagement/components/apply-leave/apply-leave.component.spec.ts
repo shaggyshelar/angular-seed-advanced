@@ -78,47 +78,6 @@ export function main() {
                     });
             });
         });
-
-        // t.it('test the reasonTextChanged() method', () => {
-        //     t.async(() => {
-        //         TestBed.compileComponents()
-        //             .then(() => {
-        //                 let fixture = TestBed.createComponent(TestComponent);
-        //                 fixture.detectChanges();
-
-        //                 let homeInstance = fixture.debugElement.children[0].componentInstance;
-
-        //                 homeInstance.model.reason = 'high fever';
-        //                 homeInstance.reasonTextChanged();
-        //                 t.e(homeInstance.charsLeft).toEqual(600-homeInstance.model.reason.length);
-
-        //                 homeInstance.model.reason = 'high fever and some personal reason';
-        //                 homeInstance.reasonTextChanged();
-        //                 t.e(homeInstance.charsLeft).toEqual(600-homeInstance.model.reason.length);
-        //             });
-        //     });
-        // });
-
-        // t.it('test the validateLeaveType() method', () => {
-        //     t.async(() => {
-        //         TestBed.compileComponents()
-        //             .then(() => {
-        //                 let fixture = TestBed.createComponent(TestComponent);
-        //                 fixture.detectChanges();
-
-        //                 let homeInstance = fixture.debugElement.children[0].componentInstance;
-
-        //                 homeInstance.model.leaveType = 'select';
-        //                 homeInstance.validateLeaveType();
-        //                 t.e(homeInstance.leaveTypeInvalid).toEqual(false);
-
-        //                 homeInstance.model.leaveType = 'Leave';
-        //                 homeInstance.validateLeaveType();
-        //                 t.e(homeInstance.leaveTypeInvalid).toEqual(true);
-        //             });
-        //     });
-        // });
-
     });
 
 }
