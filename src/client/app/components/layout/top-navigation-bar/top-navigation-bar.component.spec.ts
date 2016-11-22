@@ -53,7 +53,7 @@ export function main() {
                         fixture.detectChanges();
                         let linkDes = fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
                         let links = linkDes.map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
-                        expect(links[0].linkParams).toBe('/my-profile');
+                        expect(links[0].linkParams).toBe('/profile/my');
                         expect(links[1].linkParams).toBe('/change-password');
                     });
             }));
