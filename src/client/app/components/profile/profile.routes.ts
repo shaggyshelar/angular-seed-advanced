@@ -1,16 +1,29 @@
 /** Angular Dependencies */
-import { Route } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 /** Module Level Dependencies */
-  import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 /** Route Definitions */
-export const ProfileRoutes: Route[] = [
+const ProfileRoutes: Routes = [
   {
-    path: 'my-profile',
-    component: MyProfileComponent,
-    data: {
-      permissions: ['Timesheet.READ']
-    }
+    path: 'profile',
+    children: [
+      {
+        path: 'my',
+        component: MyProfileComponent,
+      },
+    ]
   }
 ];
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(ProfileRoutes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class ProfileRoutingModule { }

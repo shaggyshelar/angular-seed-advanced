@@ -19,8 +19,9 @@ after_failure:
 - ./slacktee.sh -t "$TRAVIS_REPO_SLUG $TRAVIS_JOB_NUMBER build directory" &
 
 after_success: |
-  if [ -n "$GITHUB_API_KEY" ]; then
+  if [ -n "$GITHUB_API_KEY" -a "$TRAVIS_EVENT_TYPE" == "push" ]; then
     npm run build.prod
+    cp -r ./coverage ./dist/prod/
     cd ./dist/prod
     git init
     git add .
@@ -28,7 +29,7 @@ after_success: |
     git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     cd ..
     cd ..
-    ./slacktee.sh -t "App Successfully Deployed" &
+    echo "Application Deployed Succsffully!" | ./slacktee.sh -t "Heroku Deploy"
   fi
 
 branches:

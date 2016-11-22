@@ -43,8 +43,12 @@ export class ExperienceComponent implements OnInit {
       endDate: '12/12/2020',
       role: '2000',
       environment: '',
-      responsibilites: 'status',
-      description: 'hr Comment'
+      duration:'8 years',
+      status:'status',
+      currentProject: true,
+      comment: 'Comment',
+      responsibilites : '',
+      description: ''
     }];
     this.showDiv = true;
   }

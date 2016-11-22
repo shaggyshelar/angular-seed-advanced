@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<label>{{ 'NOMINEE_NAME_1' | translate }} </label>
 						<div class="div-margin">
-							<input type="text" [(ngModel)]="firstNomineeName" class="form-control" placeholder="">
+							<input type="text" id="nominee_firstNomineeName" [(ngModel)]="nomineeObj.firstNomineeName" class="form-control" placeholder="">
 						</div>
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 					<div class="form-group">
 						<label>{{ 'NOMINEE_1_RELATION_EMP' | translate }} </label>
 						<div class="div-margin">
-							<input type="text" [(ngModel)]="firstNomineeRelationWithEmp" class="form-control" placeholder="">
+							<input type="text" id="nominee_firstNomineeRelationWithEmp" [(ngModel)]="nomineeObj.firstNomineeRelationWithEmp" class="form-control" placeholder="">
 						</div>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 					<div class="form-group">
 						<label>{{ 'NOMINEE_NAME_2' | translate }} </label>
 						<div class="div-margin">
-							<input type="text" [(ngModel)]="secondNomineeName" class="form-control" placeholder="">
+							<input type="text" id="nominee_secondNomineeName" [(ngModel)]="nomineeObj.secondNomineeName" class="form-control" placeholder="">
 						</div>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 					<div class="form-group">
 						<label>{{ 'NOMINEE_2_RELATION_EMP' | translate }} </label>
 						<div class="div-margin">
-							<input type="text" [(ngModel)]="secondNomineeRelationWithEmp" class="form-control" placeholder="">
+							<input type="text" id="nominee_secondNomineeRelationWithEmp" [(ngModel)]="nomineeObj.secondNomineeRelationWithEmp" class="form-control" placeholder="">
 						</div>
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="div-margin nominee-info">
-						<input type="checkbox" name="nomineesInfo"> {{ 'NOMINEE_INFO' | translate }}
+						<input type="checkbox" name="nomineesInfo" id="nominee_nomineesInfo" [(ngModel)]="nomineeObj.nomineesInfo"> {{ 'NOMINEE_INFO' | translate }}
 					</div>
 				</div>
 			</div>

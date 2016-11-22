@@ -11,9 +11,10 @@ import { ApproveTimesheetComponent } from './components/approve-timesheet/approv
 import { ViewApproveTimesheetComponent } from './components/approve-timesheet/view-approve-timesheet.component';
 import { ApprovedTimesheetComponent } from './components/approved-timesheet/approved-timesheet.component';
 import { ReportTimesheetComponent } from './components/report-timesheet/report-timesheet.component';
+import { TimesheetRoutingModule } from './timesheet.routes';
 
 /** Module Import Declarations */
-let imports = [CommonModule, TranslateModule];
+let imports = [TimesheetRoutingModule,CommonModule, TranslateModule];
 
 /** Component/Directive Declarations */
 let declarations = [MyTimesheetComponent,

@@ -22,8 +22,9 @@ import { UANComponent } from './components/profile-details/uan/uan.component';
 import { PassportComponent } from './components/profile-details/passport/passport.component';
 import { NomineesComponent } from './components/profile-details/nominees/nominees.component';
 import { IdentityProofsComponent } from './components/profile-details/identity-proofs/identity-proofs.component';
+import { ProfileRoutingModule } from './profile.routes';
 /** Module Import Declarations */
-let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule, ReactiveFormsModule];
+let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule, ReactiveFormsModule, ProfileRoutingModule];
 
 /** Component/Directive Declarations */
 let declarations = [

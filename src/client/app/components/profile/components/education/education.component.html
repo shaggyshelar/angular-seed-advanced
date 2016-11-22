@@ -30,14 +30,14 @@
                     <span>{{ 'CLASS' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-dropdown [options]="class" [style]="{'width':'100%'}" formControlName="class"></p-dropdown>
+                        <p-dropdown [options]="class" [style]="{'width':'100%'}" formControlName="class" id="education_class"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
                     <span>{{ 'DEGREE' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="form-group div-margin">
-                        <input type="text" class="form-control" placeholder="" formControlName="degree">
+                        <input type="text" class="form-control" placeholder="" formControlName="degree" id="education_degree">
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('required') && educationForm.get('degree').touched">
                         Degree is required
@@ -50,14 +50,14 @@
                     <span>{{ 'GRADE' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-dropdown [options]="grade" [style]="{'width':'100%'}" formControlName="grade"></p-dropdown>
+                        <p-dropdown [options]="grade" [style]="{'width':'100%'}" formControlName="grade" id="education_grade"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
                     <span>{{ 'PERCENTAGE' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <input type="text" class="form-control" placeholder="" formControlName="percentage">
+                        <input type="text" class="form-control" placeholder="" formControlName="percentage" id="education_percentage">
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('required') && educationForm.get('percentage').touched">
                         {{ 'PERCENTAGE' | translate }} is required
@@ -70,7 +70,7 @@
                     <span>{{ 'YEAR_OF_PASSING' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <input type="text" class="form-control" placeholder="" formControlName="yearOfPassing">
+                        <input type="text" class="form-control" placeholder="" formControlName="yearOfPassing" id="education_yearOfPassing">
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('required') && educationForm.get('yearOfPassing').touched">
                         {{ 'YEAR_OF_PASSING' | translate }} is required
@@ -83,7 +83,7 @@
                     <span>{{ 'SCANNED_COPY' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-fileUpload (onSelect)="onFileSelect($event)" url="http://localhost:5555/upload"></p-fileUpload>
+                        <p-fileUpload (onSelect)="onFileSelect($event)" url="http://localhost:5555/upload" id="education_certificate"></p-fileUpload>
                     </div>
                 </div>
             </div>

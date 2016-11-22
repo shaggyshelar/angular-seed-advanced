@@ -229,5 +229,6 @@
   "VOTER_ID":"Voter ID",
   "DETAILS":"Details",
   "ADMIN_TITLE":"Admin",
-  "FEATURE_TITLE":"Feature"
+  "FEATURE_TITLE":"Feature",
+  "CURRENT_PROJECT": "Current Project"
 }
