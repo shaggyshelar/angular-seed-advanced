@@ -8,5 +8,5 @@ export const routes: Array<any> = [
   ...HomeRoutes,
   ...AboutRoutes,
   ...LoginRoutes,
-  ...LeaveManagementRoutes
+  ...LeaveManagementRoutes,
 ];
