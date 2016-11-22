@@ -230,5 +230,6 @@
   "DETAILS":"Details",
   "ADMIN_TITLE":"Admin",
   "FEATURE_TITLE":"Feature",
-  "CURRENT_PROJECT": "Current Project"
+  "CURRENT_PROJECT": "Current Project",
+  "ROLE_TITLE":"Role"
 }
