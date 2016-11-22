@@ -83,7 +83,7 @@
                     <span>{{ 'SCANNED_COPY' | translate }}</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
-                        <p-fileUpload (onSelect)="onFileSelect($event)" url="http://localhost:5555/upload" id="education_certificate"></p-fileUpload>
+                        <input type="file" id="education_certificate" (change)="onChange($event)">
                     </div>
                 </div>
             </div>

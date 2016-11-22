@@ -1,7 +1,7 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
 import { BaseComponent } from '../views/base-component';
@@ -11,12 +11,21 @@ import { SelectItem } from 'primeng/primeng';
 
 /** Module Level Dependencies */
 
+/** Other Module Dependencies */
+import * as _ from 'lodash';
+
+export interface Select {
+    id: number;
+    name: string;
+};
+
 export interface EducationForm {
+    id: number;
     degree: string;
     percentage: string;
     yearOfPassing: string;
-    class: string;
-    grade: string;
+    class: Select;
+    grade: Select;
 }
 
 
@@ -59,6 +68,7 @@ export class EducationComponent implements OnInit {
         this.grade.push({ label: 'Pass', value: { id: 4, name: 'Pass' } });
 
         this.educationForm = this.formBuilder.group({
+            id: [''],
             degree: ['', [Validators.required, Validators.minLength(2)]],
             class: ['', [Validators.required]],
             grade: ['', [Validators.required]],
@@ -69,6 +79,39 @@ export class EducationComponent implements OnInit {
 
     onSubmit({ value, valid }: { value: EducationForm, valid: boolean }) {
         console.log(value, valid);
+        //TODO :Edit Functionality
+        //  var educationData = _.find(this.education,['id',value.id]);
+        //    if (educationData) {
+        //        educationData.class = value.class.name,
+        //        educationData.degree = value.degree,
+        //        educationData.grade = value.grade.name,
+        //        educationData.percentage = value.percentage,
+        //        educationData.yearOfPassing = value.yearOfPassing;
+        //    } else {
+        //      this.education.push({
+        //        id: this.education.length + 1,
+        //        class: value.class.name,
+        //        degree: value.degree,
+        //        grade: value.grade.name,
+        //        percentage: value.percentage,
+        //        yearOfPassing: value.yearOfPassing,
+        //        certificate: '',
+        //        status: 'status',
+        //        hrComment: 'hr Comment'
+        //      });
+        //    }
+        this.education = [{
+            id: this.education.length + 1,
+            class: value.class.name,
+            degree: value.degree,
+            grade: value.grade.name,
+            percentage: value.percentage,
+            yearOfPassing: value.yearOfPassing,
+            certificate: '',
+            status: 'status',
+            hrComment: 'hr Comment'
+        }];
+        this.showDiv = true;
     }
 
     onFileSelect(event) {
@@ -77,34 +120,27 @@ export class EducationComponent implements OnInit {
 
     onAddClick() {
         this.showDiv = false;
-        this.educationObj = {};
+        this.educationForm.reset();
     }
-    submit() {
-        this.education = [{
-            id: 1,
-            class: 'ssc',
-            degree: 'ssc',
-            grade: 'distiction',
-            percentage: '90',
-            yearOfPassing: '2000',
-            certificate: '',
-            status: 'status',
-            hrComment: 'hr Comment'
-        }];
-        this.showDiv = true;
-    }
+
     cancel() {
         this.showDiv = true;
+        this.educationForm.reset();
     }
     editEducation(educationData) {
         this.showDiv = false;
-        this.educationObj = {
-            class: this.class[1].value,
+        this.educationForm.setValue({
+            id: educationData.id,
             degree: educationData.degree,
-            grade: this.grade[1].value,
-            percentage: educationData.percentage,
+            class: _.find(this.class, ['label', educationData.class]).value,
+            grade: _.find(this.grade, ['label', educationData.grade]).value,
             yearOfPassing: educationData.yearOfPassing,
-            certificate: educationData.certificate
-        };
+            percentage: educationData.percentage
+        });
+    }
+
+    onChange(event) {
+        var files = event.srcElement.files;
+        console.log(files);
     }
 }

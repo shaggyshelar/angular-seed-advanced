@@ -230,5 +230,15 @@
   "DETAILS":"Details",
   "ADMIN_TITLE":"Admin",
   "FEATURE_TITLE":"Feature",
-  "CURRENT_PROJECT": "Current Project"
+  "CURRENT_PROJECT": "Current Project",
+
+  "ACHIEVEMENT_REQUIRED":"Please enter achievement",
+  "SKILLTYPE_REQUIRED" :"Please select Skill Type",
+  "SKILL_REQUIRED" :"Please enter skills",
+  "PROJECT_REQUIRED" : "Please enter Project",
+  "CLIENT_REQUIRED": "Please enter Client name",
+  "ROLE_REQUIRED" : "Please enter role",
+  "STARTDATE_REQUIRED" : "Please enter start Date",
+  "ENDDATE_REQUIRED" : "Please enter end Date",
+  "RESPONSIBILITY_REQUIRED" : "Please enter respnsibility"
 }
