@@ -5,6 +5,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
 
+import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
+import { Router } from '@angular/router';
+
 // app
 import { MyLeavesComponent } from './my-leaves.component';
 
@@ -13,9 +16,12 @@ export function main() {
     t.describe('Component: MyLeavesComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CoreModule],
+                imports: [CoreModule, MultilingualModule],
                 declarations: [MyLeavesComponent, TestComponent],
-                schemas: [NO_ERRORS_SCHEMA]
+                schemas: [NO_ERRORS_SCHEMA],
+                providers: [
+                    { provide: Router, useClass: RouterStub }
+                ]
             });
         });
 
@@ -68,6 +74,40 @@ export function main() {
             });
         });
 
+        // t.it('should call applyLeaveClicked()',inject([Router],(router: Router)=>{
+        //     t.async(()=>{
+        //         TestBed.compileComponents()
+        //             .then(()=>{
+        //                 let fixture = TestBed.createComponent(TestComponent);
+        //                 fixture.detectChanges();
+
+        //                 let homeInstance = fixture.debugElement.children[0].componentInstance;
+        //                 const spy = spyOn(router,'navigateByUrl');
+                        
+        //                 var btn = fixture.nativeElement.getElementsByClassName('btn green btn-outline');
+        //                 btn.click();
+        //                 const navArgs = spy.calls.first().args[0];
+
+        //                 t.e(navArgs).toBe('/leave-management/apply-leave');
+        //             });
+        //     });
+        // }));
+
+        t.it('should call applyLeaveClicked() original', () => {
+            t.async(() => {
+                TestBed.compileComponents()
+                    .then(() => {
+                        let fixture = TestBed.createComponent(TestComponent);
+                        fixture.detectChanges();
+
+                        //let homeInstance = fixture.debugElement.children[0].componentInstance;
+
+                        fixture.nativeElement.getElementsByClassName('btn green btn-outline');
+                        //t.e(editBtnDataTable).not.toBe(null);
+                    });
+            });
+        });
+
         //REDIRECTION (BY EDIT BUTTON ON DATATABLE) TO 'APPLY LEAVE' TEST CASE TO BE ADDED
 
     });
@@ -80,3 +120,7 @@ export function main() {
     template: '<leaves></leaves>'
 })
 class TestComponent { }
+
+class RouterStub {
+    navigate(url: any) { return url; }
+}

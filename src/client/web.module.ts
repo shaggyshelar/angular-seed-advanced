@@ -33,6 +33,7 @@ import { CorporateModule } from './app/components/corporate/index';
 import { ProfileModule } from './app/components/profile/index';
 import { TimesheetModule } from './app/components/timesheet/index';
 import { LeaveManagementModule } from './app/components/leaveManagement/index';
+import { ChangePasswordModule } from './app/components/changePassword/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -53,7 +54,7 @@ import { FooterComponent } from './app/components/layout/footer/footer.component
 import { QuickSidebarComponent } from './app/components/layout/quick-sidebar/quick-sidebar.component';
 import { SidebarComponent } from './app/components/layout/sidebar/sidebar.component';
 import { TopNavigationBarComponent } from './app/components/layout/top-navigation-bar/top-navigation-bar.component';
-
+import { AdminModule } from './app/components/admin/index';
 
 let routerModule = RouterModule.forRoot(routes);
 
@@ -98,7 +99,9 @@ export function cons() {
     ProfileModule,
     CorporateModule,
     TimesheetModule,
-    LeaveManagementModule
+    LeaveManagementModule,
+    AdminModule,
+    ChangePasswordModule
   ],
   declarations: [
     AppComponent,

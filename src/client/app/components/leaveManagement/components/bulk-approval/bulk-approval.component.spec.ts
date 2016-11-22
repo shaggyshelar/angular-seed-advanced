@@ -5,6 +5,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
 
+import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
+import { Router } from '@angular/router';
+
 // app
 import { BulkApproveComponent } from './bulk-approval.component';
 
@@ -13,9 +16,12 @@ export function main() {
     t.describe('Component: BulkApproveComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CoreModule],
+                imports: [CoreModule, MultilingualModule],
                 declarations: [BulkApproveComponent, TestComponent],
-                schemas: [NO_ERRORS_SCHEMA]
+                schemas: [NO_ERRORS_SCHEMA],
+                providers: [
+                    { provide: Router, useClass: RouterStub }
+                ]
             });
         });
 
@@ -127,3 +133,6 @@ export function main() {
 })
 class TestComponent { }
 
+class RouterStub {
+    navigate(url: any) { return url; }
+}
