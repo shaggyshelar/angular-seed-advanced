@@ -28,7 +28,8 @@ export = () => {
             rootDir + '/**.html',
             rootDir + '/css/**.css',
             rootDir + '/assets/**/**.*',
-            rootDir + '/font-awesome/**/**.*',
+            rootDir + '/images/**/**.*',
+            rootDir + '/fonts/**/**.*',
             rootDir + '/manifest.json',
             rootDir + '/js/**.js'
         ],
