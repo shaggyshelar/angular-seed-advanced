@@ -1,74 +1,85 @@
-<div class="portlet box yellow border-color">
-	<div class="portlet-title div-color">
-		<div class="caption title">
-			{{ 'VISA' | translate }}
-		</div>
-		<div class="actions">
-			<span class="div-actions"> 
+<form novalidate (ngSubmit)="onSubmit(visaForm)" [formGroup]="visaForm">
+	<div class="portlet box yellow border-color">
+		<div class="portlet-title div-color">
+			<div class="caption title">
+				{{ 'VISA' | translate }}
+			</div>
+			<div class="actions">
+				<span class="div-actions"> 
                 <i class="fa fa-check-circle"></i> {{ 'REQUIRES_APPROVAL' | translate }}  
             </span>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div *ngIf="visa.length == 0">
+				<hr>
+				<h5> {{ 'NO_RECORDS' | translate }}</h5>
+			</div>
+			<div *ngIf="visa.length > 0">
+				<p-dataTable [value]="visa" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+					<p-column header="{{ 'EDIT' | translate }}">
+						<template let-visaData="rowData" pTemplate type="body">
+							<i class="fa fa-pencil icon-color" (click)="editVisa(visaData)"></i>
+						</template>
+					</p-column>
+					<p-column header="{{ 'VISA_NUMBER' | translate }}" field="visaNumber"></p-column>
+					<p-column header="{{ 'VISA_EXPIRY_DATE' | translate }}" field="visaExpiryDate"></p-column>
+					<p-column header="{{ 'VISA_TYPE' | translate }}" field="visaType"></p-column>
+					<p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
+					<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
+					<p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComments"></p-column>
+				</p-dataTable>
+			</div>
+			<div *ngIf="!showDiv">
+				<div class="row row-margin">
+					<div class="col-md-6 col-margin">
+						<span>{{ 'VISA_NUMBER' | translate }}</span>
+						<span class="req-field"> *</span>
+						<div class="div-margin">
+							<input type="text" id="visa_number" formControlName="number" class="form-control" placeholder="">
+							<div class="alert alert-danger" *ngIf="visaForm.get('number').hasError('required') && visaForm.get('number').touched">
+								{{ 'PLEASE_ENTER' | translate }} {{ 'VISA_NUMBER' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-margin">
+						<span>{{ 'VISA_EXPIRY_DATE' | translate }}</span>
+						<span class="req-field"> *</span>
+						<div class="div-margin">
+							<p-calendar id="visa_expiryDate" formControlName="expiryDate" [showIcon]="true"></p-calendar>
+							<div class="alert alert-danger" *ngIf="visaForm.get('expiryDate').hasError('required') && visaForm.get('expiryDate').touched">
+								{{ 'PLEASE_ENTER' | translate }} {{ 'VISA_EXPIRY_DATE' | translate }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-margin">
+					<div class="col-md-6 col-margin">
+						<span>{{ 'VISA_TYPE' | translate }}</span>
+						<span class="req-field"> *</span>
+						<div class="div-margin">
+							<input type="text" id="visa_type" formControlName="type" class="form-control" placeholder="">
+							<div class="alert alert-danger" *ngIf="visaForm.get('type').hasError('required') && visaForm.get('type').touched">
+								{{ 'PLEASE_ENTER' | translate }} {{ 'VISA_TYPE' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-margin">
+						<span>{{ 'SCANNED_COPY' | translate }}</span>
+						<span class="req-field"> *</span>
+						<div class="div-margin">
+							<input type="file" id="visa_document">
+						</div>
+					</div>
+				</div>
+				<div class="row row-margin button-margin">
+					<button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="visaForm.invalid"></button>
+					<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+				</div>
+			</div>
+			<div class="row row-margin button-margin" *ngIf="showDiv">
+				<button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_VISA' | translate }}"></button>
+			</div>
 		</div>
 	</div>
-	<div class="portlet-body">
-		<div *ngIf="visa.length == 0">
-			<hr>
-			<h5> {{ 'NO_RECORDS' | translate }}</h5>
-		</div>
-		<div *ngIf="visa.length > 0">
-			<p-dataTable [value]="visa" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-				<p-column header="{{ 'EDIT' | translate }}">
-					<template let-visaData="rowData" pTemplate type="body">
-						<i class="fa fa-pencil icon-color" (click)="editVisa(visaData)"></i>
-					</template>
-				</p-column>
-				<p-column header="{{ 'VISA_NUMBER' | translate }}" field="visaNumber"></p-column>
-				<p-column header="{{ 'VISA_EXPIRY_DATE' | translate }}" field="visaExpiryDate"></p-column>
-				<p-column header="{{ 'VISA_TYPE' | translate }}" field="visaType"></p-column>
-				<p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
-				<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-				<p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComments"></p-column>
-			</p-dataTable>
-		</div>
-		<div *ngIf="!showDiv">
-			<div class="row row-margin">
-				<div class="col-md-6 col-margin">
-					<span>{{ 'VISA_NUMBER' | translate }}</span>
-					<span class="req-field"> *</span>
-					<div class="div-margin">
-						<input type="text" id="visa_number" [(ngModel)]="visaObj.number" class="form-control" placeholder="">
-					</div>
-				</div>
-				<div class="col-md-6 col-margin">
-					<span>{{ 'VISA_EXPIRY_DATE' | translate }}</span>
-					<span class="req-field"> *</span>
-					<div class="div-margin">
-						<p-calendar id="visa_expiryDate" [(ngModel)]="visaObj.expiryDate" [showIcon]="true"></p-calendar>
-					</div>
-				</div>
-			</div>
-			<div class="row row-margin">
-				<div class="col-md-6 col-margin">
-					<span>{{ 'VISA_TYPE' | translate }}</span>
-					<span class="req-field"> *</span>
-					<div class="div-margin">
-						<input type="text" id="visa_type" [(ngModel)]="visaObj.type" class="form-control" placeholder="">
-					</div>
-				</div>
-                <div class="col-md-6 col-margin">
-					<span>{{ 'SCANNED_COPY' | translate }}</span>
-					<span class="req-field"> *</span>
-					<div class="div-margin">
-						<input type="file" id="visa_document" [(ngModel)]="visaObj.document">
-					</div>
-				</div>
-			</div>
-			<div class="row row-margin button-margin">
-				<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
-				<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
-			</div>
-		</div>
-		<div class="row row-margin button-margin" *ngIf="showDiv">
-			<button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_VISA' | translate }}"></button>
-		</div>
-	</div>
-</div>
+</form>

@@ -31,6 +31,9 @@
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <p-dropdown [options]="class" [style]="{'width':'100%'}" formControlName="class" id="education_class"></p-dropdown>
+                        <div class="alert alert-danger" *ngIf="educationForm.get('class').hasError('required') && educationForm.get('class').touched">
+                            Class is required
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
@@ -51,6 +54,9 @@
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <p-dropdown [options]="grade" [style]="{'width':'100%'}" formControlName="grade" id="education_grade"></p-dropdown>
+                        <div class="alert alert-danger" *ngIf="educationForm.get('grade').hasError('required') && educationForm.get('grade').touched">
+                            Grade is required
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
@@ -88,7 +94,7 @@
                 </div>
             </div>
             <div class="row row-margin button-margin">
-                <button pButton type="submit" label="{{ 'SUBMIT' | translate }}"  [disabled]="educationForm.invalid"></button>
+                <button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="educationForm.invalid"></button>
                 <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
             </div>
         </div>
