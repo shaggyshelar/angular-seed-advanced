@@ -22,21 +22,10 @@ export class FeatureComponent implements OnInit {
     featureList: Array<Feature>;
     feature: Feature;
     isAddEdit: boolean;
-    nextId: number;
     errorMessage: any;
     constructor(private featureService: FeatureService) {
         this.isAddEdit = false;
         this.feature = new Feature(0, '');
-        // this.featureList = [{
-        //     id: 1,
-        //     name: 'TimeSheet',
-        // },
-        // {
-        //     id: 2,
-        //     name: 'Corporate',
-        // },
-        // ];
-        this.nextId = 2;
     }
     ngOnInit() {
         this.getFeature();
@@ -84,10 +73,6 @@ export class FeatureComponent implements OnInit {
                 this.getFeature();
             },
             error => this.errorMessage = <any>error);
-        // let featureTobeEditIndex = _.findIndex(this.featureList, function (item) {
-        //     return item.id === feature.id;
-        // });
-        // this.featureList.splice(featureTobeEditIndex, 1);
     }
 }
 

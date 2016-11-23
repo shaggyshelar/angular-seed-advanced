@@ -231,7 +231,7 @@
   "ADMIN_TITLE":"Admin",
   "FEATURE_TITLE":"Feature",
   "CURRENT_PROJECT": "Current Project",
-
+  "ROLE_TITLE":"Role",
   "ACHIEVEMENT_REQUIRED":"Please enter achievement",
   "SKILLTYPE_REQUIRED" :"Please select Skill Type",
   "SKILL_REQUIRED" :"Please enter skills",
