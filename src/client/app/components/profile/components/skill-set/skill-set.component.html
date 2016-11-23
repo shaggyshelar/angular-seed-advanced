@@ -1,3 +1,4 @@
+<form novalidate (ngSubmit)="onSubmit(skillSetForm)" [formGroup]="skillSetForm">
 <div class="portlet-body">
 	<div *ngIf="skillSet.length == 0">
 		<hr>
@@ -23,19 +24,25 @@
 				<span>{{ 'SKILL_TYPE' | translate }}</span>
 				<span class="skill-set-req-field"> *</span>
 				<div>
-					<p-dropdown [options]="skillTypes" [(ngModel)]="skillSetObj.type" [style]="{'width':'100%'}"></p-dropdown>
+					<p-dropdown [options]="skillTypes" formControlName="skillType" [style]="{'width':'100%'}"></p-dropdown>
+					<div class="alert alert-danger" *ngIf="skillSetForm.get('skillType').hasError('required') && skillSetForm.get('skillType').touched">
+						{{ 'SKILLTYPE_REQUIRED' | translate }}
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2 col-margin">
 				<span>{{ 'SKILLS' | translate }}</span>
 				<span class="skill-set-req-field"> *</span>
 				<div class="form-group">
-					<input type="text" [(ngModel)]="skillSetObj.skill" class="form-control" placeholder="">
+					<input type="text" formControlName="skills" class="form-control" placeholder="">
+					<div class="alert alert-danger" *ngIf="skillSetForm.get('skills').hasError('required') && skillSetForm.get('skills').touched">
+						{{ 'SKILL_REQUIRED' | translate }}
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row row-margin button-margin">
-			<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
+			<button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="skillSetForm.invalid"></button>
 			<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
 		</div>
 	</div>
