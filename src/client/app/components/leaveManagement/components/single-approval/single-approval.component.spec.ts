@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 // app
 import { SingleApprovalComponent } from './single-approval.component';
 
+var urlVar: any;
+
 export function main() {
 
     t.describe('Component: SingleApprovalComponent', () => {
@@ -25,7 +27,7 @@ export function main() {
             });
         });
 
-        t.it('should have a defined component', () => {
+        t.it('should have a defined component',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
@@ -34,98 +36,61 @@ export function main() {
                         t.e(fixture.nativeElement).toBeTruthy();
                         t.e(TestComponent).toBeDefined();
                     });
-            });
-        });
+            }));
 
-        t.it('should have defined singleapproval component',
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement).toBeTruthy();
-                        t.e(TestComponent).toBeDefined();
-                    });
-            })
-        );
-
-        t.it('on page load page status', () => {
+        t.it('should check for correct redirection path ',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[1].innerHTML).toBe('Approve');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[2].innerHTML).toBe('Reject');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[3].innerHTML).toBe('Close');
-                        t.e(fixture.nativeElement.querySelectorAll('h4')[2].innerHTML).toBe('Requestor Details');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        homeInstance.closeClicked();
+                        t.e(urlVar).toBe('/leave-management/approve-leave');
                     });
-            });
-        });
+            }));
 
-        t.it('validation click APPROVE with blank comments field', () => {
+        t.it('should check action of rejectClicked() call ',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[1].innerHTML).toBe('Approve');
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Comments cannot be left blank');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        homeInstance.rejectClicked();
+                        t.e(homeInstance.rejected).toBe(true);
+                        t.e(homeInstance.approved).toBe(false);
                     });
-            });
-        });
+            }));
 
-        t.it('validation click APPROVE with comments not blank', () => {
+        t.it('should check action of approveClicked() call ',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        fixture.nativeElement.querySelector('textarea').innerHTML = 'Approved';
-                        fixture.detectChanges();
-                        fixture.nativeElement.querySelectorAll('button')[1].click();
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Approved');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        homeInstance.approveClicked();
+                        t.e(homeInstance.rejected).toBe(false);
+                        t.e(homeInstance.approved).toBe(true);
                     });
-            });
-        });
+            }));
 
-        t.it('validation click REJECT with blank comments field', () => {
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
+        t.it('should check action of submitForm() call with dummy object ',
+        t.async(() => {
+            TestBed.compileComponents()
+                .then(() => {
+                    let fixture = TestBed.createComponent(TestComponent);
+                    fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[2].innerHTML).toBe('Reject');
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Comments cannot be left blank');
-                    });
-            });
-        });
-
-        t.it('validation click REJECT with comments not blank', () => {
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
-
-                        fixture.nativeElement.querySelector('textarea').innerHTML = 'Approved';
-                        fixture.detectChanges();
-                        fixture.nativeElement.querySelectorAll('button')[2].click();
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Rejected');
-                    });
-            });
-        });
-
-        //CLOSE BUTTON CLICK FOR REDIRECTION TEST CASE TO BE ADDED
+                    let homeInstance = fixture.debugElement.children[0].componentInstance;
+                    var form = { form : 'nothing here!' };
+                    homeInstance.submitForm(form);
+                });
+        }));
 
     });
 }
@@ -138,5 +103,5 @@ export function main() {
 class TestComponent { }
 
 class RouterStub {
-    navigate(url: any) { return url; }
+    navigate(url: any) { urlVar = url[0]; }
 }
