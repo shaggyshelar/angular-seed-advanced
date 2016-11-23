@@ -1,0 +1,18 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <form (submit)="addName()">
+            <input [(ngModel)]="newUser.name" name="user_name">
+            <input [(ngModel)]="newUser.email" name="user_email">
+            <input type="number" [(ngModel)]="newUser.age" name="user_age">
+            <button type="submit">Add </button>
+        </form>
+        <ul>
+            <li *ngFor="let user of (users$ | async)">
+                ID: {{user.id}} - <a [routerLink]="['../', user.id]">{{user.name}}</a> - {{user.email}}
+                <button (click)="deleteUser.emit(user)">&times;</button>
+            </li>
+        </ul>
+    </div>
+</div>

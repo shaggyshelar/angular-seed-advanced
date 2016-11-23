@@ -1,0 +1,85 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <span>LINK UP</span>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Timesheet Report</span>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="portlet light ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Projects</label>
+                                <div class="col-md-9">
+                                    <p-dropdown [options]="projects"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Employee</label>
+                                <div class="col-md-9">
+                                    <p-dropdown [options]="employee"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Timesheet Status</label>
+                                <div class="col-md-8">
+                                    <p-dropdown [options]="status"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">From</label>
+                                <div class="col-md-9">
+                                    <p-calendar [showIcon]="true"></p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">To</label>
+                                <div class="col-md-9">
+                                    <p-calendar [showIcon]="true"></p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-body">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-9">
+                                    <button pButton type="button" label="Show Report"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <p-dataTable [value]="timesheetReport" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                            <p-column field="date" header="Date" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="employeeName" header="Employee Name" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="project" header="Project" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="task" header="Task" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="billableHours" header="Billable Hours" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="nonBillableHours" header="Non-Billable Hours" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="totalHours" header="Total Hours" [sortable]="true" [filter]="true"></p-column>
+                            <p-column field="status" header="Status" [sortable]="true" [filter]="true"></p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
