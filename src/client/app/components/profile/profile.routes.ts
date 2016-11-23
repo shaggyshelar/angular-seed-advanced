@@ -8,13 +8,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 /** Route Definitions */
 const ProfileRoutes: Routes = [
   {
-    path: 'profile',
-    children: [
-      {
-        path: 'my',
-        component: MyProfileComponent,
-      },
-    ]
+    path: 'profile',   
+    component: MyProfileComponent    
   }
 ];
 

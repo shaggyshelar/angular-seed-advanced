@@ -59,7 +59,7 @@ export class SingleApprovalComponent {
 
   closeClicked() {
     this.model.comments = '';
-    this.router.navigate(['/approve-leave']);
+    this.router.navigate(['/leave-management/approve-leave']);
   }
 
   submitForm(form: NgForm) {

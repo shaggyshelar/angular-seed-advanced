@@ -95,7 +95,7 @@
                         <form #form="ngForm" (submit)="submitForm(form)"  novalidate>
                             <div class="form-group">
                                 <label class="control-label">{{ 'COMMENTS' | translate }}</label>
-                                <textarea autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
+                                <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
                                 </textarea>
                             </div>
 

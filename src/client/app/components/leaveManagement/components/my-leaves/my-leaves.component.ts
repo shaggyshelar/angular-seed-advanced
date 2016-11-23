@@ -31,10 +31,10 @@ export class MyLeavesComponent {
   }
 
   applyLeaveClicked() {
-    this.router.navigate(['/apply-leave']);
+    this.router.navigate(['/leave-management/apply-leave']);
   }
 
   updateBtnClicked() {
-    this.router.navigate(['/update-leave']);
+    this.router.navigate(['/leave-management/update-leave']);
   }
 }
