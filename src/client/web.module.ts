@@ -6,12 +6,13 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 // libs
-import { StoreModule } from '@ngrx/store';
+//import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
 //import { AppComponent } from './app/components/app.component';
+import { FeaturesModule } from './app/features/features.module';
 import { AppComponent } from './app/components/app/app.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { AboutComponent } from './app/components/about/about.component';
@@ -21,19 +22,19 @@ import { routes } from './app/components/app.routes';
 import { CoreModule } from './app/frameworks/core/core.module';
 import { CommonModule } from './app/shared/index';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { multilingualReducer, MultilingualEffects } from './app/frameworks/i18n/index';
+import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { SampleModule } from './app/frameworks/sample/sample.module';
-import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
+//import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
 
-import { LoginComponent } from './app/components/login/login.component';
-import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
-import { CorporateModule } from './app/components/corporate/index';
+// import { LoginComponent } from './app/components/login/login.component';
+// import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
+// import { CorporateModule } from './app/components/corporate/index';
 
-import { ProfileModule } from './app/components/profile/index';
-import { TimesheetModule } from './app/components/timesheet/index';
-import { LeaveManagementModule } from './app/components/leaveManagement/index';
-import { ChangePasswordModule } from './app/components/changePassword/index';
+// import { ProfileModule } from './app/components/profile/index';
+// import { TimesheetModule } from './app/components/timesheet/index';
+// import { LeaveManagementModule } from './app/components/leaveManagement/index';
+// import { ChangePasswordModule } from './app/components/changePassword/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -50,10 +51,10 @@ import { MultilingualService } from './app/frameworks/i18n/services/multilingual
 MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
 
 //Layout
-import { FooterComponent } from './app/components/layout/footer/footer.component';
-import { QuickSidebarComponent } from './app/components/layout/quick-sidebar/quick-sidebar.component';
-import { SidebarComponent } from './app/components/layout/sidebar/sidebar.component';
-import { TopNavigationBarComponent } from './app/components/layout/top-navigation-bar/top-navigation-bar.component';
+// import { FooterComponent } from './app/components/layout/footer/footer.component';
+// import { QuickSidebarComponent } from './app/components/layout/quick-sidebar/quick-sidebar.component';
+// import { SidebarComponent } from './app/components/layout/sidebar/sidebar.component';
+// import { TopNavigationBarComponent } from './app/components/layout/top-navigation-bar/top-navigation-bar.component';
 import { AdminModule } from './app/components/admin/index';
 
 let routerModule = RouterModule.forRoot(routes);
@@ -81,6 +82,7 @@ export function cons() {
       { provide: WindowService, useFactory: (win) },
       { provide: ConsoleService, useFactory: (cons) }
     ]),
+    FeaturesModule,
     CommonModule,
     routerModule,
     AnalyticsModule,
@@ -90,30 +92,30 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
-    StoreModule.provideStore({
-      i18n: multilingualReducer,
-      names: nameListReducer
-    }),
+    // StoreModule.provideStore({
+    //   i18n: multilingualReducer,
+    //   names: nameListReducer
+    // }),
     EffectsModule.run(MultilingualEffects),
-    EffectsModule.run(NameListEffects),
-    ProfileModule,
-    CorporateModule,
-    TimesheetModule,
-    LeaveManagementModule,
+    //EffectsModule.run(NameListEffects),
+    // ProfileModule,
+    // CorporateModule,
+    // TimesheetModule,
+    // LeaveManagementModule,
     AdminModule,
-    ChangePasswordModule
+    //ChangePasswordModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
     //Layout
-    FooterComponent,
-    QuickSidebarComponent,
-    SidebarComponent,
-    TopNavigationBarComponent,
-    LoginComponent,
-    UnauthorizedAccessComponent
+    // FooterComponent,
+    // QuickSidebarComponent,
+    // SidebarComponent,
+    // TopNavigationBarComponent,
+    // LoginComponent,
+    // UnauthorizedAccessComponent
   ],
   providers: [
     {
@@ -125,14 +127,3 @@ export function cons() {
 })
 
 export class WebModule { }
-
-
-let envConfig = JSON.parse('<%= ENV_CONFIG %>');
-if (envConfig.ENV === 'PROD') {
-  if ('serviceWorker' in navigator) {
-    (<any>navigator).serviceWorker.register('./service-worker.js').then((registration: any) =>
-      console.log('ServiceWorker registration successful with scope: ', registration.scope))
-      .catch((err: any) =>
-        console.log('ServiceWorker registration failed: ', err));
-  }
-}
