@@ -36,7 +36,7 @@
                     <form #form="ngForm" novalidate>
                         <div class="form-group">
                             <label class="control-label">{{ 'COMMENTS' | translate }}</label>
-                            <textarea autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched"></textarea>
+                            <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="pull-right">
-                                    <button id="accept" [disabled]="form.invalid" (click)="approveClicked()" class="btn "> {{ 'APPROVE' | translate }} </button>
+                                    <button id="approve" [disabled]="form.invalid" (click)="approveClicked()" class="btn "> {{ 'APPROVE' | translate }} </button>
                                     <button id="reject" [disabled]="form.invalid" (click)="rejectClicked()" class="btn "> {{ 'REJECT' | translate }} </button>
                                 </div>
                             </div>

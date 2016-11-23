@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <label class="control-label" [class.warning]="leaveTypeInvalid && leaveType.touched"> {{ 'LEAVE_TYPE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span></label>
                                         <div>
-                                            <select required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType" (blur)="validateLeaveType()"
+                                            <select id="leaveType" required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType" (blur)="validateLeaveType()"
                                                 [class.validationClass]="leaveTypeInvalid && leaveType.touched">
                                                 <option value="select">Select</option>
                                                 <option *ngFor="let leave of leaves">
@@ -102,7 +102,7 @@
                                     <div class="form-group">
                                         <label class="control-label"> {{ 'NUMBER_LEAVES' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
                                         <div>
-                                            <input type="text" disabled="disabled" class="form-control" required [(ngModel)]="model.numDays" name="numDays" #numDays="ngModel"/>
+                                            <input id="numLeaves" type="text" disabled="disabled" class="form-control" required [(ngModel)]="model.numDays" name="numDays" #numDays="ngModel"/>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                     <div class="form-group">
                                         <label class="control-label"> {{ 'START_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
                                         <div>
-                                            <p-calendar required dateFormat="dd/mm/yy" [showIcon]="true" (onSelect)="startChanged()" [(ngModel)]="model.start" name="start" #start="ngModel"></p-calendar>
+                                            <p-calendar id="start" required dateFormat="dd/mm/yy" [showIcon]="true" (onSelect)="startChanged()" [(ngModel)]="model.start" name="start" #start="ngModel"></p-calendar>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                     <div class="form-group">
                                         <label class="control-label"> {{ 'END_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
                                         <div>
-                                            <p-calendar  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
+                                            <p-calendar id="end"  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                             <span class="warning">{{ 'ASTERISK' | translate }}</span> 
                                         </label>
                                         <div>
-                                            <textarea required name="reason" pattern="...+" #reason="ngModel" (keyup)="reasonTextChanged()" maxlength="600" [(ngModel)]="model.reason" class="fullWidth" [class.validationClass]="reason.invalid && reason.touched"></textarea>
+                                            <textarea id="reason" required name="reason" pattern="...+" #reason="ngModel" (keyup)="reasonTextChanged()" maxlength="600" [(ngModel)]="model.reason" class="fullWidth" [class.validationClass]="reason.invalid && reason.touched"></textarea>
                                             <div class="charsLeft pull-right">{{charsLeft}} characters left</div>
                                         </div>
                                     </div>

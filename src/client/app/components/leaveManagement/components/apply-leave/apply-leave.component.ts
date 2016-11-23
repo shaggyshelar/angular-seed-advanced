@@ -103,7 +103,7 @@ export class ApplyLeaveComponent {
   }
 
   cancelClick() {
-    this.router.navigate(['/my-leaves']);
+    this.router.navigate(['/leave-management/my-leaves']);
   }
 
 }

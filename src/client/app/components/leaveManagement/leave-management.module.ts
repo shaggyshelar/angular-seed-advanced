@@ -15,9 +15,10 @@ import { HolidaysComponent } from './components/holidays/holidays.component';
 import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
 import { SingleApprovalComponent } from './components/single-approval/single-approval.component';
 import { UpdateLeaveComponent } from './components/update-leave/update-leave.component';
+import { LeaveManagementRoutingModule } from './leave-management.routes';
 
 /** Module Import Declarations */
-let imports = [FormsModule,CommonModule, TranslateModule, BrowserModule];
+let imports = [LeaveManagementRoutingModule, FormsModule,CommonModule, TranslateModule, BrowserModule];
 
 /** Component/Directive Declarations */
 let declarations = [
