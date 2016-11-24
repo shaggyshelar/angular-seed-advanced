@@ -1,13 +1,32 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { BaseComponent } from '../views/base-component';
 
 /** Module Level Dependencies */
 
 /** Third Party Dependencies */
-import {SelectItem} from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
+
+/** Other Module Dependencies */
+import * as _ from 'lodash';
+import * as moment from 'moment/moment';
+
+export interface Select {
+    id: number;
+    name: string;
+};
+
+export interface CertificationForm {
+    id: number;
+    option: Select;
+    code: Select;
+    fromEspl: boolean;
+    date: string;
+    document: string;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -21,14 +40,13 @@ export class CertificationComponent implements OnInit {
     certificationOptions: SelectItem[];
     certificationCodes: SelectItem[];
     showDiv: boolean;
-    certification: any;
+    certificationForm: FormGroup;
 
-    constructor() {
+    constructor(private formBuilder: FormBuilder) {
         this.certifications = [];
         this.certificationOptions = [];
         this.certificationCodes = [];
         this.showDiv = true;
-        this.certification = {};
     }
 
     ngOnInit(): void {
@@ -47,34 +65,50 @@ export class CertificationComponent implements OnInit {
             { label: '11113', value: { id: 3, name: '11113' } },
             { label: '11114', value: { id: 4, name: '11114' } },
         ];
+
+        this.certificationForm = this.formBuilder.group({
+            id: [null],
+            option: ['', [Validators.required]],
+            code: [''],
+            fromEspl: [''],
+            date: ['', [Validators.required]],
+            document: ['',]
+        });
     }
 
     onAddClick() {
         this.showDiv = false;
-        this.certification = {};
+        this.certificationForm.reset();
     }
-    submit() {
+    onSubmit({ value, valid }: { value: CertificationForm, valid: boolean }) {
+        this.showDiv = true;
         this.certifications = [{
             id: 1,
-            certificate: 'Microsoft',
-            code: '11111',
-            certificateDate: '01/02/2016',
+            certificate: value.option.name,
+            code: '1111',
+            certificateDate: moment(value.date).format('DD/MM/YYYY'),
+            fromEspl: value.fromEspl,
             document: '',
             status: 'pending for approval',
             comment: ''
         }];
-        this.showDiv = true;
+
     }
+
     cancel() {
         this.showDiv = true;
+        this.certificationForm.reset();
     }
 
     selectCertification(certificationData) {
         this.showDiv = false;
-        this.certification = {
-            option: this.certificationOptions[1].value,
-            code: this.certificationCodes[1].value,
-            date: certificationData.certificateDate
-        };
-    }  
+        var date = certificationData.date.split('/');
+        this.certificationForm.setValue({
+            id: certificationData.id,
+            option: _.find(this.certificationOptions, ['label', certificationData.option]).value,
+            code: _.find(this.certificationCodes, ['label', '11111']).value,
+            date: new Date(date[2] + '-' + date[1] + '-' + date[0]),
+            fromEspl: certificationData.fromEspl,
+        });
+    }
 }

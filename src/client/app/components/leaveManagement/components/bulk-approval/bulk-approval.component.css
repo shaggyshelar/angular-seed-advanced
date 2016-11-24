@@ -4,3 +4,7 @@
 .warning{
     color: red;
 }
+
+.fixWidth{
+    width:38px;
+}

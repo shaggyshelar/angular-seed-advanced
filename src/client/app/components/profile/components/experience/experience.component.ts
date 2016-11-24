@@ -35,13 +35,11 @@ export interface ExperienceForm {
 export class ExperienceComponent implements OnInit {
     experience: Experience[];
     showDiv: boolean;
-    todayDate: any;
     experienceForm: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder) {
         this.showDiv = true;
-        this.todayDate = moment().format('dd/mm/yyyy');;
     }
 
     ngOnInit(): void {
@@ -66,42 +64,14 @@ export class ExperienceComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: ExperienceForm, valid: boolean }) {
-        //TODO :Edit Functinality
-        // var experienceData = _.find(this.experience, ['id', value.id]);
-        // if (experienceData) {
-        //     experienceData.project = value.project,
-        //     experienceData.client = value.client,
-        //     experienceData.startDate = value.startDate,
-        //     experienceData.endDate = value.endDate,
-        //     experienceData.role = value.role,
-        //     experienceData.environment = value.environment,
-        //     experienceData.responsibilites = value.responsibilites,
-        //     experienceData.description = value.description,
-        //     experienceData.currentProject =value.currentProject;
-        // } else {
-        //   this.experience.push({
-        //     id: this.experience.length + 1,
-        //     project: value.project,
-        //     client: value.client,
-        //     startDate: value.startDate,
-        //     endDate: value.endDate,
-        //     role: value.role,
-        //     environment: value.environment,
-        //     responsibilites: value.responsibilites,
-        //     description: value.description,
-        //      currentProject: value.currentProject,
-        //     duration: '8 years',       
-        //     status: 'status',
-        //     comment: 'Comment'
-        //   });
-        // }
+
 
         this.experience = [{
             id: this.experience.length + 1,
             project: value.project,
             client: value.client,
-            startDate: value.startDate,
-            endDate: value.endDate,
+            startDate: moment(value.startDate).format('DD/MM/YYYY'),
+            endDate: moment(value.endDate).format('DD/MM/YYYY'),
             role: value.role,
             environment: value.environment,
             responsibilites: value.responsibilites,
@@ -113,36 +83,21 @@ export class ExperienceComponent implements OnInit {
         }];
         this.showDiv = true;
     }
-    submit() {
-        this.experience = [{
-            id: 1,
-            project: 'ssc',
-            client: 'ssc',
-            startDate: '12/12/2012',
-            endDate: '12/12/2020',
-            role: '2000',
-            environment: '',
-            duration: '8 years',
-            status: 'status',
-            currentProject: true,
-            comment: 'Comment',
-            responsibilites: '',
-            description: ''
-        }];
-        this.showDiv = true;
-    }
+
     cancel() {
         this.showDiv = true;
         this.experienceForm.reset();
     }
     editExperienceData(experienceData) {
         this.showDiv = false;
+        var startDate = experienceData.startDate.split('/');
+        var endDate = experienceData.endDate.split('/');
         this.experienceForm.setValue({
             id: experienceData.id,
             project: experienceData.project,
             client: experienceData.client,
-            startDate: experienceData.startDate,
-            endDate: experienceData.endDate,
+            startDate: new Date(startDate[2] + '-' + startDate[1] + '-' + startDate[0]),
+            endDate: new Date(endDate[2] + '-' + endDate[1] + '-' + endDate[0]),
             role: experienceData.role,
             environment: experienceData.environment,
             responsibilites: experienceData.responsibilites,

@@ -68,7 +68,7 @@
 					<span>{{ 'START_DATE' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="form-group div-margin">
-						<p-calendar id="experience_startDate" formControlName="startDate" [showIcon]="true" readonlyInput="readonlyInput"></p-calendar>
+						<p-calendar id="experience_startDate" formControlName="startDate" [showIcon]="true" readonlyInput="readonlyInput" dateFormat="dd/mm/yy"></p-calendar>
 						<div class="alert alert-danger" *ngIf="experienceForm.get('startDate').hasError('required') && experienceForm.get('startDate').touched">
 							{{ 'STARTDATE_REQUIRED' | translate }}
 						</div>
@@ -80,7 +80,7 @@
 					<span>{{ 'END_DATE' | translate }}</span>
 					<span class="req-field"> *</span>
 					<div class="div-margin">
-						<p-calendar id="experience_endDate" formControlName="endDate" [showIcon]="true" readonlyInput="readonlyInput"></p-calendar>
+						<p-calendar id="experience_endDate" formControlName="endDate" [showIcon]="true" readonlyInput="readonlyInput" dateFormat="dd/mm/yy"></p-calendar>
 						<div class="alert alert-danger" *ngIf="experienceForm.get('endDate').hasError('required') && experienceForm.get('endDate').touched">
 							{{ 'ENDDATE_REQUIRED' | translate }}
 						</div>

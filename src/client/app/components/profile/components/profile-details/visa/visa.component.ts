@@ -1,9 +1,20 @@
 /** Angular Dependencies */
+import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
 import { BaseComponent } from '../../views/base-component';
 
 /** Module Level Dependencies */
+
+/** Other Module Dependencies */
+import * as moment from 'moment/moment';
+
+export interface VisaForm {
+    number: string;
+    expiryDate: string;
+    type: string;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -12,43 +23,53 @@ import { BaseComponent } from '../../views/base-component';
     templateUrl: 'visa.component.html',
     styleUrls: ['visa.component.css']
 })
-export class VisaComponent {
+export class VisaComponent implements OnInit {
     visa: any[];
     showDiv: boolean;
-    visaObj :any;
+    visaObj: any;
+    visaForm: FormGroup;
 
-    constructor() {
+    constructor(private formBuilder: FormBuilder) {
         this.visa = [];
         this.showDiv = true;
         this.visaObj = {};
     }
 
     ngOnInit(): void {
-        this.visa=[];
+        this.visa = [];
+        this.visaForm = this.formBuilder.group({
+            number: ['', [Validators.required]],
+            expiryDate: ['', [Validators.required]],
+            type: ['', [Validators.required]]
+        });
     }
     onAddClick() {
         this.showDiv = false;
+        this.visaForm.reset();
     }
-    submit() {
+    onSubmit({ value, valid }: { value: VisaForm, valid: boolean }) {
+        this.showDiv = true;
         this.visa = [{
             id: 1,
-            visaNumber: '123456',
-            visaExpiryDate: '10/11/2013',
-            visaType: '11 Months',
+            visaNumber: value.number,
+            visaExpiryDate: moment(value.expiryDate).format('DD/MM/YYYY'),
+            visaType: value.type,
             document: '',
             status: 'Pending for approval',
             hrComments: ''
         }];
-        this.showDiv = true;
     }
     cancel() {
         this.showDiv = true;
+        this.visaForm.reset();
     }
-    editVisa (visaData) {
-        this.showDiv=false;
-        this.visaObj.number = visaData.visaNumber;
-        this.visaObj.expiryDate = visaData.visaExpiryDate;
-        this.visaObj.type = visaData.visaType;
-        this.visaObj.document = visaData.document;
+    editVisa(visaData) {
+        this.showDiv = false;
+        var date = visaData.visaExpiryDate.split('/');
+        this.visaForm.setValue({
+            number: visaData.visaNumber,
+            type: visaData.visaType,
+            expiryDate: new Date(date[2] + '-' + date[1] + '-' + date[0])
+        });
     }
 }

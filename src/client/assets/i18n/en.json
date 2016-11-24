@@ -240,5 +240,6 @@
   "ROLE_REQUIRED" : "Please enter role",
   "STARTDATE_REQUIRED" : "Please enter start Date",
   "ENDDATE_REQUIRED" : "Please enter end Date",
-  "RESPONSIBILITY_REQUIRED" : "Please enter respnsibility"
+  "RESPONSIBILITY_REQUIRED" : "Please enter respnsibility",
+  "PLEASE_ENTER": "Please Enter"
 }

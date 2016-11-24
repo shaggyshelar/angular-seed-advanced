@@ -25,8 +25,8 @@ class FormFieldClass {
   constructor(
     public numDays: number,
     public leaveType: any,
-    public end: Date,
-    public start: Date,
+    public end: any,
+    public start: any,
     public reason: string
   ) { }
 }
