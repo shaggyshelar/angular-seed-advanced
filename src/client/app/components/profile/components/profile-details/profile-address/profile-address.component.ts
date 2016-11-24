@@ -1,12 +1,19 @@
 /** Angular Dependencies */
+import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
-import {BaseComponent} from '../../views/base-component';
+import { BaseComponent } from '../../views/base-component';
 
 /** Module Level Dependencies */
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
+
+export interface AddressForm {
+    currentAddress: string;
+    permanentAddress: string;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -15,17 +22,25 @@ import * as _ from 'lodash';
     templateUrl: 'profile-address.component.html',
     styleUrls: ['profile-address.component.css']
 })
-export class ProfileAddressComponent {
+export class ProfileAddressComponent implements OnInit {
 
     employmentHistory: any[];
     addressList: any[];
     showDiv: boolean;
-    address : any;
+    address: any;
+    addressForm: FormGroup;
 
-    constructor() {
+    constructor(private formBuilder: FormBuilder) {
         this.addressList = [];
         this.showDiv = true;
         this.address = {};
+    }
+
+    ngOnInit(): void {
+        this.addressForm = this.formBuilder.group({
+            currentAddress: ['', [Validators.required]],
+            permanentAddress: ['', [Validators.required]]
+        });
     }
 
     addClick() {
@@ -33,36 +48,33 @@ export class ProfileAddressComponent {
         if (this.addressList.length > 0) {
             var currentAddress = _.find(this.addressList, ['type', 'current']);
             var permanentAddress = _.find(this.addressList, ['type', 'permanent']);
-
-            if (currentAddress) {
-                this.address.currentAddress = currentAddress.address;
-                this.address.currentDocument = currentAddress.document;
-            }
-            if (permanentAddress) {
-                this.address.permanentAddress = permanentAddress.address;
-                this.address.permanentDocument = permanentAddress.document;
-            }
+            this.addressForm.setValue({
+                currentAddress: currentAddress ? currentAddress.address : '',
+                permanentAddress: permanentAddress ? permanentAddress.address : ''
+            });
         }
     }
-    submit() {
+
+    onSubmit({ value, valid }: { value: AddressForm, valid: boolean }) {
+        this.showDiv = true;
         this.addressList = [{
             id: 1,
             type: 'current',
-            address: 'address1',
+            address: value.currentAddress,
             document: '',
             status: 'pending for approval',
             hrComment: ''
         }, {
-                id: 1,
-                type: 'permanent',
-                address: 'address2',
-                document: '',
-                status: 'pending for approval',
-                hrComment: ''
-            }];
-        this.showDiv = true;
+            id: 2,
+            type: 'permanent',
+            address: value.permanentAddress,
+            document: '',
+            status: 'pending for approval',
+            hrComment: ''
+        }];
     }
     cancel() {
         this.showDiv = true;
+        this.addressForm.reset();
     }
 }

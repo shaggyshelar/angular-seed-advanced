@@ -66,17 +66,18 @@ export function main() {
                         expect(isAuthneticatedStatus).toBe(true);
                     });
             }));
-        // t.it('should have isUserMenuOpen property set to true',
-        //     t.async(() => {
-        //         TestBed.compileComponents()
-        //             .then(() => {
-        //                 let fixture = TestBed.createComponent(TestComponent);
-        //                 fixture.detectChanges();
-        //                 let componentInstance = fixture.debugElement.children[0].componentInstance;
-        //                 componentInstance.toggleUserMenu();
-        //                 t.expect(componentInstance.isUserMenuOpen).toBe(true);
-        //             });
-        //     }));
+        t.it('should have isUserMenuOpen property set to true',
+            t.async(() => {
+                TestBed.compileComponents()
+                    .then(() => {
+                        let fixture = TestBed.createComponent(TestComponent);
+                        fixture.detectChanges();
+                        let componentInstance = fixture.debugElement.children[0].componentInstance;
+                         t.expect(componentInstance.isUserMenuOpen).toBe(false);
+                        componentInstance.toggleUserMenu();
+                        t.expect(componentInstance.isUserMenuOpen).toBe(true);
+                    });
+            }));
     });
 };
 

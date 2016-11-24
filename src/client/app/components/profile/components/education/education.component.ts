@@ -78,28 +78,6 @@ export class EducationComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: EducationForm, valid: boolean }) {
-        console.log(value, valid);
-        //TODO :Edit Functionality
-        //  var educationData = _.find(this.education,['id',value.id]);
-        //    if (educationData) {
-        //        educationData.class = value.class.name,
-        //        educationData.degree = value.degree,
-        //        educationData.grade = value.grade.name,
-        //        educationData.percentage = value.percentage,
-        //        educationData.yearOfPassing = value.yearOfPassing;
-        //    } else {
-        //      this.education.push({
-        //        id: this.education.length + 1,
-        //        class: value.class.name,
-        //        degree: value.degree,
-        //        grade: value.grade.name,
-        //        percentage: value.percentage,
-        //        yearOfPassing: value.yearOfPassing,
-        //        certificate: '',
-        //        status: 'status',
-        //        hrComment: 'hr Comment'
-        //      });
-        //    }
         this.education = [{
             id: this.education.length + 1,
             class: value.class.name,
