@@ -2,7 +2,8 @@
 import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 import { CommonModule as AngularCommonModule } from '@angular/common';
-import {RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Third party Dependencies */
 import { TranslateLoader } from 'ng2-translate';
@@ -15,7 +16,7 @@ import { MultilingualModule, translateFactory } from '../../framework.ref';
 /** Module Level Dependencies */
 import { LoginService } from './services/login.service';
 import { IfAuthorize } from './directives/ifAuthorize.directive';
-import {UnauthorizedAccessComponent} from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
+import { UnauthorizedAccessComponent } from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
 
 
 let translate = MultilingualModule.forRoot([{
@@ -46,7 +47,9 @@ let primeNgComponents = [
 let imports = [
     RouterModule,
     AngularCommonModule,
-    translate];
+    translate,
+    FormsModule,
+    ReactiveFormsModule];
 
 /**  Exported components declaration   */
 let exportComponents = [
@@ -55,7 +58,9 @@ let exportComponents = [
     //translate,
     IfAuthorize,
     UnauthorizedAccessComponent,
-    ...primeNgComponents
+    ...primeNgComponents,
+    FormsModule,
+    ReactiveFormsModule
 ];
 
 /**
