@@ -19,6 +19,7 @@ import { AuthModule } from './core/auth/auth.module';
 import { DashboardModule } from './core/dashboard/dashboard.module';
 import { UserModule } from './users/users.module';
 import { TimesheetModule } from './timesheet/index';
+import { CorporateModule } from './corporate/index';
 
 /**
  * 
@@ -38,6 +39,7 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
         routing,
         FormsModule,
         TimesheetModule,
+        CorporateModule
     ],
     exports: [],
     declarations: [FeaturesComponent],
