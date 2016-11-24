@@ -25,7 +25,7 @@ export function main() {
             });
         });
 
-        t.it('should have a defined component', ()=> {
+        t.it('should have a defined component',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
@@ -34,94 +34,72 @@ export function main() {
                         t.e(fixture.nativeElement).toBeTruthy();
                         t.e(TestComponent).toBeDefined();
                     });
-            });
-        });
+            }));
 
-        t.it('should have defined bulkapproval component',
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement).toBeTruthy();
-                        t.e(TestComponent).toBeDefined();
-                    });
-            })
-        );
-
-        t.it('on page load page status', () => {
+        t.it('on page load page status',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[1].innerHTML).toBe('Approve');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[2].innerHTML).toBe('Reject');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        t.e(homeInstance.requests[0].eid).toBe(23132);
+                        t.e(homeInstance.requests[1].eid).toBe(23133);
+                        t.e(homeInstance.requests[2].eid).toBe(23134);
+                        t.e(homeInstance.requests[3].eid).toBe(23135);
+                        t.e(homeInstance.model.comments).toBe('');
+                        t.e(homeInstance.selectedEmployees.length).toBe(0);
+                        t.e(homeInstance.approved).toBe(false);
+                        t.e(homeInstance.rejected).toBe(false);
                     });
-            });
-        });
+            }));
 
-        t.it('validation click APPROVE with blank comments field', () => {
+        t.it('on approveClicked() status',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[1].innerHTML).toBe('Approve');
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Comments cannot be left blank');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        
+                        homeInstance.approveClicked();
+                        t.e(homeInstance.approved).toBe(true);
+                        
                     });
-            });
-        });
+            }));
 
-        t.it('validation click APPROVE with comments not blank', () => {
+        t.it('on approveClicked() status',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        fixture.nativeElement.querySelector('textarea').innerHTML = 'Approved';
-                        fixture.detectChanges();
-                        fixture.nativeElement.querySelectorAll('button')[1].click();
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Approved');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        homeInstance.selectedEmployees.push({ eid: 23132, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' });
+                        homeInstance.approveClicked();
+                        t.e(homeInstance.approved).toBe(true);
+                        
                     });
-            });
-        });
+            }));
 
-        t.it('validation click REJECT with blank comments field', () => {
+        t.it('on rejectClicked() status',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
 
-                        t.e(fixture.nativeElement.querySelector('textarea').getAttributes('text')).toBe('');
-                        t.e(fixture.nativeElement.querySelectorAll('button')[2].innerHTML).toBe('Reject');
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Comments cannot be left blank');
+                        let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        homeInstance.selectedEmployees.push({ eid: 23132, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' });
+                        homeInstance.rejectClicked();
+                        t.e(homeInstance.rejected).toBe(true);
+                        
                     });
-            });
-        });
+            }));
 
-        t.it('validation click REJECT with comments not blank', () => {
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
-
-                        fixture.nativeElement.querySelector('textarea').innerHTML = 'Approved';
-                        fixture.detectChanges();
-                        fixture.nativeElement.querySelectorAll('button')[2].click();
-                        fixture.detectChanges();
-                        t.e(fixture.nativeElement.querySelector('h5').innerHTML).toBe('Rejected');
-                    });
-            });
-        });
     });
 }
 
