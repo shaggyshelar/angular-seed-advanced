@@ -23,6 +23,7 @@ export class UsersListComponent implements OnInit {
     constructor(private store: Store<any>, private logService: LogService) {
         this.logService.debug('UsersListComponent : constructor');
         this.users$ = store.select('users');
+        this.users$.subscribe(res => console.dir(res.json()));
         this.store.dispatch({ type: USER_LIST_ACTIONS.INIT });
     }
     /**

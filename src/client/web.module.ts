@@ -6,13 +6,14 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 // libs
-//import { StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
 //import { AppComponent } from './app/components/app.component';
 import { FeaturesModule } from './app/features/features.module';
+import {LoginComponent} from './app/components/login/login.component';
 import { AppComponent } from './app/components/app/app.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { AboutComponent } from './app/components/about/about.component';
@@ -22,13 +23,13 @@ import { routes } from './app/components/app.routes';
 import { CoreModule } from './app/frameworks/core/core.module';
 import { CommonModule } from './app/shared/index';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualEffects } from './app/frameworks/i18n/index';
+import { MultilingualEffects, multilingualReducer } from './app/frameworks/i18n/index';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 //import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
 
 // import { LoginComponent } from './app/components/login/login.component';
-// import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
+ import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
 // import { CorporateModule } from './app/components/corporate/index';
 
 // import { ProfileModule } from './app/components/profile/index';
@@ -92,10 +93,10 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
-    // StoreModule.provideStore({
-    //   i18n: multilingualReducer,
-    //   names: nameListReducer
-    // }),
+     StoreModule.provideStore({
+       i18n: multilingualReducer,
+  //     names: nameListReducer
+     }),
     EffectsModule.run(MultilingualEffects),
     //EffectsModule.run(NameListEffects),
     // ProfileModule,
@@ -114,8 +115,8 @@ export function cons() {
     // QuickSidebarComponent,
     // SidebarComponent,
     // TopNavigationBarComponent,
-    // LoginComponent,
-    // UnauthorizedAccessComponent
+     LoginComponent,
+     UnauthorizedAccessComponent
   ],
   providers: [
     {
