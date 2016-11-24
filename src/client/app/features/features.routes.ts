@@ -9,7 +9,7 @@ import { ErrorPagesRoutes } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
-import { CorporateRoutes } from './corporate/index';
+import { CorporateRoutes,CorporateModule } from './corporate/index';
 
 //Routes
 import { AuthRoutes } from './core/index';
@@ -37,7 +37,7 @@ export const featureRoutes: Routes = [
         path: 'corporate',
         children: [...CorporateRoutes],
         data: {
-          //  reducers: CorporateModule.reducers()
+            reducers: CorporateModule.reducers()
         }
     }
 ];

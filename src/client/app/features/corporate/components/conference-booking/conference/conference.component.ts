@@ -2,12 +2,21 @@
 import { OnInit, Inject, ElementRef } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 //import * as localForage from 'localforage';
+
 /** Framework Dependencies */
 import { BaseComponent} from '../../../../framework.ref';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
 import * as _ from 'lodash';
+
+/** Module Level Dependencies */
+import { ConferenceBookingService} from '../../../services/conference-booking/conference-booking.service';
+import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 
 /** Component Declaration */
 @BaseComponent({
@@ -18,9 +27,8 @@ import * as _ from 'lodash';
 })
 export class ConferenceComponent implements OnInit {
     elementRef: ElementRef;
-
     events: any[];
-    allEvents: any[];
+    //allEvents: any[];
     header: any;
     selectedEvent: MyEvent;
     dialogVisible: boolean = false;
@@ -30,27 +38,34 @@ export class ConferenceComponent implements OnInit {
     maxTime: string;
     conferenceRooms: any[];
     selectedRoom: string;
-    constructor(private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    serverEvents: Observable<any>;
+    constructor(private store: Store<any>,private conferenceBookingService:ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
-        this.events = [];
+        //this.events = [];
+        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_BOOKING_INIT });
+        this.serverEvents = store.select('conferenceEvents');
+        this.serverEvents.subscribe(res => {
+            this.events=res; 
+            console.dir(res)
+        });
     }
     ngAfterViewInit() {
         var el: HTMLElement = this.elementRef.nativeElement;
         var slots = el.querySelectorAll('.ui-widget-content');
         _.forEach(slots, function (elem, key) {
-            if (key !== 0) {
-                elem.addEventListener('mouseover', function (event) {
-                    if (!this.innerHTML && !this.className.includes('fc-axis')) {
-                      this.innerHTML='<div class="btn calender-btn-add"  style="float:right">+Add</div>';
-                    }
-                });
-                elem.addEventListener('mouseout', function (event) {
-                    if (!this.className.includes('fc-axis')) {
-                         this.innerHTML='';
-                    }
-                });
-            }
+            // if (key !== 0) {
+            //     elem.addEventListener('mouseover', function (event) {
+            //         if (!this.innerHTML && !this.className.includes('fc-axis')) {
+            //           this.innerHTML='<div class="btn calender-btn-add"  style="float:right">+Add</div>';
+            //         }
+            //     });
+            //     elem.addEventListener('mouseout', function (event) {
+            //         if (!this.className.includes('fc-axis')) {
+            //              this.innerHTML='';
+            //         }
+            //     });
+            // }
         });
     }
     ngOnInit() {
@@ -71,71 +86,14 @@ export class ConferenceComponent implements OnInit {
             };
         }
 
-        this.allEvents = [
-            {
-                'title': 'Inteview',
-                'start': moment().add(2, 'hours'),
-                'end': moment().add(4, 'hours'),
-                'color': '#8877A9',
-                'conference': 'Caribbean'
-            },
-            {
-                'title': 'Jenzabar Client call',
-                'start': moment(),
-                'end': moment().add(3, 'hours'),
-                'color': '#3FABA4',
-                'conference': 'Dubai'
-            },
-            {
-                'title': 'Product Meeting',
-                'start': moment().subtract(3, 'hours'),
-                'end': moment().subtract(1, 'hours'),
-                'color': '#FF9655',
-                'conference': 'Hong Kong'
-            },
-            {
-                'title': 'Tccc client call',
-                'start': moment().subtract(3, 'hours'),
-                'end': moment().subtract(2, 'hours'),
-                'color': '#3FABA4',
-                'conference': 'Dubai'
-            },
-            {
-                'title': 'Standup Meeting',
-                'start': moment().add(1, 'd').subtract(3, 'hours'),
-                'end': moment().add(1, 'd').subtract(1, 'hours'),
-                'color': '#E7C5F5',
-                'conference': 'Bahamas'
-            },
-            {
-                'title': 'NGO/NPO Meeting',
-                'start': moment().add(1, 'd').subtract(3, 'hours'),
-                'end': moment().add(1, 'd').subtract(2, 'hours'),
-                'color': '#8877A9',
-                'conference': 'Caribbean'
-            },
-            {
-                'title': 'Conference',
-                'start': moment().subtract(1, 'd').subtract(3, 'hours'),
-                'end': moment().subtract(1, 'd').subtract(2, 'hours'),
-                'color': '#D05454',
-                'conference': 'Barcelona'
-            },
-            {
-                'title': 'Interview',
-                'start': moment().subtract(1, 'd'),
-                'end': moment().subtract(1, 'd').add(3, 'hours'),
-                'color': '#DFBA49',
-                'conference': 'Trainning Room'
-            }
-        ];
+       
     //    localForage.getItem('conferenceEvent').then((value) => {
     //         if (value !== null) {
     //             this.allEvents.push(value);
     //         }
     //         this.events = this.allEvents;
     //     });
-        this.events = this.allEvents;
+        //this.events = this.allEvents;
         this.conferenceRooms = [{
             name: 'Bahamas',
             color: '#E7C5F5'
@@ -184,14 +142,14 @@ export class ConferenceComponent implements OnInit {
     }
 
     getEventByRooms(room: string) {
-        this.selectedRoom = room;
-        if (room === 'AllRooms') {
-            this.events = this.allEvents;
-        } else {
-            this.events = _.filter(this.allEvents, function (item) {
-                return item.conference === room;
-            });
-        }
+        // this.selectedRoom = room;
+        // if (room === 'AllRooms') {
+        //     this.events = this.allEvents;
+        // } else {
+        //     this.events = _.filter(this.allEvents, function (item) {
+        //         return item.conference === room;
+        //     });
+        // }
     }
 }
 class MyEvent {

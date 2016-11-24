@@ -18,13 +18,16 @@ import { MyBookingComponent } from './components/conference-booking/my-booking/m
 import { LogTicketComponent } from './components/ticket/log-ticket/log-ticket.component';
 import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-ticket.component';
 //import { CorporateRoutingModule } from './corporate.routes';
-
+// Services Delarations
+import { ConferenceBookingService } from './services/conference-booking/conference-booking.service';
+import { ConferenceBookingEffects } from './services/conference-booking/conference-booking.effects';
+import { corporateReducer } from './services/corporate.reducer';
 
 /** Module Definition */
 @NgModule({
     imports: [
-        RouterModule,FormsModule,BrowserModule,CommonModule,TranslateModule 
-       // EffectsModule.run(TimesheetEffects)
+        RouterModule,FormsModule,BrowserModule,CommonModule,TranslateModule, 
+        EffectsModule.run(ConferenceBookingEffects)
     ],
     exports: [],
     declarations: [
@@ -33,11 +36,11 @@ import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-
     MyBookingComponent,
     LogTicketComponent,
     ManageTicketComponent],
-    //providers: [CorporateService],
+    providers: [ConferenceBookingService],
 })
-// export class CorporateModule {
-//     static reducers(): { [key: string]: ActionReducer<any> } {
-//         return { timesheet: timesheetReducer };
-//     }
-// }
-export class CorporateModule { }
+export class CorporateModule {
+    static reducers(): { [key: string]: ActionReducer<any> } {
+        return { corporate: corporateReducer };
+    }
+}
+//export class CorporateModule { }
