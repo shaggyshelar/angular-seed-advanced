@@ -1,6 +1,6 @@
 var utils = require('../utils');
 var _ = require('lodash');
-var profileData = require('./../profile/profileData');
+var profileData = require('./profileData');
 
 module.exports = function (app) {
     app.get('/api/profile/:id', function (req, res) {

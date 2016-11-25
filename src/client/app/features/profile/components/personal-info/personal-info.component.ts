@@ -4,7 +4,6 @@ import { OnInit } from '@angular/core';
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-
 /** Framework Level Dependencies */
 import { BaseComponent, LogService } from '../../../framework.ref';
 
@@ -65,34 +64,20 @@ export class PersonalInfoComponent implements OnInit {
     this.isAddEmergencyContact = false;
     this.isEditEmergencyContact = false;
     this.isAddSkypeID = false;
-    this.isEditSkypeID = false;   
+    this.isEditSkypeID = false;  
   }
 
-  ngOnInit(): void {
-    // this.profile = {
-    //   employeeID: 1,
-    //   employeeName: 'Nick',
-    //   currentAddress: 'currentAddress',
-    //   contactNo: '',
-    //   email: 'email@anc.com',
-    //   dateOfBirth: '01/01/1993',
-    //   esplPfNo: '',
-    //   previousPfNo: '',
-    //   careerStartDate: '',
-    //   lastWorkingDay: '',
-    //   emergencyContactName: '',
-    //   bloodGroup: '',
-    //   emergencyContactNo: '',
-    //   skypeID: ''
-    // };
-    this.store.dispatch({ type: PROFILE_ACTIONS.DETAILS, payload: 1 });
-    //this.profileInfo = _.cloneDeep(this.profile);
-     this.profileInfoObs = this.store.select('profile');
+  ngOnInit(): void {  
+    this.store.dispatch({ type: PROFILE_ACTIONS.DETAILS, payload: 1 });    
+    this.profileInfoObs = this.store.select('profile');    
+    this.profileInfoObs.subscribe(res => {
+      this.profileInfo = res ? res.profile : {};
+    });       
   }
 
   addBloodGroup() {
-    this.isAddBloodGroup = true;
-    this.isEditBloodGroup = true;
+     this.isAddBloodGroup = true;
+     this.isEditBloodGroup = true;
   }
   editBloodGroup() {
     this.isEditBloodGroup = true;

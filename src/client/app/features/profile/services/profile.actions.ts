@@ -16,5 +16,5 @@ interface IProfileActions {
 export const PROFILE_ACTIONS: IProfileActions = {
     INIT: `${CONTEXT}_INIT`,
     DETAILS : `${CONTEXT}_DELAILS`,
-    DETAILS_FETCHED : `${CONTEXT}_DELAILS_FETCHED`
+    DETAILS_FETCHED : `${CONTEXT}_DELAILS_FETCHED`   
 };
