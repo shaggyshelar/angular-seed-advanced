@@ -6,9 +6,6 @@ import { Holiday } from './holiday';
 /** State Definition */
 export interface LeaveManagementState {
     leaves: Leave;
-    // selectedTimesheet: Leave;
-    // employees: Employee[];
-    // selectedEmployee: Employee;
-    // holiday: Holiday[];
-    // selectedHoliday: Holiday;
+    employees: Employee;
+    holiday: Holiday;
 }

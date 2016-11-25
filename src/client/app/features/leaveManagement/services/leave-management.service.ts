@@ -15,7 +15,6 @@ import { BaseService } from '../../core/index';
 import { Employee } from '../models/employee';
 import { Leave } from '../models/leave';
 import { LeaveManagementState } from '../models/leave-management.state';
-import { LEAVE_MANAGEMENT_ACTIONS } from './leave-management.actions';
 
 /** Context for service calls */
 export const CONTEXT = 'leaves';
@@ -27,7 +26,7 @@ export class LeaveManagementService extends BaseService {
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<LeaveManagementState>) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('LeaveManagement Service Initialized');
-        this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.INIT });
+        //this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.INIT });
     }
 
 /**

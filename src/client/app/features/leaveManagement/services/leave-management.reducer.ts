@@ -8,7 +8,7 @@ import { LeaveManagementState } from '../models/leave-management.state';
 /** Reducer Function Definition */
 function leaveManagementReducerFn(state: LeaveManagementState, action: Action): LeaveManagementState {
     switch (action.type) {
-        case LEAVE_MANAGEMENT_ACTIONS.INITIALIZED:
+        case LEAVE_MANAGEMENT_ACTIONS.DETAILS_FETCHED:
             let newState = Object.assign([], state, {
                 leaves: action.payload
             });

@@ -35,7 +35,7 @@ export class MyLeavesComponent {
   }
 
   ngOnInit() {
-    this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.INIT });
+    this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.DETAILS});
     this.leaves$ = this.store.select('leaves');
     this.leaves$.subscribe(res =>
       this.leaves = res ? res.leaves : {}

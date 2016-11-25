@@ -1,5 +1,5 @@
 var utils = require('../utils');
-var leaves = require('./../leaves/leavesData');
+var leaves = require('./leavesData');
 var _ = require('lodash');
 
 // var getLeaves = function (req, res) {

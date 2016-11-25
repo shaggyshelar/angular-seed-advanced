@@ -20,6 +20,8 @@ interface ILeaveManagementActions {
     SUBMIT: string;
     SUBMIT_SUCCESS: string;
     SUBMIT_FAILED: string;
+    DETAILS: string;
+    DETAILS_FETCHED: string;
 
 }
 
@@ -34,5 +36,7 @@ export const LEAVE_MANAGEMENT_ACTIONS: ILeaveManagementActions = {
     ACTION_FAILED: `${CONTEXT}_ACTION_FAILED`,
     SUBMIT: `${CONTEXT}_SUBMIT`,
     SUBMIT_SUCCESS: `${CONTEXT}_SUBMIT_SUCCESS`,
-    SUBMIT_FAILED: `${CONTEXT}_SUBMIT_FAILED`
+    SUBMIT_FAILED: `${CONTEXT}_SUBMIT_FAILED`,
+    DETAILS : `${CONTEXT}_DELAILS`,
+    DETAILS_FETCHED : `${CONTEXT}_DELAILS_FETCHED`
 };
