@@ -1,10 +1,10 @@
 /** Angular Dependencies */
 import { OnInit, Inject, ElementRef } from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 //import * as localForage from 'localforage';
 
 /** Framework Dependencies */
-import { BaseComponent} from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ import * as moment from 'moment/moment';
 import * as _ from 'lodash';
 
 /** Module Level Dependencies */
-import { ConferenceBookingService} from '../../../services/conference-booking/conference-booking.service';
+import { ConferenceBookingService } from '../../../services/conference-booking/conference-booking.service';
 import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 
 /** Component Declaration */
@@ -39,18 +39,14 @@ export class ConferenceComponent implements OnInit {
     conferenceRooms: any[];
     selectedRoom: string;
     serverEvents: Observable<any>;
-    constructor(private store: Store<any>,private conferenceBookingService:ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private store: Store<any>, private conferenceBookingService: ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
         //this.events = [];
-        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_BOOKING_INIT });
-        this.serverEvents = store.select('conferenceEvents');
-        this.serverEvents.subscribe(res => {
-            this.events=res; 
-            console.dir(res)
-        });
+
     }
     ngAfterViewInit() {
+
         var el: HTMLElement = this.elementRef.nativeElement;
         var slots = el.querySelectorAll('.ui-widget-content');
         _.forEach(slots, function (elem, key) {
@@ -69,7 +65,12 @@ export class ConferenceComponent implements OnInit {
         });
     }
     ngOnInit() {
-
+        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_BOOKING_INIT });
+        this.serverEvents = this.store.select('CorporateState');
+        this.serverEvents.subscribe(res => {
+            this.events = res;
+            console.dir( this.events)
+        });
         this.minTime = '07:00:00';
         this.maxTime = '20:00:00';
         if (window.screen.width < 768) {
@@ -86,13 +87,13 @@ export class ConferenceComponent implements OnInit {
             };
         }
 
-       
-    //    localForage.getItem('conferenceEvent').then((value) => {
-    //         if (value !== null) {
-    //             this.allEvents.push(value);
-    //         }
-    //         this.events = this.allEvents;
-    //     });
+
+        //    localForage.getItem('conferenceEvent').then((value) => {
+        //         if (value !== null) {
+        //             this.allEvents.push(value);
+        //         }
+        //         this.events = this.allEvents;
+        //     });
         //this.events = this.allEvents;
         this.conferenceRooms = [{
             name: 'Bahamas',

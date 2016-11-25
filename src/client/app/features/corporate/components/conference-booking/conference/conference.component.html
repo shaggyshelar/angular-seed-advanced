@@ -58,6 +58,11 @@
     </div>
     <!-- END PAGE BASE CONTENT -->
   </div>
+  <ul>
+    <li *ngFor="let conf of serverEvents | async"> 
+      conf.title
+    </li>
+  </ul>
   <!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->

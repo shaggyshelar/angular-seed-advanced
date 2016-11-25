@@ -25,7 +25,7 @@ export class ConferenceBookingEffects {
         .switchMap(action => this.conferenceBookingService.getList$())
         .map(res => ({ type: CORPORATE_ACTIONS.CONFERENCE_BOOKING_INITIALIZED, payload: res.json() }))
         // nothing reacting to failure at moment but you could if you want (here for example)
-        .catch(() => Observable.of({ type: CORPORATE_ACTIONS.INIT_FAILED }));
+        //.catch(() => Observable.of({ type: CORPORATE_ACTIONS.INIT_FAILED }));
 
     // @Effect() add$ = this.actions$
     //     .ofType(TIMESHEET_ACTIONS.ADD)

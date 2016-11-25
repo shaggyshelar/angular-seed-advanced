@@ -6,22 +6,23 @@ import { CORPORATE_ACTIONS } from './corporate.actions';
 import { CorporteState } from '../models/corporate.state';
 
 const initialState: CorporteState = {
-  conferenceEvents:[],
-  tickets:[]
+    conferenceEvents: [],
+    tickets: []
 };
 /** Reducer Function Definition */
-function corporateReducerFn(state :CorporteState={conferenceEvents:[], tickets:[]}, action: Action) {
+function corporateReducerFn(state: CorporteState, action: Action): CorporteState {
     switch (action.type) {
 
         case CORPORATE_ACTIONS.CONFERENCE_BOOKING_INITIALIZED:
-            return Object.assign({},state,{
-               conferenceEvents :action.payload
+            let newState: CorporteState = Object.assign({}, state, {
+                conferenceEvents: action.payload
             });
+            return newState;
 
         default:
             return state;
     }
 };
 
-/** Timesheet Reducer Function Export */
+/** corporate Reducer Function Export */
 export const corporateReducer: ActionReducer<any> = corporateReducerFn;
