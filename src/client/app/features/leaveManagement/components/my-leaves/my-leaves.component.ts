@@ -1,9 +1,15 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+import { OnInit, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
 /** Framework Dependencies */
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
+import { Leave } from '../../models/leave';
+import { LEAVE_MANAGEMENT_ACTIONS } from '../../services/leave-management.actions';
 
 /** Component Declaration */
 
@@ -16,18 +22,25 @@ import { BaseComponent, LogService } from '../../../framework.ref';
 export class MyLeavesComponent {
 
   servRows = 5;
-  leaves: any[];
+  public leaves$: Observable<any>;
+  public leaves : any;
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private store: Store<any>,
+    private logService: LogService
+  ) { 
+    this.logService.debug('MyLeavesComponent : constructor');
+  
+  }
 
   ngOnInit() {
-    this.leaves = [
-      { empName: 'Person1 LName', start: '22-09-2016', end: '23-09-2016', numDays: 2, status: 'Approved' },
-      { empName: 'Person1 LName', start: '22-08-2016', end: '22-08-2016', numDays: 1, status: 'Approved' },
-      { empName: 'Person1 LName', start: '02-10-2016', end: '03-10-2016', numDays: 2, status: 'Approved' }
-    ];
+    this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.INIT });
+    this.leaves$ = this.store.select('leaves');
+    this.leaves$.subscribe(res =>
+      this.leaves = res ? res.leaves : {}
+    );
+    this.logService.debug('MyLeavesComponent : ngOnInit');
   }
 
   applyLeaveClicked() {

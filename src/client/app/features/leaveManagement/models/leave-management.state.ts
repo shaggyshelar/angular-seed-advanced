@@ -5,10 +5,10 @@ import { Holiday } from './holiday';
 
 /** State Definition */
 export interface LeaveManagementState {
-    timesheets: Leave[];
-    selectedTimesheet: Leave;
-    employees: Employee[];
-    selectedEmployee: Employee;
-    holiday: Holiday[];
-    selectedHoliday: Holiday;
+    leaves: Leave;
+    // selectedTimesheet: Leave;
+    // employees: Employee[];
+    // selectedEmployee: Employee;
+    // holiday: Holiday[];
+    // selectedHoliday: Holiday;
 }

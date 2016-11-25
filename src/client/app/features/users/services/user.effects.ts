@@ -32,7 +32,7 @@ export class UserListEffects {
         .map(action => {
             let name = action.payload;
             // analytics
-            this.userList.track(USER_LIST_ACTIONS.USER_ADDED, { label: name });
+           // this.userList.track(USER_LIST_ACTIONS.USER_ADDED, { label: name });
             return ({ type: USER_LIST_ACTIONS.USER_ADDED, payload: name });
         });
 

@@ -70,9 +70,9 @@
             <div class="col-lg-9 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
                     <p-dataTable [value]="leaves" [paginator]="true" [rows]=(servRows) [responsive]="true">
-                        <p-column field="empName" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="start" header="{{ 'START_DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="end" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="employeeName" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="startDate" header="{{ 'START_DATE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="endDate" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
                         <p-column field="numDays" header="{{ 'NO_LEAVES' | translate }}" [sortable]="true"></p-column>
                         <p-column field="status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
                         <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">

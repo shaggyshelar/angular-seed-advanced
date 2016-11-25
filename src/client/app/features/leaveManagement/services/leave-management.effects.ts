@@ -16,19 +16,22 @@ import { LeaveManagementService } from './leave-management.service';
 
 @Injectable()
 export class LeaveManagementEffects {
-    // @Effect() init$ = this.actions$
-    //     .ofType(LEAVE_MANAGEMENT_ACTIONS.INIT)
-    //     .switchMap(
-    //     action => {
-    //         this.logService.debug('Timesheets Effects Init Action called');
-    //         return this.leaveManagementService.getChildList$('employee', 0, 0, false);
-    //     }
-    //     )
-    //     .map(res => ({ type: LEAVE_MANAGEMENT_ACTIONS.INITIALIZED, payload: res.json() }))
-    //     // nothing reacting to failure at moment but you could if you want (here for example)
-    //     .catch(() => Observable.of({ type: LEAVE_MANAGEMENT_ACTIONS.INIT_FAILED }));
+    @Effect() init$ = this.actions$
+        .ofType(LEAVE_MANAGEMENT_ACTIONS.INIT)
+        .switchMap(
+        action => {
+            this.logService.debug('LeaveManagement Effects Init Action called');
+            return this.leaveManagementService.getLeaves();
+        }
+        )
+        //.map(res => ({ type: LEAVE_MANAGEMENT_ACTIONS.INITIALIZED, payload: res.json() }))
+         .map(res => {
+             let profile = res;
+             return ({ type: LEAVE_MANAGEMENT_ACTIONS.INITIALIZED, payload: res });
+         });
+        // nothing reacting to failure at moment but you could if you want (here for example)
+ //       .catch(() => Observable.of({ type: LEAVE_MANAGEMENT_ACTIONS.INIT_FAILED }));
 
-        constructor(
-            leaveManagementService: LeaveManagementService
-        ) { }
+
+        constructor(private store: Store<any>, private actions$: Actions, private leaveManagementService: LeaveManagementService, private http: Http, private logService: LogService) { }
 }

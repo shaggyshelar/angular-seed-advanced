@@ -18,7 +18,7 @@ import { LeaveManagementState } from '../models/leave-management.state';
 import { LEAVE_MANAGEMENT_ACTIONS } from './leave-management.actions';
 
 /** Context for service calls */
-export const CONTEXT = 'leave-management';
+export const CONTEXT = 'leaves';
 
 /** Service Definition */
 @Injectable()
@@ -29,8 +29,12 @@ export class LeaveManagementService extends BaseService {
         this.logService.debug('LeaveManagement Service Initialized');
         this.store.dispatch({ type: LEAVE_MANAGEMENT_ACTIONS.INIT });
     }
-}
 
 /**
  * getLeavesRecord method
  */
+      getLeaves(): Observable<Leave> {
+         this.logService.debug('ProfileService : getProfile method');
+         return this.getList$().map(res => res.json());
+     }
+}

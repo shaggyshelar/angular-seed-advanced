@@ -8,4 +8,5 @@ export interface Leave {
     leaveType;
     numDays;
     reason;
+    status;
 }
