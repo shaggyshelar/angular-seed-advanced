@@ -4,6 +4,6 @@ import { Conference } from './conference';
 
 /** State Definition */
 export interface CorporteState {
-    conferenceEvents:Conference[];
-    tickets: Ticket[];
+    conferenceEvents:any;
+    tickets: any;
 }

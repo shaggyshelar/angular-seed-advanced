@@ -20,7 +20,6 @@ import { DashboardModule } from './core/dashboard/dashboard.module';
 import { UserModule } from './users/users.module';
 import { TimesheetModule } from './timesheet/index';
 import { CorporateModule } from './corporate/index';
-
 /**
  * 
  import { LoginComponent } from './app/components/login/login.component';
@@ -39,7 +38,7 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
         routing,
         FormsModule,
         TimesheetModule,
-        CorporateModule
+        CorporateModule,
     ],
     exports: [],
     declarations: [FeaturesComponent],

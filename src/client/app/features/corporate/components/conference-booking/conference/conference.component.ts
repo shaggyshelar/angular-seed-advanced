@@ -39,10 +39,10 @@ export class ConferenceComponent implements OnInit {
     conferenceRooms: any[];
     selectedRoom: string;
     serverEvents: Observable<any>;
-    constructor(private store: Store<any>, private conferenceBookingService: ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private store: Store<any>,  private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
-        //this.events = [];
+        this.events = [];
 
     }
     ngAfterViewInit() {
@@ -65,12 +65,12 @@ export class ConferenceComponent implements OnInit {
         });
     }
     ngOnInit() {
-        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_BOOKING_INIT });
-        this.serverEvents = this.store.select('CorporateState');
-        this.serverEvents.subscribe(res => {
-            this.events = res;
-            console.dir( this.events)
-        });
+        this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
+        
+        this.serverEvents = this.store.select('conferenceEvents');
+        this.serverEvents.subscribe(res =>
+            this.events = res ? res:[]
+        );
         this.minTime = '07:00:00';
         this.maxTime = '20:00:00';
         if (window.screen.width < 768) {
@@ -86,7 +86,6 @@ export class ConferenceComponent implements OnInit {
                 right: 'month,agendaWeek,agendaDay'
             };
         }
-
 
         //    localForage.getItem('conferenceEvent').then((value) => {
         //         if (value !== null) {

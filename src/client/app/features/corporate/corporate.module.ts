@@ -1,9 +1,6 @@
 
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 /** Third Party Dependencies */
 import { EffectsModule } from '@ngrx/effects';
@@ -19,28 +16,30 @@ import { LogTicketComponent } from './components/ticket/log-ticket/log-ticket.co
 import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-ticket.component';
 //import { CorporateRoutingModule } from './corporate.routes';
 // Services Delarations
-import { ConferenceBookingService } from './services/conference-booking/conference-booking.service';
-import { ConferenceBookingEffects } from './services/conference-booking/conference-booking.effects';
-import { corporateReducer } from './services/corporate.reducer';
+import { CorporateService } from './services/conference-booking/corporate.service';
+import { CorporateEffects } from './services/conference-booking/corporate.effects';
+import { CorporateReducer } from './services/corporate.reducer';
 
 /** Module Definition */
 @NgModule({
     imports: [
-        RouterModule,FormsModule,BrowserModule,CommonModule,TranslateModule, 
-        EffectsModule.run(ConferenceBookingEffects)
+        CommonModule,
+        TranslateModule,
+        EffectsModule.run(CorporateEffects)
     ],
     exports: [],
     declarations: [
         ConferenceComponent,
-    BookComponent,
-    MyBookingComponent,
-    LogTicketComponent,
-    ManageTicketComponent],
-    providers: [ConferenceBookingService],
+        BookComponent,
+        MyBookingComponent,
+        LogTicketComponent,
+        ManageTicketComponent
+    ],
+    providers: [CorporateService],
 })
 export class CorporateModule {
     static reducers(): { [key: string]: ActionReducer<any> } {
-        return { corporate: corporateReducer };
+        return { corporate: CorporateReducer };
     }
 }
 //export class CorporateModule { }

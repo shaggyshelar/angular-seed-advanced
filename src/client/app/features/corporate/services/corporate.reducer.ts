@@ -5,24 +5,18 @@ import { ActionReducer, Action } from '@ngrx/store';
 import { CORPORATE_ACTIONS } from './corporate.actions';
 import { CorporteState } from '../models/corporate.state';
 
-const initialState: CorporteState = {
-    conferenceEvents: [],
-    tickets: []
-};
 /** Reducer Function Definition */
-function corporateReducerFn(state: CorporteState, action: Action): CorporteState {
+function CorporteReducerFn(state: CorporteState, action: Action): CorporteState {
     switch (action.type) {
-
-        case CORPORATE_ACTIONS.CONFERENCE_BOOKING_INITIALIZED:
+        case CORPORATE_ACTIONS.INITIALIZED:
             let newState: CorporteState = Object.assign({}, state, {
                 conferenceEvents: action.payload
             });
-            return newState;
-
+            return newState; 
         default:
             return state;
     }
 };
 
-/** corporate Reducer Function Export */
-export const corporateReducer: ActionReducer<any> = corporateReducerFn;
+/** Timesheet Reducer Function Export */
+export const CorporateReducer: ActionReducer<any> = CorporteReducerFn;

@@ -12,8 +12,8 @@ import { LogService, AnalyticsService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../../core/index';
-//import { Timesheet } from '../models/timesheet';
-//import { Employee } from '../models/employee';
+//import { Leave } from '../../models/leave';
+// import { Employee } from '../models/employee';
 import { CorporteState } from '../../models/corporate.state';
 
 /** Context for service calls */
@@ -21,27 +21,22 @@ export const CONTEXT = 'conferenceBooking';
 
 /** Service Definition */
 @Injectable()
-export class ConferenceBookingService extends BaseService {
+export class CorporateService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<CorporteState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('ConferenceBooking Service Initialized Successfully');
-       
+        this.logService.debug('CorporateService  Initialized Successfully');
+       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
     }
 
     /**
-     * getConferenceBooking Events method
+     * getProfile method
      */
-    getConferenceBooking(): Observable<any> {
+    // getLeave(id): Observable<Leave> {
+    //     return this.get$(id).map(res => res.json());
+    // }
+     getConferenceBooking(): Observable<any> {
         this.logService.debug('ConferenceBookingService : getConferenceBooking method');
         return this.getList$().map(res => res.json());
     }
-
-    // /**
-    //  * getEmployeesDefinition
-    //  */
-    // getEmployees(): Observable<Employee> {
-    //     this.logService.debug('TimesheetService : getEmployees method');
-    //     return this.getChildList$('employee').map(res => res.json());
-    // }
 }
