@@ -9,6 +9,7 @@ import { ErrorPagesRoutes } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
+import { CorporateModule,CorporateRoutes } from './corporate/index';
 
 //Routes
 import { AuthRoutes } from './core/index';
@@ -30,6 +31,12 @@ export const featureRoutes: Routes = [
         children: [...TimesheetRoutes],
         data: {
             reducers: TimesheetModule.reducers()
+        }
+    }, {
+        path: 'corporate',
+        children: [...CorporateRoutes],
+        data: {
+            reducers: CorporateModule.reducers()
         }
     }
 ];

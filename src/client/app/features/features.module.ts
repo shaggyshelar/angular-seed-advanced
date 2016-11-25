@@ -19,6 +19,7 @@ import { AuthModule } from './core/auth/auth.module';
 import { DashboardModule } from './core/dashboard/dashboard.module';
 import { UserModule } from './users/users.module';
 import { TimesheetModule } from './timesheet/index';
+import { CorporateModule } from './corporate/index';
 
 /**
  * 
@@ -31,13 +32,14 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
 /**  Module Definition */
 @NgModule({
     imports: [
-        StoreModule.provideStore(FeaturesModule.reducers()),
         UserModule,
         AuthModule,
         DashboardModule,
         routing,
         FormsModule,
         TimesheetModule,
+        CorporateModule,
+        StoreModule.provideStore(FeaturesModule.reducers())
     ],
     exports: [],
     declarations: [FeaturesComponent],

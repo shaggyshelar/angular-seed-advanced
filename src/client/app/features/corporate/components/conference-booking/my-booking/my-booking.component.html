@@ -1,0 +1,82 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb  hidden-xs">
+            <li>
+                <a href="index.html">{{"LINK_UP" | translate }}</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">{{"CONFERENCE_BOOKING_TITLE" | translate }}</span>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">{{"MY_BOOKING_TITLE" | translate }}</span>
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+        <!-- BEGIN PAGE BASE CONTENT -->
+        <p-confirmDialog header="Confirmation" id="confirmationDialog" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <button class="btn btn-default col-sm-6 selected-link" id="manageBooking" [routerLink]="['../myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
+                        <button class="btn btn-default col-sm-6" id="manageAllRoom" [routerLink]="['../conferenceBooking', 'AllRooms']">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
+                    </div>
+                    <div class="col-sm-7">
+                        <ul class="legend">
+                            <li *ngFor="let item of conferenceRooms" class="col-xs-6 col-md-4 col-sm-4">
+                                <a [routerLink]="['../conferenceBooking', item.name]" id="{{item.name}}"><span class="color-list" [style.backgroundColor]="item.color"></span> {{item.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light bordered">
+            <nav class="container hidden-sm hidden-md hidden-lg">
+                <a class="buttons"  [routerLink]="['../newBooking']" id="newEvent" tooltip="New Event" href="#"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
+            </nav>
+            <div class="portlet-title">
+                <div class="caption">
+                    <a [routerLink]="['../conferenceBooking']" id="conferenceRoomLink" class="portlet-link">{{"MY_BOOKING_CONFERENCE_ROOM" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">{{"MY_BOOKING_ALL_EVENT" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../myBookings']" id="myBookingLink" class="selected">{{"MY_BOOKING_TITLE" | translate }}</a>&nbsp;&nbsp;
+                    <a class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li *ngFor="let item of conferenceRooms">
+                                <a [routerLink]="['../conferenceBooking', item.name]">{{item.name}}</a>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+                <div class="actions">
+                    <a [routerLink]="['../newBooking']" id="newEventBooking" class="btn green hidden-xs"><i class="fa fa-plus"></i> New Event</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <p-growl [value]="msgs"></p-growl>
+
+                <p-dataTable [value]="bookings" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    <p-column field="title" header="Title" [sortable]="true"></p-column>
+                    <p-column field="startTime" header="Start Time" [sortable]="true"></p-column>
+                    <p-column field="endTime" header="End Time" [sortable]="true"></p-column>
+                    <p-column field="attendees" header="Attendees" [sortable]="true"></p-column>
+                    <p-column field="room" header="Conference Rooms" [sortable]="true"></p-column>
+                    <p-column header="Delete">
+                        <template let-car="rowData" pTemplate type="body">
+                            <button class="btn btn-danger" (click)="confirm()" id="deleteBtn"><i class="fa fa-trash"></i></button>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
