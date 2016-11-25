@@ -9,6 +9,7 @@ import { ErrorPagesRoutes } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
+import { LeaveRoutes, LeaveModule } from './leaveManagement/index';
 
 //Routes
 import { AuthRoutes } from './core/index';
@@ -30,6 +31,12 @@ export const featureRoutes: Routes = [
         children: [...TimesheetRoutes],
         data: {
             reducers: TimesheetModule.reducers()
+        }
+    },{
+        path: 'leave',
+        children: [...LeaveRoutes],
+        data: {
+            reducers: LeaveModule.reducers()
         }
     }
 ];

@@ -61,7 +61,7 @@ export function main () {
 
                         let homeInstance = fixture.debugElement.children[0].componentInstance;
                         homeInstance.editBtnClicked();
-                        t.e(urlVar).toBe('/leave-management/single-approval');
+                        t.e(urlVar).toBe('/leave/single-approval');
                     });
             })
             );

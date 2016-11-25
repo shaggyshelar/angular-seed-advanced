@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./apis')(app);
 require('./features/features')(app);
 require('./roles/roles')(app);
+require('./leave/leaveApi')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

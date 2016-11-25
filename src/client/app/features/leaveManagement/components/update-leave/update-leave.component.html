@@ -1,0 +1,109 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" [ifAuthorize]="['Leave.UPDATE']">
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <!-- END PAGE TITLE -->
+        </div>
+        <div class="hidden-xs">
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <span>LINK UP</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span> Leaves</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span> Apply Leave</span>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <!-- START HOLIDAY PARTICULARS COMPONENT -->
+            <div class="col-lg-4 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <h4>Requestor Details</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td> Employee ID </td>
+                                        <td> 24568 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Employee Name </td>
+                                        <td> Person1 LName </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Department </td>
+                                        <td> EBS </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Active on Projects</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Manager</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> RMS </td>
+                                        <td> Sagar Shelar </td>
+                                    </tr>
+                                    <tr>
+                                        <td> PLSV 1 </td>
+                                        <td> Some Person </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END HOLIDAY PARTICULARS COMPONENT  -->
+
+            <!-- START HOLIDAY LIST COMPONENT BY PRIMENG -->
+            <div class="col-lg-8 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <h4>Update Leave</h4>
+                    <div class="row">
+                        <div class="pull-right">
+                            <h5 class="font-blue">Leave Approved</h5>
+                        </div>
+                        <p-dataTable [value]="leaves" [responsive]="true">
+                            <p-column field="leave.name" header="{{ 'LEAVE_TYPE' | translate }}"></p-column>
+                            <p-column field="numDays" header="{{ 'NO_LEAVES' | translate }}"></p-column>
+                            <p-column field="reason" header="{{ 'REASON' | translate }}"></p-column>
+                            <p-column field="start" header="{{ 'START_DATE' | translate }}"></p-column>
+                            <p-column field="end" header="{{ 'END_DATE' | translate }}"></p-column>
+                            <p-column field="action" header="{{ 'ACTION' | translate }}"></p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+                <div class="portlet light bordered">
+                    <div class="row">
+                        <p-dataTable [value]="managers" [responsive]="true">
+                            <p-column field="project" header="{{ 'PROJECT' | translate }}"></p-column>
+                            <p-column field="manager" header="{{ 'MANAGER' | translate }}"></p-column>
+                            <p-column field="status" header="{{ 'STATUS' | translate }}"></p-column>
+                            <p-column field="comments" header="{{ 'COMMENTS' | translate }}"></p-column>
+                        </p-dataTable>
+                    </div>
+                    <button id="close" class="btn blue btn-outline" (click)="closeClicked()">{{ 'CLOSE' | translate }}</button>
+                </div>
+            </div>
+            <!-- END HOLIDAY LIST COMPONENT BY PRIMENG -->
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

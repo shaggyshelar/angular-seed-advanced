@@ -73,7 +73,7 @@ export function main() {
 
                         let homeInstance = fixture.debugElement.children[0].componentInstance;
                         homeInstance.applyLeaveClicked();
-                        t.e(urlVar).toBe('/leave-management/apply-leave');
+                        t.e(urlVar).toBe('/leave/apply-leave');
                     });
             }));
 
@@ -86,7 +86,7 @@ export function main() {
 
                         let homeInstance = fixture.debugElement.children[0].componentInstance;
                         homeInstance.updateBtnClicked();
-                        t.e(urlVar).toBe('/leave-management/update-leave');
+                        t.e(urlVar).toBe('/leave/update-leave');
                     });
             }));
 
