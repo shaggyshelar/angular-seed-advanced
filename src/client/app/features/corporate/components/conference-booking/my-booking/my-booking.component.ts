@@ -3,7 +3,11 @@ import { ConfirmationService } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 
 /** Framework Dependencies */
-import { BaseComponent} from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 
 /** Component Declaration */
 @BaseComponent({
@@ -16,8 +20,10 @@ import { BaseComponent} from '../../../../framework.ref';
 export class MyBookingComponent {
     bookings: Array<Object>;
     msgs: Message[] = [];
-    conferenceRooms:any[];
-    constructor(private confirmationService: ConfirmationService) {
+    conferenceRooms: any[];
+    serverEvents: Observable<any>;
+    constructor(private store: Store<any>, private confirmationService: ConfirmationService) {
+        this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
         this.bookings = [{
             'title': 'Inteview',
             'startTime': '24/10/2016 10:00',
@@ -68,35 +74,34 @@ export class MyBookingComponent {
             'room': 'Houston',
         }
         ];
-         this.conferenceRooms = [{
+        this.conferenceRooms = [{
             name: 'Bahamas',
             color: '#E7C5F5'
         },
-            {
-                name: 'Dubai',
-                color: '#3FABA4'
-            }, {
-                name: 'Cape Town',
-                color: '#35AA47'
-            }, {
-                name: 'Hong Kong',
-                color: '#FF9655'
-            }, {
-                name: 'Caribbean',
-                color: '#8877A9'
-            }, {
-                name: 'Houston	',
-                color: '#428BCA'
-            }, {
-                name: 'Barcelona',
-                color: '#D05454'
-            }, {
-                name: 'Trainning Room',
-                color: '#DFBA49'
-            },
+        {
+            name: 'Dubai',
+            color: '#3FABA4'
+        }, {
+            name: 'Cape Town',
+            color: '#35AA47'
+        }, {
+            name: 'Hong Kong',
+            color: '#FF9655'
+        }, {
+            name: 'Caribbean',
+            color: '#8877A9'
+        }, {
+            name: 'Houston	',
+            color: '#428BCA'
+        }, {
+            name: 'Barcelona',
+            color: '#D05454'
+        }, {
+            name: 'Trainning Room',
+            color: '#DFBA49'
+        },
         ];
     }
-
     confirm() {
         this.confirmationService.confirm({
             message: 'Do you want to delete this record?',

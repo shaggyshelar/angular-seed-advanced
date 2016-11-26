@@ -38,7 +38,7 @@ export class ConferenceComponent implements OnInit {
     conferenceRooms: any[];
     selectedRoom: string;
     serverEvents: Observable<any>;
-    constructor(private store: Store<any>,  private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    constructor(private store: Store<any>, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
         this.events = [];
@@ -64,11 +64,11 @@ export class ConferenceComponent implements OnInit {
         });
     }
     ngOnInit() {
+        this.serverEvents = this.store.select('corporate');
         this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
-        
-        this.serverEvents = this.store.select('conferenceEvents');
-        this.serverEvents.subscribe(res =>
-            this.events = res ? res:[]
+        this.serverEvents.subscribe(res => {
+            this.events = res ? res.conferenceEvents : [];
+         }
         );
         this.minTime = '07:00:00';
         this.maxTime = '20:00:00';

@@ -42,5 +42,3 @@ export class CorporateModule {
         return { corporate: CorporateReducer };
     }
 }
-
-//export class CorporateModule { }
