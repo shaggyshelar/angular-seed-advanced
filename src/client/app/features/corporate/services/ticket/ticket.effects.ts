@@ -16,26 +16,26 @@ import { LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { CORPORATE_ACTIONS } from '../corporate.actions';
-import { CorporateService } from './corporate.service';
+import { TicketService } from './ticket.service';
 
 @Injectable()
-export class CorporateEffects {
+export class TicketEffects {
 
-    @Effect() corporatedetails$ = this.actions$
-        .ofType(CORPORATE_ACTIONS.INIT)
-        .switchMap(action => this.corporateService.getConferenceBooking())
+    @Effect() ticketDetails$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.TICKET_INIT)
+        .switchMap(action => this.ticketService.getTicketList())
         .map(res => {
             let data = res;
-            return ({ type: CORPORATE_ACTIONS.INITIALIZED, payload: data });
+            return ({ type: CORPORATE_ACTIONS.TICKET_INITIALIZED, payload: data });
         });
 
     constructor(
         private store: Store<any>,
         private actions$: Actions,
-        private corporateService: CorporateService,
+        private ticketService: TicketService,
         private http: Http,
         private logService: LogService
     ) {
-        this.logService.debug('CorporateEffects : constructor');
+        this.logService.debug('TicketEffects : constructor');
     }
 }

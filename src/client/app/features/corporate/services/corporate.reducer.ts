@@ -12,7 +12,13 @@ function CorporteReducerFn(state: CorporteState, action: Action): CorporteState 
             let newState: CorporteState = Object.assign({}, state, {
                 conferenceEvents: action.payload
             });
-            return newState; 
+            return newState;
+
+        case CORPORATE_ACTIONS.TICKET_INITIALIZED:
+            let newStates: CorporteState = Object.assign({}, state, {
+                tickets: action.payload
+            });
+            return newStates;
         default:
             return state;
     }

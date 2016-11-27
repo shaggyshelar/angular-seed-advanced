@@ -16,8 +16,10 @@ import { LogTicketComponent } from './components/ticket/log-ticket/log-ticket.co
 import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-ticket.component';
 //import { CorporateRoutingModule } from './corporate.routes';
 // Services Delarations
-import { CorporateService } from './services/conference-booking/corporate.service';
-import { CorporateEffects } from './services/conference-booking/corporate.effects';
+import { ConferenceBookingService } from './services/conference-booking/conference-booking.service';
+import { TicketService } from './services/ticket/ticket.service';
+import { ConferenceBookingEffects } from './services/conference-booking/conference-booking.effects';
+import { TicketEffects } from './services/ticket/ticket.effects';
 import { CorporateReducer } from './services/corporate.reducer';
 
 /** Module Definition */
@@ -25,7 +27,8 @@ import { CorporateReducer } from './services/corporate.reducer';
     imports: [
         CommonModule,
         TranslateModule,
-        EffectsModule.run(CorporateEffects)
+        EffectsModule.run(ConferenceBookingEffects),
+        EffectsModule.run(TicketEffects),
     ],
     exports: [],
     declarations: [
@@ -35,7 +38,7 @@ import { CorporateReducer } from './services/corporate.reducer';
         LogTicketComponent,
         ManageTicketComponent
     ],
-    providers: [CorporateService],
+    providers: [ConferenceBookingService,TicketService],
 })
 export class CorporateModule {
     static reducers(): { [key: string]: ActionReducer<any> } {

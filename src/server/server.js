@@ -12,6 +12,7 @@ require('./apis')(app);
 require('./features/features')(app);
 require('./roles/roles')(app);
 require('./corporate/conferenceBooking/conferenceBookingAPI')(app);
+require('./corporate/ticket/ticketAPI')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

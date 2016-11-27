@@ -27,7 +27,7 @@ import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 export class ConferenceComponent implements OnInit {
     elementRef: ElementRef;
     events: any[];
-    //allEvents: any[];
+    allEvents: any[];
     header: any;
     selectedEvent: MyEvent;
     dialogVisible: boolean = false;
@@ -67,8 +67,19 @@ export class ConferenceComponent implements OnInit {
         this.serverEvents = this.store.select('corporate');
         this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
         this.serverEvents.subscribe(res => {
-            this.events = res ? res.conferenceEvents : [];
-         }
+            if (res) {
+                this.allEvents =  res.conferenceEvents;
+                this.events = this.allEvents;
+                this.route.params.forEach((params: Params) => {
+                    let room = params['room'];
+                    if (room) {
+                        this.getEventByRooms(room);
+                    } else {
+                        this.getEventByRooms('AllRooms');
+                    }
+                });
+            }
+        }
         );
         this.minTime = '07:00:00';
         this.maxTime = '20:00:00';
@@ -120,14 +131,6 @@ export class ConferenceComponent implements OnInit {
             color: '#DFBA49'
         },
         ];
-        this.route.params.forEach((params: Params) => {
-            let room = params['room'];
-            if (room) {
-                this.getEventByRooms(room);
-            } else {
-                this.getEventByRooms('AllRooms');
-            }
-        });
     };
     handleDayClick() {
         this.router.navigate(['/app/corporate/newBooking']);
@@ -141,14 +144,14 @@ export class ConferenceComponent implements OnInit {
     }
 
     getEventByRooms(room: string) {
-        // this.selectedRoom = room;
-        // if (room === 'AllRooms') {
-        //     this.events = this.allEvents;
-        // } else {
-        //     this.events = _.filter(this.allEvents, function (item) {
-        //         return item.conference === room;
-        //     });
-        // }
+        this.selectedRoom = room;
+        if (room === 'AllRooms') {
+            this.events = this.allEvents;
+        } else {
+            this.events = _.filter(this.allEvents, function (item) {
+                return item.conference === room;
+            });
+        }
     }
 }
 class MyEvent {

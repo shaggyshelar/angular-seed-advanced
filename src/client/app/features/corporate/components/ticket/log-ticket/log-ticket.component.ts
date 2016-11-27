@@ -3,10 +3,14 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import { BaseComponent} from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Ticket } from '../../../models/ticket';
+import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
 
 import { MenuItem } from 'primeng/primeng';
 /** Component Declaration */
@@ -17,13 +21,22 @@ import { MenuItem } from 'primeng/primeng';
   styleUrls: ['log-ticket.component.css']
 })
 export class LogTicketComponent implements OnInit {
-  ticket: Ticket[];
+  ticket: any; //Ticket[];
   private items: MenuItem[];
   constructor(
-    private router: Router) {
+    private router: Router,
+    private store: Store<any>) {
   }
 
   ngOnInit(): void {
+    this.ticket = [];
+    this.store.dispatch({ type: CORPORATE_ACTIONS.TICKET_INIT });
+    this.store.select('corporate').subscribe((res: any) => {
+      if (res) {
+        this.ticket = res.tickets;
+      }
+    }
+    );
     this.items = [
       {
         label: 'Edit',
@@ -43,95 +56,14 @@ export class LogTicketComponent implements OnInit {
       }
     ];
 
-    this.ticket = [{
-      id: 1,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    },
-    {
-      id: 2,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    }, {
-      id: 3,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    }, {
-      id: 4,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    }, {
-      id: 5,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    }, {
-      id: 6,
-      ticket: '',
-      department: 'IT',
-      concern: 'Abc',
-      description: 'Abc',
-      status: 'Abc',
-      priority: 'Abc',
-      updatedBy: 'Abc',
-      resolvedBy: 'Abc',
-      createdDate: '20-11-2018',
-      updatedDate: '25-11-2018',
-      ageDays: 10
-    }
-    ];
   }
 
   newTicket() {
-    this.router.navigate(['../manage-ticket']);
+    this.router.navigate(['/app/corporate/manage-ticket']);
   }
 
   selectTicket(ticket: Ticket) {
-    this.router.navigate(['../manage-ticket']);
+    this.router.navigate(['/app/corporate/manage-ticket']);
   }
 
 }

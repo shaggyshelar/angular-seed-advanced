@@ -21,7 +21,7 @@ export const CONTEXT = 'conferenceBooking';
 
 /** Service Definition */
 @Injectable()
-export class CorporateService extends BaseService {
+export class ConferenceBookingService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<CorporteState>) {
         super(analyticsService, http, CONTEXT, logService);
