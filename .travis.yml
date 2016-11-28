@@ -2,10 +2,11 @@ language: node_js
 node_js: stable
 sudo: false
 
-install: true # yarn bug
+install: true  # yarn bug
 
 addons:
-  firefox: '39.0'
+  firefox: "45.0"
+
 os:
 - linux
 before_install:
@@ -13,10 +14,11 @@ before_install:
   fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
 before_script:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start
-  2>&1 &"; fi
-- chmod +x ./slacktee.sh
+  - npm install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
+  - chmod +x ./slacktee.sh
+
 after_failure:
 - cat /home/travis/build/NathanWalker/angular-seed-advanced/npm-debug.log
 branches:
