@@ -12,27 +12,22 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Profile } from '../models/profile';
-// import { Employee } from '../models/employee';
+import { Education } from '../models/education';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'profile';
+export const CONTEXT = 'education';
 
 /** Service Definition */
 @Injectable()
-export class ProfileService extends BaseService {
+export class EducationService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Profile Service Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+        this.logService.debug('Education Service Initialized Successfully');
     }
 
-    /**
-     * getProfile method
-     */
-    getProfile(id): Observable<Profile> {
+    getEducation(id): Observable<Education> {
         return this.get$(id).map(res => res.json());
-    }
+    }   
 }

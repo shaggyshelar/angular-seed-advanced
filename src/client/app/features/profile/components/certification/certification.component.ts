@@ -2,10 +2,15 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../services/profile.actions';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -41,8 +46,9 @@ export class CertificationComponent implements OnInit {
     certificationCodes: SelectItem[];
     showDiv: boolean;
     certificationForm: FormGroup;
+    public profile_Observable: Observable<any>;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private store: Store<any>) {
         this.certifications = [];
         this.certificationOptions = [];
         this.certificationCodes = [];
@@ -73,6 +79,14 @@ export class CertificationComponent implements OnInit {
             fromEspl: [''],
             date: ['', [Validators.required]],
             document: ['',]
+        });
+
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_CERTIFICATES, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.certifications = res && res.cetificates ? res.cetificates : [];
+            console.log('Certificates', this.certifications);
         });
     }
 

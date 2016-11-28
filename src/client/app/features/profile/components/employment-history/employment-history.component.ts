@@ -2,10 +2,15 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../services/profile.actions';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
@@ -31,8 +36,9 @@ export class EmploymentHistoryComponent implements OnInit {
     showDiv: boolean;
     showEmployerDiv: boolean;
     employmentHistoryForm: FormGroup;
+    public profile_Observable: Observable<any>;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
         this.employmentHistory = [];
         this.lastEmployerDetails = [];
         this.showDiv = true;
@@ -40,6 +46,14 @@ export class EmploymentHistoryComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EMPLOYMENT_HISTORY, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.employmentHistory = res && res.employmentHistory ? res.employmentHistory : [];
+            console.log('EmploymentHistory', this.employmentHistory);
+        });
+
         this.employmentHistoryForm = this.formBuilder.group({
             id: [''],
             employementDetails: ['', [Validators.required]],

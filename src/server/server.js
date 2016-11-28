@@ -11,7 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./apis')(app);
 require('./features/features')(app);
 require('./roles/roles')(app);
-require('./profile/profileApi')(app);
+require('./profiles/profiles')(app);
+require('./achievements/achievements')(app);
+require('./certificates/certificates')(app);
+require('./skills/skills')(app);
+require('./experience/experience')(app);
+require('./employmentHistory/employmentHistory')(app);
+require('./education/education')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

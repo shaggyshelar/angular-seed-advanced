@@ -3,13 +3,20 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../framework.ref';
+
+/** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../services/profile.actions';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
 /** Module Level Dependencies */
-import { SkillSet } from '../../entity/skill-set';
+import { Skill } from '../../models/skill';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -33,13 +40,14 @@ export interface SkillSetForm {
   styleUrls: ['skill-set.component.css']
 })
 export class SkillSetComponent implements OnInit {
-  skillSet: SkillSet[];
+  skillSet: Skill[];
   skillTypes: SelectItem[];
   showDiv: boolean;
   skillSetForm: FormGroup;
+  public profile_Observable: Observable<any>;
 
   constructor(
-    private router: Router, private formBuilder: FormBuilder) {
+    private router: Router, private formBuilder: FormBuilder, private store: Store<any>) {
     this.skillTypes = [];
     this.showDiv = true;
   }
@@ -55,6 +63,14 @@ export class SkillSetComponent implements OnInit {
       skillType: ['', [Validators.required]],
       skills: ['', [Validators.required]]
     });
+
+    let ProfileID = 1;
+    this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_SKILLS, payload: ProfileID });
+    this.profile_Observable = this.store.select('profile');
+    this.profile_Observable.subscribe(res => {
+      this.skillSet = res ? res.skills : [];
+      console.log('SKills', this.skillSet);
+    });
   }
 
   onAddClick() {
@@ -63,33 +79,23 @@ export class SkillSetComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: SkillSetForm, valid: boolean }) {
-    var skillSetData = _.find(this.skillSet, ['id', value.id]);
+    var skillSetData = _.find(this.skillSet, ['ID', value.id]);
     if (skillSetData) {
-      skillSetData.skillType = value.skillType.name;
-      skillSetData.skills = value.skills;
+      skillSetData.Type = value.skillType.name;
+      skillSetData.Description = value.skills;
     } else {
       this.skillSet.push({
-        id: this.skillSet.length + 1,
-        skillType: value.skillType.name,
-        skills: value.skills,
-        status: 'status',
-        comments: 'Comment',
-        approvers: 'Lead'
+        ID: this.skillSet.length + 1,
+        Type: value.skillType.name,
+        Description: value.skills,
+        Status: 'status',
+        Comments: 'Comment',
+        Approvers: 'Lead'
       });
     }
     this.showDiv = true;
   }
-  submit() {
-    this.skillSet = [{
-      id: 1,
-      skillType: 'Language / Technology',
-      skills: 'C#',
-      status: 'status',
-      comments: 'Comment',
-      approvers: 'Lead'
-    }];
-    this.showDiv = true;
-  }
+
   cancel() {
     this.showDiv = true;
     this.skillSetForm.reset();

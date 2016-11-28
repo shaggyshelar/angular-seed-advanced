@@ -3,8 +3,15 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent, LogService } from '../../../framework.ref';
+
+/** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../services/profile.actions';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -43,9 +50,10 @@ export class EducationComponent implements OnInit {
     showDiv: boolean;
     educationObj: any;
     educationForm: FormGroup;
+    public profile_Observable: Observable<any>;
 
     constructor(
-        private router: Router, private formBuilder: FormBuilder) {
+        private router: Router, private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
         this.education = [];
         this.class = [];
         this.grade = [];
@@ -66,6 +74,14 @@ export class EducationComponent implements OnInit {
         this.grade.push({ label: 'First Class', value: { id: 2, name: 'First Class' } });
         this.grade.push({ label: 'Second Class', value: { id: 3, name: 'Second Class' } });
         this.grade.push({ label: 'Pass', value: { id: 4, name: 'Pass' } });
+
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EDUCATION, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.education = res && res.education ? res.education : [];
+            console.log('Education', this.education);
+        });
 
         this.educationForm = this.formBuilder.group({
             id: [''],

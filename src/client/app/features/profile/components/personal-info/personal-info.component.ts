@@ -64,20 +64,21 @@ export class PersonalInfoComponent implements OnInit {
     this.isAddEmergencyContact = false;
     this.isEditEmergencyContact = false;
     this.isAddSkypeID = false;
-    this.isEditSkypeID = false;  
+    this.isEditSkypeID = false;
   }
 
-  ngOnInit(): void {  
-    this.store.dispatch({ type: PROFILE_ACTIONS.DETAILS, payload: 1 });    
-    this.profileInfoObs = this.store.select('profile');    
+  ngOnInit(): void {
+    this.store.dispatch({ type: PROFILE_ACTIONS.DETAILS, payload: 1 });
+    this.profileInfoObs = this.store.select('profile');
     this.profileInfoObs.subscribe(res => {
       this.profileInfo = res ? res.profile : {};
-    });       
+      console.log('Profile', this.profileInfo);
+    });
   }
 
   addBloodGroup() {
-     this.isAddBloodGroup = true;
-     this.isEditBloodGroup = true;
+    this.isAddBloodGroup = true;
+    this.isEditBloodGroup = true;
   }
   editBloodGroup() {
     this.isEditBloodGroup = true;

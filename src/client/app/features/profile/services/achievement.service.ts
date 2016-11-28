@@ -12,27 +12,26 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Profile } from '../models/profile';
+import { Achievement } from '../models/achievement';
 // import { Employee } from '../models/employee';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'profile';
+export const CONTEXT = 'achievement';
 
 /** Service Definition */
 @Injectable()
-export class ProfileService extends BaseService {
+export class AchievementService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Profile Service Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+        this.logService.debug('Achievement Service Initialized Successfully');
     }
 
-    /**
-     * getProfile method
-     */
-    getProfile(id): Observable<Profile> {
+    getAchievements(id): Observable<Achievement> {
         return this.get$(id).map(res => res.json());
+    }
+    addAchievements(params): Observable<Achievement> {
+        return this.post$(params).map(res => res.json());
     }
 }

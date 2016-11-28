@@ -26,6 +26,13 @@ import { IdentityProofsComponent } from './components/profile-details/identity-p
 
 // Services Delarations
 import { ProfileService } from './services/profile.service';
+import { AchievementService } from './services/achievement.service';
+import { CerificateService } from './services/certificate.service';
+import { SkillService } from './services/skill.service';
+import { EducationService } from './services/education.service';
+import { EmploymentHistoryService } from './services/employmentHistory.service';
+import { ExperienceService } from './services/experience.service';
+
 import { ProfileEffects } from './services/profile.effects';
 import { profileReducer } from './services/profile.reducer';
 
@@ -53,7 +60,7 @@ import { profileReducer } from './services/profile.reducer';
         NomineesComponent,
         IdentityProofsComponent
     ],
-    providers:[ProfileService],
+    providers: [ProfileService, AchievementService, CerificateService, SkillService,EducationService,EmploymentHistoryService,ExperienceService],
 })
 
 export class ProfileModule {

@@ -11,11 +11,11 @@
 					<i class="fa fa-pencil icon-color" (click)="editSkillSetData(skillSetData)"></i>
 				</template>
 			</p-column>
-			<p-column header="{{ 'SKILL_TYPE' | translate }}" field="skillType"></p-column>
-			<p-column header="{{ 'SKILLS' | translate }}" field="skills"></p-column>
-			<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-			<p-column header="{{ 'COMMENTS' | translate }}" field="comments"></p-column>
-			<p-column header="{{ 'APPROVERS' | translate }}" field="approvers"></p-column>
+			<p-column header="{{ 'SKILL_TYPE' | translate }}" field="Type"></p-column>
+			<p-column header="{{ 'SKILLS' | translate }}" field="Description"></p-column>
+			<p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+			<p-column header="{{ 'COMMENTS' | translate }}" field="Comments"></p-column>
+			<p-column header="{{ 'APPROVERS' | translate }}" field="Approvers"></p-column>
 		</p-dataTable>
 	</div>
 	<div *ngIf="!showDiv">

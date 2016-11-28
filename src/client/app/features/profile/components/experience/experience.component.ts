@@ -2,15 +2,22 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { Experience } from '../../entity/experience';
+import { PROFILE_ACTIONS } from '../../services/profile.actions';
+
+/** Module Level Dependencies */
+import { Experience } from '../../models/experience';
 
 /** Other Module Dependencies */
 // import * as _ from 'lodash';
-import * as moment from 'moment/moment';
+//import * as moment from 'moment/moment';
 
 export interface ExperienceForm {
     id: number;
@@ -36,9 +43,10 @@ export class ExperienceComponent implements OnInit {
     experience: Experience[];
     showDiv: boolean;
     experienceForm: FormGroup;
+    public profile_Observable: Observable<any>;
 
     constructor(
-        private formBuilder: FormBuilder) {
+        private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
         this.showDiv = true;
     }
 
@@ -56,6 +64,14 @@ export class ExperienceComponent implements OnInit {
             description: [''],
             currentProject: [''],
         });
+
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EXPERIENCE, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.experience = res && res.experience ? res.experience : [];
+            console.log('Experience', this.experience);
+        });
     }
 
     onAddClick() {
@@ -66,21 +82,21 @@ export class ExperienceComponent implements OnInit {
     onSubmit({ value, valid }: { value: ExperienceForm, valid: boolean }) {
 
 
-        this.experience = [{
-            id: this.experience.length + 1,
-            project: value.project,
-            client: value.client,
-            startDate: moment(value.startDate).format('DD/MM/YYYY'),
-            endDate: moment(value.endDate).format('DD/MM/YYYY'),
-            role: value.role,
-            environment: value.environment,
-            responsibilites: value.responsibilites,
-            description: value.description,
-            currentProject: value.currentProject,
-            duration: '8 years',
-            status: 'status',
-            comment: 'Comment'
-        }];
+        // this.experience = [{
+        //     id: this.experience.length + 1,
+        //     project: value.project,
+        //     client: value.client,
+        //     startDate: moment(value.startDate).format('DD/MM/YYYY'),
+        //     endDate: moment(value.endDate).format('DD/MM/YYYY'),
+        //     role: value.role,
+        //     environment: value.environment,
+        //     responsibilites: value.responsibilites,
+        //     description: value.description,
+        //     currentProject: value.currentProject,
+        //     duration: '8 years',
+        //     status: 'status',
+        //     comment: 'Comment'
+        // }];
         this.showDiv = true;
     }
 
