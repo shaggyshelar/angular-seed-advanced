@@ -21,7 +21,7 @@ import { MenuItem } from 'primeng/primeng';
   styleUrls: ['log-ticket.component.css']
 })
 export class LogTicketComponent implements OnInit {
-  ticket: any; //Ticket[];
+  ticket: Ticket[];
   private items: MenuItem[];
   constructor(
     private router: Router,
@@ -58,14 +58,14 @@ export class LogTicketComponent implements OnInit {
   }
 
   newTicket() {
-    this.router.navigate(['/app/corporate/manage-ticket']);
+    this.router.navigate(['/corporate/manage-ticket']);
   }
 
   selectTicket(ticket: Ticket) {
-    this.router.navigate(['/app/corporate/manage-ticket']);
+    this.router.navigate(['/corporate/manage-ticket']);
   }
 
   editTicket(ticket) {
-    this.router.navigate(['/app/corporate/manage-ticket',ticket.id]);
+    this.router.navigate(['/corporate/manage-ticket',ticket.Id]);
   }
 }

@@ -1,11 +1,15 @@
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import { BaseComponent} from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Other Module Dependencies */
-import {SelectItem, Message} from 'primeng/primeng';
+import { SelectItem, Message } from 'primeng/primeng';
 //import * as localForage from 'localforage';
+import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
 
 /** Component Declaration */
 @BaseComponent({
@@ -26,9 +30,9 @@ export class BookComponent {
     msgs: Message[] = [];
     conferenceModel: ConferenceBooking;
 
-    constructor(private router: Router) {
+    constructor(private store: Store<any>, private router: Router) {
 
-        this.conferenceModel = new ConferenceBooking(0, '', new Date(), new Date(), false, '', '');
+        this.conferenceModel = new ConferenceBooking(0, '', new Date(), new Date(), false, '', '', {});
 
         this.conferenceRooms = [];
         this.conferenceRooms.push({ label: 'Select Room', value: null });
@@ -42,8 +46,12 @@ export class BookComponent {
         this.conferenceRooms.push({ label: 'Trainning Room', value: { id: 5, name: 'Trainning Room', color: '#DFBA49' } });
     }
     save() {
-        this.conferenceModel.conference = this.selectedRoom.name;
+        this.conferenceModel.Room = {
+            Name: this.selectedRoom.name,
+            Color: this.selectedRoom.color
+        }
         this.conferenceModel.color = this.selectedRoom.color;
+        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_ADD, payload: this.conferenceModel });
         // localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {
         //     this.msgs = [];
         //     this.msgs.push({ severity: 'success', summary: 'Confirmed', detail: 'Record saved' });
@@ -59,6 +67,7 @@ class ConferenceBooking {
         public end: Date,
         public allDay: boolean,
         public color: string,
-        public conference: string
+        public conference: string,
+        public Room: Object
     ) { }
 }

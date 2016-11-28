@@ -62,14 +62,14 @@ export class ManageTicketComponent implements OnInit {
     }
 
     save() {
-        if(this.params){
-            this.store.dispatch({ type: CORPORATE_ACTIONS.TICKET_EDIT , payload: this.ticketModel });
-        } else{
+        if (this.params) {
+            this.store.dispatch({ type: CORPORATE_ACTIONS.TICKET_EDIT, payload: this.ticketModel });
+        } else {
             this.store.dispatch({ type: CORPORATE_ACTIONS.TICKET_ADD, payload: this.ticketModel });
         }
     }
 
     cancel() {
-        this.router.navigate(['/app/corporate/log-ticket']);
+        this.router.navigate(['/corporate/log-ticket']);
     }
 }

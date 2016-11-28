@@ -29,6 +29,21 @@ export class ConferenceBookingEffects {
             return ({ type: CORPORATE_ACTIONS.INITIALIZED, payload: data });
         });
 
+    @Effect() save$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.CONFERENCE_ADD)
+        .switchMap(action => this.conferenceBookingService.saveConference(action.payload))
+        .map(res => {
+            let data = res;
+            return ({ type: CORPORATE_ACTIONS.INITIALIZED, payload: data });
+        });
+
+    @Effect() myBooking$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.CONFERENCE_FETCH_MY_BOOKING)
+        .switchMap(action => this.conferenceBookingService.getMyBooking(action.payload))
+        .map(res => {
+            let data = res;
+            return ({ type: CORPORATE_ACTIONS.CONFERENCE_MY_BOOKING_FETCHED, payload: data });
+        });
     constructor(
         private store: Store<any>,
         private actions$: Actions,

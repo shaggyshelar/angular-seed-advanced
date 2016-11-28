@@ -26,17 +26,18 @@ export class ConferenceBookingService extends BaseService {
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<CorporteState>) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('CorporateService  Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
     }
 
-    /**
-     * getProfile method
-     */
-    // getLeave(id): Observable<Leave> {
-    //     return this.get$(id).map(res => res.json());
-    // }
-     getConferenceBooking(): Observable<any> {
+    getConferenceBooking(): Observable<any> {
         this.logService.debug('ConferenceBookingService : getConferenceBooking method');
         return this.getList$().map(res => res.json());
+    }
+
+    saveConference(conference): Observable<any> {
+        return this.post$(conference).map(res => res.json());
+    }
+
+    getMyBooking(id): Observable<any> {
+        return this.get$(id).map(res => res.json());
     }
 }

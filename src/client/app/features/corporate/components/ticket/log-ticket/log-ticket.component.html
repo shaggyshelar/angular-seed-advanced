@@ -25,16 +25,16 @@
 					</div>
 					<div class="portlet-body">
 						<p-dataTable [value]="ticket" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-							<p-column field="department" header="{{ 'DEPARTMENT' | translate }}" [sortable]="true"></p-column>
-							<p-column field="concern" header="{{ 'CONCERN' | translate }}" [sortable]="true"></p-column>
-							<p-column field="description" header="{{ 'DESCRIPTION' | translate }}" [sortable]="true"></p-column>
-							<p-column field="status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
-							<p-column field="priority" header="{{ 'PRIORITY' | translate }}" [sortable]="true"></p-column>
-							<p-column field="createdDate" header="{{ 'CREATED_DATE' | translate }}" [sortable]="true"></p-column>
-							<p-column field="updatedDate" header="{{ 'UPDATED_DATE' | translate }}" [sortable]="true"></p-column>
-							<p-column field="updatedBy" header="{{ 'UPDATED_BY' | translate }}" [sortable]="true"></p-column>
-							<p-column field="resolvedBy" header="{{ 'RESOLVED_BY' | translate }}" [sortable]="true"></p-column>
-							<p-column field="ageDays" header="{{ 'AGE_DAYS' | translate }}" [sortable]="true"></p-column>
+							<p-column field="Department" header="{{ 'DEPARTMENT' | translate }}" [sortable]="true"></p-column>
+							<p-column field="Doncern" header="{{ 'CONCERN' | translate }}" [sortable]="true"></p-column>
+							<p-column field="Description" header="{{ 'DESCRIPTION' | translate }}" [sortable]="true"></p-column>
+							<p-column field="Status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
+							<p-column field="Priority" header="{{ 'PRIORITY' | translate }}" [sortable]="true"></p-column>
+							<p-column field="CreatedDate" header="{{ 'CREATED_DATE' | translate }}" [sortable]="true"></p-column>
+							<p-column field="UpdatedDate" header="{{ 'UPDATED_DATE' | translate }}" [sortable]="true"></p-column>
+							<p-column field="UpdatedBy" header="{{ 'UPDATED_BY' | translate }}" [sortable]="true"></p-column>
+							<p-column field="ResolvedBy" header="{{ 'RESOLVED_BY' | translate }}" [sortable]="true"></p-column>
+							<p-column field="AgeDays" header="{{ 'AGE_DAYS' | translate }}" [sortable]="true"></p-column>
 							<p-column header="{{ 'Action' | translate }}">
 								<template let-currentTicket="rowData" pTemplate>
 									<!--<button #btn type="button" pButton icon="fa fa-list" label="Show" (click)="showAction($event,menu)"></button>-->

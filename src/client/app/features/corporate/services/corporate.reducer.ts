@@ -24,6 +24,10 @@ function CorporteReducerFn(state: CorporteState, action: Action): CorporteState 
                 selectedTicket: action.payload
             });
 
+        case CORPORATE_ACTIONS.CONFERENCE_MY_BOOKING_FETCHED:
+            return Object.assign({}, state, {
+                myBookingList: action.payload
+            });
         default:
             return state;
     }

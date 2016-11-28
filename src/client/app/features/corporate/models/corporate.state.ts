@@ -7,4 +7,5 @@ export interface CorporteState {
     conferenceEvents:Conference[];
     tickets: Ticket[];
     selectedTicket:Ticket;
+    myBookingList:Conference[];
 }

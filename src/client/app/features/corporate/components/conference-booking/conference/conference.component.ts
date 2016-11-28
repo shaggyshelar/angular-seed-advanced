@@ -133,7 +133,7 @@ export class ConferenceComponent implements OnInit {
         ];
     };
     handleDayClick() {
-        this.router.navigate(['/app/corporate/newBooking']);
+        this.router.navigate(['/corporate/newBooking']);
     }
 
     handleEventClicked(event: any) {
@@ -149,7 +149,7 @@ export class ConferenceComponent implements OnInit {
             this.events = this.allEvents;
         } else {
             this.events = _.filter(this.allEvents, function (item) {
-                return item.conference === room;
+                return item.Room.Name === room;
             });
         }
     }

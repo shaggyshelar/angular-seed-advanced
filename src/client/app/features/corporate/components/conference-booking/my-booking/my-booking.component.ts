@@ -1,9 +1,12 @@
+import { OnInit } from '@angular/core';
+
 /** Other Module Dependencies */
 import { ConfirmationService } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
+
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -17,63 +20,12 @@ import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
     styleUrls: ['my-booking.component.css']
 })
 
-export class MyBookingComponent {
+export class MyBookingComponent implements OnInit {
     bookings: Array<Object>;
     msgs: Message[] = [];
     conferenceRooms: any[];
     serverEvents: Observable<any>;
     constructor(private store: Store<any>, private confirmationService: ConfirmationService) {
-        this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
-        this.bookings = [{
-            'title': 'Inteview',
-            'startTime': '24/10/2016 10:00',
-            'endTime': '24/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Hongkong',
-        },
-        {
-            'title': 'Jenzabar Client call',
-            'startTime': '25/10/2016 10:00',
-            'endTime': '25/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Bahamas',
-        },
-        {
-            'title': 'Product Meeting',
-            'startTime': '26/10/2016 10:00',
-            'endTime': '26/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Barcelona',
-        },
-        {
-            'title': 'Tccc client call',
-            'startTime': '27/10/2016 10:00',
-            'endTime': '28/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Hongkong',
-        },
-        {
-            'title': 'NGO/NPO Meeting',
-            'startTime': '29/10/2016 10:00',
-            'endTime': '29/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Training Room',
-        },
-        {
-            'title': 'Standup Meeting',
-            'startTime': '22/10/2016 10:00',
-            'endTime': '22/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Cape Town',
-        },
-        {
-            'title': 'Inteview',
-            'startTime': '25/10/2016 10:00',
-            'endTime': '25/10/2016 12:00',
-            'attendees': 'xyz',
-            'room': 'Houston',
-        }
-        ];
         this.conferenceRooms = [{
             name: 'Bahamas',
             color: '#E7C5F5'
@@ -101,6 +53,14 @@ export class MyBookingComponent {
             color: '#DFBA49'
         },
         ];
+    }
+    ngOnInit() {
+        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_FETCH_MY_BOOKING, payload: '1' });
+        this.store.select('corporate').subscribe((res: any) => {
+            if (res && res.myBookingList) {
+                this.bookings = res.myBookingList;
+            }
+        });
     }
     confirm() {
         this.confirmationService.confirm({

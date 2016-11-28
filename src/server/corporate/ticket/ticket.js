@@ -8,20 +8,20 @@ var getTicket = function (req, res) {
 
 var getTicketById = function (req, res) {
     var id = parseInt(req.params.id);
-    var index = _.findIndex(ticketData.ticketList, { id: id });
+    var index = _.findIndex(ticketData.ticketList, { Id: id });
     res.json(ticketData.ticketList[index]);
 };
 
 var saveTicket = function (req, res) {
     var ticket = req.body;
-    ticket.id = ++ticketData.ids;
+    ticket.Id = ++ticketData.ids;
     ticketData.ticketList.push(ticket);
     res.json(ticketData.ticketList);
 };
 
 var editTicket = function (req, res) {
     var ticket = req.body;
-    var index = _.findIndex(ticketData.ticketList, { id: ticket.id });
+    var index = _.findIndex(ticketData.ticketList, { Id: ticket.Id });
     ticketData.ticketList[index] = ticket
     res.json(ticketData.ticketList);
 };

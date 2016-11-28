@@ -1,7 +1,8 @@
 export interface Conference {
-    id: number;
-    title: string;
-    start: string;
-    end: string;
-    allDay: boolean;
+    Id: number;
+    Title: string;
+    StartTime: string;
+    EndTime: string;
+    Room:Object;
+    AllDay: boolean;
 }

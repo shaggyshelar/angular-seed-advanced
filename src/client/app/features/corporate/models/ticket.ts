@@ -1,16 +1,16 @@
 export class Ticket {
     constructor(
-        id,
-        ticket,
-        department,
-        concern,
-        description,
-        status,
-        priority,
-        createdDate,
-        updatedDate,
-        updatedBy,
-        resolvedBy,
-        ageDays,
+        public Id,
+        public ticket,
+        public Department,
+        public Concern,
+        public Description,
+        public Status,
+        public Priority,
+        public CreatedDate,
+        public UpdatedDate,
+        public UpdatedBy,
+        public ResolvedBy,
+        public AgeDays,
     ) { }
 }

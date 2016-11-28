@@ -3,72 +3,107 @@ var moment = require('moment');
 // List of hardcoded ConferenceBookingEvents along with their details.
 
 var conferenceBooking = {
-    conferenceBookingList:[
-            {
-                 id:1,
-                'title': 'Inteview',
-                'start': moment().add(2, 'hours'),
-                'end': moment().add(4, 'hours'),
-                'color': '#8877A9',
-                'conference': 'Caribbean'
+    conferenceBookingList: [
+        {
+            Id: 1,
+            'title': 'Inteview',
+            'start': moment().add(2, 'hours'),
+            'end': moment().add(4, 'hours'),
+            'Room': {
+                'Color': '#8877A9',
+                'Name': 'Caribbean'
             },
-            {
-                 id:2,
-                'title': 'Jenzabar Client call',
-                'start': moment(),
-                'end': moment().add(3, 'hours'),
-                'color': '#3FABA4',
-                'conference': 'Dubai'
+            'color': '#8877A9',
+            'Attendees': 'xyz'
+        },
+        {
+            Id: 2,
+            'title': 'Jenzabar Client call',
+            'start': moment(),
+            'end': moment().add(3, 'hours'),
+            'Room': {
+                'Color': '#3FABA4',
+                'Name': 'Dubai'
             },
-            {
-                 id:3,
-                'title': 'Product Meeting',
-                'start': moment().subtract(3, 'hours'),
-                'end': moment().subtract(1, 'hours'),
-                'color': '#FF9655',
-                'conference': 'Hong Kong'
+            'color': '#3FABA4',
+            'Attendees': 'xyz'
+
+        },
+        {
+            Id: 3,
+            'title': 'Product Meeting',
+            'start': moment().subtract(3, 'hours'),
+            'end': moment().subtract(1, 'hours'),
+            'Room': {
+                'Color': '#FF9655',
+                'Name': 'Hong Kong'
             },
-            {
-                 id:4,
-                'title': 'Tccc client call',
-                'start': moment().subtract(3, 'hours'),
-                'end': moment().subtract(2, 'hours'),
-                'color': '#3FABA4',
-                'conference': 'Dubai'
+            'color': '#FF9655',
+            'Attendees': 'xyz'
+
+        },
+        {
+            Id: 4,
+            'title': 'Tccc client call',
+            'start': moment().subtract(3, 'hours'),
+            'end': moment().subtract(2, 'hours'),
+            'Room': {
+                'Color': '#3FABA4',
+                'Name': 'Dubai'
             },
-            {
-                 id:5,
-                'title': 'Standup Meeting',
-                'start': moment().add(1, 'd').subtract(3, 'hours'),
-                'end': moment().add(1, 'd').subtract(1, 'hours'),
-                'color': '#E7C5F5',
-                'conference': 'Bahamas'
+            'color': '#3FABA4',
+            'Attendees': 'xyz'
+
+        },
+        {
+            Id: 5,
+            'title': 'Standup Meeting',
+            'start': moment().add(1, 'd').subtract(3, 'hours'),
+            'end': moment().add(1, 'd').subtract(1, 'hours'),
+            'Room': {
+                'Color': '#E7C5F5',
+                'Name': 'Bahamas'
             },
-            {
-                 id:6,
-                'title': 'NGO/NPO Meeting',
-                'start': moment().add(1, 'd').subtract(3, 'hours'),
-                'end': moment().add(1, 'd').subtract(2, 'hours'),
-                'color': '#8877A9',
-                'conference': 'Caribbean'
+            'color': '#E7C5F5',
+            'Attendees': 'xyz'
+        },
+        {
+            Id: 6,
+            'title': 'NGO/NPO Meeting',
+            'start': moment().add(1, 'd').subtract(3, 'hours'),
+            'end': moment().add(1, 'd').subtract(2, 'hours'),
+            'Room': {
+                'Color': '#8877A9',
+                'Name': 'Caribbean'
             },
-            {
-                 id:7,
-                'title': 'Conference',
-                'start': moment().subtract(1, 'd').subtract(3, 'hours'),
-                'end': moment().subtract(1, 'd').subtract(2, 'hours'),
-                'color': '#D05454',
-                'conference': 'Barcelona'
+            'color': '#8877A9',
+            'Attendees': 'xyz'
+        },
+        {
+            Id: 7,
+            'title': 'Conference',
+            'start': moment().subtract(1, 'd').subtract(3, 'hours'),
+            'end': moment().subtract(1, 'd').subtract(2, 'hours'),
+            'Room': {
+                'Color': '#D05454',
+                'Name': 'Barcelona'
             },
-            {
-                 id:8,
-                'title': 'Interview',
-                'start': moment().subtract(1, 'd'),
-                'end': moment().subtract(1, 'd').add(3, 'hours'),
-                'color': '#DFBA49',
-                'conference': 'Trainning Room'
-            }
-        ],
+            'color': '#D05454',
+            'Attendees': 'xyz'
+        },
+        {
+            Id: 8,
+            'title': 'Interview',
+            'start': moment().subtract(1, 'd'),
+            'end': moment().subtract(1, 'd').add(3, 'hours'),
+            'Room': {
+                'Color': '#DFBA49',
+                'Name': 'Trainning Room'
+            },
+            'color': '#DFBA49',
+            'Attendees': 'xyz'
+        }
+    ],
     ids: 8
 };
 

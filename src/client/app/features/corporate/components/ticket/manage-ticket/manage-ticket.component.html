@@ -19,7 +19,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'DEPARTMENT' | translate }}</label>
 								<div>
-									<p-dropdown [options]="departments"  [(ngModel)]="ticketModel.department" name="departments" [styleClass]="form-control"></p-dropdown>
+									<p-dropdown [options]="departments"  [(ngModel)]="ticketModel.Department" name="departments" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'PRIORITY' | translate }}</label>
 								<div>
-									<p-dropdown [options]="priorities"   [(ngModel)]="ticketModel.priority" name="priorities" [styleClass]="form-control"></p-dropdown>
+									<p-dropdown [options]="priorities"   [(ngModel)]="ticketModel.Priority" name="priorities" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'CONCERN' | translate }}</label>
 								<div>
-									<p-dropdown [options]="concerns"   [(ngModel)]="ticketModel.concern" name="concerns" [styleClass]="form-control"></p-dropdown>
+									<p-dropdown [options]="concerns"   [(ngModel)]="ticketModel.Concern" name="concerns" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<label class="control-label"> {{ 'DESCRIPTION' | translate }} </label>
 								<div>
-									<textarea [(ngModel)]="description" [(ngModel)]="ticketModel.description" name="description" class="fullWidth"></textarea>
+									<textarea  [(ngModel)]="ticketModel.Description" name="description" class="fullWidth"></textarea>
 								</div>
 							</div>
 						</div>

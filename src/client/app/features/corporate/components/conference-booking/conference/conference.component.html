@@ -18,7 +18,7 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-sm-5">
-            <button class="btn btn-default col-sm-6" id="manageBooking" [routerLink]="['/app/corporate/myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
+            <button class="btn btn-default col-sm-6" id="manageBooking" [routerLink]="['/corporate/myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
             <button class="btn btn-default col-sm-6" id="manageAllRoom"  [class.selected-link]="selectedRoom=='AllRooms'" (click)="getEventByRooms('AllRooms')">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
           </div>
           <div class="col-sm-7">
