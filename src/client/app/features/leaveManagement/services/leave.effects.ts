@@ -29,6 +29,14 @@ export class LeaveEffects {
             return ({ type: LEAVE_ACTIONS.DETAILS_FETCHED, payload: res });
         });
 
+    @Effect() detail$ = this.actions$
+        .ofType(LEAVE_ACTIONS.DETAIL)
+        .map(res => {
+            let param = res.payload;
+            this.leaveService.track(LEAVE_ACTIONS.DETAIL_FETCHED, { label: param });
+            return ({ type: LEAVE_ACTIONS.DETAIL_FETCHED, payload: param });
+        });
+
     constructor(
         private store: Store<any>,
         private actions$: Actions,

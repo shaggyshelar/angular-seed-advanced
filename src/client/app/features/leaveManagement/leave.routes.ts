@@ -37,11 +37,11 @@ export const LeaveRoutes: Route[] = [
     component: BulkApproveComponent
   },
   {
-    path: 'update-leave',
+    path: 'update-leave/:id',
     component: UpdateLeaveComponent
   },
   {
-    path: 'single-approval',
+    path: 'single-approval/:id',
     component: SingleApprovalComponent
   }
 ];

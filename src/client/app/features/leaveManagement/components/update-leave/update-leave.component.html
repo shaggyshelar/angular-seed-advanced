@@ -79,8 +79,8 @@
                         <div class="pull-right">
                             <h5 class="font-blue">Leave Approved</h5>
                         </div>
-                        <p-dataTable [value]="leaves" [responsive]="true">
-                            <p-column field="leave.name" header="{{ 'LEAVE_TYPE' | translate }}"></p-column>
+                        <p-dataTable [value]="leave" [responsive]="true">
+                            <p-column field="leaveType" header="{{ 'LEAVE_TYPE' | translate }}"></p-column>
                             <p-column field="numDays" header="{{ 'NO_LEAVES' | translate }}"></p-column>
                             <p-column field="reason" header="{{ 'REASON' | translate }}"></p-column>
                             <p-column field="start" header="{{ 'START_DATE' | translate }}"></p-column>
@@ -91,11 +91,11 @@
                 </div>
                 <div class="portlet light bordered">
                     <div class="row">
-                        <p-dataTable [value]="managers" [responsive]="true">
+                        <p-dataTable [value]="leave" [responsive]="true">
                             <p-column field="project" header="{{ 'PROJECT' | translate }}"></p-column>
-                            <p-column field="manager" header="{{ 'MANAGER' | translate }}"></p-column>
+                            <p-column field="approvers" header="{{ 'MANAGER' | translate }}"></p-column>
                             <p-column field="status" header="{{ 'STATUS' | translate }}"></p-column>
-                            <p-column field="comments" header="{{ 'COMMENTS' | translate }}"></p-column>
+                            <p-column field="comment" header="{{ 'COMMENTS' | translate }}"></p-column>
                         </p-dataTable>
                     </div>
                     <button id="close" class="btn blue btn-outline" (click)="closeClicked()">{{ 'CLOSE' | translate }}</button>

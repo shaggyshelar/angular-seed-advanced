@@ -7,12 +7,20 @@ import { LeaveState } from '../models/leave.state';
 
 /** Reducer Function Definition */
 function LeaveReducerFn(state: LeaveState, action: Action): LeaveState {
+    let newState: LeaveState;
     switch (action.type) {
         case LEAVE_ACTIONS.DETAILS_FETCHED:
-            let newState: LeaveState = Object.assign({}, state, {
+            newState = Object.assign({}, state, {
                 leaves: action.payload
             });
             return newState; 
+
+        case LEAVE_ACTIONS.DETAIL_FETCHED:
+            newState = Object.assign({}, state, {
+                leave: action.payload
+            });
+            return newState; 
+
         default:
             return state;
     }
