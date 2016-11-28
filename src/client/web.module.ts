@@ -8,23 +8,24 @@ import { Http } from '@angular/http';
 // libs
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
 //import { AppComponent } from './app/components/app.component';
+import { APP_COMPONENTS } from './app/components/index';
 import { AppComponent } from './app/components/app/app.component';
-import { HomeComponent } from './app/components/home/home.component';
-import { AboutComponent } from './app/components/about/about.component';
 import { routes } from './app/components/app.routes';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
 import { CommonModule } from './app/shared/index';
+import { AppReducer } from './app/frameworks/ngrx/index';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { multilingualReducer, MultilingualEffects } from './app/frameworks/i18n/index';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
+import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
-import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
+import { NameListEffects } from './app/frameworks/sample/index';
 
 import { LoginComponent } from './app/components/login/login.component';
 import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
@@ -90,10 +91,8 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
-    StoreModule.provideStore({
-      i18n: multilingualReducer,
-      names: nameListReducer
-    }),
+    StoreModule.provideStore(AppReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(MultilingualEffects),
     EffectsModule.run(NameListEffects),
     ProfileModule,
@@ -104,16 +103,17 @@ export function cons() {
     ChangePasswordModule
   ],
   declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
+    //AppComponent,
+    //HomeComponent,
+    //AboutComponent,
     //Layout
     FooterComponent,
     QuickSidebarComponent,
     SidebarComponent,
     TopNavigationBarComponent,
     LoginComponent,
-    UnauthorizedAccessComponent
+    UnauthorizedAccessComponent,
+    APP_COMPONENTS
   ],
   providers: [
     {
@@ -126,13 +126,3 @@ export function cons() {
 
 export class WebModule { }
 
-
-let envConfig = JSON.parse('<%= ENV_CONFIG %>');
-if (envConfig.ENV === 'PROD') {
-  if ('serviceWorker' in navigator) {
-    (<any>navigator).serviceWorker.register('./service-worker.js').then((registration: any) =>
-      console.log('ServiceWorker registration successful with scope: ', registration.scope))
-      .catch((err: any) =>
-        console.log('ServiceWorker registration failed: ', err));
-  }
-}
