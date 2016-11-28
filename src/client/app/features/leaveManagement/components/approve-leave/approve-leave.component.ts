@@ -34,6 +34,7 @@ export class ApproveLeaveComponent implements OnInit {
   constructor(
     private router: Router
   ) { }
+
   ngOnInit() {
     this.approvalRecords = [
       { eid: 23123, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
@@ -41,6 +42,8 @@ export class ApproveLeaveComponent implements OnInit {
     ];
 
   }
+
+
   editBtnClicked() {
     this.router.navigate(['/leave/single-approval']);
   }
