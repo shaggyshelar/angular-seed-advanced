@@ -77,8 +77,8 @@
 							<span class="title">Feature</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a routerLinkActive="active">
+					<li class="nav-item"  [ifAuthorize]="['ROLE.READ']">
+						<a routerLink="/admin/role" routerLinkActive="active">
 							<span class="title">Role</span>
 						</a>
 					</li>

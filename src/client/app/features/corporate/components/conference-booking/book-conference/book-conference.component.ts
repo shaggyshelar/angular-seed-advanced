@@ -49,7 +49,7 @@ export class BookComponent {
         this.conferenceModel.Room = {
             Name: this.selectedRoom.name,
             Color: this.selectedRoom.color
-        }
+        };
         this.conferenceModel.color = this.selectedRoom.color;
         this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_ADD, payload: this.conferenceModel });
         // localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {

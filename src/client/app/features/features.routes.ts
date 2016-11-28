@@ -9,7 +9,8 @@ import { ErrorPagesRoutes } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
-import { CorporateModule,CorporateRoutes } from './corporate/index';
+import { CorporateModule, CorporateRoutes } from './corporate/index';
+import { AdminRoutes } from './admin/index';
 
 //Routes
 import { AuthRoutes } from './core/index';
@@ -37,6 +38,12 @@ export const featureRoutes: Routes = [
         children: [...CorporateRoutes],
         data: {
             reducers: CorporateModule.reducers()
+        }
+    }, {
+        path: 'admin',
+        children: [...AdminRoutes],
+        data: {
+            //reducers: AdminModule.reducers()
         }
     }
 ];
