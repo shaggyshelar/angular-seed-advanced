@@ -6,4 +6,5 @@ import { Conference } from './conference';
 export interface CorporteState {
     conferenceEvents:Conference[];
     tickets: Ticket[];
+    selectedTicket:Ticket;
 }

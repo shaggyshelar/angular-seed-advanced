@@ -24,24 +24,25 @@ export class IfAuthorize implements OnInit {
     }
 
     checkPermission() {
-        let userHasPermissions = false;
-        if (localStorage.getItem('loggedInUserPermission') !== null) {
-            let loggedInUserPermission = JSON.parse(localStorage.getItem('loggedInUserPermission'));
-            for (var i = 0; i < this.permissions.length; i++) {
-                if (loggedInUserPermission.indexOf(this.permissions[i]) === -1) {
-                    userHasPermissions = false;
-                    break;
-                } else {
-                    userHasPermissions = true;
-                }
-            }
-            if (!userHasPermissions) {
-                this._element.style.display = 'none';
-            } else {
-                this._element.style.display = 'block';
-            }
-        } else {
-            this._element.style.display = 'none';
-        }
+        // let userHasPermissions = false;
+        // if (localStorage.getItem('loggedInUserPermission') !== null) {
+        //     let loggedInUserPermission = JSON.parse(localStorage.getItem('loggedInUserPermission'));
+        //     for (var i = 0; i < this.permissions.length; i++) {
+        //         if (loggedInUserPermission.indexOf(this.permissions[i]) === -1) {
+        //             userHasPermissions = false;
+        //             break;
+        //         } else {
+        //             userHasPermissions = true;
+        //         }
+        //     }
+        //     if (!userHasPermissions) {
+        //         this._element.style.display = 'none';
+        //     } else {
+        //         this._element.style.display = 'block';
+        //     }
+        // } else {
+        //     this._element.style.display = 'none';
+        // }
+         this._element.style.display = 'block';
     }
 }

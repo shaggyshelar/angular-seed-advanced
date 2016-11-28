@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./apis')(app);
 require('./features/features')(app);
 require('./roles/roles')(app);
-require('./corporate/conferenceBooking/conferenceBookingAPI')(app);
-require('./corporate/ticket/ticketAPI')(app);
+require('./corporate/conferenceBooking/conferenceBooking')(app);
+require('./corporate/ticket/ticket')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

@@ -35,8 +35,7 @@ export class LogTicketComponent implements OnInit {
       if (res) {
         this.ticket = res.tickets;
       }
-    }
-    );
+    });
     this.items = [
       {
         label: 'Edit',
@@ -66,4 +65,7 @@ export class LogTicketComponent implements OnInit {
     this.router.navigate(['/app/corporate/manage-ticket']);
   }
 
+  editTicket(ticket) {
+    this.router.navigate(['/app/corporate/manage-ticket',ticket.id]);
+  }
 }

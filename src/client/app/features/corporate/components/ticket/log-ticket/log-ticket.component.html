@@ -36,12 +36,12 @@
 							<p-column field="resolvedBy" header="{{ 'RESOLVED_BY' | translate }}" [sortable]="true"></p-column>
 							<p-column field="ageDays" header="{{ 'AGE_DAYS' | translate }}" [sortable]="true"></p-column>
 							<p-column header="{{ 'Action' | translate }}">
-								<template let-car="rowData" pTemplate>
+								<template let-currentTicket="rowData" pTemplate>
 									<!--<button #btn type="button" pButton icon="fa fa-list" label="Show" (click)="showAction($event,menu)"></button>-->
 									<div class="dropdown pull-right">
 										<i class="fa fa-ellipsis-v dropdown-toggle action-icon" data-toggle="dropdown" aria-hidden="true"></i>
 										<ul class="dropdown-menu pull-right">
-											<li (click)="selectTicket(ticket)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{ 'EDIT' | translate }}</li>
+											<li (click)="editTicket(currentTicket)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{ 'EDIT' | translate }}</li>
 											<li (click)="selectTicket(ticket)"><i class="fa  fa-reply" aria-hidden="true"></i>{{ 'REPLY' | translate }}</li>
 											<li (click)="selectTicket(ticket)"><i class="fa fa-times" aria-hidden="true"></i>{{ 'CLOSE' | translate }}</li>
 											<li (click)="selectTicket(ticket)"><i class="fa fa-retweet" aria-hidden="true"></i>{{ 'REOPEN' | translate }}</li>

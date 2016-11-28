@@ -16,6 +16,10 @@ export const CorporateRoutes: Routes = [
     component: ManageTicketComponent,
   },
   {
+    path: 'manage-ticket/:id',
+    component: ManageTicketComponent,
+  },
+  {
     path: 'log-ticket',
     component: LogTicketComponent,
 

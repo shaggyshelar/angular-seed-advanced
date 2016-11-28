@@ -29,6 +29,31 @@ export class TicketEffects {
             return ({ type: CORPORATE_ACTIONS.TICKET_INITIALIZED, payload: data });
         });
 
+    @Effect() getTicketById$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.TICKET_GET)
+        .switchMap(action => this.ticketService.getTicketById(action.payload))
+        .map(res => {
+            let data = res;
+            return ({ type: CORPORATE_ACTIONS.TICKET_DETAILS_FETCHED, payload: data });
+        });
+
+    @Effect() save$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.TICKET_ADD)
+        .switchMap(action => this.ticketService.saveTicket(action.payload))
+        .map(res => {
+            let data = res;
+            return ({ type: CORPORATE_ACTIONS.TICKET_INITIALIZED, payload: data });
+        });
+
+    @Effect() edit$ = this.actions$
+        .ofType(CORPORATE_ACTIONS.TICKET_EDIT)
+        .switchMap(action => this.ticketService.editTicket(action.payload))
+        .map(res => {
+            let data = res;
+            return ({ type: CORPORATE_ACTIONS.TICKET_INITIALIZED, payload: data });
+        });
+
+
     constructor(
         private store: Store<any>,
         private actions$: Actions,

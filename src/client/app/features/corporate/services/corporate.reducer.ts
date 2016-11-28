@@ -15,10 +15,15 @@ function CorporteReducerFn(state: CorporteState, action: Action): CorporteState 
             return newState;
 
         case CORPORATE_ACTIONS.TICKET_INITIALIZED:
-            let newStates: CorporteState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 tickets: action.payload
             });
-            return newStates;
+
+        case CORPORATE_ACTIONS.TICKET_DETAILS_FETCHED:
+            return Object.assign({}, state, {
+                selectedTicket: action.payload
+            });
+
         default:
             return state;
     }

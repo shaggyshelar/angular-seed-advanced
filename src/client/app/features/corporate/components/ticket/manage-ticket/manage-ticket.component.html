@@ -19,7 +19,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'DEPARTMENT' | translate }}</label>
 								<div>
-									<p-dropdown [options]="departments"></p-dropdown>
+									<p-dropdown [options]="departments"  [(ngModel)]="ticketModel.department" name="departments" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'PRIORITY' | translate }}</label>
 								<div>
-									<p-dropdown [options]="priorities"></p-dropdown>
+									<p-dropdown [options]="priorities"   [(ngModel)]="ticketModel.priority" name="priorities" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ 'CONCERN' | translate }}</label>
 								<div>
-									<p-dropdown [options]="concerns"></p-dropdown>
+									<p-dropdown [options]="concerns"   [(ngModel)]="ticketModel.concern" name="concerns" [styleClass]="form-control"></p-dropdown>
 								</div>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<label class="control-label"> {{ 'DESCRIPTION' | translate }} </label>
 								<div>
-									<textarea [(ngModel)]="description" class="fullWidth"></textarea>
+									<textarea [(ngModel)]="description" [(ngModel)]="ticketModel.description" name="description" class="fullWidth"></textarea>
 								</div>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 							<div class="form-body">
 								<label class="control-label"></label>
 								<div>
-									<button pButton type="button" label="{{ 'SAVE' | translate }}"></button>
+									<button pButton type="button" label="{{ 'SAVE' | translate }}"  (click)="save()" ></button>
 									<button pButton type="button" label="{{ 'CANCEL' | translate }}"  (click)="cancel()" ></button>
 								</div>
 							</div>
