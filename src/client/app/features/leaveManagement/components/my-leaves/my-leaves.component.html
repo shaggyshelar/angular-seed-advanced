@@ -76,8 +76,8 @@
                         <p-column field="numDays" header="{{ 'NO_LEAVES' | translate }}" [sortable]="true"></p-column>
                         <p-column field="status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
                         <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
-                            <template let-car="rowData" pTemplate type="body">
-                                <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked()" icon="fa-edit"></button>
+                            <template let-leave="rowData" pTemplate type="body">
+                                <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked(leave.id)" icon="fa-edit"></button>
                             </template>
                         </p-column>
                     </p-dataTable>
