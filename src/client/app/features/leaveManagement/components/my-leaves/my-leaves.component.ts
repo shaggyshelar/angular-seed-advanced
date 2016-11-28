@@ -35,7 +35,7 @@ export class MyLeavesComponent {
     this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
     this.leaveObs = this.store.select('leave');
     this.leaveObs.subscribe(res => {
-      this.leave = res ? this.arrangeData(res.leaves) : []
+      this.leave = res ? this.arrangeData(res.leaves) : [];
     }
     );
 

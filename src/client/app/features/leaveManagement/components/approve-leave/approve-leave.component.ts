@@ -22,7 +22,7 @@ import { OnInit } from '@angular/core';
 })
 export class ApproveLeaveComponent implements OnInit {
 
-  leaveObs: Observable<any>
+  leaveObs: Observable<any>;
   approvalRecords: any[];
   servRows = 10;
 
@@ -40,7 +40,7 @@ export class ApproveLeaveComponent implements OnInit {
 
     this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
     this.leaveObs = this.store.select('leave');
-    this.leaveObs.subscribe(res =>{
+    this.leaveObs.subscribe(res => {
       this.approvalRecords = res ? res.leaves : [];
       if (res)
         console.log('from approve-leave data: ' + JSON.stringify(res.leaves));

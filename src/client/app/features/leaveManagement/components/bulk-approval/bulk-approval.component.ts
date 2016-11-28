@@ -68,7 +68,7 @@ export class BulkApproveComponent {
   ngOnInit() {
     this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
     this.leaveObs = this.store.select('leave');
-    this.leaveObs.subscribe(res =>{
+    this.leaveObs.subscribe(res => {
       this.requests = res ? res.leaves : [];
       if (res)
         console.log('from bulk-approval data: ' + JSON.stringify(res.leaves));
