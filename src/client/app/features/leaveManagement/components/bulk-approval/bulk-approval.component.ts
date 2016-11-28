@@ -1,9 +1,15 @@
 /** Angular Dependencies */
-
+import { Router } from '@angular/router';
 /** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+//import { BaseComponent } from '../views/base-component';
+import { BaseComponent, LogService } from '../../../framework.ref';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
+import { LEAVE_ACTIONS } from '../../services/leave.actions';
 
 /** Component Declaration */
 
@@ -31,24 +37,42 @@ class FormFieldClass {
 })
 export class BulkApproveComponent {
 
+  leaveObs: Observable<any>;
+
   servRows = 5;
   requests: any[];
-  selectedEmployees: ShowLeaveReq[] = [];
+  selectedEmployees: ShowLeaveReq[];
 
   model: FormFieldClass;
   approved: boolean = false;
   rejected: boolean = false;
 
-  constructor() {
-    this.requests = [
-      { eid: 23132, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-      { eid: 23133, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-      { eid: 23134, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-      { eid: 23135, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-    ];
+  constructor(
+    private router: Router,
+    private store: Store<any>,
+    private logService: LogService
+  ) {
+    this.requests = [];
+
+    // this.requests = [
+    //   { eid: 23132, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
+    //   { eid: 23133, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
+    //   { eid: 23134, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
+    //   { eid: 23135, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
+    // ];
 
     this.model = new FormFieldClass('');
     this.selectedEmployees = [];
+  }
+
+  ngOnInit() {
+    this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
+    this.leaveObs = this.store.select('leave');
+    this.leaveObs.subscribe(res =>{
+      this.requests = res ? res.leaves : [];
+      if (res)
+        console.log('from bulk-approval data: ' + JSON.stringify(res.leaves));
+    });
   }
 
   approveClicked() {
