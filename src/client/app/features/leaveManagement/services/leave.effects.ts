@@ -1,5 +1,5 @@
 /**
- * Timesheet Effects Module
+ * Leave Effects Module
  */
 
 /** Angular Dependencies */
