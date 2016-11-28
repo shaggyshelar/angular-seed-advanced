@@ -5,70 +5,36 @@ var leaves = [
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2016, 11, 28, 00, 00, 00, 00),
                 endDate: new Date(2016, 11, 28, 00, 00, 00, 00),
                 numberOfLeave: 1,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             },
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2016, 11, 29, 00, 00, 00, 00),
                 endDate: new Date(2016, 11, 29, 00, 00, 00, 00),
                 numberOfLeave: 1,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             }
         ],
+        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
+        pending: '',
         numberOfLeave: 2,
         halfDayLeave: 0,
         absent: 0,
@@ -80,70 +46,36 @@ var leaves = [
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2016, 11, 29, 00, 00, 00, 00),
                 endDate: new Date(2016, 12, 29, 00, 00, 00, 00),
                 numberOfLeave: 2,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             },
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2016, 11, 30, 00, 00, 00, 00),
                 endDate: new Date(2016, 12, 30, 00, 00, 00, 00),
                 numberOfLeave: 2,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             }
         ],
+        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
+        pending: '',
         numberOfLeave: 2,
         halfDayLeave: 0,
         absent: 0,
@@ -155,103 +87,51 @@ var leaves = [
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2017, 1, 04, 00, 00, 00, 00),
                 endDate: new Date(2017, 1, 04, 00, 00, 00, 00),
                 numberOfLeave: 2,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             },
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2017, 01, 05, 00, 00, 00, 00),
                 endDate: new Date(2017, 01, 05, 00, 00, 00, 00),
                 numberOfLeave: 2,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             },
             {
                 user: {
                     id: 10431,
-                    name: 'Mukul Tilak',
-                    project: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar',
-                        },
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    approvedBy: [
-                        {
-                            title: 'EBS',
-                            manager: 'Kunal Adhikari'
-                        }
-                    ],
-                    pendingApprovers: [
-                        {
-                            title: 'Angular 2',
-                            manager: 'Sagar Shelar'
-                        }
-                    ]
+                    name: 'Mukul Tilak'
                 },
                 startDate: new Date(2017, 01, 06, 00, 00, 00, 00),
                 endDate: new Date(2016, 01, 06, 00, 00, 00, 00),
                 numberOfLeave: 2,
                 status: 'Approved',
-                reason: 'Personal'
+                reason: 'Personal',
+                leaveType : {
+                    id: 1,
+                    title: 'Leave'
+                }
             }
         ],
+        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
+        pending: '',
         numberOfLeave: 2,
         halfDayLeave: 0,
         absent: 0,

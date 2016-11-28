@@ -1,8 +1,11 @@
 var utils = require('../utils');
 var leaves = require('./leaveData');
+var user = require('./userData');
+var leaveCount = require('./leaveCountData');
 var _ = require('lodash');
 
 module.exports = function (app) {
+
     app.get('/api/leave/:id', function (req, res) {
         var id = req.params.id;
         for (var index in leaves) {
@@ -40,5 +43,15 @@ module.exports = function (app) {
         else {
             res.status(500).end('Bad Request.');
         }
+    });
+
+    app.get('/api/leave/count', function (req, res) {
+        console.log('/api/leave/count');
+        res.json(leaveCount);
+    });
+
+
+    app.get('/api/leave/userData', function (req, res) {
+        res.json(user);
     });
 }
