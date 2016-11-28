@@ -48,7 +48,7 @@ export class MyLeavesComponent {
     this.router.navigate(['/leave/apply-leave']);
   }
 
-  updateBtnClicked() {
-    this.router.navigate(['/leave/update-leave']);
+  updateBtnClicked(id) {
+    this.router.navigate(['/leave/update-leave', id]);
   }
 }
