@@ -29,14 +29,6 @@ export class HolidayEffects {
             return ({ type: LEAVE_ACTIONS.HOLIDAYS_FETCHED, payload: res });
         });
 
-    // @Effect() detail$ = this.actions$
-    //     .ofType(LEAVE_ACTIONS.HOLIDAYS)
-    //     .map(res => {
-    //         let param = res.payload;
-    //         this.holidayService.track(LEAVE_ACTIONS.HOLIDAYS_FETCHED, { label: param });
-    //         return ({ type: LEAVE_ACTIONS.HOLIDAYS_FETCHED, payload: param });
-    //     });
-
     constructor(
         private store: Store<any>,
         private actions$: Actions,
