@@ -18,6 +18,12 @@ require('./skills/skills')(app);
 require('./experience/experience')(app);
 require('./employmentHistory/employmentHistory')(app);
 require('./education/education')(app);
+require('./address/address')(app);
+require('./identityProof/identityProof')(app);
+require('./nominees/nominees')(app);
+require('./passport/passport')(app);
+require('./uan/uan')(app);
+require('./visa/visa')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

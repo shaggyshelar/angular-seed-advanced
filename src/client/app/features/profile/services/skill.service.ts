@@ -17,7 +17,7 @@ import { Skill } from '../models/skill';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'skill';
+export const CONTEXT = 'Skill';
 
 /** Service Definition */
 @Injectable()
@@ -25,10 +25,9 @@ export class SkillService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Skill Service Initialized Successfully');
     }
 
     getSkills(id): Observable<Skill> {
         return this.get$(id).map(res => res.json());
-    }   
+    }
 }

@@ -16,7 +16,7 @@ import { EmploymentHistory } from '../models/employmentHistory';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'employmentHistory';
+export const CONTEXT = 'EmploymentHistory';
 
 /** Service Definition */
 @Injectable()
@@ -24,10 +24,9 @@ export class EmploymentHistoryService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('EmploymentHistory Service Initialized Successfully');
     }
 
     getEmploymentHistory(id): Observable<EmploymentHistory> {
         return this.get$(id).map(res => res.json());
-    }   
+    }
 }

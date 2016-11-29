@@ -1,10 +1,15 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 
-/** Framework Dependencies */
-import {BaseComponent} from '../../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../../services/profile.actions';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -25,9 +30,10 @@ export class IdentityProofsComponent implements OnInit {
     showDiv: boolean;
     showSubDiv: boolean;
     selectedIdentityType: any;
-    identity : any;
+    identity: any;
+    public profile_Observable: Observable<any>;
 
-    constructor() {
+    constructor(private store: Store<any>) {
         this.identityProofs = [];
         this.showDiv = false;
         this.showSubDiv = false;
@@ -42,6 +48,13 @@ export class IdentityProofsComponent implements OnInit {
             { label: 'PAN Card', value: { id: 2, name: 'PAN Card' } },
             { label: 'Voter ID', value: { id: 3, name: 'Voter ID' } }
         ];
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_IDENTITY_PROOF, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.identityProofs = res && res.identityProofs ? res.identityProofs : [];
+            console.log('IdentityProofs', this.identityProofs);
+        });
     }
     addClick() {
         this.showDiv = true;
@@ -68,12 +81,12 @@ export class IdentityProofsComponent implements OnInit {
         this.selectedIdentityType = {};
     }
     onIdentityTypeChange(event) {
-        this.showSubDiv = true;       
+        this.showSubDiv = true;
     }
 
-    editIdentityProof (identity) {  
-        this.showDiv = false;     
-        this.showSubDiv = true; 
+    editIdentityProof(identity) {
+        this.showDiv = false;
+        this.showSubDiv = true;
         this.selectedIdentityType = this.identityTypes[1].value;
         this.identity.value = this.identity.value;
         this.identity.document = this.identity.document;

@@ -1,9 +1,15 @@
 /** Angular Dependencies */
+import { OnInit } from '@angular/core';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../../services/profile.actions';
 
 /** Component Declaration */
 @BaseComponent({
@@ -12,17 +18,26 @@ import { BaseComponent } from '../../views/base-component';
     templateUrl: 'nominees.component.html',
     styleUrls: ['nominees.component.css']
 })
-export class NomineesComponent {
+export class NomineesComponent implements OnInit {
     nomineesData: any[];
     showDiv: boolean;
     nomineeObj: any;
+    public profile_Observable: Observable<any>;
 
-    constructor() {
+    constructor(private store: Store<any>) {
         this.nomineesData = [];
         this.showDiv = true;
         this.nomineeObj = {};
     }
-
+    ngOnInit(): void {
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_NOMINEES, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.nomineesData = res && res.nominees ? res.nominees : [];
+            console.log('Nominees', this.nomineesData);
+        });
+    }
     submit() {
         this.nomineesData = [{
             id: 1,

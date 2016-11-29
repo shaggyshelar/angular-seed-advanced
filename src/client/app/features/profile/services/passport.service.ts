@@ -12,21 +12,21 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Experience } from '../models/experience';
+import { Passport } from '../models/passport';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'Experience';
+export const CONTEXT = 'Passport';
 
 /** Service Definition */
 @Injectable()
-export class ExperienceService extends BaseService {
+export class PassportService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getExperience(id): Observable<Experience> {
+    getPassport(id): Observable<Passport> {
         return this.get$(id).map(res => res.json());
     }
 }

@@ -18,24 +18,55 @@ interface IProfileActions {
     INITIALIZE_ADD_ACHIEVEMENT: string;
     ADD_ACHIEVEMENT: string;
 
+    //Ceritificates
     INITIALIZE_GET_CERTIFICATES: string;
     GET_CERTIFICATES: string;
 
+    //Skills
     INITIALIZE_GET_SKILLS: string;
     GET_SKILLS: string;
 
-    INITIALIZE_GET_EDUCATION:string;
+    //Education
+    INITIALIZE_GET_EDUCATION: string;
     GET_EDUCATION: string;
 
+    //Employment History
     INITIALIZE_GET_EMPLOYMENT_HISTORY: string;
     GET_EMPLOYMENT_HISTORY: string;
 
+    //Experience
     INITIALIZE_GET_EXPERIENCE: string;
     GET_EXPERIENCE: string;
+
+    //Indentity Proof
+    INITIALIZE_GET_IDENTITY_PROOF: string;
+    GET_IDENTITY_PROOF: string;
+
+    //Nominees
+    INITIALIZE_GET_NOMINEES: string;
+    GET_NOMINEES: string;
+
+    //Passport
+    INITIALIZE_GET_PASSPORT: string;
+    GET_PASSPORT: string;
+
+    //Address
+    INITIALIZE_GET_ADDRESS: string;
+    GET_ADDRESS: string;
+
+    //Uan
+    INITIALIZE_GET_UAN: string;
+    GET_UAN: string;
+
+    //Visa
+    INITIALIZE_GET_VISA: string;
+    GET_VISA: string;
 }
 
 export const PROFILE_ACTIONS: IProfileActions = {
     INIT: `${CONTEXT}_INIT`,
+
+    //Profile Info
     DETAILS: `${CONTEXT}_DELAILS`,
     DETAILS_FETCHED: `${CONTEXT}_DELAILS_FETCHED`,
 
@@ -64,4 +95,28 @@ export const PROFILE_ACTIONS: IProfileActions = {
     //Experience
     INITIALIZE_GET_EXPERIENCE: `${CONTEXT}_INITIALIZE_GET_EXPERIENCE`,
     GET_EXPERIENCE: `${CONTEXT}_GET_EXPERIENCE`,
+
+    //Indentity Proof
+    INITIALIZE_GET_IDENTITY_PROOF: `${CONTEXT}_INITIALIZE_GET_IDENTITY_PROOF`,
+    GET_IDENTITY_PROOF: `${CONTEXT}_GET_IDENTITY_PROOF`,
+
+    //Nominees
+    INITIALIZE_GET_NOMINEES: `${CONTEXT}_INITIALIZE_GET_NOMINEES`,
+    GET_NOMINEES: `${CONTEXT}_GET_NOMINEES`,
+
+    //Passport
+    INITIALIZE_GET_PASSPORT: `${CONTEXT}_INITIALIZE_GET_PASSPORT`,
+    GET_PASSPORT: `${CONTEXT}_GET_PASSPORT`,
+
+    //Address
+    INITIALIZE_GET_ADDRESS: `${CONTEXT}_INITIALIZE_GET_ADDRESS`,
+    GET_ADDRESS: `${CONTEXT}_GET_ADDRESS`,
+
+    //Uan
+    INITIALIZE_GET_UAN: `${CONTEXT}_INITIALIZE_GET_UAN`,
+    GET_UAN: `${CONTEXT}_GET_UAN`,
+
+    //Visa
+    INITIALIZE_GET_VISA: `${CONTEXT}_INITIALIZE_GET_VISA`,
+    GET_VISA: `${CONTEXT}_GET_VISA`,
 };

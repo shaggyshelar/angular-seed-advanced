@@ -12,21 +12,21 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Experience } from '../models/experience';
+import { Uan } from '../models/uan';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'Experience';
+export const CONTEXT = 'Uan';
 
 /** Service Definition */
 @Injectable()
-export class ExperienceService extends BaseService {
+export class UanService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getExperience(id): Observable<Experience> {
+    getUan(id): Observable<Uan> {
         return this.get$(id).map(res => res.json());
     }
 }

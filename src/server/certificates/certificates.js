@@ -3,7 +3,7 @@ var _ = require('lodash');
 var certificateData = require('./certificateData');
 
 module.exports = function (app) {
-    app.get('/api/certificate/:id', function (req, res) {
+    app.get('/api/Certificate/:id', function (req, res) {
         res.json(certificateData);
     });
 };

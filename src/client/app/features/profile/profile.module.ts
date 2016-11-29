@@ -32,6 +32,12 @@ import { SkillService } from './services/skill.service';
 import { EducationService } from './services/education.service';
 import { EmploymentHistoryService } from './services/employmentHistory.service';
 import { ExperienceService } from './services/experience.service';
+import { AddressService } from './services/address.service';
+import { IdentityProofService } from './services/identityProof.service';
+import { NomineesService } from './services/nominees.service';
+import { PassportService } from './services/passport.service';
+import { UanService } from './services/uan.service';
+import { VisaService } from './services/visa.service';
 
 import { ProfileEffects } from './services/profile.effects';
 import { profileReducer } from './services/profile.reducer';
@@ -60,7 +66,8 @@ import { profileReducer } from './services/profile.reducer';
         NomineesComponent,
         IdentityProofsComponent
     ],
-    providers: [ProfileService, AchievementService, CerificateService, SkillService,EducationService,EmploymentHistoryService,ExperienceService],
+    providers: [ProfileService, AchievementService, CerificateService, SkillService, EducationService, EmploymentHistoryService,
+        ExperienceService, AddressService, IdentityProofService, NomineesService, PassportService, UanService, VisaService]
 })
 
 export class ProfileModule {

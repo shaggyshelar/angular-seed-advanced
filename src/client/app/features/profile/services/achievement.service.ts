@@ -17,7 +17,7 @@ import { Achievement } from '../models/achievement';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
-export const CONTEXT = 'achievement';
+export const CONTEXT = 'Achievement';
 
 /** Service Definition */
 @Injectable()
@@ -25,7 +25,6 @@ export class AchievementService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Achievement Service Initialized Successfully');
     }
 
     getAchievements(id): Observable<Achievement> {

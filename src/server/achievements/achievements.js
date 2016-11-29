@@ -3,11 +3,11 @@ var _ = require('lodash');
 var achievementData = require('./achievementData');
 
 module.exports = function (app) {
-    app.get('/api/achievement/:id', function (req, res) {
+    app.get('/api/Achievement/:id', function (req, res) {
         res.json(achievementData);
     });
-    app.post('/api/achievement', function(req, res) {
-    console.log(req.body);
-       res.json(req.body);
+    app.post('/api/Achievement', function (req, res) {
+        console.log(req.body);
+        res.json(req.body);
     });
 };

@@ -1,9 +1,15 @@
 /** Angular Dependencies */
+import { OnInit } from '@angular/core';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../../services/profile.actions';
 
 /** Component Declaration */
 @BaseComponent({
@@ -12,15 +18,26 @@ import { BaseComponent } from '../../views/base-component';
     templateUrl: 'uan.component.html',
     styleUrls: ['uan.component.css']
 })
-export class UANComponent {
+export class UANComponent implements OnInit {
     uanData: any[];
     showDiv: boolean;
-    uanObj:any;
+    uanObj: any;
+    public profile_Observable: Observable<any>;
 
-    constructor() {
+    constructor(private store: Store<any>) {
         this.uanData = [];
         this.showDiv = true;
         this.uanObj = {};
+    }
+
+    ngOnInit(): void {
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_UAN, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.uanData = res && res.uan ? res.uan : [];
+            console.log('UAN', this.uanData);
+        });
     }
 
     submit() {
@@ -39,7 +56,7 @@ export class UANComponent {
 
     add() {
         this.showDiv = false;
-        if(this.uanData.length > 0) {
+        if (this.uanData.length > 0) {
             this.uanObj.number = this.uanData[0].uanNumber;
             this.uanObj.fromESPL = this.uanData[0].fromESPL;
         }

@@ -2,10 +2,15 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../../views/base-component';
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+/** Framework Level Dependencies */
+import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
+import { PROFILE_ACTIONS } from '../../../services/profile.actions';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -24,13 +29,13 @@ export interface AddressForm {
 })
 export class ProfileAddressComponent implements OnInit {
 
-    employmentHistory: any[];
     addressList: any[];
     showDiv: boolean;
     address: any;
     addressForm: FormGroup;
+    public profile_Observable: Observable<any>;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private store: Store<any>) {
         this.addressList = [];
         this.showDiv = true;
         this.address = {};
@@ -40,6 +45,14 @@ export class ProfileAddressComponent implements OnInit {
         this.addressForm = this.formBuilder.group({
             currentAddress: ['', [Validators.required]],
             permanentAddress: ['', [Validators.required]]
+        });
+
+        let ProfileID = 1;
+        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_ADDRESS, payload: ProfileID });
+        this.profile_Observable = this.store.select('profile');
+        this.profile_Observable.subscribe(res => {
+            this.addressList = res && res.address ? res.address : [];
+            console.log('Address', this.addressList);
         });
     }
 
