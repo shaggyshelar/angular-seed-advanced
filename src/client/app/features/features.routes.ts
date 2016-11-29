@@ -51,7 +51,7 @@ export const featureRoutes: Routes = [
         data: {
             //reducers: AdminModule.reducers()
         }
-    }, , {
+    },{
         path: 'profile',
         children: [...ProfileRoutes],
         data: {
