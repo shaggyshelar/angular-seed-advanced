@@ -1,11 +1,17 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+//import { BaseComponent } from '../views/base-component';
+import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
+import { LEAVE_ACTIONS } from '../../services/leave.actions';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
 /** Component Declaration */
 
@@ -38,8 +44,9 @@ class FormFieldClass {
   styleUrls: ['apply-leave.component.css']
 })
 
-export class ApplyLeaveComponent {
-
+export class ApplyLeaveComponent implements OnInit {
+  leaveObs: Observable<any>;
+  leave: any;
   leaveTypeInvalid: boolean = true;
   strtDt: any;
   endDt: any;
@@ -57,11 +64,18 @@ export class ApplyLeaveComponent {
   model: FormFieldClass;
 
   constructor(
-    private router: Router
+    private router: Router,private store: Store<any>, private logService: LogService
   ) {
     this.model = new FormFieldClass(1, 'select', new Date(), new Date(), '');
   }
 
+  ngOnInit() {
+    this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
+    this.leaveObs = this.store.select('leave');
+    this.leaveObs.subscribe(res =>
+      this.leave = res ? res.leave : {}
+    );
+  }
   submitForm(form: NgForm) {
     this.validateLeaveType();
     if (this.leaveTypeInvalid)

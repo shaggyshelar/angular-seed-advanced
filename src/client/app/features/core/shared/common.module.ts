@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 import { CommonModule as AngularCommonModule } from '@angular/common';
 import {RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Third party Dependencies */
 import { TranslateLoader } from 'ng2-translate';
@@ -46,12 +47,16 @@ let primeNgComponents = [
 let imports = [
     RouterModule,
     AngularCommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
     translate];
 
 /**  Exported components declaration   */
 let exportComponents = [
     RouterModule,
     AngularCommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
     //translate,
     IfAuthorize,
     UnauthorizedAccessComponent,
