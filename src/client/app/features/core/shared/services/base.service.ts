@@ -34,7 +34,6 @@ export class BaseService extends Analytics implements HttpServices {
         super(analyticsService);
         this.httpService = _httpService;
         this.requestUrl = this.baseUrl.concat(_context);
-        this.getHeaders();
         this.logService = _logService;
         this.logService.debug('BaseService : constructor : requestUrl ' + this.requestUrl);
     }
@@ -45,6 +44,7 @@ export class BaseService extends Analytics implements HttpServices {
      */
     get$(id, isSecured?: boolean): Observable<Response> {
         this.logService.debug('BaseService : getList$');
+        this.getHeaders(isSecured);
         return this.httpService.get(this.requestUrl + '/' + id, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing get$ method : ' + err.toString());
             return this.handleError(err);
@@ -58,6 +58,7 @@ export class BaseService extends Analytics implements HttpServices {
      */
     getList$(pageNum?: number, pageSize?: number, isSecured?: boolean): Observable<Response> {
         this.logService.debug('BaseService : getList$');
+        this.getHeaders(isSecured);
         return this.httpService.get(this.requestUrl, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing getList$ method : ' + err.toString());
             return this.handleError(err);
@@ -72,6 +73,7 @@ export class BaseService extends Analytics implements HttpServices {
      */
     getChildList$(childName: string, pageNum?: number, pageSize?: number, isSecured?: boolean) {
         this.logService.debug('BaseService : getChildList$');
+        this.getHeaders(isSecured);
         return this.httpService.get(this.requestUrl + '/' + childName, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing getList$ method : ' + err.toString());
             return this.handleError(err);
@@ -84,7 +86,7 @@ export class BaseService extends Analytics implements HttpServices {
      * @isSecured : Optional Parameter : Parameter to tell base service if security headers nedds to be included
      */
     post$(payload, isSecured?: boolean): Observable<Response> {
-
+        this.getHeaders(isSecured);
         return this.httpService.post(this.requestUrl, payload, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing post$ method : ' + err.toString());
             return this.handleError(err);
@@ -97,6 +99,7 @@ export class BaseService extends Analytics implements HttpServices {
     * @isSecured : Optional Parameter : Parameter to tell base service if security headers nedds to be included
     */
     put$(id, payload, isSecured?: boolean) {
+        this.getHeaders(isSecured);
         return this.httpService.put(this.requestUrl, payload, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing put$ method : ' + err.toString());
             return this.handleError(err);
@@ -108,6 +111,7 @@ export class BaseService extends Analytics implements HttpServices {
      * @isSecured : Optional Parameter : Parameter to tell base service if security headers nedds to be included
      */
     delete$(id, isSecured?: boolean) {
+        this.getHeaders(isSecured);
         this.logService.debug('BaseService : Delete Method called');
         return this.httpService.delete(this.requestUrl + '/' + id, this.options).catch(err => {
             this.logService.debug('BaseService : Error executing delete$ method : ' + err.toString());
@@ -134,9 +138,11 @@ export class BaseService extends Analytics implements HttpServices {
     /** 
      * Method for Including Headers 
      */
-    private getHeaders(): void {
+    private getHeaders(isSecured?: boolean): void {
         let headers = new Headers({});
+        if (isSecured) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+        }
         this.options = new RequestOptions({ headers: headers });
     }
-
 }

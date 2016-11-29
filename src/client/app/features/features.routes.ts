@@ -38,6 +38,7 @@ export const featureRoutes: Routes = [
     }, {
         path: 'corporate',
         children: [...CorporateRoutes],
+        canActivate: [AuthGuard],
         data: {
             reducers: CorporateModule.reducers()
         }
