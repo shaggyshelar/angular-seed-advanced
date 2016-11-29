@@ -2,8 +2,13 @@ var utils = require('./utils');
 var users = require('./userData');
 var _ = require('lodash');
 
-module.exports = function(app) {
-    app.post('/api/Authentication/GetToken', function(req, res) {
+module.exports = function (app) {
+    let usersData = [
+        { id: 1, name: 'mahesh', age: '31', email: 'kedari.mahesh@gmail.com' },
+        { id: 2, name: 'Sachin', age: '28', email: 'sachin@gmail.com' },
+        { id: 3, name: 'Mukul', age: '28', email: 'mukul@gmail.com' }
+    ];
+    app.post('/api/Authentication/GetToken', function (req, res) {
         var userName = req.body.UserName;
         var password = req.body.Password;
         var userIndex = _.findIndex(users, { UserName: userName, Password: password });
@@ -15,12 +20,12 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/api/GetLoggedInUserPermission', utils.EnsureAuthenticated, function(req, res) {
+    app.get('/api/GetLoggedInUserPermission', utils.EnsureAuthenticated, function (req, res) {
         var userIndex = _.findIndex(users, { Id: req.userID });
         res.json(users[userIndex].Permissions);
     });
 
-    app.get('/api/getHolidays', function(req, res) {
+    app.get('/api/getHolidays', function (req, res) {
         res.json([
             { id: '1111', date: '11/11/1111', title: 'Laxmi Puja', type: 'Fixed' },
             { id: '2222', date: '22/22/1111', title: 'Bhai Duj', type: 'Floating' },
@@ -29,7 +34,7 @@ module.exports = function(app) {
         ]);
     });
 
-    app.get('/api/getTimesheets', function(req, res) {
+    app.get('/api/getTimesheets', function (req, res) {
         res.json([
             { id: '11111', date: '11/11/1111', billableHours: '11:11', nonBillableHours: '12:12', name: 'Records 1' },
             { id: '22222', date: '22/11/1111', billableHours: '22:11', nonBillableHours: '22:12', name: 'Records 1' },
@@ -37,7 +42,7 @@ module.exports = function(app) {
             { id: '4444', date: '44/11/1111', billableHours: '44:11', nonBillableHours: '44:12', name: 'Records 1' },
         ]);
     });
-    app.get('/api/user/:id', function(req, res) {
+    app.get('/api/user/:id', function (req, res) {
         var id = req.params.id;
         for (var index in usersData) {
             if (usersData[index].id == id) {
@@ -52,7 +57,7 @@ module.exports = function(app) {
             }
         }`);
     })
-    app.get('/api/user', function(req, res) {
+    app.get('/api/user', function (req, res) {
         res.json(usersData);
         /*res.status(500).end(`{
             "error": {
@@ -61,13 +66,13 @@ module.exports = function(app) {
             }
         }`);*/
     });
-    app.post('/api/user', function(req, res) {
+    app.post('/api/user', function (req, res) {
         res.json(req.body);
     })
-    app.put('/api/user', function() {
+    app.put('/api/user', function () {
         res.json(req.body);
     });
-    app.delete('/api/user/:id', function(req, res) {
+    app.delete('/api/user/:id', function (req, res) {
         var id = req.param.id;
         for (var index in this.users) {
             if (this.users[index].id == id) {
@@ -80,7 +85,7 @@ module.exports = function(app) {
         res.send(false);
     });
 
-    app.get('/api/timesheet/employee', function(req, res) {
+    app.get('/api/timesheet/employee', function (req, res) {
         res.json(
             [{
                 id: 1,

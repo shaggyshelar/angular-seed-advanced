@@ -17,9 +17,7 @@ export class DashboardContainerComponent implements OnInit {
 
     ngOnInit() {
         this.logService.debug('DashboardContainerComponent : ngOnInit');
-        window['App'].init();
-        window['Layout'].init();
-        window['Demo'].init();
-        window['QuickSidebar'].init();
+         window['App'].init();
+         window['Layout'].init();
     }
 }

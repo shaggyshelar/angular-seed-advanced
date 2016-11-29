@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 //Components
 import { DashboardComponent, DashboardContainerComponent } from './core/dashboard/index';
 //Modules
-import { ErrorPagesRoutes } from './core/index';
+import { ErrorPagesRoutes, AuthGuard } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
@@ -22,12 +22,14 @@ export const featureRoutes: Routes = [
     {
         path: 'user',
         children: [...UsersRoutes],
+        canActivate: [AuthGuard],
         data: {
             reducers: UserModule.reducers()
         }
     }, {
         path: 'timesheet',
         children: [...TimesheetRoutes],
+        canActivate: [AuthGuard],
         data: {
             reducers: TimesheetModule.reducers()
         }
@@ -37,16 +39,17 @@ export const featureRoutes: Routes = [
 /** DO NOT UPDATE BELOW CODE */
 /** Features Main routes */
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'app',
-        pathMatch: 'full'
+    // {
+    //     path: '',
+    //     redirectTo: 'app',
+    //     pathMatch: 'full'
 
-    },
+    // },
     ...AuthRoutes,
     {
-        path: 'app',
+        path: '',
         component: DashboardContainerComponent,
+        canActivate: [AuthGuard],
         children: [
             ...featureRoutes,
             ...ErrorPagesRoutes,

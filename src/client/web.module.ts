@@ -6,36 +6,22 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 // libs
-//import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
-//import { AppComponent } from './app/components/app.component';
 import { FeaturesModule } from './app/features/features.module';
-import { AppComponent } from './app/components/app/app.component';
+import { AppComponent } from './app/components/app.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { AboutComponent } from './app/components/about/about.component';
 import { routes } from './app/components/app.routes';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
-import { CommonModule } from './app/shared/index';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { SampleModule } from './app/frameworks/sample/sample.module';
-//import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
-
-// import { LoginComponent } from './app/components/login/login.component';
-// import { UnauthorizedAccessComponent } from './app/components/errorPages/unauthorizedAccess/unauthorizedAccess.component';
-// import { CorporateModule } from './app/components/corporate/index';
-
-// import { ProfileModule } from './app/components/profile/index';
-// import { TimesheetModule } from './app/components/timesheet/index';
-// import { LeaveManagementModule } from './app/components/leaveManagement/index';
-// import { ChangePasswordModule } from './app/components/changePassword/index';
-
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
@@ -49,14 +35,6 @@ import { AppConfig } from './app/frameworks/sample/services/app-config';
 import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
 // custom i18n language support
 MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
-
-//Layout
-// import { FooterComponent } from './app/components/layout/footer/footer.component';
-// import { QuickSidebarComponent } from './app/components/layout/quick-sidebar/quick-sidebar.component';
-// import { SidebarComponent } from './app/components/layout/sidebar/sidebar.component';
-// import { TopNavigationBarComponent } from './app/components/layout/top-navigation-bar/top-navigation-bar.component';
-import { AdminModule } from './app/components/admin/index';
-
 let routerModule = RouterModule.forRoot(routes);
 
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
@@ -77,13 +55,12 @@ export function cons() {
 
 @NgModule({
   imports: [
+    FeaturesModule,
     BrowserModule,
     CoreModule.forRoot([
       { provide: WindowService, useFactory: (win) },
       { provide: ConsoleService, useFactory: (cons) }
     ]),
-    FeaturesModule,
-    CommonModule,
     routerModule,
     AnalyticsModule,
     MultilingualModule.forRoot([{
@@ -92,30 +69,12 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
-    // StoreModule.provideStore({
-    //   i18n: multilingualReducer,
-    //   names: nameListReducer
-    // }),
     EffectsModule.run(MultilingualEffects),
-    //EffectsModule.run(NameListEffects),
-    // ProfileModule,
-    // CorporateModule,
-    // TimesheetModule,
-    // LeaveManagementModule,
-    AdminModule,
-    //ChangePasswordModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    //Layout
-    // FooterComponent,
-    // QuickSidebarComponent,
-    // SidebarComponent,
-    // TopNavigationBarComponent,
-    // LoginComponent,
-    // UnauthorizedAccessComponent
   ],
   providers: [
     {

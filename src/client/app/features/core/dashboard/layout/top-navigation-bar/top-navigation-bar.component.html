@@ -53,7 +53,7 @@
             <li>
               <a href="#">
                 <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../assets/images/avatar.png" class="img-circle" alt=""> </span>
                 <span class="subject">
                                                         <span class="from"> Lisa Wong </span>
                 <span class="time">Just Now </span>
@@ -102,11 +102,12 @@
     <!-- END TODO DROPDOWN -->
     <!-- BEGIN USER LOGIN DROPDOWN -->
     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-    <li class="dropdown dropdown-user dropdown-dark">
+    <li class="dropdown dropdown-user dropdown-dark  hidden-xs">
       <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
         <span class="username username-hide-on-mobile"> Nick </span>
-        <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-        <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg" /> </a>
+        <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->        
+            <i class="fa fa-user icon-size"></i>
+        </a>
       <ul class="dropdown-menu dropdown-menu-default">
         <li>
           <a routerLink="/profile" routerLinkActive="active">
@@ -114,9 +115,8 @@
           </a>
         </li>
         <li>
-          <a href="app_todo_2.html">
-            <i class="icon-rocket"></i> My Tasks
-            <span class="badge badge-success"> 7 </span>
+          <a routerLink="/change-password" routerLinkActive="active">
+            <i class="icon-wrench"></i>{{ 'CHANGE_PASSWORD' | translate }}
           </a>
         </li>
         <li class="divider"> </li>
@@ -125,18 +125,12 @@
             <i class="icon-lock"></i> Lock Screen </a>
         </li>
         <li>
-          <a href="page_user_login_1.html">
+          <a  (click)="logout()">
             <i class="icon-key"></i> Log Out </a>
         </li>
       </ul>
     </li>
     <!-- END USER LOGIN DROPDOWN -->
-    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-    <li class="dropdown dropdown-extended quick-sidebar-toggler">
-      <span class="sr-only">Toggle Quick Sidebar</span>
-      <i class="icon-logout"></i>
-    </li>
-    <!-- END QUICK SIDEBAR TOGGLER -->
   </ul>
 </div>
 <!-- END TOP NAVIGATION MENU -->
