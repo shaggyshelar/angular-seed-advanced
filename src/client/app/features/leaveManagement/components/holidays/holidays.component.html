@@ -22,7 +22,7 @@
             <!-- START HOLIDAY CALENDER COMPONENT BY PRIMENG -->
             <div class="col-lg-6 col-xs-12 col-sm-12">
                 <div class="portlet light bordered h2FontSize">
-                    <p-schedule [events]="events" [editable]="false" (onEventClick)="handleEventClicked($event)"></p-schedule>
+                    <p-schedule [events]="holidays" [editable]="false" (onEventClick)="handleEventClicked($event)"></p-schedule>
 
                     <p-dialog header="Holiday Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false">
                         <div class="ui-grid ui-grid-responsive ui-fluid">
@@ -45,7 +45,7 @@
                 <div class="portlet light bordered">
                     <p-dataTable [value]="holidays" [paginator]="true" [rows]=(servRows) [responsive]="true" >
                         <p-column field="title" header="{{ 'TITLE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="date" header="{{ 'DATE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="start" header="{{ 'DATE' | translate }}" [sortable]="true"></p-column>
                         <p-column field="weekDay" header="{{ 'DAY' | translate }}" [sortable]="true"></p-column>
                         <p-column field="holidayType" header="{{ 'TYPE' | translate }}" [sortable]="true" >
                             <template let-holiday="rowData" pTemplate type="body" >

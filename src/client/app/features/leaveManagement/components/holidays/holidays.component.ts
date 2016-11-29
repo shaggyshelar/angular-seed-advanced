@@ -122,22 +122,21 @@ export class HolidaysComponent {
 
   }
 
-//cal events require : title | start
-//datatable require  : title | date | day | type
-//data being received: id: num |title: str | holidaysDate: Date | weekDay: str | holidayType: str
   arrangeData(params) {
-    var bufDate;
-    var newHoliday: any[] = [];
-    for (var index in params) {
-      newHoliday.push({
-        id: params[index].id,
-        title: params[index].title,
-        holidayDate: '',
-        start: params[index].holidaysDate,
-        weekDay: params[index].weekday,
-        holidayType: params[index].holidayType
-      });
-    }
-    return newHoliday;
+    // var bufDate;
+    // var newHoliday: any[] = [];
+    // for (var index in params) {
+    //   newHoliday.push({
+    //     id: params[index].id,
+    //     title: params[index].title,
+    //     start: null,//+params[index].holidaysDate,
+    //     weekDay: ''+params[index].weekDay,
+    //     holidayType: ''+params[index].holidayType
+    //   });
+    //   console.log(JSON.stringify(params[index]));
+    // }
+    console.log(JSON.stringify(params))
+    // return newHoliday;
   }
+
 }
