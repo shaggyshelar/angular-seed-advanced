@@ -39,4 +39,3 @@ export function main() {
     template: '<quick-sidebar></quick-sidebar>'
 })
 class TestComponent { }
-

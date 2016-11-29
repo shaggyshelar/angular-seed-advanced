@@ -6,22 +6,25 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 // libs
+import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
 import { FeaturesModule } from './app/features/features.module';
 import { AppComponent } from './app/components/app.component';
-import { HomeComponent } from './app/components/home/home.component';
-import { AboutComponent } from './app/components/about/about.component';
+import { APP_COMPONENTS } from './app/components/index';
 import { routes } from './app/components/app.routes';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
+import { AppReducer } from './app/frameworks/ngrx/index';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
+import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
+
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
@@ -70,11 +73,11 @@ export function cons() {
     }]),
     SampleModule,
     EffectsModule.run(MultilingualEffects),
+    StoreModule.provideStore(AppReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
+    APP_COMPONENTS
   ],
   providers: [
     {
