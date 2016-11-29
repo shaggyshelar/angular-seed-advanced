@@ -46,8 +46,8 @@
                     <p-dataTable [value]="holidays" [paginator]="true" [rows]=(servRows) [responsive]="true" >
                         <p-column field="title" header="{{ 'TITLE' | translate }}" [sortable]="true"></p-column>
                         <p-column field="date" header="{{ 'DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="day" header="{{ 'DAY' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="type" header="{{ 'TYPE' | translate }}" [sortable]="true" >
+                        <p-column field="weekDay" header="{{ 'DAY' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="holidayType" header="{{ 'TYPE' | translate }}" [sortable]="true" >
                             <template let-holiday="rowData" pTemplate type="body" >
                                 <span> <a (click)="clicked(holiday)" >{{holiday.type}}</a></span> 
                             </template>

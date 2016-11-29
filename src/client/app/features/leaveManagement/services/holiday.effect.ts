@@ -22,20 +22,20 @@ import { HolidayService } from './holiday.service';
 export class HolidayEffects {
 
     @Effect() details$ = this.actions$
-        .ofType(LEAVE_ACTIONS.DETAILS)
+        .ofType(LEAVE_ACTIONS.HOLIDAYS)
         .switchMap(
         action => this.holidayService.getHolidays())
         .map(res => {
             return ({ type: LEAVE_ACTIONS.HOLIDAYS_FETCHED, payload: res });
         });
 
-    @Effect() detail$ = this.actions$
-        .ofType(LEAVE_ACTIONS.DETAIL)
-        .map(res => {
-            let param = res.payload;
-            this.holidayService.track(LEAVE_ACTIONS.HOLIDAYS_FETCHED, { label: param });
-            return ({ type: LEAVE_ACTIONS.HOLIDAYS_FETCHED, payload: param });
-        });
+    // @Effect() detail$ = this.actions$
+    //     .ofType(LEAVE_ACTIONS.HOLIDAYS)
+    //     .map(res => {
+    //         let param = res.payload;
+    //         this.holidayService.track(LEAVE_ACTIONS.HOLIDAYS_FETCHED, { label: param });
+    //         return ({ type: LEAVE_ACTIONS.HOLIDAYS_FETCHED, payload: param });
+    //     });
 
     constructor(
         private store: Store<any>,

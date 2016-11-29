@@ -15,15 +15,9 @@ function LeaveReducerFn(state: LeaveState, action: Action): LeaveState {
             });
             return newState; 
 
-        case LEAVE_ACTIONS.DETAIL_FETCHED:
-            newState = Object.assign({}, state, {
-                leave: action.payload
-            });
-            return newState; 
-
         case LEAVE_ACTIONS.HOLIDAYS_FETCHED:
         newState = Object.assign( {}, state, {
-            holiday : action.payload
+            holidays : action.payload
         });
         return newState;
 

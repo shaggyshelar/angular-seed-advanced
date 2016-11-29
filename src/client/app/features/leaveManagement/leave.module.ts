@@ -21,13 +21,16 @@ import { UpdateLeaveComponent } from './components/update-leave/update-leave.com
 import { LeaveService } from './services/leave.service';
 import { LeaveEffects } from './services/leave.effects';
 import { leaveReducer } from './services/leave.reducer';
+import { HolidayEffects } from './services/holiday.effect';
+import { HolidayService } from './services/holiday.service';
 
 /** Module Definition */
 @NgModule({
     imports: [ 
         CommonModule,
         TranslateModule,
-        EffectsModule.run(LeaveEffects)
+        EffectsModule.run(LeaveEffects),
+        EffectsModule.run(HolidayEffects)
      ],
     exports: [  ],
     declarations: [ 
@@ -39,7 +42,7 @@ import { leaveReducer } from './services/leave.reducer';
         SingleApprovalComponent,
         UpdateLeaveComponent        
      ],
-    providers: [ LeaveService ],
+    providers: [ LeaveService, HolidayService ],
 })
 
 export class LeaveModule {

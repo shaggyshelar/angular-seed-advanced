@@ -1,15 +1,17 @@
 /** Angular Dependencies */
-
+import { Router } from '@angular/router';
 /** Framework Dependencies */
-import { BaseComponent } from '../views/base-component';
+//import { BaseComponent } from '../views/base-component';
+import { BaseComponent, LogService } from '../../../framework.ref';
+
+/** Third Party Dependencies */
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
+import { LEAVE_ACTIONS } from '../../services/leave.actions';
 
 /** Component Declaration */
-
-//import { HolidayService } from '../../../shared/index';
-//import { Store } from '@ngrx/store';
-//import { AppState } from '../../../domain/appState';
 
 export class MyEvent {
   id: number;
@@ -29,14 +31,15 @@ export class Holiday {
 @BaseComponent({
   moduleId: module.id,
   selector: 'view-holidays',
-templateUrl: 'holidays.component.html'
+  templateUrl: 'holidays.component.html'
 })
 
 export class HolidaysComponent {
 
+  holidaysObs: Observable<any>;
   servRows = 7;
 
-  holidays: any[];
+  holidays: any;
   events: any[];
 
   eventDay: MyEvent;
@@ -47,6 +50,14 @@ export class HolidaysComponent {
   holidayDay: string;
   holidayDate: string;
   holidayType: string;
+
+  private holidayRecords;
+
+  constructor(
+    private router: Router, private store: Store<any>, private logService: LogService
+  ) {
+    this.holidays = [];
+  }
 
   //private holidayRecords;
 
@@ -62,25 +73,32 @@ export class HolidaysComponent {
   //}
 
   ngOnInit() {
-    this.holidays = [
-      { title: 'Lakshmi Puja', date: '30-10-2016', day: 'Sunday', type: 'Fixed' },
-      { title: 'Bhai Duj', date: '01-11-2016', day: 'Tuesday', type: 'Fixed' },
-      { title: 'Christmas', date: '25-12-2016', day: 'Sunday', type: 'Fixed' },
-      { title: 'New Year', date: '01-01-2017', day: 'Sunday', type: 'Fixed' },
-      { title: 'Makar Sankaranti', date: '14-01-2017', day: 'Saturday', type: 'Fixed' },
-      { title: 'Republic Day', date: '26-01-2017', day: 'Thursday', type: 'Fixed' },
-      { title: 'Holi', date: '13-03-2017', day: 'Monday', type: 'Fixed' },
-    ];
 
-    this.events = [
-      { 'title': 'Lakshmi Puja', 'start': '2016-10-30' },
-      { 'title': 'Bhai Duj', 'start': '2016-11-01' },
-      { 'title': 'Christmas', 'start': '2016-12-25' },
-      { 'title': 'New Year', 'start': '2017-01-01' },
-      { 'title': 'Makar Sankaranti', 'start': '2017-01-14' },
-      { 'title': 'Republic Day', 'start': '2017-01-26' },
-      { 'title': 'Holi', 'start': '2017-03-13' },
-    ];
+    this.store.dispatch({ type: LEAVE_ACTIONS.HOLIDAYS, payload: 1 });
+    this.holidaysObs = this.store.select('leave');
+    this.holidaysObs.subscribe(res => {
+      this.holidays = res ? this.arrangeData(res.holidays) : [];
+    });
+
+    // this.holidays = [
+    //   { title: 'Lakshmi Puja', date: '30-10-2016', day: 'Sunday', type: 'Fixed' },
+    //   { title: 'Bhai Duj', date: '01-11-2016', day: 'Tuesday', type: 'Fixed' },
+    //   { title: 'Christmas', date: '25-12-2016', day: 'Sunday', type: 'Fixed' },
+    //   { title: 'New Year', date: '01-01-2017', day: 'Sunday', type: 'Fixed' },
+    //   { title: 'Makar Sankaranti', date: '14-01-2017', day: 'Saturday', type: 'Fixed' },
+    //   { title: 'Republic Day', date: '26-01-2017', day: 'Thursday', type: 'Fixed' },
+    //   { title: 'Holi', date: '13-03-2017', day: 'Monday', type: 'Fixed' },
+    // ];
+
+    // this.events = [
+    //   { 'title': 'Lakshmi Puja', 'start': '2016-10-30' },
+    //   { 'title': 'Bhai Duj', 'start': '2016-11-01' },
+    //   { 'title': 'Christmas', 'start': '2016-12-25' },
+    //   { 'title': 'New Year', 'start': '2017-01-01' },
+    //   { 'title': 'Makar Sankaranti', 'start': '2017-01-14' },
+    //   { 'title': 'Republic Day', 'start': '2017-01-26' },
+    //   { 'title': 'Holi', 'start': '2017-03-13' },
+    // ];
 
     //this.holidayRecords = this.holidayService.getComments();
   }
@@ -104,4 +122,22 @@ export class HolidaysComponent {
 
   }
 
+//cal events require : title | start
+//datatable require  : title | date | day | type
+//data being received: id: num |title: str | holidaysDate: Date | weekDay: str | holidayType: str
+  arrangeData(params) {
+    var bufDate;
+    var newHoliday: any[] = [];
+    for (var index in params) {
+      newHoliday.push({
+        id: params[index].id,
+        title: params[index].title,
+        holidayDate: '',
+        start: params[index].holidaysDate,
+        weekDay: params[index].weekday,
+        holidayType: params[index].holidayType
+      });
+    }
+    return newHoliday;
+  }
 }
