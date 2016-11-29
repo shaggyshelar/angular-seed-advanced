@@ -1,6 +1,5 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 /** Framework Dependencies */
 import { BaseComponent, LogService } from '../../../../framework.ref';
@@ -14,7 +13,7 @@ import { BaseComponent, LogService } from '../../../../framework.ref';
 })
 export class QuickSidebarComponent implements OnInit {
 
-  constructor(private router: Router, private logService: LogService) {
+  constructor(private logService: LogService) {
     this.logService.debug('QuickSidebarComponent :  constructor');
   }
 

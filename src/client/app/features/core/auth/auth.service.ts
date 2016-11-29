@@ -19,7 +19,7 @@ export class AuthService extends BaseService {
     }
 
     authenticate(username: string, password: string) {
-        this.router.navigate(['../app']);
+        this.router.navigate(['/']);
         this.authenticated = true;
         return true;
     }

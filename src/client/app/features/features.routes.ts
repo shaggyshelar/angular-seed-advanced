@@ -39,15 +39,15 @@ export const featureRoutes: Routes = [
 /** DO NOT UPDATE BELOW CODE */
 /** Features Main routes */
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'app',
-        pathMatch: 'full'
+    // {
+    //     path: '',
+    //     redirectTo: 'app',
+    //     pathMatch: 'full'
 
-    },
+    // },
     ...AuthRoutes,
     {
-        path: 'app',
+        path: '',
         component: DashboardContainerComponent,
         canActivate: [AuthGuard],
         children: [

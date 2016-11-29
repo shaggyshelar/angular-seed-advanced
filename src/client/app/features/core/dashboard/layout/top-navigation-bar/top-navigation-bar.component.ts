@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 /** Framework Dependencies */
 import { BaseComponent, LogService } from '../../../../framework.ref';
+import { LoginService } from '../../../shared/services/login.service';
 
 @BaseComponent({
   moduleId: module.id,
@@ -13,8 +14,13 @@ import { BaseComponent, LogService } from '../../../../framework.ref';
 })
 export class TopNavigationBarComponent implements OnInit {
 
-  constructor(private router: Router, private logService: LogService) {
+  constructor(private loginService: LoginService, private router: Router, private logService: LogService) {
     this.logService.debug('TopNavigationBarComponent : constructor');
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
