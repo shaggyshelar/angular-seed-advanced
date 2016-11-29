@@ -2,7 +2,7 @@
 var holidays = [
     {
         id: 1,
-        title: 'Lakshmi Pune',
+        title: 'Lakshmi Pujan',
         holidaysDate: new Date(2016,10,30,00,00,00,00),
         weekDay: 'Sunday',
         holidayType: 'Fixed',
