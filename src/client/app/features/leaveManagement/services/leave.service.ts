@@ -17,7 +17,7 @@ import { Leave } from '../models/leave';
 import { LeaveState } from '../models/leave.state';
 
 /** Context for service calls */
-export const CONTEXT = 'leave';
+export const CONTEXT = 'Leave';
 
 /** Service Definition */
 @Injectable()
@@ -30,11 +30,17 @@ export class LeaveService extends BaseService {
     }
 
     /**
-     * getProfile method
+     * getLeave method
+     * Gets leave object corresponding to ID specified
      */
     getLeave(id): Observable<Leave> {
         return this.get$(id).map(res => res.json());
     }
+
+    /**
+     * getLeaves method
+     * Gets array of leaves
+     */
     getLeaves(): Observable<Leave> {
         return this.getList$().map(res => res.json());
     }
