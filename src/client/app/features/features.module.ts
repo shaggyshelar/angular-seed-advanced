@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { combineReducers, ActionReducer, StoreModule } from '@ngrx/store';
 
 /** Framework Dependencies */
-import { multilingualReducer } from './framework.ref';
+//import { multilingualReducer } from './framework.ref';
 
 /** Module Level Dependencies */
 //Components
@@ -53,7 +53,7 @@ export class FeaturesModule {
             .filter(route => (route.data && route.data['reducers']))
             .map(route => route.data['reducers']).filter(() => true);
         return combineReducers(Object.assign({},
-            { i18n: multilingualReducer },
+            //{ i18n: multilingualReducer },
             ...actionReducers
         ));
     }
