@@ -35,7 +35,7 @@ export class UpdateLeaveComponent {
   }
 
   closeClicked() {
-    this.router.navigate(['/leave-management/my-leaves']);
+    this.router.navigate(['/leave/my-leaves']);
   }
 
 }

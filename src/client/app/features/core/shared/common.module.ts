@@ -48,7 +48,7 @@ let imports = [
     RouterModule,
     AngularCommonModule,  
     FormsModule, 
-    ReactiveFormsModule,    
+    ReactiveFormsModule, 
     translate];
 
 /**  Exported components declaration   */
@@ -57,6 +57,8 @@ let exportComponents = [
     FormsModule,
     ReactiveFormsModule,
     AngularCommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
     //translate,
     IfAuthorize,
     UnauthorizedAccessComponent,
