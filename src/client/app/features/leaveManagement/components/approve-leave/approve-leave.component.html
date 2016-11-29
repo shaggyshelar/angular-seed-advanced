@@ -28,8 +28,8 @@
                             <p-column field="approvers" header="{{ 'APPROVERS' | translate }}" [sortable]="true"></p-column>
                             <p-column field="pending" header="{{ 'PENDING_APPROVERS' | translate }}" [sortable]="true"></p-column>
                             <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
-                                <template let-car="rowData" pTemplate type="body">
-                                    <button id="actionEdit" type="button" (click)="editBtnClicked()" pButton icon="fa-edit"></button>
+                                <template let-leave="rowData" pTemplate type="body">
+                                    <button id="actionEdit" type="button" (click)="editBtnClicked(leave.id)" pButton icon="fa-edit"></button>
                                 </template>
                             </p-column>
                         </p-dataTable>

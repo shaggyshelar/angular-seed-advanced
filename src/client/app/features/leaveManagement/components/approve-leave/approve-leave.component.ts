@@ -34,8 +34,8 @@ export class ApproveLeaveComponent implements OnInit {
 
   ngOnInit() {
     this.approvalRecords = [
-      { eid: 23123, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-      { eid: 23124, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' }
+      { id:2, eid: 23123, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
+      { id:3, eid: 23124, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' }
     ];
 
     this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
@@ -48,7 +48,7 @@ export class ApproveLeaveComponent implements OnInit {
   }
 
 
-  editBtnClicked() {
-    this.router.navigate(['/leave/single-approval']);
+  editBtnClicked(id) {
+    this.router.navigate(['/leave/single-approval',id]);
   }
 }
