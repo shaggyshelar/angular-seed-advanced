@@ -21,6 +21,8 @@ import { UserModule } from './users/users.module';
 import { TimesheetModule } from './timesheet/index';
 import { CorporateModule } from './corporate/index';
 import { AdminModule } from './admin/index';
+import { LeaveModule } from './leaveManagement/index';
+
 /**
  * 
  import { LoginComponent } from './app/components/login/login.component';
@@ -41,6 +43,7 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
         TimesheetModule,
         CorporateModule,
         AdminModule,
+        LeaveModule
     ],
     exports: [],
     declarations: [FeaturesComponent],

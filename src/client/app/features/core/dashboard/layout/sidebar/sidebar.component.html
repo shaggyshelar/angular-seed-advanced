@@ -121,7 +121,7 @@
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item  " [ifAuthorize]="['Leave.READ']">
+			<li class="nav-item  " >
 				<a href="javascript:;" class="nav-link nav-toggle">
 					<i class="icon-calendar"></i>
 					<span class="title">Leave Management</span>
@@ -129,27 +129,27 @@
 				</a>
 				<ul class="sub-menu">
 					<li class="nav-item  " [ifAuthorize]="['Holiday.READ']">
-						<a routerLink="/leave-management/holidays" routerLinkActive="active">
+						<a routerLink="/leave/holidays" routerLinkActive="active">
 							<span class="title">Holidays</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Leave.READ']">
-						<a routerLink="/leave-management/my-leaves" routerLinkActive="active">
+						<a routerLink="/leave/my-leaves" routerLinkActive="active">
 							<span class="title">My Leaves</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Leave.CREATE']">
-						<a routerLink="/leave-management/apply-leave" routerLinkActive="active">
+						<a routerLink="/leave/apply-leave" routerLinkActive="active">
 							<span class="title">Apply For Leave</span>
 						</a>
 					</li>
-					<li class="nav-item  " [ifAuthorize]="['LeaveApproval.READ']">
-						<a routerLink="/leave-management/approve-leave" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['LeaveApproval.READ','LeaveApproval.UPDATE']">
+						<a routerLink="/leave/approve-leave" routerLinkActive="active">
 							<span class="title">Leave Approval</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['BulkLeaveApproval.UPDATE','BulkLeaveApproval.READ']">
-						<a routerLink="/leave-management/bulk-approval" routerLinkActive="active">
+						<a routerLink="/leave/bulk-approval" routerLinkActive="active">
 							<span class="title">Bulk Leave Approval</span>
 						</a>
 					</li>

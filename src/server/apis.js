@@ -3,7 +3,7 @@ var users = require('./userData');
 var _ = require('lodash');
 
 module.exports = function (app) {
-    let usersData = [
+    var usersData = [
         { id: 1, name: 'mahesh', age: '31', email: 'kedari.mahesh@gmail.com' },
         { id: 2, name: 'Sachin', age: '28', email: 'sachin@gmail.com' },
         { id: 3, name: 'Mukul', age: '28', email: 'mukul@gmail.com' }

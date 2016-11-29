@@ -47,7 +47,7 @@ export function main() {
 
                         let homeInstance = fixture.debugElement.children[0].componentInstance;
                         homeInstance.closeClicked();
-                        t.e(urlVar).toBe('/leave-management/approve-leave');
+                        t.e(urlVar).toBe('/leave/approve-leave');
                     });
             }));
 

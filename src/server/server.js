@@ -13,6 +13,8 @@ require('./features/features')(app);
 require('./roles/roles')(app);
 require('./corporate/conferenceBooking/conferenceBooking')(app);
 require('./corporate/ticket/ticket')(app);
+require('./leave/leave')(app);
+require('./holidays/holiday')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');
