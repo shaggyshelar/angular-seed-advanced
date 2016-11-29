@@ -5,8 +5,6 @@ var identityProof = [
             Name: 'Type1'
         },
         Value: 'value1',
-        PermanantAdd: 'PermanantAdd',
-        PermanantAddFilePath: '',
         Status: 'Pending for approval',
         Comments: '',
         FilePath: ''
@@ -16,8 +14,6 @@ var identityProof = [
             Name: 'Type2'
         },
         Value: 'value2',
-        PermanantAdd: 'PermanantAdd2',
-        PermanantAddFilePath: '',
         Status: 'Pending for approval',
         Comments: '',
         FilePath: ''

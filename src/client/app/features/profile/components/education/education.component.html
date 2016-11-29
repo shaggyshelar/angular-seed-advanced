@@ -14,14 +14,14 @@
                         <i class="fa fa-pencil icon-color" (click)="editEducation(educationData)"></i>
                     </template>
                 </p-column>
-                <p-column header="{{ 'CLASS' | translate }}" field="class"></p-column>
-                <p-column header="{{ 'DEGREE' | translate }}" field="degree"></p-column>
-                <p-column header="{{ 'GRADE' | translate }}" field="grade"></p-column>
-                <p-column header="{{ 'PERCENTAGE' | translate }}" field="percentage"></p-column>
-                <p-column header="{{ 'YEAR_OF_PASSING' | translate }}" field="yearOfPassing"></p-column>
-                <p-column header="{{ 'CERTIFICATE' | translate }}" field="certificate"></p-column>
-                <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-                <p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComment"></p-column>
+                <p-column header="{{ 'CLASS' | translate }}" field="Class.Name"></p-column>
+                <p-column header="{{ 'DEGREE' | translate }}" field="Degree"></p-column>
+                <p-column header="{{ 'GRADE' | translate }}" field="Grade"></p-column>
+                <p-column header="{{ 'PERCENTAGE' | translate }}" field="Percentage"></p-column>
+                <p-column header="{{ 'YEAR_OF_PASSING' | translate }}" field="YearOfPassing"></p-column>
+                <p-column header="{{ 'CERTIFICATE' | translate }}" field="FilePath"></p-column>
+                <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+                <p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
             </p-dataTable>
         </div>
         <div *ngIf="!showDiv">

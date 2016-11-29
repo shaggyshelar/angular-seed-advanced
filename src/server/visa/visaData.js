@@ -2,6 +2,7 @@ var visa = [
     {
         ID: 1,
         Number: '34534535',
+        ExpDate: '12/12/20',
         Type: 'Type1',
         FilePath: '',
         Status: 'Pending for approval',

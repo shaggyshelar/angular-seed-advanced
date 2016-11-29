@@ -79,20 +79,20 @@ export class SkillSetComponent implements OnInit {
   }
 
   onSubmit({ value, valid }: { value: SkillSetForm, valid: boolean }) {
-    var skillSetData = _.find(this.skillSet, ['ID', value.id]);
-    if (skillSetData) {
-      skillSetData.Type = value.skillType.name;
-      skillSetData.Description = value.skills;
-    } else {
-      this.skillSet.push({
-        ID: this.skillSet.length + 1,
-        Type: value.skillType.name,
-        Description: value.skills,
-        Status: 'status',
-        Comments: 'Comment',
-        Approvers: 'Lead'
-      });
-    }
+    // var skillSetData = _.find(this.skillSet, ['ID', value.id]);
+    // if (skillSetData) {
+    //   skillSetData.Type = value.skillType.name;
+    //   skillSetData.Description = value.skills;
+    // } else {
+    //   this.skillSet.push({
+    //     ID: this.skillSet.length + 1,
+    //     Type: value.skillType.name,
+    //     Description: value.skills,
+    //     Status: 'status',
+    //     Comments: 'Comment',
+    //     Approvers: 'Lead'
+    //   });
+    // }
     this.showDiv = true;
   }
 

@@ -1,5 +1,6 @@
 export interface EmploymentHistory {
     ID: number;
+    EmploymentDetail: string;
     StartDate: string;
     EndDate: string;
     Duration: string;

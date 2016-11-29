@@ -23,11 +23,11 @@
             </div>
             <div *ngIf="passport.length > 0">
                 <p-dataTable [value]="passport" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-                    <p-column header="{{ 'PASSPORT_NUMBER' | translate }}" field="passportNumber"></p-column>
-                    <p-column header="{{ 'PASSPORT_EXPIRY_DATE' | translate }}" field="passportExpiryDate"></p-column>
-                    <p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
-                    <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-                    <p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComment"></p-column>
+                    <p-column header="{{ 'PASSPORT_NUMBER' | translate }}" field="Number"></p-column>
+                    <p-column header="{{ 'PASSPORT_EXPIRY_DATE' | translate }}" field="ExpDate"></p-column>
+                    <p-column header="{{ 'DOCUMENT' | translate }}" field="FilePath"></p-column>
+                    <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+                    <p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
                 </p-dataTable>
             </div>
 

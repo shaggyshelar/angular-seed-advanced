@@ -22,12 +22,12 @@
 							<i class="fa fa-pencil icon-color" (click)="editVisa(visaData)"></i>
 						</template>
 					</p-column>
-					<p-column header="{{ 'VISA_NUMBER' | translate }}" field="visaNumber"></p-column>
-					<p-column header="{{ 'VISA_EXPIRY_DATE' | translate }}" field="visaExpiryDate"></p-column>
-					<p-column header="{{ 'VISA_TYPE' | translate }}" field="visaType"></p-column>
-					<p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
-					<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-					<p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComments"></p-column>
+					<p-column header="{{ 'VISA_NUMBER' | translate }}" field="Number"></p-column>
+					<p-column header="{{ 'VISA_EXPIRY_DATE' | translate }}" field="ExpDate"></p-column>
+					<p-column header="{{ 'VISA_TYPE' | translate }}" field="Type"></p-column>
+					<p-column header="{{ 'DOCUMENT' | translate }}" field="FilePath"></p-column>
+					<p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+					<p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
 				</p-dataTable>
 			</div>
 			<div *ngIf="!showDiv">

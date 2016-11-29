@@ -26,11 +26,11 @@
                         <i class="fa fa-pencil icon-color" (click)="editIdentityProof(identity)"></i>
                     </template>
                 </p-column>
-                <p-column header="{{ 'IDENTITY_TYPE' | translate }}" field="identityType"></p-column>
-                <p-column header="{{ 'VALUE' | translate }}" field="value"></p-column>
-                <p-column header="{{ 'DOCUMENT' | translate }}" field="document"></p-column>
-                <p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-                <p-column header="{{ 'HR_COMMENT' | translate }}" field="hrComment"></p-column>
+                <p-column header="{{ 'IDENTITY_TYPE' | translate }}" field="Type.Name"></p-column>
+                <p-column header="{{ 'VALUE' | translate }}" field="Value"></p-column>
+                <p-column header="{{ 'DOCUMENT' | translate }}" field="FilePath"></p-column>
+                <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+                <p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
             </p-dataTable>
         </div>
 

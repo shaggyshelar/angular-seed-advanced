@@ -11,16 +11,16 @@
 						<i class="fa fa-pencil icon-color" (click)="editExperienceData(experienceData)"></i>
 					</template>
 				</p-column>
-				<p-column header="{{ 'PROJECT' | translate }}" field="project"></p-column>
-				<p-column header="{{ 'CLIENT' | translate }}" field="client"></p-column>
-				<p-column header="{{ 'START_DATE' | translate }}" field="startDate"></p-column>
-				<p-column header="{{ 'END_DATE' | translate }}" field="endDate"></p-column>
-				<p-column header="{{ 'ROLE' | translate }}" field="role"></p-column>
-				<p-column header="{{ 'ENVIRONMENT' | translate }}" field="environment"></p-column>
-				<p-column header="{{ 'DURATION' | translate }}" field="duration"></p-column>
-				<p-column header="{{ 'STATUS' | translate }}" field="status"></p-column>
-				<p-column header="{{ 'CURRENT_PROJECT' | translate }}" field="currentProject"></p-column>
-				<p-column header="{{ 'COMMENTS' | translate }}" field="comment"></p-column>
+				<p-column header="{{ 'PROJECT' | translate }}" field="Project.Name"></p-column>
+				<p-column header="{{ 'CLIENT' | translate }}" field="Client.Name"></p-column>
+				<p-column header="{{ 'START_DATE' | translate }}" field="StartDate"></p-column>
+				<p-column header="{{ 'END_DATE' | translate }}" field="EndDate"></p-column>
+				<p-column header="{{ 'ROLE' | translate }}" field="Role"></p-column>
+				<p-column header="{{ 'ENVIRONMENT' | translate }}" field="Environment"></p-column>
+				<p-column header="{{ 'DURATION' | translate }}" field="Duration"></p-column>
+				<p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+				<p-column header="{{ 'CURRENT_PROJECT' | translate }}" field="IsCurrentProject"></p-column>
+				<p-column header="{{ 'COMMENTS' | translate }}" field="Comments"></p-column>
 			</p-dataTable>
 		</div>
 		<div *ngIf="!showDiv">
