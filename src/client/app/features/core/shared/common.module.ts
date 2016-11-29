@@ -46,14 +46,16 @@ let primeNgComponents = [
  */
 let imports = [
     RouterModule,
-    AngularCommonModule,
+    AngularCommonModule,  
     FormsModule, 
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
     translate];
 
 /**  Exported components declaration   */
 let exportComponents = [
-    RouterModule,
+    RouterModule,    
+    FormsModule,
+    ReactiveFormsModule,
     AngularCommonModule,
     FormsModule, 
     ReactiveFormsModule,
@@ -61,7 +63,7 @@ let exportComponents = [
     IfAuthorize,
     UnauthorizedAccessComponent,
     ...primeNgComponents
-];
+    ];
 
 /**
  * Components/ Directives declaration
