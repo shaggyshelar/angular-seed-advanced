@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 module.exports = function (app) {
 
-    app.get('/api/leave/:id', function (req, res) {
+    app.get('/api/Leave/:id', function (req, res) {
         var id = req.params.id;
         for (var index in leaves) {
             if (leaves[index].id == id) {
@@ -16,20 +16,20 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/api/leave', function (req, res) {
+    app.get('/api/Leave', function (req, res) {
         res.json(leaves);
     });
 
-    app.post('/api/leave', function (req, res) {
+    app.post('/api/Leave', function (req, res) {
         if (req.body != null) {
             leaves.push(req.body);
             res.sendStatus(201);
         } else {
-            res.status(500).end('Bad Request.');
+            res.sendSatus(500).end('Bad Request.');
         }
     });
 
-    app.put('/api/leave', function (req, res) {
+    app.put('/api/Leave/:id', function (req, res) {
         if (req.body != null && req.params.id) {
             var id = req.params.id;
             for (var index in leaves) {
@@ -41,17 +41,16 @@ module.exports = function (app) {
             res.sendStatus(201);
         }
         else {
-            res.status(500).end('Bad Request.');
+            res.sendSatus(500).end('Bad Request.');
         }
     });
 
-    app.get('/api/leave/count', function (req, res) {
-        console.log('/api/leave/count');
+    app.get('/api/Leaves/GetCount', function (req, res) {
         res.json(leaveCount);
     });
 
 
-    app.get('/api/leave/userData', function (req, res) {
+    app.get('/api/Leaves/GetUserDetails', function (req, res) {
         res.json(user);
     });
 }
