@@ -5,8 +5,10 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // app
 import { BaseComponent, RouterExtensions } from '../../frameworks/core/index';
-import { NAME_LIST_ACTIONS } from '../../frameworks/sample/index';
 import { LoginService } from '../../shared/services/login.service';
+//import { IAppState, getNames } from '../../frameworks/ngrx/index';
+import { IAppState } from '../../frameworks/ngrx/index';
+import * as nameList from '../../frameworks/sample/index';
 
 @BaseComponent({
   moduleId: module.id,
@@ -15,11 +17,11 @@ import { LoginService } from '../../shared/services/login.service';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public names$: Observable<any>;
+  public names$: Observable<Array<string>>;
   public newName: string = '';
 
-  constructor(private loginService: LoginService, private store: Store<any>, public routerext: RouterExtensions, private _router: Router) {
-    this.names$ = store.select('names');
+  constructor(private loginService: LoginService, private store: Store<IAppState>, public routerext: RouterExtensions, private _router: Router) {
+    //this.names$ = store.let(<any>getNames);
   }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
    * @returns return false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    this.store.dispatch({ type: NAME_LIST_ACTIONS.ADD, payload: this.newName });
+    this.store.dispatch(new nameList.AddAction(this.newName));
     this.newName = '';
     return false;
   }
