@@ -24,7 +24,7 @@
 		<ul class="user-menu" style="display:none">
 			<br/>
 			<li>
-				<a routerLink="/profile/my" routerLinkActive="active">
+				<a routerLink="/profile" routerLinkActive="active">
 					<i class="icon-user"></i> &nbsp;&nbsp; {{ 'MY_PROFILE' | translate }}
 				</a>
 			</li>
@@ -67,8 +67,8 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
-					<li class="nav-item">
-						<a routerLinkActive="active">
+					<li class="nav-item" >
+						<a  routerLinkActive="active">
 							<span class="title">User</span>
 						</a>
 					</li>
@@ -77,8 +77,8 @@
 							<span class="title">Feature</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a routerLinkActive="active">
+					<li class="nav-item" >
+						<a routerLink="/admin/role" routerLinkActive="active">
 							<span class="title">Role</span>
 						</a>
 					</li>
@@ -95,27 +95,27 @@
 				</a>
 				<ul class="sub-menu">
 					<li class="nav-item  " [ifAuthorize]="['Timesheet.READ']">
-						<a routerLink="/app/timesheet/my" routerLinkActive="active">
+						<a routerLink="/timesheet/my" routerLinkActive="active">
 							<span class="title">My Timesheets</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Timesheet.CREATE']">
-						<a routerLink="/app/timesheet/add-edit" routerLinkActive="active">
+						<a routerLink="/timesheet/add-edit" routerLinkActive="active">
 							<span class="title">Enter Timesheets</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Timesheet.UPDATE','Timesheet.READ']">
-						<a routerLink="/app/timesheet/approve" routerLinkActive="active">
+						<a routerLink="/timesheet/approve" routerLinkActive="active">
 							<span class="title">Approve Timesheets</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Timesheet.READ']">
-						<a routerLink="/app/timesheet/approved" routerLinkActive="active">
+						<a routerLink="/timesheet/approved" routerLinkActive="active">
 							<span class="title">Approved Timesheets</span>
 						</a>
 					</li>
 					<li class="nav-item  " [ifAuthorize]="['Timesheet.READ']">
-						<a routerLink="/app/timesheet/report" routerLinkActive="active">
+						<a routerLink="/timesheet/report" routerLinkActive="active">
 							<span class="title">Timesheet Report</span>
 						</a>
 					</li>
@@ -128,28 +128,28 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
-					<li class="nav-item  " >
-						<a routerLink="/leave/holidays" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['Holiday.READ']">
+						<a routerLink="/leave-management/holidays" routerLinkActive="active">
 							<span class="title">Holidays</span>
 						</a>
 					</li>
-					<li class="nav-item  " >
-						<a routerLink="/leave/my-leaves" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['Leave.READ']">
+						<a routerLink="/leave-management/my-leaves" routerLinkActive="active">
 							<span class="title">My Leaves</span>
 						</a>
 					</li>
-					<li class="nav-item  " >
-						<a routerLink="/leave/apply-leave" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['Leave.CREATE']">
+						<a routerLink="/leave-management/apply-leave" routerLinkActive="active">
 							<span class="title">Apply For Leave</span>
 						</a>
 					</li>
-					<li class="nav-item  " >
-						<a routerLink="/leave/approve-leave" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['LeaveApproval.READ','LeaveApproval.UPDATE']">
+						<a routerLink="/leave-management/approve-leave" routerLinkActive="active">
 							<span class="title">Leave Approval</span>
 						</a>
 					</li>
-					<li class="nav-item  " >
-						<a routerLink="/leave/bulk-approval" routerLinkActive="active">
+					<li class="nav-item  " [ifAuthorize]="['BulkLeaveApproval.UPDATE','BulkLeaveApproval.READ']">
+						<a routerLink="/leave-management/bulk-approval" routerLinkActive="active">
 							<span class="title">Bulk Leave Approval</span>
 						</a>
 					</li>
@@ -163,19 +163,19 @@
 				</a>
 				<ul class="sub-menu">
 					<li class="nav-item  ">
-						<a routerLink="/app/corporate/conferenceBooking" routerLinkActive="active">
+						<a routerLink="/corporate/conferenceBooking" routerLinkActive="active">
 							<span class="title">Conference Booking</span>
 						</a>
 					</li>
 					<li class="nav-item  ">
-						<a routerLink="/app/corporate/log-ticket" routerLinkActive="active">
+						<a routerLink="/corporate/log-ticket" routerLinkActive="active">
 							<span class="title">Log Ticket</span>
 						</a>
 					</li>
 				</ul>
 			</li>
 			<li class="nav-item  ">
-				<a routerLink="/app/user" routerLinkActive="active" class="nav-link nav-toggle">
+				<a routerLink="/user" routerLinkActive="active" class="nav-link nav-toggle">
 					<i class="icon-calendar"></i>
 					<span class="title">Users</span>
 					<span class="arrow"></span>
