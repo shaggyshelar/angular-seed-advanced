@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./apis')(app);
 require('./features/features')(app);
 require('./roles/roles')(app);
+require('./corporate/conferenceBooking/conferenceBooking')(app);
+require('./corporate/ticket/ticket')(app);
 require('./profiles/profiles')(app);
 require('./achievements/achievements')(app);
 require('./certificates/certificates')(app);

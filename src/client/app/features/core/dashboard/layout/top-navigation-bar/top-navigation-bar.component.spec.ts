@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { TopNavigationBarComponent } from './top-navigation-bar.component';
 import { t } from '../../../../../frameworks/test/index';
 import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.module';
-import { LoginService } from '../../../shared/services/login.service';
+import { AuthService } from '../../../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { LogService } from '../../../../framework.ref';
@@ -21,7 +21,7 @@ export function main() {
                 ],
                 declarations: [TopNavigationBarComponent, TestComponent, RouterLinkStubDirective],
                 providers: [
-                    { provide: LoginService, useValue: new MockLoginService() },
+                    { provide: AuthService, useValue: new MockLoginService() },
                     { provide: Router, useClass: RouterStub },
                     { provide: LogService, useClass: LogServiceStub }
                 ],

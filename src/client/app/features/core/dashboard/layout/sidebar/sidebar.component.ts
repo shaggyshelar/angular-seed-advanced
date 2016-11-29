@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 /** Framework Dependencies */
 import { BaseComponent, LogService } from '../../../../framework.ref';
-import { LoginService } from '../../../shared/services/login.service';
+import { AuthService } from '../../../auth/auth.service';
 declare var $: any;
 
 /** Component Definition */
@@ -16,13 +16,13 @@ declare var $: any;
 })
 export class SidebarComponent implements OnInit {
   isUserMenuOpen: boolean;
-  constructor(private loginService: LoginService, private router: Router, private logService: LogService) {
+  constructor(private authService: AuthService, private router: Router, private logService: LogService) {
     this.logService.debug('SidebarComponent : constructor');
     this.isUserMenuOpen = false;
   }
 
   logout() {
-    this.loginService.logout();
+    this.authService.logout();
     this.isUserMenuOpen = false;
     this.router.navigate(['/login']);
   }

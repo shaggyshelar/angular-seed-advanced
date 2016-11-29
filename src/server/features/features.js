@@ -34,9 +34,9 @@ var editFeature = function (req, res) {
 };
 
 module.exports = function (app) {
-    app.get('/api/Feature/GetFeatures', utils.EnsureAuthenticated, getFeatures);
-    app.post('/api/Feature/GetFeatureById', utils.EnsureAuthenticated,  getFeatureById);
-    app.post('/api/Feature/Add', utils.EnsureAuthenticated, addFeature);
-    app.post('/api/Feature/Delete', utils.EnsureAuthenticated, deleteFeature);
-    app.post('/api/Feature/Edit', utils.EnsureAuthenticated, editFeature);
+    app.get('/api/Feature/GetFeatures',  getFeatures);
+    app.post('/api/Feature/GetFeatureById',  getFeatureById);
+    app.post('/api/Feature/Add', addFeature);
+    app.post('/api/Feature/Delete', deleteFeature);
+    app.post('/api/Feature/Edit', editFeature);
 };

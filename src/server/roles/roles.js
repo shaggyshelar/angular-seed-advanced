@@ -53,11 +53,11 @@ var revokePermissionFromRole = function (req, res) {
     res.json(permission);
 };
 module.exports = function (app) {
-    app.get('/api/Role/GetRoles', utils.EnsureAuthenticated, getRoles);
-    app.post('/api/Role/GetRoleById', utils.EnsureAuthenticated,  getRoleById);
-    app.post('/api/Role/Add', utils.EnsureAuthenticated,  addRole);
-    app.post('/api/Role/Delete', utils.EnsureAuthenticated,  deleteRole);
-    app.post('/api/Role/Edit', utils.EnsureAuthenticated,  editRole);
+    app.get('/api/Role/GetRoles',  getRoles);
+    app.post('/api/Role/GetRoleById',  getRoleById);
+    app.post('/api/Role/Add',   addRole);
+    app.post('/api/Role/Delete', deleteRole);
+    app.post('/api/Role/Edit',  editRole);
     app.post('/api/Role/GetPermissionsByRole', utils.EnsureAuthenticated,  getPermissionsByRole);
     app.post('/api/Role/AddPermissionToRole', utils.EnsureAuthenticated,  addPermissionToRole);
     app.post('/api/Role/RevokePermissionFromRole', utils.EnsureAuthenticated,  revokePermissionFromRole);

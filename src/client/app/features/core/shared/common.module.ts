@@ -1,19 +1,19 @@
-/** Angular Dependencies */
+ /* Angular Dependencies */
 import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 import { CommonModule as AngularCommonModule } from '@angular/common';
 import {RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-/** Third party Dependencies */
+/* Third party Dependencies */
 import { TranslateLoader } from 'ng2-translate';
 
 import { ScheduleModule, DataTableModule, SharedModule, ButtonModule, InputTextareaModule, CalendarModule, DropdownModule, DialogModule, ConfirmDialogModule, GrowlModule, ConfirmationService, ProgressBarModule, CheckboxModule, FileUploadModule } from 'primeng/primeng';
 
-/** Framework Dependencies */
+/* Framework Dependencies */
 import { MultilingualModule, translateFactory } from '../../framework.ref';
 
-/** Module Level Dependencies */
+/* Module Level Dependencies */
 import { LoginService } from './services/login.service';
 import { IfAuthorize } from './directives/ifAuthorize.directive';
 import {UnauthorizedAccessComponent} from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
@@ -51,7 +51,7 @@ let imports = [
     ReactiveFormsModule, 
     translate];
 
-/**  Exported components declaration   */
+/*  Exported components declaration   */
 let exportComponents = [
     RouterModule,    
     FormsModule,
@@ -78,7 +78,7 @@ let declarations = [
  */
 let providers = [LoginService, ConfirmationService];
 
-/** Module Definition */
+/* Module Definition */
 @NgModule({
     imports,
     exports: exportComponents,
@@ -87,7 +87,7 @@ let providers = [LoginService, ConfirmationService];
 })
 export class CommonModule { }
 
-/** Export Translation Module */
+/* Export Translation Module */
 export var TranslateModule = MultilingualModule.forRoot([{
     provide: TranslateLoader,
     deps: [Http],
