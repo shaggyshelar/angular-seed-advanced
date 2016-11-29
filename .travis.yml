@@ -32,13 +32,14 @@ after_success: |
     git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     cd ..
     cd ..
-    echo "Application Deployed Succsffully!" | ./slacktee.sh -t "Heroku Deploy"
+    echo "Application Deployed!" | ./slacktee.sh -t "Heroku Deploy"
   fi
 
 branches:
   only: 
   - production
   - develop
+  - devMahesh
 
 notifications:
   email: true
