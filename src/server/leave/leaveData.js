@@ -1,143 +1,104 @@
 // List of hardcoded features along with their details.
-var leaves = [
-    {
-        leaveLst: [
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
-                },
-                startDate: new Date(2016, 11, 28, 00, 00, 00, 00),
-                endDate: new Date(2016, 11, 28, 00, 00, 00, 00),
-                numberOfLeave: 1,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
-                }
+var leaves = {
+    leaveLst: [
+        {
+            user: {
+                id: 10431,
+                name: 'Mukul Tilak'
             },
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
-                },
-                startDate: new Date(2016, 11, 29, 00, 00, 00, 00),
-                endDate: new Date(2016, 11, 29, 00, 00, 00, 00),
-                numberOfLeave: 1,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
-                }
-            }
-        ],
-        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
-        pending: '',
-        numberOfLeave: 2,
-        halfDayLeave: 0,
-        absent: 0,
-        halfDayAbsent: 0,
-        id: 1
-    },
-    {
-        leaveLst: [
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
-                },
-                startDate: new Date(2016, 11, 29, 00, 00, 00, 00),
-                endDate: new Date(2016, 12, 29, 00, 00, 00, 00),
-                numberOfLeave: 2,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
-                }
+            type: {
+                id: 1,
+                title: 'Leave'
             },
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
+            startDate: '1/12/2016 00:00:00',
+            endDate: '3/12/2016 00:00:00',
+            numberOfLeave: 3,
+            status: 'Approved',
+            reason: 'Ill health',
+            projects:[
+                {
+                    title: 'HRMS',
+                    manager: 'Sagar Shelar'
                 },
-                startDate: new Date(2016, 11, 30, 00, 00, 00, 00),
-                endDate: new Date(2016, 12, 30, 00, 00, 00, 00),
-                numberOfLeave: 2,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
+                {
+                    title: 'EBS Practice',
+                    manager: 'Kunal Adhikari'
                 }
-            }
-        ],
-        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
-        pending: '',
-        numberOfLeave: 2,
-        halfDayLeave: 0,
-        absent: 0,
-        halfDayAbsent: 0,
-        id: 2
-    },
-    {
-        leaveLst: [
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
-                },
-                startDate: new Date(2017, 1, 04, 00, 00, 00, 00),
-                endDate: new Date(2017, 1, 04, 00, 00, 00, 00),
-                numberOfLeave: 2,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
-                }
+            ],
+            approved:[
+                'Sagar Shelar'
+            ],
+            pending:[
+                'Kunal Adhikari'
+            ]
+        },
+        {
+            user: {
+                id: 10431,
+                name: 'Mukul Tilak'
             },
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
-                },
-                startDate: new Date(2017, 01, 05, 00, 00, 00, 00),
-                endDate: new Date(2017, 01, 05, 00, 00, 00, 00),
-                numberOfLeave: 2,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
-                }
+            type: {
+                id: 1,
+                title: 'Leave'
             },
-            {
-                user: {
-                    id: 10431,
-                    name: 'Mukul Tilak'
+            startDate: '31/12/2016 00:00:00',
+            endDate: '31/12/2016 00:00:00',
+            numberOfLeave: 1,
+            status: 'Approved',
+            reason: 'Party',
+            projects:[
+                {
+                    title: 'HRMS',
+                    manager: 'Sagar Shelar'
                 },
-                startDate: new Date(2017, 01, 06, 00, 00, 00, 00),
-                endDate: new Date(2016, 01, 06, 00, 00, 00, 00),
-                numberOfLeave: 2,
-                status: 'Approved',
-                reason: 'Personal',
-                leaveType : {
-                    id: 1,
-                    title: 'Leave'
+                {
+                    title: 'EBS Practice',
+                    manager: 'Kunal Adhikari'
                 }
-            }
-        ],
-        approvers: 'Sagar Shelar, Kunal Adhikari, Pooje Merchant',
-        pending: '',
-        numberOfLeave: 2,
-        halfDayLeave: 0,
-        absent: 0,
-        halfDayAbsent: 0,
-        id: 3
-    }
-];
+            ],
+            approved:[
+                'Sagar Shelar'
+            ],
+            pending:[
+                'Kunal Adhikari'
+            ]
+        },
+        {
+            user: {
+                id: 10431,
+                name: 'Mukul Tilak'
+            },
+            type: {
+                id: 1,
+                title: 'Leave'
+            },
+            startDate: '1/2/2017 00:00:00',
+            endDate: '5/2/2017 00:00:00',
+            numberOfLeave: 5,
+            status: 'Pending',
+            reason: 'Road Trip',
+            projects:[
+                {
+                    title: 'HRMS',
+                    manager: 'Sagar Shelar'
+                },
+                {
+                    title: 'EBS Practice',
+                    manager: 'Kunal Adhikari'
+                }
+            ],
+            approved:[
+                'Sagar Shelar'
+            ],
+            pending:[
+                'Kunal Adhikari'
+            ]
+        },
+    ],
+    numberOfLeave:3,
+    halfDayLeave:6,
+    absent:0,
+    halfDayAbsent:0
+};
 
 module.exports = leaves;
