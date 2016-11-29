@@ -46,9 +46,9 @@ let primeNgComponents = [
  */
 let imports = [
     RouterModule,
-    AngularCommonModule,
+    AngularCommonModule,  
     FormsModule, 
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
     translate];
 
 /*  Exported components declaration   */

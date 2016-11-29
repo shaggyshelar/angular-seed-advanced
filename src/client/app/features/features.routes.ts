@@ -11,6 +11,7 @@ import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
 import { CorporateModule, CorporateRoutes } from './corporate/index';
 import { AdminRoutes } from './admin/index';
+import { ProfileRoutes, ProfileModule } from './profile/index';
 import { LeaveRoutes, LeaveModule } from './leaveManagement/index';
 
 //Routes
@@ -49,7 +50,13 @@ export const featureRoutes: Routes = [
         children: [...AdminRoutes],
         data: {
             //reducers: AdminModule.reducers()
-    }
+        }
+    }, , {
+        path: 'profile',
+        children: [...ProfileRoutes],
+        data: {
+            reducers: ProfileModule.reducers()
+        }
     }, {
         path: 'leave',
         children: [...LeaveRoutes],
