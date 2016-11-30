@@ -34,7 +34,7 @@ after_success: |
       git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
     fi
     if [ "$TRAVIS_BRANCH" == "framework" ]; then
-      git push -f -q https://github.com/shaggyshelar/AngularDemo.git master
+      git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/AngularDemo.git master
     fi
     cd ..
     cd ..

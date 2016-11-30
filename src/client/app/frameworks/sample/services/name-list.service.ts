@@ -13,7 +13,6 @@ import { CATEGORY } from '../common/category.common';
 
 // module
 import { ISampleState } from '../states/index';
-import * as actions from '../actions/name-list.action';
 
 @Injectable()
 export class NameListService extends Analytics {
