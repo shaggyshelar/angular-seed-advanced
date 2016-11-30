@@ -9,6 +9,7 @@ import { TranslateLoader } from 'ng2-translate';
 
 // app
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
+import { FeaturesModule } from './app/features/features.module';
 
 //app
 import { routes } from './app/components/app.routes';
@@ -22,6 +23,7 @@ import { SampleModule } from './app/frameworks/sample/sample.module';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
+
 //SIZE INCREASE 200KB
 // Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 // if (String('<%= BUILD_TYPE %>') === 'dev') {
@@ -60,6 +62,7 @@ export function cons() {
   imports: [
     BrowserModule,
     routerModule,
+    FeaturesModule
     // CoreModule.forRoot([
     //   { provide: WindowService, useFactory: (win) },
     //   { provide: ConsoleService, useFactory: (cons) }

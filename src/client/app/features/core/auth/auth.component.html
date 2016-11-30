@@ -1,0 +1,11 @@
+<div class="logo"></div>
+<div class="login-block">
+    <h1>Login</h1>
+    <form  class="form-signin">
+        <input id="userName" [(ngModel)]="model.UserName" type="text" class="form-control" name="Username" placeholder="Username"
+            required autofocus />
+        <input id="password" [(ngModel)]="model.Password" type="password" class="form-control" name="Password" placeholder="Password"
+            required />
+        <button type="button" id="loginBtn" (click)="login()" class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" >Login</button>
+    </form>
+</div>
