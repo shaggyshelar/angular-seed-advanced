@@ -77,7 +77,7 @@
 							<span class="title">Feature</span>
 						</a>
 					</li>
-					<li class="nav-item" >
+					<li class="nav-item"  [ifAuthorize]="['ROLE.READ']">
 						<a routerLink="/admin/role" routerLinkActive="active">
 							<span class="title">Role</span>
 						</a>
@@ -155,26 +155,26 @@
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item  " [ifAuthorize]="['ConferenceBook.READ']">
+			<li class="nav-item"  [ifAuthorize]="['CORPORATE.MANAGE']">
 				<a href="javascript:;" class="nav-link nav-toggle">
 					<i class="fa fa-briefcase"></i>
 					<span class="title">Corporate</span>
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
-					<li class="nav-item  ">
+					<li class="nav-item"  [ifAuthorize]="['CONFERENCE_BOOK.READ']">
 						<a routerLink="/corporate/conferenceBooking" routerLinkActive="active">
 							<span class="title">Conference Booking</span>
 						</a>
 					</li>
-					<li class="nav-item  ">
+					<li class="nav-item  "  [ifAuthorize]="['TICKET.READ']">
 						<a routerLink="/corporate/log-ticket" routerLinkActive="active">
 							<span class="title">Log Ticket</span>
 						</a>
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item  ">
+			<li class="nav-item  "  [ifAuthorize]="['TICKET.READ']">
 				<a routerLink="/user" routerLinkActive="active" class="nav-link nav-toggle">
 					<i class="icon-calendar"></i>
 					<span class="title">Users</span>

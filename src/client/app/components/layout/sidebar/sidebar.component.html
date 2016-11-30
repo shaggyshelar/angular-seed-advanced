@@ -155,14 +155,14 @@
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item  " [ifAuthorize]="['ConferenceBook.READ']">
+			<li class="nav-item  " [ifAuthorize]="['CONFERENCE_BOOK.READ']">
 				<a href="javascript:;" class="nav-link nav-toggle">
 					<i class="fa fa-briefcase"></i>
 					<span class="title">Corporate</span>
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
-					<li class="nav-item  ">
+					<li class="nav-item  " [ifAuthorize]="['CONFERENCE_BOOK.READ']">
 						<a routerLink="/corporate/conferenceBooking" routerLinkActive="active">
 							<span class="title">Conference Booking</span>
 						</a>

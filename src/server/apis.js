@@ -8,7 +8,7 @@ module.exports = function (app) {
         { id: 2, name: 'Sachin', age: '28', email: 'sachin@gmail.com' },
         { id: 3, name: 'Mukul', age: '28', email: 'mukul@gmail.com' }
     ];
-    app.post('/api/Authentication/GetToken', function (req, res) {
+    app.post('/api/Auth', function (req, res) {
         var userName = req.body.UserName;
         var password = req.body.Password;
         var userIndex = _.findIndex(users, { UserName: userName, Password: password });
@@ -20,7 +20,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/api/GetLoggedInUserPermission', utils.EnsureAuthenticated, function (req, res) {
+    app.get('/api/Auth', utils.EnsureAuthenticated, function (req, res) {
         var userIndex = _.findIndex(users, { Id: req.userID });
         res.json(users[userIndex].Permissions);
     });

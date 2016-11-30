@@ -51,8 +51,6 @@ export class HolidaysComponent {
   holidayDate: string;
   holidayType: string;
 
-  private holidayRecords;
-
   constructor(
     private router: Router, private store: Store<any>, private logService: LogService
   ) {
@@ -135,7 +133,7 @@ export class HolidaysComponent {
     //   });
     //   console.log(JSON.stringify(params[index]));
     // }
-    console.log(JSON.stringify(params))
+    console.log(JSON.stringify(params));
     // return newHoliday;
   }
 
