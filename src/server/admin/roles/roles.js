@@ -1,4 +1,4 @@
-var utils = require('./../utils');
+var utils = require('../../utils');
 var roles = require('./../roles/rolesData');
 var _ = require('lodash');
 

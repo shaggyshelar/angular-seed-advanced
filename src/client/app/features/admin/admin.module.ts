@@ -14,6 +14,7 @@ import { RoleListComponent } from './components/roles/role-list/role-list.compon
 import { RoleAddEditComponent } from './components/roles/role-add-edit/role-add-edit.component';
 import { FeatureService } from './services/feature/feature.service';
 import { RoleService } from './services/role.service';
+import { PermissionService } from './services/permission.service';
 import { AdminReducer } from './services/admin.reducers';
 import { FeatureEffects } from './services/feature/feature.effects';
 
@@ -30,7 +31,7 @@ import { FeatureEffects } from './services/feature/feature.effects';
         RoleListComponent,
         RoleAddEditComponent
     ],
-    providers: [FeatureService,RoleService],
+    providers: [FeatureService,RoleService,PermissionService],
 })
 export class AdminModule {
     static reducers(): { [key: string]: ActionReducer<any> } {
