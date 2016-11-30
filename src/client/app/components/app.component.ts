@@ -13,8 +13,8 @@ import { BaseComponent, Config, LogService } from '../frameworks/core/index';
 @BaseComponent({
   moduleId: module.id,
   selector: 'sd-app',
-  //templateUrl: 'app.component.html',
-  template: 'Hello world!',
+  templateUrl: 'app.component.html',
+  //template: 'Hello world!',
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
 export class AppComponent {
