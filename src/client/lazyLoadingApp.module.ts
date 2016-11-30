@@ -8,10 +8,9 @@ import { Http } from '@angular/http';
 import { TranslateLoader } from 'ng2-translate';
 
 // app
-import { APP_COMPONENTS } from './app/components/index';
+import { APP_COMPONENTS, AppComponent } from './app/components/index';
 
 //app
-import { AppComponent } from './app.component';
 import { routes } from './app/components/app.routes';
 
 // feature modules
@@ -69,7 +68,7 @@ export function cons() {
     ],
   bootstrap: [AppComponent],
   declarations: [
-    AppComponent
+    APP_COMPONENTS
   ],
   providers: [
     {

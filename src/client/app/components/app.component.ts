@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import './operators';
 
 // app
-import { AnalyticsService } from '../frameworks/analytics/index';
+//import { AnalyticsService } from '../frameworks/analytics/index';
 import { BaseComponent, Config, LogService } from '../frameworks/core/index';
 
 /**
@@ -13,11 +13,12 @@ import { BaseComponent, Config, LogService } from '../frameworks/core/index';
 @BaseComponent({
   moduleId: module.id,
   selector: 'sd-app',
-  templateUrl: 'app.component.html',
+  //templateUrl: 'app.component.html',
+  template: 'Hello world!',
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
 export class AppComponent {
-  constructor(public analytics: AnalyticsService, public logger: LogService) {
-    logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
-  }
+  // constructor(public logger: LogService) {
+  //   logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
+  // }
 }
