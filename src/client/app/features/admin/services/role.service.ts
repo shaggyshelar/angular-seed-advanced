@@ -1,82 +1,43 @@
-import { Role } from '../models/role';
-import { Injectable, } from '@angular/core';
-import { Response, Http, Headers, RequestOptions } from '@angular/http';
+/** Angular Dependencies */
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+/** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { CustomAnalytics, AnalyticsService } from '../../../frameworks/analytics/index';
+//import 'rxjs/add/operator/map';
 
+/** Framework Level Dependencies */
+import { LogService, AnalyticsService } from '../../framework.ref';
+
+/** Module Level Dependencies */
+import { BaseService } from '../../core/index';
+import { Role } from '../models/role';
+/** Context for service calls */
+export const CONTEXT = 'role';
+
+/** Service Definition */
 @Injectable()
-export class RoleService extends CustomAnalytics {
+export class RoleService extends BaseService {
 
-    constructor(public analytics: AnalyticsService, public http: Http) {
-        super(analytics, http);
+    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
+        super(analyticsService, http, CONTEXT, logService);
+        this.logService.debug('RoleService  Initialized Successfully');
     }
 
-    addRole(role: Role) {
-        let url = this.toURL('api/Role/Add');
-        let headers = new Headers();
-        let body = JSON.stringify({ role });
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+    getRoles(): Observable<Role[]> {
+        this.logService.debug('RoleService : getConferenceBooking method');
+        return this.getList$(0,0,true).map(res => res.json());
     }
-    editRole(role: Role) {
-        let url = this.toURL('api/Role/Edit');
-        let headers = new Headers();
-        let body = JSON.stringify({ role });
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+    addRole(role:Role): Observable<any> {
+        return this.post$(role,true).map(res => res.json());
     }
-    getRoles() {
-        let url = this.toURL('api/Role/GetRoles');
-        let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(url, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+    editRole(role:Role): Observable<any> {
+        return this.put$(role.id,role,true).map(res => res.json());
     }
-
-
-    getRoleById(id: number) {
-        let url = this.toURL('api/Role/GetRoleById');
-        let body = JSON.stringify({ role: { id: id } });
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+    getRoleById(roleID): Observable<any> {
+        return this.get$(roleID,true).map(res => res.json());
     }
-
-    // editFeature(feature: Feature) {
-    //     let url = this.toURL('api/Feature/Edit');
-    //     let body = JSON.stringify(feature);
-    //     let headers = new Headers();
-    //     headers.append('Content-Type', 'application/json');
-    //     headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    //     let options = new RequestOptions({ headers: headers });
-    //     return this.http.post(url, body, options)
-    //         .map(this.extractData)
-    //         .catch(this.handleError);
-    // }
-
-    public handleError(error: Response) {
-        console.log(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
-    private extractData(res: Response) {
-        if (res.status < 200 || res.status >= 300) {
-            throw new Error('Bad response status: ' + res.status);
-        }
-        let body = res.json();
-        return body || {};
+    deleteRole(roleID): Observable<any> {
+        return this.delete$(roleID,true);
     }
 }

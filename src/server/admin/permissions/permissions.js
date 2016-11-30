@@ -27,7 +27,7 @@ var addPermissionToRole = function (req, res) {
     res.json(permission);
 };
 var revokePermissionFromRole = function (req, res) {
-    var permission = parseInt(req.params.id);
+    var permission = req.body;
     var roleindex = _.findIndex(roles.roleList, { id: parseInt(permission.RoleId) });
     var permissionindex = _.findIndex(roles.roleList[roleindex].Permissions, { Text: permission.text });
     roles.roleList[roleindex].Permissions.splice(permissionindex, 1);
@@ -38,5 +38,5 @@ module.exports = function (app) {
   app.get('/api/permission', utils.EnsureAuthenticated, getAllPermissions);
   app.get('/api/permission/:id', utils.EnsureAuthenticated, getPermissionsByRole);
   app.post('/api/permission', utils.EnsureAuthenticated, addPermissionToRole);
-  app.delete('/api/permission/:id', utils.EnsureAuthenticated, revokePermissionFromRole);
+  app.put('/api/permission', utils.EnsureAuthenticated, revokePermissionFromRole);
 };

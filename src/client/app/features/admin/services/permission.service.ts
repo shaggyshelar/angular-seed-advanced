@@ -33,5 +33,7 @@ export class PermissionService extends BaseService {
     addPermissionToRole(permission): Observable<any> {
         return this.post$(permission,true).map(res => res.json());
     }
-
+    revokePermission(permission): Observable<any> {
+        return this.put$(permission.id,permission,true);
+    }
 }

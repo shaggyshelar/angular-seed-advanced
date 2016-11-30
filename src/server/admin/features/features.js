@@ -19,7 +19,7 @@ var deleteFeature = function (req, res) {
     id: featureID
   });
   features.featuresList.splice(index, 1)
-  res.json(features.featuresList);
+  res.sendStatus(200);
 };
 
 var getFeatureById = function (req, res) {
@@ -36,7 +36,7 @@ var editFeature = function (req, res) {
     id: feature.id
   });
   features.featuresList[index] = feature
-  res.json(features.featuresList);
+  res.json(feature);
 };
 
 module.exports = function (app) {

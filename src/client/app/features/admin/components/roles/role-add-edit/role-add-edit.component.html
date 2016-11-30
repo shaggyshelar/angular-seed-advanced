@@ -58,11 +58,11 @@
                 </div>
               </div>
             </div>
-            <p-dataTable [value]="rolePermissionList" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+            <p-dataTable [value]="rolePermissionList | async" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
               <p-column field="Text" header="Permissions" [sortable]="true"></p-column>
               <p-column header="Revoke">
                 <template let-permission="rowData" pTemplate type="body">
-                  <a>Revoke</a>
+                  <a (click)="revokePermission(permission)">Revoke</a>
                 </template>
               </p-column>
             </p-dataTable>

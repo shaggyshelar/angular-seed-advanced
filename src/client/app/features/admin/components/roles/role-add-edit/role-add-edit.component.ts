@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 /** Other Module Dependencies */
-
+import { Observable } from 'rxjs/Rx';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
@@ -24,8 +24,8 @@ export class RoleAddEditComponent implements OnInit {
     params: number;
     permissionList: any;
     filteredPermissionList: any;
-    selectedPermission:Object;
-    rolePermissionList:Array<Object>;
+    selectedPermission:any;
+    rolePermissionList:Observable<any>;
     constructor(private roleService: RoleService,
         private permissionService: PermissionService,
         private route: ActivatedRoute, private router: Router) {
@@ -38,7 +38,7 @@ export class RoleAddEditComponent implements OnInit {
                 this.roleService.getRoleById(this.params)
                     .subscribe(
                     results => {
-                        this.role = <any>results;
+                        this.role = <Role>results;
                     },
                     error => this.errorMessage = <any>error);
                 this.getAllPermissions();
@@ -46,7 +46,6 @@ export class RoleAddEditComponent implements OnInit {
             }
         });
     }
-
 
     onSave() {
         if (this.params) {
@@ -88,13 +87,17 @@ export class RoleAddEditComponent implements OnInit {
             }
         }
     }
-     private getPermissionsByRole() {
-          this.permissionService.getPermissionsByRole(this.params)
-            .subscribe(
+    revokePermission(permission) {
+        permission.RoleId=this.params;
+        this.permissionService.revokePermission(permission)
+          .subscribe(
             results => {
-                this.rolePermissionList = <any>results;
+                this.getPermissionsByRole();
             },
             error => this.errorMessage = <any>error);
+    }
+     private getPermissionsByRole() {
+          this.rolePermissionList = this.permissionService.getPermissionsByRole(this.params);
     }
     private  getAllPermissions() {
         this.permissionService.getAllPermission()

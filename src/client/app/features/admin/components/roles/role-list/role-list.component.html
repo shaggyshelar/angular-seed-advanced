@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <p-dataTable [value]="roleList" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                <p-dataTable [value]="roleList | async" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                     <p-column field="name" header="Role Name" [sortable]="true"></p-column>
                     <p-column header="Edit">
                         <template let-role="rowData" pTemplate type="body">
@@ -36,8 +36,8 @@
                         </template>
                     </p-column>
                     <p-column header="Delete">
-                        <template let-feature="rowData" pTemplate type="body">
-                            <button class="btn btn-danger" ><i class="fa fa-trash"></i></button>
+                        <template let-role="rowData" pTemplate type="body">
+                            <button class="btn btn-danger"  (click)="onDelete(role)"><i class="fa fa-trash"></i></button>
                         </template>
                     </p-column>
                 </p-dataTable>

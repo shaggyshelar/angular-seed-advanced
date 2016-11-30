@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
 /** Other Module Dependencies */
-
+import { Observable } from 'rxjs/Rx';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
@@ -19,7 +19,7 @@ import { Role } from '../../../models/role';
 })
 
 export class RoleListComponent implements OnInit {
-    roleList: Array<Role>;
+    roleList: Observable<Role[]>;
     role: Role;
     errorMessage: any;
     constructor(private roleService: RoleService,private router: Router) {
@@ -30,27 +30,18 @@ export class RoleListComponent implements OnInit {
     }
 
     getRole() {
-        this.roleService.getRoles()
-            .subscribe(
-            results => {
-                this.roleList = results;
-            },
-            error => this.errorMessage = <any>error);
+       this.roleList= this.roleService.getRoles();
     }
-    // onCancel() {
-    //     this.feature = new Feature(0, '');
-    //     this.isAddEdit = false;
-    // }
     onEditClick(role:Role) {
          this.router.navigate(['/admin/role/edit',role.id]);
     }
-    // onDelete(feature: Feature) {
-    //      this.featureService.deleteFeature(feature)
-    //         .subscribe(
-    //         results => {
-    //             this.getFeature();
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
+    onDelete(role: Role) {
+         this.roleService.deleteRole(role.id)
+            .subscribe(
+            results => {
+                this.getRole();
+            },
+            error => this.errorMessage = <any>error);
+    }
 }
 
