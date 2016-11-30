@@ -7,13 +7,13 @@ module.exports = function (app) {
         res.json(certificateData);
     });
     app.post('/api/Certificate', function (req, res) {
-        let certificate = req.body;
+        var certificate = req.body;
         certificate.ID = certificateData.length + 1;
         certificateData.push(certificate);
         res.sendStatus(200);
     });
     app.put('/api/Certificate', function (req, res) {
-        let certificate = req.body;
+        var certificate = req.body;
         var index = _.findIndex(certificateData, { ID: certificate.ID });
         certificateData[index] = certificate;
         res.sendStatus(200);

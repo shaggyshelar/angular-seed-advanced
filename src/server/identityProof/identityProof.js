@@ -7,13 +7,13 @@ module.exports = function (app) {
         res.json(identityProofData);
     });
     app.post('/api/IdentityProof', function (req, res) {
-        let identityProof = req.body;
+        var identityProof = req.body;
         identityProof.ID = identityProofData.length + 1;
         identityProofData.push(identityProof);
         res.sendStatus(200);
     });
     app.put('/api/IdentityProof', function (req, res) {
-        let identityProof = req.body;
+        var identityProof = req.body;
         var index = _.findIndex(identityProofData, { ID: identityProof.ID });
         identityProofData[index] = identityProof;
         res.sendStatus(200);

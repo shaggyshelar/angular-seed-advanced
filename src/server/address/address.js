@@ -7,13 +7,13 @@ module.exports = function (app) {
         res.json(addressData);
     });
     app.post('/api/Address', function (req, res) {
-        let address = req.body;
+        var address = req.body;
         address.ID = addressData.length + 1;
         addressData.push(address);
         res.sendStatus(200);
     });
     app.put('/api/Address', function (req, res) {
-        let address = req.body;
+        var address = req.body;
         var index = _.findIndex(addressData, { ID: address.ID });
         addressData[index] = address;
         res.sendStatus(200);

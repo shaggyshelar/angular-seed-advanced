@@ -7,13 +7,13 @@ module.exports = function (app) {
         res.json(educationData);
     });
     app.post('/api/Education', function (req, res) {
-        let education = req.body;
+        var education = req.body;
         education.ID = educationData.length + 1;
         educationData.push(education);
         res.sendStatus(200);
     });
     app.put('/api/Education', function (req, res) {
-        let education = req.body;
+        var education = req.body;
         var index = _.findIndex(educationData, { ID: education.ID });
         educationData[index] = education;
         res.sendStatus(200);
