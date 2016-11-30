@@ -10,7 +10,7 @@ import { ErrorPagesRoutes, AuthGuard } from './core/index';
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
 import { CorporateModule, CorporateRoutes } from './corporate/index';
-import { AdminRoutes } from './admin/index';
+import { AdminRoutes, AdminModule } from './admin/index';
 import { ProfileRoutes, ProfileModule } from './profile/index';
 import { LeaveRoutes, LeaveModule } from './leaveManagement/index';
 
@@ -49,9 +49,9 @@ export const featureRoutes: Routes = [
         path: 'admin',
         children: [...AdminRoutes],
         data: {
-            //reducers: AdminModule.reducers()
+            reducers: AdminModule.reducers()
         }
-    },{
+    }, {
         path: 'profile',
         children: [...ProfileRoutes],
         data: {

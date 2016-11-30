@@ -9,7 +9,7 @@ app.use('/node_modules', express.static(__dirname + '/../../node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 require('./apis')(app);
-require('./features/features')(app);
+require('./admin/features/features')(app);
 require('./roles/roles')(app);
 require('./corporate/conferenceBooking/conferenceBooking')(app);
 require('./corporate/ticket/ticket')(app);
