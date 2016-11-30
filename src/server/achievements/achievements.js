@@ -7,7 +7,15 @@ module.exports = function (app) {
         res.json(achievementData);
     });
     app.post('/api/Achievement', function (req, res) {
-        console.log(req.body);
-        res.json(req.body);
+        var achievement = req.body;
+        achievement.ID = achievementData.length + 1;
+        achievementData.push(achievement);
+        res.sendStatus(200);
+    });
+    app.put('/api/Achievement', function (req, res) {
+        var achievement = req.body;
+        var index = _.findIndex(achievementData, { ID: achievement.ID });
+        achievementData[index] = achievement;
+        res.sendStatus(200);
     });
 };
