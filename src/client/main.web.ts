@@ -9,9 +9,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 // import { TranslationProviders } from './i18n.providers';
 
 // platfrom module
-//import { WebModule } from './web.module';
-
-import { AppModule } from './app/lazyLoading/app.module';
+import { WebModule } from './lazyLoadingApp.module';
 
 // example of how to use build variables to determine environment
 if (String('<%= BUILD_TYPE %>') === 'prod' || String('<%= TARGET_DESKTOP_BUILD %>') === 'true') {
@@ -25,5 +23,5 @@ if (String('<%= BUILD_TYPE %>') === 'prod' || String('<%= TARGET_DESKTOP_BUILD %
 // TP.getTranslationFile().then((providers: any) => {
   // const options: any = { providers };
   //platformBrowserDynamic().bootstrapModule(WebModule/*, options*/);
-  platformBrowserDynamic().bootstrapModule(AppModule/*, options*/);
+  platformBrowserDynamic().bootstrapModule(WebModule/*, options*/);
 // });
