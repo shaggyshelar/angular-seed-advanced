@@ -1,9 +1,7 @@
 <div platform>
-  Hello World!
-  <sd-home></sd-home>
-  <sd-about></sd-about>
-
-  <!--<sd-toolbar></sd-toolbar>
-  <sd-navbar></sd-navbar>
-  <router-outlet></router-outlet>-->
+  <nav>
+    <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">About</a>
+  </nav>
+  <router-outlet></router-outlet>
 </div>

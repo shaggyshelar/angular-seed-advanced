@@ -37,7 +37,7 @@ import { MultilingualService } from './app/frameworks/i18n/services/multilingual
 //SIZE INCREASE 800KB
 //MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
 
-//let routerModule = RouterModule.forRoot(routes);
+let routerModule = RouterModule.forRoot(routes);
 
 // if (String('<%= TARGET_DESKTOP %>') === 'true') {
 //   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
@@ -59,7 +59,7 @@ export function cons() {
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule,
+    routerModule,
     // CoreModule.forRoot([
     //   { provide: WindowService, useFactory: (win) },
     //   { provide: ConsoleService, useFactory: (cons) }
