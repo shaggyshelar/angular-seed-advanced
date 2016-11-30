@@ -1,10 +1,16 @@
 var address = [
     {
         ID: 1,
-        CurrentAdd: 'CurrentAdd1',
-        CurrentAddFilePath: '',
-        PermanantAdd: 'PermanantAdd1',
-        PermanantAddFilePath: '',
+        Type: 'Current',
+        FilePath: '',
+        Description: 'CurrentAdd',
+        Status: 'Pending for Approval',
+        Comments: '',
+    }, {
+        ID: 2,
+        Type: 'Permanant',
+        FilePath: '',
+        Description: 'PermanantAdd',
         Status: 'Pending for Approval',
         Comments: '',
     }

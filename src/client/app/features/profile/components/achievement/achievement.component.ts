@@ -7,10 +7,12 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 /** Framework Level Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../services/profile.actions';
+//import { PROFILE_ACTIONS } from '../../services/profile.actions';
+import { AchievementService } from '../../services/achievement.service';
+import { Achievement } from '../../models/achievement';
 
 /** Other Module Dependencies */
 //import * as _ from 'lodash';
@@ -27,24 +29,17 @@ export interface AchievementForm {
     templateUrl: 'achievement.component.html',
     styleUrls: ['achievement.component.css']
 })
-export class AchievementComponent implements OnInit {
-    achievements: any[];
+export class AchievementComponent implements OnInit {   
     showDiv: boolean;
-    achievementForm: FormGroup;
-    public profile_Observable: Observable<any>;
+    achievementForm: FormGroup;   
+    public achievements: Observable<Achievement>;
 
-    constructor(private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
-        this.achievements = [];
+    constructor(private formBuilder: FormBuilder, private store: Store<any>, private achievementService: AchievementService) {
         this.showDiv = true;
     }
     ngOnInit(): void {
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_ACHIEVEMENTS, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.achievements = res ? res.achievements : [];
-            console.log('Achievements', this.achievements);
-        });
+        let ProfileID = 1;        
+        this.achievements = this.achievementService.getAchievements(ProfileID);
 
         this.achievementForm = this.formBuilder.group({
             id: [null],
@@ -57,27 +52,28 @@ export class AchievementComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: AchievementForm, valid: boolean }) {
-        // var achievementData = _.find(this.achievements, ['id', value.id]);
-        // if (achievementData) {
-        //     achievementData.achievement = value.description;
-        // } else {
-        //     this.achievements.push({
-        //         id: this.achievements.length + 1,
-        //         achievement: value.description,
-        //         status: 'pending for approval',
-        //         comment: ''
-        //     });
-        // }
-        let params = {
-            Name: value.description
-        };
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_ADD_ACHIEVEMENT, payload: params });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.achievements = res ? res.achievements : [];
-        });
-
-        this.showDiv = true;
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Name: value.description
+            };
+            this.achievementService.updateAchievement(value.id, params).subscribe(res => {
+                if (res) {
+                    this.achievements = this.achievementService.getAchievements(1);
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Name: value.description
+            };
+            this.achievementService.addAchievement(params).subscribe(res => {
+                if (res) {
+                    this.achievements = this.achievementService.getAchievements(1);
+                    this.showDiv = true;
+                }
+            });
+        }
     }
     cancel() {
         this.showDiv = true;
@@ -85,8 +81,8 @@ export class AchievementComponent implements OnInit {
     }
     editAchievement(achievementData) {
         this.achievementForm.setValue({
-            id: achievementData.id,
-            description: achievementData.achievement
+            id: achievementData.ID,
+            description: achievementData.Name
         });
         this.showDiv = false;
     }

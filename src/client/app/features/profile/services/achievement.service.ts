@@ -13,7 +13,6 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
 import { Achievement } from '../models/achievement';
-// import { Employee } from '../models/employee';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
@@ -30,7 +29,12 @@ export class AchievementService extends BaseService {
     getAchievements(id): Observable<Achievement> {
         return this.get$(id).map(res => res.json());
     }
-    addAchievements(params): Observable<Achievement> {
-        return this.post$(params).map(res => res.json());
+
+    addAchievement(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateAchievement(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

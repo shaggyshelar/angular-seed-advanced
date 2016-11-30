@@ -12,8 +12,7 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Profile } from '../models/profile';
-// import { Employee } from '../models/employee';
+import { User } from '../models/user';
 import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
@@ -32,7 +31,7 @@ export class ProfileService extends BaseService {
     /**
      * getProfile method
      */
-    getProfile(id): Observable<Profile> {
+    getProfile(id): Observable<User> {
         return this.get$(id).map(res => res.json());
     }
 }
