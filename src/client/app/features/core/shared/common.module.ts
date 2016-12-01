@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* Third party Dependencies */
 import { TranslateLoader } from 'ng2-translate';
 
-import { ScheduleModule, DataTableModule, SharedModule, ButtonModule, InputTextareaModule, CalendarModule, DropdownModule, DialogModule, ConfirmDialogModule, GrowlModule, ConfirmationService, ProgressBarModule, CheckboxModule, FileUploadModule } from 'primeng/primeng';
+import { ScheduleModule, DataTableModule, SharedModule, ButtonModule, InputTextareaModule, CalendarModule, DropdownModule, DialogModule, ConfirmDialogModule, GrowlModule, ConfirmationService, ProgressBarModule, CheckboxModule, FileUploadModule, AutoCompleteModule } from 'primeng/primeng';
 
 /* Framework Dependencies */
 import { MultilingualModule, translateFactory } from '../../framework.ref';
@@ -38,7 +38,8 @@ let primeNgComponents = [
     GrowlModule,
     ProgressBarModule,
     CheckboxModule,
-    FileUploadModule
+    FileUploadModule,
+    AutoCompleteModule
 ];
 
 /**

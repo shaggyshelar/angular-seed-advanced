@@ -49,9 +49,9 @@ export const featureRoutes: Routes = [
         path: 'admin',
         children: [...AdminRoutes],
         data: {
-            //reducers: AdminModule.reducers()
+          //  reducers: AdminModule.reducers()
         }
-    },{
+    }, {
         path: 'profile',
         children: [...ProfileRoutes],
         data: {

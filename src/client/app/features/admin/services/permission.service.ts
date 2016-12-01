@@ -11,33 +11,29 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Role } from '../models/role';
 /** Context for service calls */
-export const CONTEXT = 'role';
+export const CONTEXT = 'permission';
 
 /** Service Definition */
 @Injectable()
-export class RoleService extends BaseService {
+export class PermissionService extends BaseService {
 
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('RoleService  Initialized Successfully');
+        this.logService.debug('PermissionService  Initialized Successfully');
     }
 
-    getRoles(): Observable<Role[]> {
-        this.logService.debug('RoleService : getConferenceBooking method');
+    getAllPermission(): Observable<any> {
+        this.logService.debug('PermissionService : getConferenceBooking method');
         return this.getList$(0,0,true).map(res => res.json());
     }
-    addRole(role:Role): Observable<any> {
-        return this.post$(role,true).map(res => res.json());
+    getPermissionsByRole(roleId): Observable<any> {
+        return this.get$(roleId,true).map(res => res.json());
     }
-    editRole(role:Role): Observable<any> {
-        return this.put$(role.id,role,true).map(res => res.json());
+    addPermissionToRole(permission): Observable<any> {
+        return this.post$(permission,true).map(res => res.json());
     }
-    getRoleById(roleID): Observable<any> {
-        return this.get$(roleID,true).map(res => res.json());
-    }
-    deleteRole(roleID): Observable<any> {
-        return this.delete$(roleID,true);
+    revokePermission(permission): Observable<any> {
+        return this.put$(permission.id,permission,true);
     }
 }

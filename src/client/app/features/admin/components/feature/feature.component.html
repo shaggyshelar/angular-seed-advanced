@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <p-dataTable [value]="featureList" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                <p-dataTable [value]="featureList | async" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                     <p-column field="name" header="Feature Name" [sortable]="true"></p-column>
                     <p-column header="Edit">
                         <template let-feature="rowData" pTemplate type="body">
