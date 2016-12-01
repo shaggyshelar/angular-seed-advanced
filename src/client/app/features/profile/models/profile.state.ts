@@ -1,5 +1,5 @@
 /** Profile Application State */
-import { Profile } from './profile';
+import { User } from './user';
 import { Achievement } from './achievement';
 import { Certificate } from './certificate';
 import { Skill } from './skill';
@@ -15,7 +15,7 @@ import { Address } from './address';
 
 /** State Definition */
 export interface ProfileState {
-    profile: Profile;
+    profile: User;
     achievements: Achievement[];
     cetificates: Certificate[];
     skills: Skill[];

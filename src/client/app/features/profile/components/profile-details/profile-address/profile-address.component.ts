@@ -59,8 +59,8 @@ export class ProfileAddressComponent implements OnInit {
     addClick() {
         this.showDiv = false;
         if (this.addressList.length > 0) {
-            var currentAddress = _.find(this.addressList, ['type', 'current']);
-            var permanentAddress = _.find(this.addressList, ['type', 'permanent']);
+            var currentAddress = _.find(this.addressList, ['Type', 'Current']);
+            var permanentAddress = _.find(this.addressList, ['Type', 'Permanent']);
             this.addressForm.setValue({
                 currentAddress: currentAddress ? currentAddress.address : '',
                 permanentAddress: permanentAddress ? permanentAddress.address : ''

@@ -1,9 +1,8 @@
 export interface Address {
     ID: number;
-    CurrentAdd: string;
-    CurrentAddFilePath: string;
-    PermanantAdd: string;
-    PermanantAddFilePath: string;
+    Type: string;
+    FilePath: string;
+    Description: string;
     Status: string;
     Comments: string;
 }
