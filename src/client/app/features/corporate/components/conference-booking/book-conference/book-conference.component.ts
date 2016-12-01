@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
-
+import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
@@ -15,7 +16,7 @@ import { ConferenceBookingService } from '../../../services/conference-booking.s
     templateUrl: 'book-conference.component.html'
 })
 
-export class BookComponent {
+export class BookComponent implements OnInit {
     property: string;
     recurrance: boolean;
     recurrancePattern: string;
@@ -25,45 +26,48 @@ export class BookComponent {
     startTime: Date;
     endTime: Date;
     msgs: Message[] = [];
-    conferenceModel: ConferenceBooking;
-
-    constructor(private conferenceBookingService: ConferenceBookingService, private router: Router) {
-
-        this.conferenceModel = new ConferenceBooking(0, '', new Date(), new Date(), false, '', '', {});
-
+    conferenceForm: FormGroup;
+    constructor(private formBuilder: FormBuilder, private conferenceBookingService: ConferenceBookingService, private router: Router) {
         this.conferenceRooms = [];
         this.conferenceRooms.push({ label: 'Select Room', value: null });
-        this.conferenceRooms.push({ label: 'Bahamas', value: { id: 1, name: 'Bahamas', color: '#E7C5F5' } });
-        this.conferenceRooms.push({ label: 'Dubai', value: { id: 2, name: 'Dubai', color: '#3FABA4' } });
-        this.conferenceRooms.push({ label: 'Cape Town', value: { id: 3, name: 'Cape Town', color: '#35AA47' } });
-        this.conferenceRooms.push({ label: 'Hong Kong', value: { id: 4, name: 'Hong Kong', color: '#FF9655' } });
-        this.conferenceRooms.push({ label: 'Houston', value: { id: 4, name: 'Houston', color: '#428BCA' } });
-        this.conferenceRooms.push({ label: 'Barcelona', value: { id: 5, name: 'Barcelona', color: '#D05454' } });
-        this.conferenceRooms.push({ label: 'Caribbean', value: { id: 5, name: 'Caribbean', color: '#8877A9' } });
-        this.conferenceRooms.push({ label: 'Trainning Room', value: { id: 5, name: 'Trainning Room', color: '#DFBA49' } });
+        this.conferenceRooms.push({ label: 'Bahamas', value: { id: 1, Name: 'Bahamas', Color: '#E7C5F5' } });
+        this.conferenceRooms.push({ label: 'Dubai', value: { id: 2, Name: 'Dubai', Color: '#3FABA4' } });
+        this.conferenceRooms.push({ label: 'Cape Town', value: { id: 3, Name: 'Cape Town', Color: '#35AA47' } });
+        this.conferenceRooms.push({ label: 'Hong Kong', value: { id: 4, Name: 'Hong Kong', Color: '#FF9655' } });
+        this.conferenceRooms.push({ label: 'Houston', value: { id: 4, Name: 'Houston', Color: '#428BCA' } });
+        this.conferenceRooms.push({ label: 'Barcelona', value: { id: 5, Name: 'Barcelona', Color: '#D05454' } });
+        this.conferenceRooms.push({ label: 'Caribbean', value: { id: 5, Name: 'Caribbean', Color: '#8877A9' } });
+        this.conferenceRooms.push({ label: 'Trainning Room', value: { id: 5, Name: 'Trainning Room', Color: '#DFBA49' } });
     }
-    save() {
-        this.conferenceModel.Room = {
-            Name: this.selectedRoom.name,
-            Color: this.selectedRoom.color
-        };
-        this.conferenceModel.color = this.selectedRoom.color;
-        this.conferenceBookingService.saveConference(this.conferenceModel).subscribe(result => {
+    ngOnInit() {
+        this.conferenceForm = this.formBuilder.group({
+            //id: [null],
+            title: ['', [Validators.required]],
+            start: ['', [Validators.required]],
+            end: ['', [Validators.required]],
+            Room: ['', [Validators.required]],
+        });
+    }
+    onSubmit({ value, valid }: { value: IConferenceForm, valid: boolean }) {
+        value.color=value.Room.Color;
+        this.conferenceBookingService.saveConference(value).subscribe(result => {
             if (result) {
                 this.router.navigate(['/corporate/conferenceBooking']);
             }
         });
     }
 }
-class ConferenceBooking {
-    constructor(
-        public id: number,
-        public title: string,
-        public start: Date,
-        public end: Date,
-        public allDay: boolean,
-        public color: string,
-        public conference: string,
-        public Room: Object
-    ) { }
+export interface IConferenceForm {
+    id: number;
+    Room: Select;
+    title: string;
+    start: Date;
+    end: Date;
+    allDay: boolean;
+    color: string;
 }
+interface Select {
+    id: number;
+    Name: string;
+    Color: string;
+};

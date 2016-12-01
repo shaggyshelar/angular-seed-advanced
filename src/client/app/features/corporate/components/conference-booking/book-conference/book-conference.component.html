@@ -10,7 +10,7 @@
       </li>
       <li>
         <span class="active">{{"CONFERENCE_BOOKING_TITLE" | translate }}</span>
-         <i class="fa fa-circle"></i>
+        <i class="fa fa-circle"></i>
       </li>
       <li>
         <span class="active">{{"NEW_BOOKING" | translate }}</span>
@@ -21,23 +21,32 @@
     <div class="portlet light bordered legends-portlet">
       <div class="portlet-body">
         <p-growl [value]="msgs"></p-growl>
-        <form class="form-horizontal">
+        <form class="form-horizontal" novalidate (ngSubmit)="onSubmit(conferenceForm)" [formGroup]="conferenceForm">
           <div class="form-group">
             <label class="control-label col-sm-2">{{'NEW_BOOKING_LABEL_TITLE' | translate}}</label>
             <div class="col-sm-10">
-              <input type="text" id="title" class="form-control" [(ngModel)]="conferenceModel.title" [ngModelOptions]="{standalone: true}">
+              <input type="text" id="title" class="form-control" formControlName="title" name="title">
+              <div class="alert alert-danger" *ngIf="conferenceForm.get('title').hasError('required') && conferenceForm.get('title').touched">
+                  Please Enter Title
+              </div>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="startTime">{{'NEW_BOOKING_LABEL_START_TIME' | translate}} *</label>
             <div class="col-sm-10">
-              <p-calendar [(ngModel)]="conferenceModel.start" id="startTime" [showTime]="true"  name="startTime"></p-calendar>
+              <p-calendar formControlName="start" id="startTime" [showTime]="true" name="startTime"></p-calendar>
+               <div class="alert alert-danger" *ngIf="conferenceForm.get('start').hasError('required') && conferenceForm.get('start').touched">
+                  Please select Start Time
+              </div>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="endTime">{{'NEW_BOOKING_LABEL_END_TIME' | translate}} *</label>
             <div class="col-sm-10">
-              <p-calendar [(ngModel)]="conferenceModel.end"  id="endTime"  [showTime]="true" name="endTime"></p-calendar>
+              <p-calendar formControlName="end" id="endTime" [showTime]="true" name="endTime"></p-calendar>
+               <div class="alert alert-danger" *ngIf="conferenceForm.get('end').hasError('required') && conferenceForm.get('end').touched">
+                  Please select End Time
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -49,11 +58,14 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="room">{{'NEW_BOOKING_LABEL_CONFERENCE_ROOMS' | translate}} *</label>
             <div class="col-sm-10">
-              <p-dropdown [options]="conferenceRooms" id="selectRoomDropdown" [(ngModel)]="selectedRoom" name="rooms" [styleClass]="form-control"></p-dropdown>
+              <p-dropdown [options]="conferenceRooms" id="selectRoomDropdown" formControlName="Room" name="rooms" [styleClass]="form-control"></p-dropdown>
+              <div class="alert alert-danger" *ngIf="conferenceForm.get('Room').hasError('required') && conferenceForm.get('Room').touched">
+                Please select room
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" >{{'NEW_BOOKING_LABEL_DOUBLE_BOOKING' | translate}}</label>
+            <label class="control-label col-sm-2">{{'NEW_BOOKING_LABEL_DOUBLE_BOOKING' | translate}}</label>
             <div class="col-sm-10">
               <button class="btn btn-default" id="doubleBookingBtn">{{'NEW_BOOKING_BTN_CHECK_DOUBLE_BOOKING' | translate}}</button>
             </div>
@@ -73,32 +85,32 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="description"> {{'NEW_BOOKING_LABEL_RECURRENCE' | translate}}</label>
             <div class="col-sm-10">
-              <p><input type="checkbox" [(ngModel)]="recurrance" id="recurrance" name="recurrance"> {{'NEW_BOOKING_LABEL_RECURRENCE_TEXT' | translate}}</p>
+              <p><input type="checkbox" id="recurrance" name="recurrance"> {{'NEW_BOOKING_LABEL_RECURRENCE_TEXT' | translate}}</p>
             </div>
           </div>
           <div class="form-group" *ngIf="recurrance">
             <div class="col-sm-12">
               <label class="radio-inline">
-      <input type="radio" [(ngModel)]="recurranceType" id="optionDaily" value="daily" name="optradio">{{'NEW_BOOKING_LABEL_DAILY' | translate}} 
+      <input type="radio" id="optionDaily" value="daily" name="optradio">{{'NEW_BOOKING_LABEL_DAILY' | translate}} 
     </label>
               <label class="radio-inline">
-      <input type="radio" [(ngModel)]="recurranceType" id="optionWeekly"  value="weekly"  name="optradio">{{'NEW_BOOKING_LABEL_WEEKLY' | translate}}
+      <input type="radio"  id="optionWeekly"  value="weekly"  name="optradio">{{'NEW_BOOKING_LABEL_WEEKLY' | translate}}
     </label>
               <label class="radio-inline">
-      <input type="radio" [(ngModel)]="recurranceType" id="optionMonthly" value="monthly" name="optradio">{{'NEW_BOOKING_LABEL_MONTHLY' | translate}} 
+      <input type="radio"  id="optionMonthly" value="monthly" name="optradio">{{'NEW_BOOKING_LABEL_MONTHLY' | translate}} 
     </label>
               <label class="radio-inline">
-      <input type="radio" [(ngModel)]="recurranceType"  id="optionYearly" value="yearly" name="optradio">{{'NEW_BOOKING_LABEL_YEARLY' | translate}}
+      <input type="radio"  id="optionYearly" value="yearly" name="optradio">{{'NEW_BOOKING_LABEL_YEARLY' | translate}}
     </label>
             </div>
           </div>
           <div class="form-group" [ngSwitch]="recurranceType" *ngIf="recurrance">
             <label class="control-label col-sm-2" for="recurranceType">{{'NEW_BOOKING_LABEL_PATTERN' | translate}}</label>
             <div class="col-sm-10" *ngSwitchCase="'daily'">
-              <p><input type="checkbox"  id="optionYearly"> {{'NEW_BOOKING_LABEL_DAILY' | translate}} </p>
+              <p><input type="checkbox" id="optionYearly"> {{'NEW_BOOKING_LABEL_DAILY' | translate}} </p>
             </div>
             <div class="col-sm-10" *ngSwitchCase="'weekly'">
-              <p><input type="checkbox"  id="optionWeekly"> {{'NEW_BOOKING_LABEL_WEEKLY' | translate}}</p>
+              <p><input type="checkbox" id="optionWeekly"> {{'NEW_BOOKING_LABEL_WEEKLY' | translate}}</p>
             </div>
             <div class="col-sm-10" *ngSwitchCase="'monthly'">
               <p>{{'NEW_BOOKING_LABEL_MONTHLY' | translate}} </p>
@@ -107,55 +119,53 @@
               <p> {{'NEW_BOOKING_LABEL_YEARLY' | translate}}</p>
             </div>
           </div>
-
           <label class="control-label col-sm-2 col-sm-2" *ngIf="recurrance" for="description">{{'NEW_BOOKING_LABEL_DATE_RANGE' | translate}}</label>
           <div class="form-group" *ngIf="recurrance">
-            <label class="col-sm-12 col-xs-12" for="startTime">{{'NEW_BOOKING_LABEL_START_DATE' | translate}}<p-calendar [(ngModel)]="recurranceStartDate" id="recurranceStartDate" name="recurranceStartDate"></p-calendar></label>
+            <label class="col-sm-12 col-xs-12" for="startTime">{{'NEW_BOOKING_LABEL_START_DATE' | translate}}<p-calendar  id="recurranceStartDate" name="recurranceStartDate"></p-calendar></label>
           </div>
           <div class="form-group" *ngIf="recurrance">
             <div class="col-sm-12">
               <label class="radio-inline">
-               <input type="radio" [(ngModel)]="recurrancePattern" value="1" id="optionNoEndDate" name="recurrancePattern">{{'NEW_BOOKING_LABEL_NO_END_DATE' | translate}}
+               <input type="radio"  value="1" id="optionNoEndDate" name="recurrancePattern">{{'NEW_BOOKING_LABEL_NO_END_DATE' | translate}}
             </label>
               <label class="radio-inline">
-               <input type="radio" [(ngModel)]="recurrancePattern" value="2" id="optionEndAfter" name="recurrancePattern">{{'NEW_BOOKING_LABEL_END_AFTER' | translate}} End after: 10 occurrence(s)
+               <input type="radio"  value="2" id="optionEndAfter" name="recurrancePattern">{{'NEW_BOOKING_LABEL_END_AFTER' | translate}} End after: 10 occurrence(s)
             </label>
               <label class="radio-inline">
-               <input type="radio" [(ngModel)]="recurrancePattern" value="3" id="optionEndBy" name="recurrancePattern">{{'NEW_BOOKING_LABEL_END_BY' | translate}}: <p-calendar [(ngModel)]="recurranceEndDate" name="recurranceEndDate"></p-calendar>
+               <input type="radio" value="3" id="optionEndBy" name="recurrancePattern">{{'NEW_BOOKING_LABEL_END_BY' | translate}}: <p-calendar name="recurranceEndDate"></p-calendar>
             </label>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" >{{'NEW_BOOKING_LABEL_SPECIAL_TREATMENT' | translate}} </label>
+            <label class="control-label col-sm-2">{{'NEW_BOOKING_LABEL_SPECIAL_TREATMENT' | translate}} </label>
             <div class="col-sm-10">
-              <p><input type="checkbox"  id="waterChkbox" > Water</p>
-              <p><input type="checkbox" id="teaChkbox" > Tea </p>
-              <p><input type="checkbox"  id="coffeeChkbox"> Coffee</p>
-              <p><input type="checkbox"  id="juiceChkbox"> Juice</p>
-              <p><input type="checkbox"  id="snacksChkbox"> Snacks</p>
-              <p><input type="checkbox"  id="breakfastChkbox"> Breakfast</p>
+              <p><input type="checkbox" id="waterChkbox"> Water</p>
+              <p><input type="checkbox" id="teaChkbox"> Tea </p>
+              <p><input type="checkbox" id="coffeeChkbox"> Coffee</p>
+              <p><input type="checkbox" id="juiceChkbox"> Juice</p>
+              <p><input type="checkbox" id="snacksChkbox"> Snacks</p>
+              <p><input type="checkbox" id="breakfastChkbox"> Breakfast</p>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2">{{'NEW_BOOKING_LABEL_SPECIAL_COMMENTS' | translate}}</label>
             <div class="col-sm-10">
-              <textarea class="form-control"  id="specialComments"></textarea>
+              <textarea class="form-control" id="specialComments"></textarea>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" >{{'NEW_BOOKING_LABEL_NO_OF_GUEST' | translate}}</label>
+            <label class="control-label col-sm-2">{{'NEW_BOOKING_LABEL_NO_OF_GUEST' | translate}}</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="noOfGuest">
+              <input type="text" class="form-control" id="noOfGuest">
             </div>
           </div>
           <div class="form-group">
-              <label class="col-md-offset-1 col-sm-10"> {{'NEW_BOOKING_LABEL_ISDELETED' | translate}}  &nbsp;&nbsp;<input type="checkbox"   id="isdeleted"></label>
+            <label class="col-md-offset-1 col-sm-10"> {{'NEW_BOOKING_LABEL_ISDELETED' | translate}}  &nbsp;&nbsp;<input type="checkbox"   id="isdeleted"></label>
           </div>
-
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="button"  (click)="save()" id="saveBtn" class="btn btn-default">{{'NEW_BOOKING_BTN_SAVE' | translate}}</button>
-              <button class="btn btn-default" type="button"   id="cancelBtn" [routerLink]="['../conferenceBooking']">{{'NEW_BOOKING_BTN_CANCEL' | translate}}</button>
+              <button pButton type="submit" label="{{ 'NEW_BOOKING_BTN_SAVE' | translate }}" id="saveBtn" [disabled]="conferenceForm.invalid"></button>
+              <button pButton type="text" label="{{ 'NEW_BOOKING_BTN_CANCEL' | translate }}" id="cancelBtn" [routerLink]="['../conferenceBooking']"></button>
             </div>
           </div>
         </form>
