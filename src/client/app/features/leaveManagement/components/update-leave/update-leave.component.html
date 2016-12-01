@@ -32,15 +32,15 @@
                                 <tbody>
                                     <tr>
                                         <td> Employee ID </td>
-                                        <td> 24568 </td>
+                                        <td> {{ (leaveObs | async)?.User.ID }} </td>
                                     </tr>
                                     <tr>
                                         <td> Employee Name </td>
-                                        <td> Person1 LName </td>
+                                        <td> {{ (leaveObs | async)?.User.Name }} </td>
                                     </tr>
                                     <tr>
                                         <td> Department </td>
-                                        <td> EBS </td>
+                                        <td> {{ (leaveObs | async)?.User.Department }} </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -55,13 +55,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td> RMS </td>
-                                        <td> Sagar Shelar </td>
-                                    </tr>
-                                    <tr>
-                                        <td> PLSV 1 </td>
-                                        <td> Some Person </td>
+                                    <tr *ngFor="let leaveRec of (leaveObs | async)?.Approvers">
+                                        <td> {{ leaveRec.Project }} </td>
+                                        <td> {{ leaveRec.Manager }} </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -77,28 +73,31 @@
                     <h4>Update Leave</h4>
                     <div class="row">
                         <div class="pull-right">
-                            <h5 class="font-blue">Leave Approved</h5>
+                            <h5 class="font-blue"></h5>
                         </div>
-                        <p-dataTable [value]="leave" [responsive]="true">
-                            <p-column field="leaveType" header="{{ 'LEAVE_TYPE' | translate }}"></p-column>
-                            <p-column field="numDays" header="{{ 'NO_LEAVES' | translate }}"></p-column>
-                            <p-column field="reason" header="{{ 'REASON' | translate }}"></p-column>
-                            <p-column field="start" header="{{ 'START_DATE' | translate }}"></p-column>
-                            <p-column field="end" header="{{ 'END_DATE' | translate }}"></p-column>
+                        <p-dataTable [value]="" [responsive]="true">
+                            <p-column field="Type.Title" header="{{ 'LEAVE_TYPE' | translate }}"></p-column>
+                            <p-column field="NumberOfLeave" header="{{ 'NO_LEAVES' | translate }}"></p-column>
+                            <p-column field="Reason" header="{{ 'REASON' | translate }}"></p-column>
+                            <p-column field="StartDate" header="{{ 'START_DATE' | translate }}"></p-column>
+                            <p-column field="EndDate" header="{{ 'END_DATE' | translate }}"></p-column>
                             <p-column field="action" header="{{ 'ACTION' | translate }}"></p-column>
                         </p-dataTable>
                     </div>
                 </div>
                 <div class="portlet light bordered">
                     <div class="row">
-                        <p-dataTable [value]="leave" [responsive]="true">
-                            <p-column field="project" header="{{ 'PROJECT' | translate }}"></p-column>
-                            <p-column field="approvers" header="{{ 'MANAGER' | translate }}"></p-column>
-                            <p-column field="status" header="{{ 'STATUS' | translate }}"></p-column>
-                            <p-column field="comment" header="{{ 'COMMENTS' | translate }}"></p-column>
+                        <p-dataTable [value]="(leaveObs | async)?.Approvers" [responsive]="true">
+                            <p-column field="Project" header="{{ 'PROJECT' | translate }}"></p-column>
+                            <p-column field="Manager" header="{{ 'MANAGER' | translate }}"></p-column>
+                            <p-column field="Status" header="{{ 'STATUS' | translate }}"></p-column>
+                            <p-column field="Comment" header="{{ 'COMMENTS' | translate }}"></p-column>
                         </p-dataTable>
                     </div>
-                    <button id="close" class="btn blue btn-outline" (click)="closeClicked()">{{ 'CLOSE' | translate }}</button>
+                    <div>
+                        <button *ngIf="!isCancellable" id="cancel" class="btn red btn-outline" (click)="cancelClicked()">{{ 'CANCEL_LEAVE' | translate }}</button>
+                        <button id="close" class="btn blue btn-outline" (click)="closeClicked()">{{ 'CLOSE' | translate }}</button>
+                    </div>
                 </div>
             </div>
             <!-- END HOLIDAY LIST COMPONENT BY PRIMENG -->

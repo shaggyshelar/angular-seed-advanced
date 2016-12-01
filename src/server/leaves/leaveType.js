@@ -1,5 +1,5 @@
 // List of hardcoded features along with their details.
-var iLeaveType = [
+var leaveType = [
     {
         ID: 1,
         Title: 'Leave'
@@ -18,4 +18,4 @@ var iLeaveType = [
     }
 ];
 
-module.exports = iLeaveType;
+module.exports = leaveType;

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Rx';
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
+import { LeaveDetail } from '../../models/leaveDetail';
 
 /** Component Declaration */
 
@@ -22,6 +23,7 @@ import { Leave } from '../../models/leave';
 })
 export class MyLeavesComponent {
   public leaveObs: Observable<Leave>;
+  public leaveDetailObs: Observable<LeaveDetail>;
   servRows = 5;
   leaves: {};
   leave: any;
