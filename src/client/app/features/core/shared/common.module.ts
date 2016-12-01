@@ -1,8 +1,7 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
-import { Http } from '@angular/http';
 import { CommonModule as AngularCommonModule } from '@angular/common';
-import {RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 /** Third party Dependencies */
 //import { TranslateLoader } from 'ng2-translate';
@@ -15,7 +14,7 @@ import { ScheduleModule, DataTableModule, SharedModule, ButtonModule, InputTexta
 /** Module Level Dependencies */
 import { LoginService } from './services/login.service';
 import { IfAuthorize } from './directives/ifAuthorize.directive';
-import {UnauthorizedAccessComponent} from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
+import { UnauthorizedAccessComponent } from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
 
 
 // let translate = MultilingualModule.forRoot([{
@@ -45,8 +44,8 @@ let primeNgComponents = [
  */
 let imports = [
     RouterModule,
-    AngularCommonModule]
-    //translate];
+    AngularCommonModule];
+//translate];
 
 /**  Exported components declaration   */
 let exportComponents = [

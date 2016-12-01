@@ -11,12 +11,12 @@ import { BaseComponent, LogService } from '../../../framework.ref';
     templateUrl: 'container.component.html'
 })
 export class DashboardContainerComponent implements OnInit {
-    // constructor(private logService: LogService) {
-    //     this.logService.debug('DashboardContainerComponent : constructor');
-    // }
+    constructor(private logService: LogService) {
+        this.logService.debug('DashboardContainerComponent : constructor');
+    }
 
     ngOnInit() {
-        //this.logService.debug('DashboardContainerComponent : ngOnInit');
+        this.logService.debug('DashboardContainerComponent : ngOnInit');
         window['App'].init();
         window['Layout'].init();
     }

@@ -2,23 +2,17 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-/** Third Party Dependencies */
-import { combineReducers, ActionReducer, StoreModule } from '@ngrx/store';
-
-/** Framework Dependencies */
-//import { multilingualReducer } from './framework.ref';
-
 /** Module Level Dependencies */
 //Components
-import { FeaturesComponent } from './features.component';
+// import { FeaturesComponent } from './features.component';
 
 //Routes
-import { routing, featureRoutes } from './features.routes';
+import { routing } from './features.routes';
 // Modules
-import { AuthModule } from './core/auth/auth.module';
+//import { AuthModule } from './core/auth/auth.module';
 import { DashboardModule } from './core/dashboard/dashboard.module';
-import { UserModule } from './users/users.module';
-import { TimesheetModule } from './timesheet/index';
+// import { UserModule } from './users/users.module';
+// import { TimesheetModule } from './timesheet/index';
 
 /**
  * 

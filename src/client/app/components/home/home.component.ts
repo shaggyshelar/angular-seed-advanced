@@ -1,14 +1,10 @@
 // libs
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // app
 import { BaseComponent, RouterExtensions } from '../../frameworks/core/index';
-import { LoginService } from '../../shared/services/login.service';
-//import { IAppState, getNames } from '../../frameworks/ngrx/index';
-import { IAppState } from '../../frameworks/ngrx/index';
-import * as nameList from '../../frameworks/sample/index';
+import { LoginService } from '../../features/core/shared/services/login.service';
 
 @BaseComponent({
   moduleId: module.id,
@@ -20,7 +16,7 @@ export class HomeComponent implements OnInit {
   public names$: Observable<Array<string>>;
   public newName: string = '';
 
-  constructor(private loginService: LoginService, private store: Store<IAppState>, public routerext: RouterExtensions, private _router: Router) {
+  constructor(private loginService: LoginService, public routerext: RouterExtensions, private _router: Router) {
     //this.names$ = store.let(<any>getNames);
   }
 
@@ -42,8 +38,6 @@ export class HomeComponent implements OnInit {
    * @returns return false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    this.store.dispatch(new nameList.AddAction(this.newName));
-    this.newName = '';
     return false;
   }
 

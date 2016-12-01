@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 // libs
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateLoader } from 'ng2-translate';
+// import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { TranslateLoader } from 'ng2-translate';
 
 // app
 import { FeaturesModule } from './app/features/features.module';
@@ -19,11 +19,11 @@ import { routes } from './app/components/app.routes';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
-import { AppReducer } from './app/frameworks/ngrx/index';
-import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
-import { MultilingualEffects } from './app/frameworks/i18n/index';
-import { SampleModule } from './app/frameworks/sample/sample.module';
+// import { AppReducer } from './app/frameworks/ngrx/index';
+// import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
+// import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
+// import { MultilingualEffects } from './app/frameworks/i18n/index';
+// import { SampleModule } from './app/frameworks/sample/sample.module';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -34,10 +34,10 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 // sample config (extra)
-import { AppConfig } from './app/frameworks/sample/services/app-config';
-import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
+// import { AppConfig } from './app/frameworks/sample/services/app-config';
+// import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
 // custom i18n language support
-MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
+//MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
 let routerModule = RouterModule.forRoot(routes);
 
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
@@ -65,16 +65,16 @@ export function cons() {
       { provide: ConsoleService, useFactory: (cons) }
     ]),
     routerModule,
-    AnalyticsModule,
-    MultilingualModule.forRoot([{
-      provide: TranslateLoader,
-      deps: [Http],
-      useFactory: (translateFactory)
-    }]),
-    SampleModule,
-    EffectsModule.run(MultilingualEffects),
-    StoreModule.provideStore(AppReducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    // AnalyticsModule,
+    // MultilingualModule.forRoot([{
+    //   provide: TranslateLoader,
+    //   deps: [Http],
+    //   useFactory: (translateFactory)
+    // }]),
+    // SampleModule,
+    // EffectsModule.run(MultilingualEffects),
+    // StoreModule.provideStore(AppReducer),
+    //StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   declarations: [
     APP_COMPONENTS

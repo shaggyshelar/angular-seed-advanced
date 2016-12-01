@@ -13,7 +13,7 @@ import { routes } from './app/components/app.routes';
 import { CoreModule } from './app/frameworks/core/core.module';
 
 // config
-import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
+import { WindowService, ConsoleService } from './app/frameworks/core/index';
 
 let routerModule = RouterModule.forRoot(routes);
 

@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { DashboardComponent } from './components/dashboard.component';
 import { DashboardContainerComponent } from './components/container.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { QuickSidebarComponent } from './layout/quick-sidebar/quick-sidebar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { TopNavigationBarComponent } from './layout/top-navigation-bar/top-navigation-bar.component';
 import { CommonModule } from '../shared/common.module';
@@ -20,8 +19,7 @@ import { CommonModule } from '../shared/common.module';
         DashboardComponent,
         FooterComponent,
         TopNavigationBarComponent,
-        SidebarComponent,
-        // QuickSidebarComponent
+        SidebarComponent
     ],
     providers: [],
 })
