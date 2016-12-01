@@ -11,15 +11,12 @@ import { RoleAddEditComponent } from './components/roles/role-add-edit/role-add-
 import { FeatureService } from './services/feature.service';
 import { RoleService } from './services/role.service';
 import { PermissionService } from './services/permission.service';
-// import { AdminReducer } from './services/admin.reducers';
-// import { FeatureEffects } from './services/feature/feature.effects';
 
 /** Module Definition */
 @NgModule({
     imports: [
         CommonModule,
         TranslateModule,
-        //EffectsModule.run(FeatureEffects),
     ],
     exports: [],
     declarations: [
@@ -30,7 +27,4 @@ import { PermissionService } from './services/permission.service';
     providers: [FeatureService,RoleService,PermissionService],
 })
 export class AdminModule {
-    // static reducers(): { [key: string]: ActionReducer<any> } {
-    //     return { admin: AdminReducer };
-    // }
 }
