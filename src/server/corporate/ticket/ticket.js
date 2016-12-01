@@ -16,14 +16,14 @@ var saveTicket = function (req, res) {
     var ticket = req.body;
     ticket.Id = ++ticketData.ids;
     ticketData.ticketList.push(ticket);
-    res.json(ticketData.ticketList);
+    res.json(ticket);
 };
 
 var editTicket = function (req, res) {
     var ticket = req.body;
     var index = _.findIndex(ticketData.ticketList, { Id: ticket.Id });
     ticketData.ticketList[index] = ticket
-    res.json(ticketData.ticketList);
+    res.json(ticket);
 };
 
 module.exports = function (app) {

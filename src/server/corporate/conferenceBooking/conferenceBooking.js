@@ -9,7 +9,7 @@ var saveConference = function (req, res) {
     var conference = req.body;
     conference.Id = ++conferenceBooking.ids;
     conferenceBooking.conferenceBookingList.push(conference);
-    res.json(conferenceBooking.conferenceBookingList);
+    res.json(conference);
 };
 var getMyBookings = function (req, res) {
     res.json(conferenceBooking.conferenceBookingList);

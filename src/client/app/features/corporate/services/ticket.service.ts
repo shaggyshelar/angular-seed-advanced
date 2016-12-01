@@ -4,17 +4,14 @@ import { Http } from '@angular/http';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Store } from '@ngrx/store';
 //import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../../framework.ref';
+import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
-import { BaseService } from '../../../core/index';
-import { Ticket } from '../../models/ticket';
-// import { Employee } from '../models/employee';
-import { CorporteState } from '../../models/corporate.state';
+import { BaseService } from '../../core/index';
+import { Ticket } from '../models/ticket';
 
 /** Context for service calls */
 export const CONTEXT = 'ticket';
@@ -23,10 +20,9 @@ export const CONTEXT = 'ticket';
 @Injectable()
 export class TicketService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<CorporteState>) {
+    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('getTicketList  Initialized Successfully');
-        // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
     }
 
     /**
@@ -53,7 +49,7 @@ export class TicketService extends BaseService {
     /**
      * getTicketList method
      */
-    getTicketList(): Observable<any> {
+    getTicketList(): Observable<Ticket[]> {
         this.logService.debug('TicketService : getTicketList method');
         return this.getList$().map(res => res.json());
     }

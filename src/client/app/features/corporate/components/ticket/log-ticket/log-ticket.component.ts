@@ -7,12 +7,13 @@ import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Ticket } from '../../../models/ticket';
-import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
+import { TicketService } from '../../../services/ticket.service';
 
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
-
+import { Observable } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
+
 /** Component Declaration */
 @BaseComponent({
   moduleId: module.id,
@@ -21,21 +22,16 @@ import { MenuItem } from 'primeng/primeng';
   styleUrls: ['log-ticket.component.css']
 })
 export class LogTicketComponent implements OnInit {
-  ticket: Ticket[];
+  ticket:Observable<Ticket[]>;
   private items: MenuItem[];
   constructor(
+    private ticketService: TicketService,
     private router: Router,
     private store: Store<any>) {
   }
 
   ngOnInit(): void {
-    this.ticket = [];
-    this.store.dispatch({ type: CORPORATE_ACTIONS.TICKET_INIT });
-    this.store.select('corporate').subscribe((res: any) => {
-      if (res) {
-        this.ticket = res.tickets;
-      }
-    });
+    this.ticket = this.ticketService.getTicketList();
     this.items = [
       {
         label: 'Edit',

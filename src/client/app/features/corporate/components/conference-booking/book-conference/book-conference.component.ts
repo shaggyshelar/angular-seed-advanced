@@ -6,10 +6,7 @@ import { BaseComponent } from '../../../../framework.ref';
 /** Other Module Dependencies */
 import { SelectItem, Message } from 'primeng/primeng';
 //import * as localForage from 'localforage';
-import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
-
-/** Third Party Dependencies */
-import { Store } from '@ngrx/store';
+import { ConferenceBookingService } from '../../../services/conference-booking.service';
 
 /** Component Declaration */
 @BaseComponent({
@@ -30,7 +27,7 @@ export class BookComponent {
     msgs: Message[] = [];
     conferenceModel: ConferenceBooking;
 
-    constructor(private store: Store<any>, private router: Router) {
+    constructor(private conferenceBookingService: ConferenceBookingService, private router: Router) {
 
         this.conferenceModel = new ConferenceBooking(0, '', new Date(), new Date(), false, '', '', {});
 
@@ -51,12 +48,11 @@ export class BookComponent {
             Color: this.selectedRoom.color
         };
         this.conferenceModel.color = this.selectedRoom.color;
-        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_ADD, payload: this.conferenceModel });
-        // localForage.setItem('conferenceEvent', this.conferenceModel, (err, value) => {
-        //     this.msgs = [];
-        //     this.msgs.push({ severity: 'success', summary: 'Confirmed', detail: 'Record saved' });
-        //     this.router.navigate(['../conferenceBooking']);
-        // });
+        this.conferenceBookingService.saveConference(this.conferenceModel).subscribe(result => {
+            if (result) {
+                this.router.navigate(['/corporate/conferenceBooking']);
+            }
+        });
     }
 }
 class ConferenceBooking {
