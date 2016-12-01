@@ -15,6 +15,7 @@ import { BaseService } from '../../core/index';
 import { Leave } from '../models/leave';
 // import { Employee } from '../models/employee';
 import { LeaveState } from '../models/leave.state';
+import { LeaveDetail } from '../models/leaveDetail';
 
 /** Context for service calls */
 export const CONTEXT = 'Leave';
@@ -22,11 +23,10 @@ export const CONTEXT = 'Leave';
 /** Service Definition */
 @Injectable()
 export class LeaveService extends BaseService {
-
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<LeaveState>) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('Profile Service Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+        // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
     }
 
     /**
@@ -43,5 +43,18 @@ export class LeaveService extends BaseService {
      */
     getLeaves(): Observable<Leave> {
         return this.getList$().map(res => res.json());
+    }
+
+    /**
+     * getLeaveArray method
+     * Gets child array in the object to be returned. List of applied leaves, in this case
+     * @methodParam mandatory parameter
+     */
+    getLeaveArray(methodParam): Observable<LeaveDetail> {
+        return this.getChildList$(methodParam).map(res => res.json());
+    }
+
+    addLeaveRecord(leavePayload): Observable<boolean> {
+        return this.post$(leavePayload).map(res => res.status === 201 ? true : false);
     }
 }

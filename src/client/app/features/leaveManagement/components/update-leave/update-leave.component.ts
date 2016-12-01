@@ -9,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
-import { LEAVE_ACTIONS } from '../../services/leave.actions';
 
 /** Component Declaration */
 
@@ -39,11 +38,11 @@ export class UpdateLeaveComponent {
       this.leaveId = +params['id'];
       console.log('param ID: ' +this.leaveId);});
 
-      this.store.dispatch({ type: LEAVE_ACTIONS.DETAIL, payload: this.leaveId });
-      this.leaveObs = this.store.select('leave');
-      this.leaveObs.subscribe(res =>
-        this.leave = res ? res.leaves : {}
-      );
+      // this.store.dispatch({ type: LEAVE_ACTIONS.DETAIL, payload: this.leaveId });
+      // this.leaveObs = this.store.select('leave');
+      // this.leaveObs.subscribe(res =>
+      //   this.leave = res ? res.leaves : {}
+      // );
 
       // this.leaves = [
       //   { leave: { id: 0, name: 'Select' }, numDays: 1, reason: 'Personal', start: '22-09-2016', end: '22-09-2016', action: '' },

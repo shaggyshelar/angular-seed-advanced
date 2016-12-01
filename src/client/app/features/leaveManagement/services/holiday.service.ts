@@ -30,14 +30,6 @@ export class HolidayService extends BaseService {
     }
 
     /**
-     * getHoliday method
-     * Gets holiday object corresponding to ID specified
-     */
-    getLeave(id): Observable<Holiday> {
-        return this.get$(id).map(res => res.json());
-    }
-
-    /**
      * getHolidays method
      * Gets array of Holiday objects
      */
