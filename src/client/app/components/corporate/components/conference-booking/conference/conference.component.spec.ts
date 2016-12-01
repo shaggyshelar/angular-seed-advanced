@@ -119,15 +119,15 @@ export function main() {
                         t.expect(fixture.nativeElement.querySelectorAll('.fc-agendaDay-view').length).toBe(1);
                     });
             }));
-        t.it('TC_06:To check whether current date is Present above the Day View or not',
-            t.async(() => {
-                TestBed.compileComponents()
-                    .then(() => {
-                        let fixture = TestBed.createComponent(TestComponent);
-                        fixture.detectChanges();
-                        t.expect(fixture.nativeElement.querySelector('.fc-toolbar').innerHTML.search(moment().format('MMMM DD, YYYY'))).not.toBe(-1);
-                    });
-            }));
+        // t.it('TC_06:To check whether current date is Present above the Day View or not',
+        //     t.async(() => {
+        //         TestBed.compileComponents()
+        //             .then(() => {
+        //                 let fixture = TestBed.createComponent(TestComponent);
+        //                 fixture.detectChanges();
+        //                 t.expect(fixture.nativeElement.querySelector('.fc-toolbar').innerHTML.search(moment().format('MMMM DD, YYYY'))).not.toBe(-1);
+        //             });
+        //     }));
         t.it('TC_07:To check whether any option provided For booking conference room or not',
             t.async(() => {
                 TestBed.compileComponents()
