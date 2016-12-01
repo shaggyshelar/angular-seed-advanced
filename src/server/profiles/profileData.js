@@ -8,9 +8,12 @@ var profiles = [
             CurrentOrgPFNumber: '',
             PreviousOrgPFNumber: ''
         },
-        EmergencyContact: {
+        Contact: {
             Name: '',
-            Number: ''
+            Number: '',
+            Type: {
+                Name: 'Emergency'
+            }
         },
         ContactNo: '23423454',
         CurrentAdd: 'India',
@@ -19,7 +22,9 @@ var profiles = [
         LastWorkingDayOfPrevEmployer: '',
         BloodGroup: 'O+',
         SkypeID: 'john.skype',
-        ProfilePath: ''
+        ProfilePath: '',
+        UserName: 'JohnUser',
+        Password: 'John'
     }
 ];
 

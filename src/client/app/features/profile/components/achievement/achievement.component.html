@@ -1,11 +1,11 @@
 <form novalidate (ngSubmit)="onSubmit(achievementForm)" [formGroup]="achievementForm">
 <div class="portlet-body">
-    <div *ngIf="achievements.length == 0">
+    <div *ngIf="!achievements">
         <hr>
         <h5> {{ 'NO_RECORDS' | translate }}</h5>
     </div>
-    <div *ngIf="achievements.length > 0">
-        <p-dataTable [value]="achievements" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+    <div *ngIf="achievements">
+        <p-dataTable [value]="achievements | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
             <p-column header="{{ 'EDIT' | translate }}">
                 <template let-achievementData="rowData" pTemplate type="body">
                     <i class="fa fa-pencil icon-color" (click)="editAchievement(achievementData)"></i>

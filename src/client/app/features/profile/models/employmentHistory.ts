@@ -1,3 +1,5 @@
+import { LastEmploymentHistory } from './lastEmploymentHistory';
+
 export interface EmploymentHistory {
     ID: number;
     EmploymentDetail: string;
@@ -5,11 +7,7 @@ export interface EmploymentHistory {
     EndDate: string;
     Duration: string;
     Designation: string;
-    FirstMonthSalarySlip: string;
-    SecondMonthSalarySlip: string;
-    ThirdMonthSalarySlip: string;
-    FirstEmployerRelieving: string;
-    SecondEmployerRelieving: string;
+    LastEmploymentHistory : LastEmploymentHistory;
     Status: string;
     Comments: string;
 }

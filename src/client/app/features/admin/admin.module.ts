@@ -1,10 +1,6 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
 
-/** Third Party Dependencies */
-// import { EffectsModule } from '@ngrx/effects';
-// import { ActionReducer } from '@ngrx/store';
-
 /** Other Module Dependencies */
 import { CommonModule, TranslateModule } from '../core/index';
 
@@ -14,13 +10,16 @@ import { RoleListComponent } from './components/roles/role-list/role-list.compon
 import { RoleAddEditComponent } from './components/roles/role-add-edit/role-add-edit.component';
 import { FeatureService } from './services/feature.service';
 import { RoleService } from './services/role.service';
+import { PermissionService } from './services/permission.service';
+// import { AdminReducer } from './services/admin.reducers';
+// import { FeatureEffects } from './services/feature/feature.effects';
 
 /** Module Definition */
 @NgModule({
     imports: [
         CommonModule,
         TranslateModule,
-        //EffectsModule.run(ConferenceBookingEffects),
+        //EffectsModule.run(FeatureEffects),
     ],
     exports: [],
     declarations: [
@@ -28,10 +27,10 @@ import { RoleService } from './services/role.service';
         RoleListComponent,
         RoleAddEditComponent
     ],
-    providers: [FeatureService,RoleService],
+    providers: [FeatureService,RoleService,PermissionService],
 })
 export class AdminModule {
     // static reducers(): { [key: string]: ActionReducer<any> } {
-    //     return { admin: CorporateReducer };
+    //     return { admin: AdminReducer };
     // }
 }

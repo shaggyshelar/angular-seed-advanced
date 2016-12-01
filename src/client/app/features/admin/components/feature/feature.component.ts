@@ -4,6 +4,8 @@ import { OnInit } from '@angular/core';
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 
+/** Third Party Dependencies */
+import { Observable } from 'rxjs/Rx';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../framework.ref';
 
@@ -19,7 +21,7 @@ import { Feature } from '../../models/feature';
 })
 
 export class FeatureComponent implements OnInit {
-    featureList: Array<Feature>;
+    featureList:Observable<Feature[]>;
     feature: Feature;
     isAddEdit: boolean;
     errorMessage: any;
@@ -32,6 +34,7 @@ export class FeatureComponent implements OnInit {
     }
     onSave() {
         if (this.feature.id === 0) {
+             // this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_ADD, payload: this.feature });
             this.featureService.addFeature(this.feature)
                 .subscribe(
                 results => {
@@ -39,6 +42,7 @@ export class FeatureComponent implements OnInit {
                 },
                 error => this.errorMessage = <any>error);
         } else {
+            //this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_EDIT, payload: this.feature });
             this.featureService.editFeature(this.feature)
                 .subscribe(
                 results => {
@@ -51,12 +55,7 @@ export class FeatureComponent implements OnInit {
     }
 
     getFeature() {
-        this.featureService.getFeatures()
-            .subscribe(
-            results => {
-                this.featureList = results;
-            },
-            error => this.errorMessage = <any>error);
+        this.featureList= this.featureService.getFeatures();
     }
     onCancel() {
         this.feature = new Feature(0, '');
@@ -67,7 +66,8 @@ export class FeatureComponent implements OnInit {
         this.isAddEdit = true;
     }
     onDelete(feature: Feature) {
-         this.featureService.deleteFeature(feature)
+        //this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_DELETE, payload: this.feature.id });
+        this.featureService.deleteFeature(feature.id)
             .subscribe(
             results => {
                 this.getFeature();
