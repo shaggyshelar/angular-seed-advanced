@@ -15,26 +15,26 @@ declare var $: any;
   styleUrls: ['sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-  isUserMenuOpen: boolean;
-  constructor(private authService: AuthService, private router: Router) {
-    //this.logService.debug('SidebarComponent : constructor');
-    this.isUserMenuOpen = false;
-  }
+  isUserMenuOpen: boolean = false;
+  // constructor(private authService: AuthService, private router: Router) {
+  //   //this.logService.debug('SidebarComponent : constructor');
+  //   this.isUserMenuOpen = false;
+  // }
 
-  logout() {
-    this.authService.logout();
-    this.isUserMenuOpen = false;
-    this.router.navigate(['/login']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.isUserMenuOpen = false;
+  //   this.router.navigate(['/login']);
+  // }
 
-  toggleUserMenu() {
-    if (this.isUserMenuOpen) {
-      $('.user-menu').slideUp();
-    } else {
-      $('.user-menu').slideDown();
-    }
-    this.isUserMenuOpen = !this.isUserMenuOpen;
-  }
+  // toggleUserMenu() {
+  //   if (this.isUserMenuOpen) {
+  //     $('.user-menu').slideUp();
+  //   } else {
+  //     $('.user-menu').slideDown();
+  //   }
+  //   this.isUserMenuOpen = !this.isUserMenuOpen;
+  // }
 
   ngOnInit(): void {
     //this.logService.debug('SidebarComponent : ngOnInit');

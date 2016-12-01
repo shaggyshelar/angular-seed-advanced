@@ -18,9 +18,9 @@ import { HttpModule } from '@angular/http';
     declarations: [
         DashboardContainerComponent,
         DashboardComponent,
-        // FooterComponent,
-        // TopNavigationBarComponent,
-        // SidebarComponent,
+        FooterComponent,
+        TopNavigationBarComponent,
+        SidebarComponent,
         // QuickSidebarComponent
     ],
     providers: [],

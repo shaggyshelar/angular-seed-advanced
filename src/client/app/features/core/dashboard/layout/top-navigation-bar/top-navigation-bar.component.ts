@@ -14,14 +14,14 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class TopNavigationBarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {
-    //this.logService.debug('TopNavigationBarComponent : constructor');
-  }
+  // constructor(private authService: AuthService, private router: Router) {
+  //   //this.logService.debug('TopNavigationBarComponent : constructor');
+  // }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.router.navigate(['/login']);
+  // }
 
   ngOnInit(): void {
     //this.logService.debug('TopNavigationBarComponent : ngOnInit');
