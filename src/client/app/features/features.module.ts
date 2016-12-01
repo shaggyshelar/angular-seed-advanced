@@ -25,7 +25,7 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
 @NgModule({
     imports: [
         // UserModule,
-        AuthModule,
+        //AuthModule,
         DashboardModule,
         routing,
         FormsModule,

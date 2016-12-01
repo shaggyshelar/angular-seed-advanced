@@ -29,10 +29,10 @@ const routes: Routes = [
         path: '',
         component: DashboardContainerComponent,
         //canActivate: [AuthGuard],
-        children: [
-            ...featureRoutes,
-            //...ErrorPagesRoutes,
-        ]
+        // children: [
+        //     ...featureRoutes,
+        //     //...ErrorPagesRoutes,
+        // ]
     }
 ];
 export const routing = RouterModule.forChild(routes);

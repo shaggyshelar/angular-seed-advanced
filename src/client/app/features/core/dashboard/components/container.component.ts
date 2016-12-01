@@ -7,7 +7,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Component Definition */
 @BaseComponent({
     moduleId: module.id,
-    selector: 'dashboard-con',
+    selector: 'dashboard',
     templateUrl: 'container.component.html'
 })
 export class DashboardContainerComponent implements OnInit {

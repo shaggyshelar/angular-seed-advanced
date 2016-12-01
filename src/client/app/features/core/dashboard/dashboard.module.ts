@@ -13,15 +13,15 @@ import { HttpModule } from '@angular/http';
 
 /** Module Definition */
 @NgModule({
-    imports: [CommonModule, HttpModule ],
+    imports: [HttpModule ],
     exports: [],
     declarations: [
         DashboardContainerComponent,
         DashboardComponent,
-        FooterComponent,
-        TopNavigationBarComponent,
-        SidebarComponent,
-        QuickSidebarComponent
+        // FooterComponent,
+        // TopNavigationBarComponent,
+        // SidebarComponent,
+        // QuickSidebarComponent
     ],
     providers: [],
 })

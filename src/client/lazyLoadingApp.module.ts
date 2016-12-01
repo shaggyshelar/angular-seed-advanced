@@ -60,9 +60,9 @@ export function cons() {
 
 @NgModule({
   imports: [
+    FeaturesModule,
     BrowserModule,
     routerModule,
-    FeaturesModule
     // CoreModule.forRoot([
     //   { provide: WindowService, useFactory: (win) },
     //   { provide: ConsoleService, useFactory: (cons) }
