@@ -28,15 +28,9 @@ class FormFieldClass {
 export class SingleApprovalComponent {
   reqId: number;
   leaveObs: Observable<any>;
-
-
   requests: any;
   servRows = 6;
-
-
-
   model: FormFieldClass;
-
   validationMessage: string = '';
   approved: boolean = false;
   rejected: boolean = false;
@@ -62,13 +56,10 @@ export class SingleApprovalComponent {
       this.reqId = +params['id'];
     });
 
-    this.store.dispatch({ type: LEAVE_ACTIONS.DETAIL, payload: this.reqId });
+    this.logService.debug('SingleApprovalComponent OnInit');
+    this.store.dispatch({ type: LEAVE_ACTIONS.LEAVE_RECORD, payload: this.reqId });
     this.leaveObs = this.store.select('leave');
-    this.leaveObs.subscribe(res => {
-      this.requests = res ? res.leave : {};
-      if(res)
-        console.log(res.leave);
-    });
+   
 
   }
 

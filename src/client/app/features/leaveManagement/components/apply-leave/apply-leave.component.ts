@@ -7,7 +7,7 @@ import { OnInit } from '@angular/core';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { LEAVE_ACTIONS } from '../../services/leave.actions';
+import { LeaveService } from '../../services/leave.service';
 
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
@@ -15,20 +15,9 @@ import { Observable } from 'rxjs/Rx';
 
 /** Component Declaration */
 
-
-class FinalLeaveData {
-  ID: number;
-  start: any;
-  end: any;
-  numDays: number;
-  leave: string;
-  reason: string;
-  empName: string;
-  status: string;
-}
-
 class FormFieldClass {
   constructor(
+    public User: {ID:number, Name: string},
     public numDays: number,
     public leaveType: any,
     public end: any,
@@ -45,16 +34,20 @@ class FormFieldClass {
 })
 
 export class ApplyLeaveComponent implements OnInit {
-  leaveObs: Observable<any>;
+  leaveObs: Observable<boolean>;
   leave: any;
-  leaveTypeInvalid: boolean = true;
+  leaveTypeValid: boolean = true;
+  leaveID: number;
   strtDt: any;
   endDt: any;
   minDate: Date;
   numDays: number = 0;
   charsLeft: number = 600;
   leavesHidden: boolean = true;
+  isLeaveAdded: boolean = false;
+  isEndDtEnable: boolean = true;
   dayCount: any;
+  showLeaveData: any;
   leaves: any = [
     { label: 'Leave', value: 1 },
     { label: 'Half-day Leave', value: 2 },
@@ -64,24 +57,33 @@ export class ApplyLeaveComponent implements OnInit {
   model: FormFieldClass;
 
   constructor(
-    private router: Router,private store: Store<any>, private logService: LogService
+    private router: Router, private store: Store<any>, private logService: LogService, private leaveService: LeaveService
   ) {
-    this.model = new FormFieldClass(1, 'select', new Date(), new Date(), '');
+    this.model = new FormFieldClass({ID:12345,Name:'Lname Fname'},1, 'select', new Date(), new Date(), '');
   }
 
   ngOnInit() {
-    this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
-    this.leaveObs = this.store.select('leave');
-    this.leaveObs.subscribe(res =>
-      this.leave = res ? res.leave : {}
-    );
+
+    this.logService.debug('ApplyLeaveComponent OnInit');
   }
+
   submitForm(form: NgForm) {
     this.validateLeaveType();
-    if (this.leaveTypeInvalid)
+    if (!this.leaveTypeValid)
       return;
 
     //call to backend submit
+    let params= {
+      User: this.model.User,
+      NumberOfLeave: this.model.numDays,
+      StartDate: this.model.start,
+      EndDate: this.model.end,
+      Comment: '',
+      Status: '',
+      Reason: this.model.reason,
+      Type: {ID:this.leaveID,Title:this.model.leaveType}
+    };
+    this.leaveObs = this.leaveService.addLeaveRecord(params);
   }
 
   startChanged() {
@@ -97,23 +99,73 @@ export class ApplyLeaveComponent implements OnInit {
 
   addLeaves() {
     //TODO : Add leave fuunctinality
+    this.isLeaveAdded = true;
   }
 
   validateLeaveType() {
-    if (this.model.leaveType === 'select') {
-      this.leaveTypeInvalid = true;
-    } else {
-      this.leaveTypeInvalid = false;
+    switch (this.model.leaveType) {
+      case 'Leave':
+        this.leaveTypeValid = true;
+        this.isEndDtEnable = true;
+        this.leaveID = 1;
+        return;
+
+      case 'Half-day Leave':
+        this.leaveTypeValid = true;
+        this.model.numDays = 0.5;
+        this.isEndDtEnable = false;
+        this.leaveID = 2;
+        return;
+
+      case 'Absent':
+        this.leaveTypeValid = true;
+        this.isEndDtEnable = true;
+        this.leaveID = 3;
+        return;
+
+      case 'Half-day Absent':
+        this.leaveTypeValid = true;
+        this.model.numDays = 0.5;
+        this.isEndDtEnable = false;
+        this.leaveID = 4;
+        return;
+
+      default:
+        this.leaveTypeValid = false;
     }
   }
 
   reasonTextChanged() {
     this.charsLeft = 600 - this.model.reason.length;
+    (this.model.reason.length > 3) ? this.isLeaveAdded = true : this.isLeaveAdded = false;
   }
 
-  dayDiffCalc() {
-    this.dayCount = (Math.round((this.endDt - this.strtDt) / (1000 * 60 * 60 * 24))) + 1;
-    this.model.numDays = this.dayCount;
+  dayDiffCalc() { // input given as Date objects
+    var dDate1 = this.model.start;
+    var dDate2 = this.model.end;
+    var iWeeks, iDateDiff, iAdjust = 0;
+    if (dDate2 < dDate1) return -1; // error code if dates transposed
+    var iWeekday1 = dDate1.getDay(); // day of week
+    var iWeekday2 = dDate2.getDay();
+    iWeekday1 = (iWeekday1 === 0) ? 7 : iWeekday1; // change Sunday from 0 to 7
+    iWeekday2 = (iWeekday2 === 0) ? 7 : iWeekday2;
+    if ((iWeekday1 > 5) && (iWeekday2 > 5)) iAdjust = 1; // adjustment if both days on weekend
+    iWeekday1 = (iWeekday1 > 5) ? 5 : iWeekday1; // only count weekdays
+    iWeekday2 = (iWeekday2 > 5) ? 5 : iWeekday2;
+
+    // calculate differnece in weeks (1000mS * 60sec * 60min * 24hrs * 7 days = 604800000)
+    iWeeks = Math.floor((dDate2.getTime() - dDate1.getTime()) / 604800000);
+
+    if (iWeekday1 <= iWeekday2) {
+      iDateDiff = (iWeeks * 5) + (iWeekday2 - iWeekday1);
+    } else {
+      iDateDiff = ((iWeeks + 1) * 5) - (iWeekday1 - iWeekday2);
+    }
+
+    iDateDiff -= iAdjust; // take into account both days on weekend
+
+    this.model.numDays = this.dayCount = (iDateDiff + 1); // add 1 because dates are 
+    return this.dayCount;
   }
 
   cancelClick() {

@@ -23,7 +23,7 @@
             <div class="col-lg-12 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
                     <p-dataTable [value]="requests" [(selection)]="selectedEmployees" [paginator]="true" [responsive]="true" [rows]=(servRows)>
-                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                        <p-column selectionMode="multiple"></p-column>
                         <p-column field="eid" header="{{ 'EMPLOYEE_ID' | translate }} "></p-column>
                         <p-column field="employee" header="{{ 'EMPLOYEE' | translate }} "></p-column>
                         <p-column field="numberofleaves" header="{{ 'NO_LEAVES' | translate }} "></p-column>

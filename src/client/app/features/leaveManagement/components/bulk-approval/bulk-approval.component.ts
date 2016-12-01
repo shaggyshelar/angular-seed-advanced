@@ -9,7 +9,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
-import { LEAVE_ACTIONS } from '../../services/leave.actions';
+import { LeaveService } from '../../services/leave.service';
+import { Leave } from '../../models/leave';
 
 /** Component Declaration */
 
@@ -37,7 +38,7 @@ class FormFieldClass {
 })
 export class BulkApproveComponent {
 
-  leaveObs: Observable<any>;
+  leaveObs: Observable<Leave>;
 
   servRows = 5;
   requests: any[];
@@ -50,44 +51,33 @@ export class BulkApproveComponent {
   constructor(
     private router: Router,
     private store: Store<any>,
-    private logService: LogService
+    private logService: LogService,
+    private leaveService: LeaveService
   ) {
     this.requests = [];
-
-    // this.requests = [
-    //   { eid: 23132, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-    //   { eid: 23133, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-    //   { eid: 23134, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-    //   { eid: 23135, employee: 'Employee', numberofleaves: 4, status: 'Approved', start: '01-10-2016', end: '10-10-2016', approvers: 'Manager, Manager, Manager, Manager', pending: '' },
-    // ];
 
     this.model = new FormFieldClass('');
     this.selectedEmployees = [];
   }
 
   ngOnInit() {
-    this.store.dispatch({ type: LEAVE_ACTIONS.DETAILS, payload: 1 });
-    this.leaveObs = this.store.select('leave');
-    this.leaveObs.subscribe(res => {
-      this.requests = res ? res.leaves : [];
-      if (res)
-        console.log('from bulk-approval data: ' + JSON.stringify(res.leaves));
-    });
+    this.leaveObs = this.leaveService.getLeaves();
   }
 
   approveClicked() {
-    this.rejected = false;
-    this.approved = true;
     if (this.selectedEmployees.length > 0) {
+      this.rejected = false;
+      this.approved = true;
       //    BACKEND CALL HERE
       return;
     }
   }
 
   rejectClicked() {
-    this.rejected = true;
-    this.approved = false;
     if (this.selectedEmployees.length > 0) {
+      this.rejected = true;
+      this.approved = false;
+      //    BACKEND CALL HERE
       return;
     }
   }
