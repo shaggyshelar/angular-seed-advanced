@@ -8,9 +8,9 @@ import { Message } from 'primeng/primeng';
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
+import { ConferenceBookingService } from '../../../services/conference-booking.service';
+import { Conference } from '../../../models/conference';
 
 /** Component Declaration */
 @BaseComponent({
@@ -21,11 +21,10 @@ import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 })
 
 export class MyBookingComponent implements OnInit {
-    bookings: Array<Object>;
+    bookings: Observable<Conference[]>;
     msgs: Message[] = [];
     conferenceRooms: any[];
-    serverEvents: Observable<any>;
-    constructor(private store: Store<any>, private confirmationService: ConfirmationService) {
+    constructor(private conferenceBookingService: ConferenceBookingService, private confirmationService: ConfirmationService) {
         this.conferenceRooms = [{
             name: 'Bahamas',
             color: '#E7C5F5'
@@ -55,12 +54,7 @@ export class MyBookingComponent implements OnInit {
         ];
     }
     ngOnInit() {
-        this.store.dispatch({ type: CORPORATE_ACTIONS.CONFERENCE_FETCH_MY_BOOKING, payload: '1' });
-        this.store.select('corporate').subscribe((res: any) => {
-            if (res && res.myBookingList) {
-                this.bookings = res.myBookingList;
-            }
-        });
+        this.bookings = this.conferenceBookingService.getMyBooking(0);
     }
     confirm() {
         this.confirmationService.confirm({

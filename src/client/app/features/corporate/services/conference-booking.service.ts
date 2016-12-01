@@ -4,17 +4,16 @@ import { Http } from '@angular/http';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Store } from '@ngrx/store';
 //import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../../framework.ref';
+import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
-import { BaseService } from '../../../core/index';
+import { BaseService } from '../../core/index';
 //import { Leave } from '../../models/leave';
 // import { Employee } from '../models/employee';
-import { CorporteState } from '../../models/corporate.state';
+import { Conference } from '../models/conference';
 
 /** Context for service calls */
 export const CONTEXT = 'conferenceBooking';
@@ -23,12 +22,12 @@ export const CONTEXT = 'conferenceBooking';
 @Injectable()
 export class ConferenceBookingService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<CorporteState>) {
+    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('CorporateService  Initialized Successfully');
     }
 
-    getConferenceBooking(): Observable<any> {
+    getConferenceBooking(): Observable<Conference[]> {
         this.logService.debug('ConferenceBookingService : getConferenceBooking method');
         return this.getList$().map(res => res.json());
     }
@@ -37,7 +36,7 @@ export class ConferenceBookingService extends BaseService {
         return this.post$(conference).map(res => res.json());
     }
 
-    getMyBooking(id): Observable<any> {
+    getMyBooking(id): Observable<Conference[]> {
         return this.get$(id).map(res => res.json());
     }
 }

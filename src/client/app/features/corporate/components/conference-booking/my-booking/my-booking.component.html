@@ -61,7 +61,7 @@
             <div class="portlet-body">
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-dataTable [value]="bookings" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                <p-dataTable [value]="bookings | async" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                     <p-column field="title" header="Title" [sortable]="true"></p-column>
                     <p-column field="start" header="Start Time" [sortable]="true"></p-column>
                     <p-column field="end" header="End Time" [sortable]="true"></p-column>

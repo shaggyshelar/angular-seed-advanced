@@ -9,7 +9,7 @@ import { ErrorPagesRoutes, AuthGuard } from './core/index';
 
 import { UsersRoutes, UserModule } from './users/index';
 import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
-import { CorporateModule, CorporateRoutes } from './corporate/index';
+import { CorporateRoutes } from './corporate/index';
 import { AdminRoutes } from './admin/index';
 import { ProfileRoutes, ProfileModule } from './profile/index';
 import { LeaveRoutes, LeaveModule } from './leaveManagement/index';
@@ -42,7 +42,7 @@ export const featureRoutes: Routes = [
         children: [...CorporateRoutes],
         canActivate: [AuthGuard],
         data: {
-            reducers: CorporateModule.reducers(),
+          //  reducers: CorporateModule.reducers(),
             permissions: ['CORPORATE.MANAGE']
         }
     }, {
