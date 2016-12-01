@@ -18,9 +18,9 @@ import { CommonModule } from '../shared/common.module';
     declarations: [
         DashboardContainerComponent,
         DashboardComponent,
-        // FooterComponent,
+        FooterComponent,
         TopNavigationBarComponent,
-        // SidebarComponent,
+        SidebarComponent,
         // QuickSidebarComponent
     ],
     providers: [],
