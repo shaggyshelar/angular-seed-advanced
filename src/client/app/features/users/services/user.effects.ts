@@ -32,7 +32,7 @@ export class UserListEffects {
         .map(action => {
             let name = action.payload;
             // analytics
-            this.userList.track(USER_LIST_ACTIONS.USER_ADDED, { label: name });
+            //this.userList.track(USER_LIST_ACTIONS.USER_ADDED, { label: name });
             return ({ type: USER_LIST_ACTIONS.USER_ADDED, payload: name });
         });
 
@@ -41,7 +41,7 @@ export class UserListEffects {
         .switchMap(action => this.userList.get$(action.payload))
         .map(res => {
             let user = res.json();
-            this.userList.track(USER_LIST_ACTIONS.DETAILS_FETCHED, { label: user.id });
+            //this.userList.track(USER_LIST_ACTIONS.DETAILS_FETCHED, { label: user.id });
             return ({ type: USER_LIST_ACTIONS.DETAILS_FETCHED, payload: user });
         });
 

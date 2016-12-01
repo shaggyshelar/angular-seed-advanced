@@ -9,6 +9,12 @@ import { FeaturesModule } from './app/features/features.module';
 //app
 import { routes } from './app/components/app.routes';
 
+// feature modules
+import { CoreModule } from './app/frameworks/core/core.module';
+
+// config
+import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
+
 let routerModule = RouterModule.forRoot(routes);
 
 declare var window, console;
@@ -23,13 +29,13 @@ export function cons() {
 
 @NgModule({
   imports: [
-    //FeaturesModule,
+    FeaturesModule,
     BrowserModule,
     routerModule,
-    // CoreModule.forRoot([
-    //   { provide: WindowService, useFactory: (win) },
-    //   { provide: ConsoleService, useFactory: (cons) }
-    // ]), // increase by 500kb
+    CoreModule.forRoot([
+      { provide: WindowService, useFactory: (win) },
+      { provide: ConsoleService, useFactory: (cons) }
+    ]), // increase by 500kb
     //AnalyticsModule, // increased by 808 kb
     //SampleModule  // Increase by 1.2 MB
     ],

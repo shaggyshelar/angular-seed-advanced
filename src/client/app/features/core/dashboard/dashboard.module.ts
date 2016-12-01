@@ -8,18 +8,18 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { QuickSidebarComponent } from './layout/quick-sidebar/quick-sidebar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { TopNavigationBarComponent } from './layout/top-navigation-bar/top-navigation-bar.component';
-import { CommonModule, TranslateModule } from '../shared/common.module';
+import { CommonModule } from '../shared/common.module';
 
 /** Module Definition */
 @NgModule({
     //imports: [CommonModule, TranslateModule],
-    imports: [],
+    imports: [CommonModule],
     exports: [],
     declarations: [
         DashboardContainerComponent,
         DashboardComponent,
         // FooterComponent,
-        // TopNavigationBarComponent,
+        TopNavigationBarComponent,
         // SidebarComponent,
         // QuickSidebarComponent
     ],

@@ -6,7 +6,7 @@ import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 
 /** Framework Dependencies */
-import { AnalyticsService, LogService } from '../../framework.ref';
+import { LogService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -18,8 +18,8 @@ import { USER_LIST_ACTIONS } from './user.actions';
 export const CONTEXT = 'user';
 @Injectable()
 export class UserListService extends BaseService {
-    constructor(public analytics: AnalyticsService, httpService: Http, public logService: LogService, private store: Store<any>) {
-        super(analytics, httpService, CONTEXT, logService);
+    constructor(httpService: Http, public logService: LogService, private store: Store<any>) {
+        super(httpService, CONTEXT, logService);
         this.store.dispatch({ type: USER_LIST_ACTIONS.INIT });
     }
 }

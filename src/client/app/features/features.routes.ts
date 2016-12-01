@@ -19,21 +19,21 @@ export const featureRoutes: Routes = [
         path: '',
         component: DashboardComponent
     },
-    {
-        path: 'user',
-        children: [...UsersRoutes],
-        canActivate: [AuthGuard],
-        data: {
-            reducers: UserModule.reducers()
-        }
-    }, {
-        path: 'timesheet',
-        children: [...TimesheetRoutes],
-        canActivate: [AuthGuard],
-        data: {
-            reducers: TimesheetModule.reducers()
-        }
-    }
+    // {
+    //     path: 'user',
+    //     children: [...UsersRoutes],
+    //     canActivate: [AuthGuard],
+    //     data: {
+    //         reducers: UserModule.reducers()
+    //     }
+    // }, {
+    //     path: 'timesheet',
+    //     children: [...TimesheetRoutes],
+    //     canActivate: [AuthGuard],
+    //     data: {
+    //         reducers: TimesheetModule.reducers()
+    //     }
+    // }
 ];
 
 /** DO NOT UPDATE BELOW CODE */
@@ -45,15 +45,15 @@ const routes: Routes = [
     //     pathMatch: 'full'
 
     // },
-    ...AuthRoutes,
+    //...AuthRoutes,
     {
         path: '',
         component: DashboardContainerComponent,
-        canActivate: [AuthGuard],
-        children: [
-            ...featureRoutes,
-            ...ErrorPagesRoutes,
-        ]
+        // canActivate: [AuthGuard],
+        // children: [
+        //     ...featureRoutes,
+        //     ...ErrorPagesRoutes,
+        // ]
     }
 ];
 export const routing = RouterModule.forChild(routes);

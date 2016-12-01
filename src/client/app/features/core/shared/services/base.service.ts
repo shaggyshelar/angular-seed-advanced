@@ -8,7 +8,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 /** Framework Dependencies */
-import { LogService, Analytics, AnalyticsService } from '../../../framework.ref';
+import { LogService } from '../../../framework.ref';
 
 /** HttpService interface Definition*/
 interface HttpServices {
@@ -21,7 +21,7 @@ interface HttpServices {
 }
 
 /** Base Service Definition */
-export class BaseService extends Analytics implements HttpServices {
+export class BaseService implements HttpServices {
     public baseUrl: string = '/api/';
     public logService: LogService;
     public options: RequestOptions;
@@ -30,8 +30,7 @@ export class BaseService extends Analytics implements HttpServices {
     private requestUrl: string;
 
     /** Base Service constructor : Accepts Analytics Service, Http Service, Context path, Log service */
-    constructor(analyticsService: AnalyticsService, _httpService: Http, _context: string, _logService: LogService) {
-        super(analyticsService);
+    constructor(_httpService: Http, _context: string, _logService: LogService) {
         this.httpService = _httpService;
         this.requestUrl = this.baseUrl.concat(_context);
         this.getHeaders();

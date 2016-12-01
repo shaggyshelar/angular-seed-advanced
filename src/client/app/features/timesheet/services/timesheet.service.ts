@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { LogService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -24,8 +24,8 @@ export const CONTEXT = 'timesheet';
 @Injectable()
 export class TimesheetService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<TimesheetState>) {
-        super(analyticsService, http, CONTEXT, logService);
+    constructor(public http: Http, public logService: LogService, private store: Store<TimesheetState>) {
+        super(http, CONTEXT, logService);
         this.logService.debug('Timehsheet Service Initialized Successfully');
         this.store.dispatch({ type: TIMESHEET_ACTIONS.INIT });
     }

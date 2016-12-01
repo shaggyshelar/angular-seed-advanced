@@ -37,7 +37,7 @@ export class TimesheetEffects {
         .map(action => {
             let name = action.payload;
             // analytics
-            this.timesheetService.track(TIMESHEET_ACTIONS.TIMESHEET_ADDED, { label: name });
+            //this.timesheetService.track(TIMESHEET_ACTIONS.TIMESHEET_ADDED, { label: name });
             return ({ type: TIMESHEET_ACTIONS.TIMESHEET_ADDED, payload: name });
         });
 
