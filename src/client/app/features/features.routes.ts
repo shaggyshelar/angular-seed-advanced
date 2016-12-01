@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 //Components
 import { DashboardComponent, DashboardContainerComponent } from './core/dashboard/index';
 //Modules
-import { ErrorPagesRoutes } from './core/index';
+//import { ErrorPagesRoutes } from './core/index';
 
 /** Feature Routes Definition */
 export const featureRoutes: Routes = [
@@ -25,14 +25,14 @@ const routes: Routes = [
 
     // },
     // ...AuthRoutes,
-    // {
-    //     path: '',
-    //     component: DashboardContainerComponent,
-    //     canActivate: [AuthGuard],
-    //     children: [
-    //         ...featureRoutes,
-    //         ...ErrorPagesRoutes,
-    //     ]
-    // }
+    {
+        path: '',
+        component: DashboardContainerComponent,
+        //canActivate: [AuthGuard],
+        children: [
+            ...featureRoutes,
+            //...ErrorPagesRoutes,
+        ]
+    }
 ];
 export const routing = RouterModule.forChild(routes);

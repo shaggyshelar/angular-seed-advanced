@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 /** Module Level Dependencies */
 //Components
-import { FeaturesComponent } from './features.component';
+//import { FeaturesComponent } from './features.component';
 
 //Routes
-import { routing, featureRoutes } from './features.routes';
+import { routing } from './features.routes';
 // Modules
-// import { AuthModule } from './core/auth/auth.module';
-// import { DashboardModule } from './core/dashboard/dashboard.module';
+import { AuthModule } from './core/auth/auth.module';
+import { DashboardModule } from './core/dashboard/dashboard.module';
 // import { UserModule } from './users/users.module';
 
 /**
@@ -25,13 +25,13 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
 @NgModule({
     imports: [
         // UserModule,
-        // AuthModule,
-        // DashboardModule,
+        AuthModule,
+        DashboardModule,
         routing,
         FormsModule,
     ],
     exports: [],
-    declarations: [FeaturesComponent],
+    //declarations: [FeaturesComponent],
     providers: [],
 })
 export class FeaturesModule {

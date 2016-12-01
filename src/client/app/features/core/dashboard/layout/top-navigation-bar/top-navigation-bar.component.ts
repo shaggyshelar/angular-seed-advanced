@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
 import { AuthService } from '../../../auth/auth.service';
 
 @BaseComponent({
@@ -14,8 +14,8 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class TopNavigationBarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private logService: LogService) {
-    this.logService.debug('TopNavigationBarComponent : constructor');
+  constructor(private authService: AuthService, private router: Router) {
+    //this.logService.debug('TopNavigationBarComponent : constructor');
   }
 
   logout() {
@@ -24,6 +24,6 @@ export class TopNavigationBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logService.debug('TopNavigationBarComponent : ngOnInit');
+    //this.logService.debug('TopNavigationBarComponent : ngOnInit');
   }
 }

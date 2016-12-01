@@ -13,11 +13,11 @@ import { BaseComponent, LogService } from '../../../../framework.ref';
 })
 export class QuickSidebarComponent implements OnInit {
 
-  constructor(private logService: LogService) {
-    this.logService.debug('QuickSidebarComponent :  constructor');
-  }
+  // constructor(private logService: LogService) {
+  //   this.logService.debug('QuickSidebarComponent :  constructor');
+  // }
 
   ngOnInit(): void {
-    this.logService.debug('QuickSidebarComponent : ngOnInit');
+    //this.logService.debug('QuickSidebarComponent : ngOnInit');
   }
 }

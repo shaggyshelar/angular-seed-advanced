@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../shared/index';
-import { LogService } from '../../framework.ref';
+//import { LogService } from '../../framework.ref';
 
 export const CONTEXT = 'Auth';
 
@@ -12,8 +12,8 @@ export const CONTEXT = 'Auth';
 export class AuthService extends BaseService {
     private authenticated = false;
 
-    constructor(httpService: Http, logService: LogService, private router: Router) {
-        super(httpService, CONTEXT, logService);
+    constructor(httpService: Http, private router: Router) {
+        super(httpService, CONTEXT);
     }
 
     isAuthenticated() {

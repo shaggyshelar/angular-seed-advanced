@@ -13,11 +13,11 @@ import { BaseComponent, LogService } from '../../../../framework.ref';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private logService: LogService) {
-    this.logService.debug('FooterComponent : constructor');
-  }
+  // constructor(private logService: LogService) {
+  //   this.logService.debug('FooterComponent : constructor');
+  // }
 
   ngOnInit(): void {
-    this.logService.debug('FooterComponent : ngOnInit');
+    //this.logService.debug('FooterComponent : ngOnInit');
   }
 }

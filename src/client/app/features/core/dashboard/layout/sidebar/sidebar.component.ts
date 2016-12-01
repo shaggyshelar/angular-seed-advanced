@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../../framework.ref';
+import { BaseComponent } from '../../../../framework.ref';
 import { AuthService } from '../../../auth/auth.service';
 declare var $: any;
 
@@ -16,8 +16,8 @@ declare var $: any;
 })
 export class SidebarComponent implements OnInit {
   isUserMenuOpen: boolean;
-  constructor(private authService: AuthService, private router: Router, private logService: LogService) {
-    this.logService.debug('SidebarComponent : constructor');
+  constructor(private authService: AuthService, private router: Router) {
+    //this.logService.debug('SidebarComponent : constructor');
     this.isUserMenuOpen = false;
   }
 
@@ -37,6 +37,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logService.debug('SidebarComponent : ngOnInit');
+    //this.logService.debug('SidebarComponent : ngOnInit');
   }
 }

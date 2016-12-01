@@ -9,10 +9,11 @@ import { QuickSidebarComponent } from './layout/quick-sidebar/quick-sidebar.comp
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { TopNavigationBarComponent } from './layout/top-navigation-bar/top-navigation-bar.component';
 import { CommonModule } from '../shared/common.module';
+import { HttpModule } from '@angular/http';
 
 /** Module Definition */
 @NgModule({
-    imports: [CommonModule ],
+    imports: [CommonModule, HttpModule ],
     exports: [],
     declarations: [
         DashboardContainerComponent,
