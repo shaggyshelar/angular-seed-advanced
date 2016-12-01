@@ -1,7 +1,8 @@
 export interface Holiday {
-    id: number;
-    title: string;
-    start: string;
-    weekDay: string;
-    holidayType: string;
+    ID: number;
+
+    Title: string;
+    HolidayDate: string;
+    WeekDay: string;
+    HolidayType: string;
 }

@@ -89,7 +89,7 @@
                                         <label class="control-label" [class.warning]="leaveTypeInvalid && leaveType.touched"> {{ 'LEAVE_TYPE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span></label>
                                         <div>
                                             <select id="leaveType" required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType" (blur)="validateLeaveType()"
-                                                [class.validationClass]="leaveTypeInvalid && leaveType.touched">
+                                                [class.validationClass]="!leaveTypeValid && leaveType.touched">
                                                 <option value="select">Select</option>
                                                 <option *ngFor="let leave of leaves">
                                                     {{leave.label}}
@@ -120,7 +120,7 @@
                                     <div class="form-group">
                                         <label class="control-label"> {{ 'END_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
                                         <div>
-                                            <p-calendar id="end"  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
+                                            <p-calendar [disabled]="!isEndDtEnable" id="end"  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
                                         </div>
                                     </div>
                                 </div>
@@ -157,8 +157,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <button id="addLeave" class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
-                                        <button id="submit" [disabled]="form.invalid" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
+                                        <button id="addLeave" [disabled]="form.invalid" class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
+                                        <button id="submit" [disabled]="form.invalid || !isLeaveAdded" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
                                         <button id="cancel" type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
                                     </div>
                                 </div>

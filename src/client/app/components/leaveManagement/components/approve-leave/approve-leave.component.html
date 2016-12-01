@@ -27,7 +27,7 @@
                             <p-column field="end" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
                             <p-column field="approvers" header="{{ 'APPROVERS' | translate }}" [sortable]="true"></p-column>
                             <p-column field="pending" header="{{ 'PENDING_APPROVERS' | translate }}" [sortable]="true"></p-column>
-                            <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
+                            <p-column header="{{ 'ACTION' | translate }}" field="color">
                                 <template let-car="rowData" pTemplate type="body">
                                     <button id="actionEdit" type="button" (click)="editBtnClicked()" pButton icon="fa-edit"></button>
                                 </template>

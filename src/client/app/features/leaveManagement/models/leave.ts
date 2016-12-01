@@ -1,14 +1,15 @@
+import { User } from './user';
+import { LeaveType } from './leaveType';
+
 export interface Leave {
     ID: number;
-    empName: string;
-    empId: number;
-    project: string;
-    approvers:string;
-    pending: string;
-    status: string;
-    leaveType: string;
-    numLeaves: number;
-    start: string;
-    end: string;
-    reason: string;
+
+    User: User;
+    Type: LeaveType;
+    StartDate: Date;
+    EndDate: Date;
+    NumberOfLeave: number;
+    Status: string;
+    Reason: string;
+    Comment: string;
 }

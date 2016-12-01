@@ -36,6 +36,6 @@ export class HolidayEffects {
         private http: Http,
         private logService: LogService
     ) {
-        this.logService.debug('ProfileEffects : constructor');
+        this.logService.debug('HolidayEffects : constructor');
     }
 }

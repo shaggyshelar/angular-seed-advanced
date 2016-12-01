@@ -69,15 +69,15 @@
             <!-- START HOLIDAY LIST COMPONENT BY PRIMENG -->
             <div class="col-lg-9 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
-                    <p-dataTable [value]="leaves" [paginator]="true" [rows]=(servRows) [responsive]="true">
-                        <p-column field="empName" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="startDate" header="{{ 'START_DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="endDate" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="numberOfLeave" header="{{ 'NO_LEAVES' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
+                    <p-dataTable [value]="leaveObs | async" [paginator]="true" [rows]=(servRows) [responsive]="true">
+                        <p-column field="User.Name" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="StartDate" header="{{ 'START_DATE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="EndDate" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="NumberOfLeave" header="{{ 'NO_LEAVES' | translate }}" [sortable]="true"></p-column>
+                        <p-column field="Status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
                         <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
                             <template let-leave="rowData" pTemplate type="body">
-                                <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked(leave.id)" icon="fa-edit"></button>
+                                <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked(leave.ID)" icon="fa-edit"></button>
                             </template>
                         </p-column>
                     </p-dataTable>

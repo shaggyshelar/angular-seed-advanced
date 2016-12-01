@@ -22,19 +22,19 @@ import { LeaveService } from './leave.service';
 export class LeaveEffects {
 
     @Effect() details$ = this.actions$
-        .ofType(LEAVE_ACTIONS.DETAILS)
+        .ofType(LEAVE_ACTIONS.LEAVE_DETAILS)
         .switchMap(
         action => this.leaveService.getLeaves())
         .map(res => {
-            return ({ type: LEAVE_ACTIONS.DETAILS_FETCHED, payload: res });
+            return ({ type: LEAVE_ACTIONS.LEAVE_DETAILS_FETCHED, payload: res });
         });
 
     @Effect() detail$ = this.actions$
-        .ofType(LEAVE_ACTIONS.DETAIL)
+        .ofType(LEAVE_ACTIONS.LEAVE_RECORD)
         .switchMap(
             action => this.leaveService.getLeave(action.payload))
             .map(res => {
-                return ({ type: LEAVE_ACTIONS.DETAIL_FETCHED, payload: res});
+                return ({ type: LEAVE_ACTIONS.LEAVE_RECORD_FETCHED, payload: res});
             });
 
 
@@ -45,6 +45,6 @@ export class LeaveEffects {
         private http: Http,
         private logService: LogService
     ) {
-        this.logService.debug('ProfileEffects : constructor');
+        this.logService.debug('LeaveEffects : constructor');
     }
 }
