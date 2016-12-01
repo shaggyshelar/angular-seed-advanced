@@ -1,11 +1,11 @@
 <form novalidate (ngSubmit)="onSubmit(experienceForm)" [formGroup]="experienceForm">
 	<div class="portlet-body">
-		<div *ngIf="experience.length == 0">
+		<div *ngIf="(experience | async)?.length == 0">
 			<hr>
 			<h5> {{ 'NO_RECORDS' | translate }}</h5>
 		</div>
-		<div *ngIf="experience.length > 0">
-			<p-dataTable [value]="experience" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+		<div *ngIf="(experience | async)?.length > 0">
+			<p-dataTable [value]="experience | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
 				<p-column header="{{ 'EDIT' | translate }}">
 					<template let-experienceData="rowData" pTemplate type="body">
 						<i class="fa fa-pencil icon-color" (click)="editExperienceData(experienceData)"></i>
@@ -61,7 +61,7 @@
 				<div class="col-md-2 col-margin">
 					<span>{{ 'CURRENT_PROJECT' | translate }}</span>
 					<div class="form-group div-margin">
-						<input type="checkbox" id="experience_currentProject" formControlName="description">
+						<input type="checkbox" id="experience_currentProject" formControlName="isCurrentProject">
 					</div>
 				</div>
 				<div class="col-md-3 col-margin">

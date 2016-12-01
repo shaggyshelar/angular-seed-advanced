@@ -3,14 +3,14 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../services/profile.actions';
+import { CertificateService } from '../../services/certificate.service';
+import { Certificate } from '../../models/certificate';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -30,7 +30,6 @@ export interface CertificationForm {
     code: Select;
     fromEspl: boolean;
     date: string;
-    document: string;
 }
 
 /** Component Declaration */
@@ -41,15 +40,14 @@ export interface CertificationForm {
     styleUrls: ['certification.component.css']
 })
 export class CertificationComponent implements OnInit {
-    certifications: any[];
+    public certifications: Observable<Certificate>;
     certificationOptions: SelectItem[];
     certificationCodes: SelectItem[];
     showDiv: boolean;
     certificationForm: FormGroup;
     public profile_Observable: Observable<any>;
 
-    constructor(private formBuilder: FormBuilder, private store: Store<any>) {
-        this.certifications = [];
+    constructor(private formBuilder: FormBuilder, private certificateService: CertificateService) {
         this.certificationOptions = [];
         this.certificationCodes = [];
         this.showDiv = true;
@@ -78,16 +76,9 @@ export class CertificationComponent implements OnInit {
             code: [''],
             fromEspl: [''],
             date: ['', [Validators.required]],
-            document: ['',]
         });
 
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_CERTIFICATES, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.certifications = res && res.cetificates ? res.cetificates : [];
-            console.log('Certificates', this.certifications);
-        });
+        this.certifications = this.certificateService.getCertificates();
     }
 
     onAddClick() {
@@ -95,18 +86,36 @@ export class CertificationComponent implements OnInit {
         this.certificationForm.reset();
     }
     onSubmit({ value, valid }: { value: CertificationForm, valid: boolean }) {
-        this.showDiv = true;
-        this.certifications = [{
-            id: 1,
-            certificate: value.option.name,
-            code: '1111',
-            certificateDate: moment(value.date).format('DD/MM/YYYY'),
-            fromEspl: value.fromEspl,
-            document: '',
-            status: 'pending for approval',
-            comment: ''
-        }];
-
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Name: value.option.name,
+                Code: value.code.name,
+                Date: moment(value.date).format('DD/MM/YYYY'),
+                FilePath: '',
+                FromESPL: value.fromEspl
+            };
+            this.certificateService.updateCertificate(value.id, params).subscribe(res => {
+                if (res) {
+                    this.certifications = this.certificateService.getCertificates();
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Name: value.option.name,
+                Code: value.code && value.code.name ? value.code.name : '',
+                Date: moment(value.date).format('DD/MM/YYYY'),
+                FilePath: '',
+                FromESPL: value.fromEspl
+            };
+            this.certificateService.addCertificate(params).subscribe(res => {
+                if (res) {
+                    this.certifications = this.certificateService.getCertificates();
+                    this.showDiv = true;
+                }
+            });
+        }
     }
 
     cancel() {
@@ -116,13 +125,13 @@ export class CertificationComponent implements OnInit {
 
     selectCertification(certificationData) {
         this.showDiv = false;
-        var date = certificationData.date.split('/');
+        var date = certificationData.Date.split('/');
         this.certificationForm.setValue({
-            id: certificationData.id,
-            option: _.find(this.certificationOptions, ['label', certificationData.option]).value,
-            code: _.find(this.certificationCodes, ['label', '11111']).value,
+            id: certificationData.ID,
+            option: _.find(this.certificationOptions, ['label', certificationData.Name]) ? _.find(this.certificationOptions, ['label', certificationData.Name]).value : '',
+            code: _.find(this.certificationCodes, ['label', certificationData.Code]) ? _.find(this.certificationCodes, ['label', certificationData.Code]).value : '',
             date: new Date(date[2] + '-' + date[1] + '-' + date[0]),
-            fromEspl: certificationData.fromEspl,
+            fromEspl: certificationData.FromESPL,
         });
     }
 }

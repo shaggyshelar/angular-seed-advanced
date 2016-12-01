@@ -27,7 +27,15 @@ export class SkillService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getSkills(id): Observable<Skill> {
-        return this.get$(id).map(res => res.json());
+    getSkills(): Observable<Skill> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addSkill(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateSkill(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }
