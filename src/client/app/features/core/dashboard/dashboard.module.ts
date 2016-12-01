@@ -12,15 +12,16 @@ import { CommonModule, TranslateModule } from '../shared/common.module';
 
 /** Module Definition */
 @NgModule({
-    imports: [CommonModule, TranslateModule],
+    //imports: [CommonModule, TranslateModule],
+    imports: [],
     exports: [],
     declarations: [
         DashboardContainerComponent,
         DashboardComponent,
-        FooterComponent,
-        TopNavigationBarComponent,
-        SidebarComponent,
-        QuickSidebarComponent
+        // FooterComponent,
+        // TopNavigationBarComponent,
+        // SidebarComponent,
+        // QuickSidebarComponent
     ],
     providers: [],
 })

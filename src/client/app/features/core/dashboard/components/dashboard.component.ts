@@ -10,22 +10,22 @@ import { BaseComponent, LogService, RouterExtensions } from '../../../framework.
     templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-    constructor(private logService: LogService, public routerExt: RouterExtensions) {
-        this.logService.debug('DashboardComponent : constructor');
-    }
+    // constructor(private logService: LogService, public routerExt: RouterExtensions) {
+    //     this.logService.debug('DashboardComponent : constructor');
+    // }
 
     ngOnInit() {
-        this.logService.debug('DashboardComponent : ngOnInit');
+        //this.logService.debug('DashboardComponent : ngOnInit');
     }
 
     readAbout() {
         // Try this in the {N} app
         // {N} can use these animation options
-        this.routerExt.navigate(['/about'], {
-            transition: {
-                duration: 1000,
-                name: 'slideTop',
-            }
-        });
+        // this.routerExt.navigate(['/about'], {
+        //     transition: {
+        //         duration: 1000,
+        //         name: 'slideTop',
+        //     }
+        // });
     }
 }

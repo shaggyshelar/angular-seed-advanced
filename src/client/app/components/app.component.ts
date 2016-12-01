@@ -4,8 +4,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import './operators';
 
 // app
-import { AnalyticsService } from '../frameworks/analytics/index';
-import { BaseComponent, Config, LogService } from '../frameworks/core/index';
+import { BaseComponent } from '../frameworks/core/index';
 
 /**
  * This class represents the main application component.
@@ -17,7 +16,7 @@ import { BaseComponent, Config, LogService } from '../frameworks/core/index';
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
 export class AppComponent {
-  constructor(public analytics: AnalyticsService, public logger: LogService) {
-    logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
-  }
+  // constructor(public analytics: AnalyticsService, public logger: LogService) {
+  //   logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
+  // }
 }

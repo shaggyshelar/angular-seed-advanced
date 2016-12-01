@@ -31,27 +31,27 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
 /**  Module Definition */
 @NgModule({
     imports: [
-        StoreModule.provideStore(FeaturesModule.reducers()),
-        UserModule,
-        AuthModule,
+        // StoreModule.provideStore(FeaturesModule.reducers()),
+        // UserModule,
+        // AuthModule,
         DashboardModule,
         routing,
         FormsModule,
-        TimesheetModule,
+        //TimesheetModule,
     ],
     exports: [],
-    declarations: [FeaturesComponent],
+    //declarations: [FeaturesComponent],
     providers: [],
 })
 export class FeaturesModule {
-    static reducers(): ActionReducer<any> {
+    // static reducers(): ActionReducer<any> {
 
-        let actionReducers: ActionReducer<any>[] = featureRoutes
-            .filter(route => (route.data && route.data['reducers']))
-            .map(route => route.data['reducers']).filter(() => true);
-        return combineReducers(Object.assign({},
-            //{ i18n: multilingualReducer },
-            ...actionReducers
-        ));
-    }
+    //     let actionReducers: ActionReducer<any>[] = featureRoutes
+    //         .filter(route => (route.data && route.data['reducers']))
+    //         .map(route => route.data['reducers']).filter(() => true);
+    //     return combineReducers(Object.assign({},
+    //         //{ i18n: multilingualReducer },
+    //         ...actionReducers
+    //     ));
+    // }
 }
