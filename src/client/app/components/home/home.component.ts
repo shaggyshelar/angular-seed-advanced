@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 // app
 import { BaseComponent, RouterExtensions } from '../../frameworks/core/index';
-// import { IAppState, getNames } from '../../frameworks/ngrx/index';
-// import * as nameList from '../../frameworks/sample/index';
+import { IAppState, getNames } from '../../frameworks/ngrx/index';
+import * as nameList from '../../frameworks/sample/index';
 
 @BaseComponent({
   moduleId: module.id,
@@ -17,25 +17,28 @@ export class HomeComponent {
   public names$: Observable<Array<string>>;
   public newName: string = '';
 
-  // constructor(public routerext: RouterExtensions) {
-  // }
+  constructor(private store: Store<IAppState>, public routerext: RouterExtensions) {
+    //this.names$ = store.let(<any>getNames);
+  }
 
   /*
    * @param newname  any text as input.
    * @returns return false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
+    this.store.dispatch(new nameList.AddAction(this.newName));
+    this.newName = '';
     return false;
   }
 
   readAbout() {
     // Try this in the {N} app
     // {N} can use these animation options
-    // this.routerext.navigate(['/about'], {
-    //   transition: {
-    //     duration: 1000,
-    //     name: 'slideTop',
-    //   }
-    // });
+    this.routerext.navigate(['/about'], {
+      transition: {
+        duration: 1000,
+        name: 'slideTop',
+      }
+    });
   }
 }
