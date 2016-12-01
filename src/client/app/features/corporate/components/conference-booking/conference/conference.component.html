@@ -34,7 +34,7 @@
 
     <div class="portlet light bordered">
       <div class="portlet-body">
-        <p-schedule [events]="events" [contentHeight]="700" [header]="headerConfig" (onDayClick)="handleDayClick($event)" [slotEventOverlap]="false"
+        <p-schedule [events]="serverEvents | async" [contentHeight]="700" [header]="headerConfig" (onDayClick)="handleDayClick($event)" [slotEventOverlap]="false"
           [defaultView]="'agendaDay'" [minTime]="minTime" [maxTime]="maxTime" (onEventClick)="handleEventClicked($event)" >
         </p-schedule>
       </div>

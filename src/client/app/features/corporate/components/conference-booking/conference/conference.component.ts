@@ -7,7 +7,6 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Other Module Dependencies */
@@ -15,7 +14,8 @@ import * as moment from 'moment/moment';
 import * as _ from 'lodash';
 
 /** Module Level Dependencies */
-import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
+import { ConferenceBookingService } from '../../../services/conference-booking.service';
+import { Conference } from '../../../models/conference';
 
 /** Component Declaration */
 @BaseComponent({
@@ -26,7 +26,6 @@ import { CORPORATE_ACTIONS } from '../../../services/corporate.actions';
 })
 export class ConferenceComponent implements OnInit {
     elementRef: ElementRef;
-    events: any[];
     allEvents: any[];
     header: any;
     selectedEvent: MyEvent;
@@ -37,15 +36,12 @@ export class ConferenceComponent implements OnInit {
     maxTime: string;
     conferenceRooms: any[];
     selectedRoom: string;
-    serverEvents: Observable<any>;
-    constructor(private store: Store<any>, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    serverEvents: Observable<Conference[]>;
+    constructor(private conferenceBookingService: ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
-        this.events = [];
-
     }
     ngAfterViewInit() {
-
         var el: HTMLElement = this.elementRef.nativeElement;
         var slots = el.querySelectorAll('.ui-widget-content');
         _.forEach(slots, function (elem, key) {
@@ -64,12 +60,10 @@ export class ConferenceComponent implements OnInit {
         });
     }
     ngOnInit() {
-        this.serverEvents = this.store.select('corporate');
-        this.store.dispatch({ type: CORPORATE_ACTIONS.INIT });
-        this.serverEvents.subscribe(res => {
-            if (res) {
-                this.allEvents =  res.conferenceEvents;
-                this.events = this.allEvents;
+        this.serverEvents = this.conferenceBookingService.getConferenceBooking();
+        this.serverEvents.subscribe(result => {
+            if (result) {
+                this.allEvents = result;
                 this.route.params.forEach((params: Params) => {
                     let room = params['room'];
                     if (room) {
@@ -79,8 +73,7 @@ export class ConferenceComponent implements OnInit {
                     }
                 });
             }
-        }
-        );
+        });
         this.minTime = '07:00:00';
         this.maxTime = '20:00:00';
         if (window.screen.width < 768) {
@@ -146,10 +139,16 @@ export class ConferenceComponent implements OnInit {
     getEventByRooms(room: string) {
         this.selectedRoom = room;
         if (room === 'AllRooms') {
-            this.events = this.allEvents;
+            this.serverEvents = new Observable<Conference[]>(observer => {
+                observer.next(this.allEvents);
+            });
         } else {
-            this.events = _.filter(this.allEvents, function (item) {
+            let events: Conference[] = [];
+            events = _.filter(this.allEvents, function (item) {
                 return item.Room.Name === room;
+            });
+            this.serverEvents = new Observable<Conference[]>(observer => {
+                observer.next(events);
             });
         }
     }
