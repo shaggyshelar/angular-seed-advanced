@@ -1,71 +1,82 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
-	<!-- BEGIN CONTENT BODY -->
-	<div class="page-content" [ifAuthorize]="['Timesheet.READ']">
-		<ul class="page-breadcrumb breadcrumb hidden-xs">
-			<li>
-				<span>LINK UP</span>
-				<i class="fa fa-circle"></i>
-			</li>
-			<li>
-				<span class="active">Manage Ticket</span>
-			</li>
-		</ul>
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="portlet light ">
-					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">Department</label>
-								<div>
-									<p-dropdown [options]="departments"  [(ngModel)]="ticketModel.Department" name="departments" [styleClass]="form-control"></p-dropdown>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">Priority</label>
-								<div>
-									<p-dropdown [options]="priorities"   [(ngModel)]="ticketModel.Priority" name="priorities" [styleClass]="form-control"></p-dropdown>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">Concern</label>
-								<div>
-									<p-dropdown [options]="concerns"   [(ngModel)]="ticketModel.Concern" name="concerns" [styleClass]="form-control"></p-dropdown>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">Description </label>
-								<div>
-									<textarea  [(ngModel)]="ticketModel.Description" name="description" class="fullWidth"></textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<div class="form-body">
-								<label class="control-label"></label>
-								<div>
-									<button pButton type="button" label="Save"  (click)="save()" ></button>
-									<button pButton type="button" label="Cancel"  (click)="cancel()" ></button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- BEGIN CONTENT BODY -->
+  <div class="page-content" [ifAuthorize]="['Timesheet.READ']">
+    <ul class="page-breadcrumb breadcrumb hidden-xs">
+      <li>
+        <span>LINK UP</span>
+        <i class="fa fa-circle"></i>
+      </li>
+      <li>
+        <span class="active">Manage Ticket</span>
+      </li>
+    </ul>
+    <div class="row">
+      <form class="form-horizontal" novalidate (ngSubmit)="onSubmit(ticketForm)" [formGroup]="ticketForm">
+        <div class="col-md-12 col-sm-12">
+          <div class="portlet light ">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label">Department</label>
+                  <div>
+                    <p-dropdown [options]="departments" formControlName="Department" name="departments" [styleClass]="form-control"></p-dropdown>
+                    <div class="alert alert-danger" *ngIf="ticketForm.get('Department').hasError('required') && ticketForm.get('Department').touched">
+                      Please select Department
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label">Priority</label>
+                  <div>
+                    <p-dropdown [options]="priorities" formControlName="Priority" name="priorities" [styleClass]="form-control"></p-dropdown>
+                    <div class="alert alert-danger" *ngIf="ticketForm.get('Priority').hasError('required') && ticketForm.get('Priority').touched">
+                      Please select Priority
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label">Concern</label>
+                  <div>
+                    <p-dropdown [options]="concerns" formControlName="Concern" name="concerns" [styleClass]="form-control"></p-dropdown>
+                    <div class="alert alert-danger" *ngIf="ticketForm.get('Concern').hasError('required') && ticketForm.get('Concern').touched">
+                      Please select Concern
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label">Description </label>
+                  <div>
+                    <textarea formControlName="Description" name="description" class="fullWidth"></textarea>
+                    <div class="alert alert-danger" *ngIf="ticketForm.get('Description').hasError('required') && ticketForm.get('Description').touched">
+                      Please fill the Description
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-body">
+                  <label class="control-label"></label>
+                  <div>
+                    <button pButton type="submit" label="Save"  [disabled]="ticketForm.invalid"></button>
+                    <button pButton type="button" label="Cancel" (click)="cancel()"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
