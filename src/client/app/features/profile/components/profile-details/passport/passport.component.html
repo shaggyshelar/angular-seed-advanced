@@ -12,7 +12,8 @@
             </div>
         </div>
         <div class="portlet-body">
-            <div *ngIf="passport.length == 0">
+            <p-growl [value]="msgs"></p-growl>
+            <div *ngIf="(passport | async)?.length == 0">
                 <table class="table table-bordered no-record-table" cellspacing="0">
                     <tbody>
                         <tr>
@@ -21,8 +22,8 @@
                     </tbody>
                 </table>
             </div>
-            <div *ngIf="passport.length > 0">
-                <p-dataTable [value]="passport" [responsive]="true" emptyMessage="No Records Found!">
+            <div *ngIf="(passport | async)?.length > 0">
+                <p-dataTable [value]="passport | async" [responsive]="true" emptyMessage="No Records Found!">
                     <p-column header="Passport Number" field="Number"></p-column>
                     <p-column header="Passport Expiry Date" field="ExpDate"></p-column>
                     <p-column header="Document" field="FilePath"></p-column>

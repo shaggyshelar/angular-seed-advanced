@@ -27,7 +27,15 @@ export class AddressService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getAddress(id): Observable<Address> {
-        return this.get$(id).map(res => res.json());
+    getAddress(): Observable<Address> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addAddress(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateAddress(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

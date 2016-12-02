@@ -3,7 +3,7 @@ var _ = require('lodash');
 var passportData = require('./passportData');
 
 module.exports = function (app) {
-    app.get('/api/Passport/:id', function (req, res) {
+    app.get('/api/Passport', function (req, res) {
         res.json(passportData);
     });
     app.post('/api/Passport', function (req, res) {
@@ -15,7 +15,8 @@ module.exports = function (app) {
     app.put('/api/Passport', function (req, res) {
         var passport = req.body;
         var index = _.findIndex(passportData, { ID: passport.ID });
-        passportData[index] = passport;
+        passportData[index].Number = passport.Number;
+        passportData[index].ExpDate = passport.ExpDate;
         res.sendStatus(200);
     });
 };
