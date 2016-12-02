@@ -1,41 +1,41 @@
 <form novalidate (ngSubmit)="onSubmit(achievementForm)" [formGroup]="achievementForm">
-<div class="portlet-body">
-    <div *ngIf="!achievements">
-        <hr>
-        <h5> {{ 'NO_RECORDS' | translate }}</h5>
-    </div>
-    <div *ngIf="achievements">
-        <p-dataTable [value]="achievements | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-            <p-column header="{{ 'EDIT' | translate }}">
-                <template let-achievementData="rowData" pTemplate type="body">
-                    <i class="fa fa-pencil icon-color" (click)="editAchievement(achievementData)"></i>
-                </template>
-            </p-column>
-            <p-column header="{{ 'ACHIEVEMENTS' | translate }}" field="Name"></p-column>
-            <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
-            <p-column header="{{ 'COMMENTS' | translate }}" field="Comments"></p-column>
-        </p-dataTable>
-    </div>
-    <div *ngIf="!showDiv">
-        <div class="row row-margin">
-            <div class="col-md-6 col-margin">
-                <span>{{ 'ACHIEVEMENT' | translate }}</span>
-                <span class="req-field"> *</span>
-                <div class="div-margin">
-                    <input type="text" id="achievement_description" class="form-control" placeholder="" formControlName="description">
-                    <div class="alert alert-danger" *ngIf="achievementForm.get('description').hasError('required') && achievementForm.get('description').touched">                       
-                        {{ 'ACHIEVEMENT_REQUIRED' | translate }}
+    <div class="portlet-body">
+        <div *ngIf="(achievements | async)?.length == 0">
+            <hr>
+            <h5> {{ 'NO_RECORDS' | translate }}</h5>
+        </div>
+        <div *ngIf="(achievements | async)?.length > 0">
+            <p-dataTable [value]="achievements | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+                <p-column header="{{ 'EDIT' | translate }}">
+                    <template let-achievementData="rowData" pTemplate type="body">
+                        <i class="fa fa-pencil icon-color" (click)="editAchievement(achievementData)"></i>
+                    </template>
+                </p-column>
+                <p-column header="{{ 'ACHIEVEMENTS' | translate }}" field="Name"></p-column>
+                <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
+                <p-column header="{{ 'COMMENTS' | translate }}" field="Comments"></p-column>
+            </p-dataTable>
+        </div>
+        <div *ngIf="!showDiv">
+            <div class="row row-margin">
+                <div class="col-md-6 col-margin">
+                    <span>{{ 'ACHIEVEMENT' | translate }}</span>
+                    <span class="req-field"> *</span>
+                    <div class="div-margin">
+                        <input type="text" id="achievement_description" class="form-control" placeholder="" formControlName="description">
+                        <div class="alert alert-danger" *ngIf="achievementForm.get('description').hasError('required') && achievementForm.get('description').touched">
+                            {{ 'ACHIEVEMENT_REQUIRED' | translate }}
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row row-margin button-margin">
+                <button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="achievementForm.invalid"></button>
+                <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+            </div>
         </div>
-        <div class="row row-margin button-margin">
-            <button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="achievementForm.invalid"></button>
-            <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+        <div class="row row-margin button-margin" *ngIf="showDiv">
+            <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_ACHIEVEMENT' | translate }}"></button>
         </div>
     </div>
-    <div class="row row-margin button-margin" *ngIf="showDiv">
-        <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW_ACHIEVEMENT' | translate }}"></button>
-    </div>
-</div>
 </form>

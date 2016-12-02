@@ -27,7 +27,7 @@ import { IdentityProofsComponent } from './components/profile-details/identity-p
 // Services Delarations
 import { ProfileService } from './services/profile.service';
 import { AchievementService } from './services/achievement.service';
-import { CerificateService } from './services/certificate.service';
+import { CertificateService } from './services/certificate.service';
 import { SkillService } from './services/skill.service';
 import { EducationService } from './services/education.service';
 import { EmploymentHistoryService } from './services/employmentHistory.service';
@@ -66,7 +66,7 @@ import { profileReducer } from './services/profile.reducer';
         NomineesComponent,
         IdentityProofsComponent
     ],
-    providers: [ProfileService, AchievementService, CerificateService, SkillService, EducationService, EmploymentHistoryService,
+    providers: [ProfileService, AchievementService, CertificateService, SkillService, EducationService, EmploymentHistoryService,
         ExperienceService, AddressService, IdentityProofService, NomineesService, PassportService, UanService, VisaService]
 })
 

@@ -3,21 +3,18 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Level Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
-
-/** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../services/profile.actions';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Experience } from '../../models/experience';
+import { ExperienceService } from '../../services/experience.service';
 
 /** Other Module Dependencies */
 // import * as _ from 'lodash';
-//import * as moment from 'moment/moment';
+import * as moment from 'moment/moment';
 
 export interface ExperienceForm {
     id: number;
@@ -29,7 +26,7 @@ export interface ExperienceForm {
     environment: string;
     responsibilites: string;
     description: string;
-    currentProject: boolean;
+    isCurrentProject: boolean;
 }
 
 /** Component Declaration */
@@ -40,18 +37,17 @@ export interface ExperienceForm {
     styleUrls: ['experience.component.css']
 })
 export class ExperienceComponent implements OnInit {
-    experience: Experience[];
+    experience: Observable<Experience>;
     showDiv: boolean;
     experienceForm: FormGroup;
     public profile_Observable: Observable<any>;
 
     constructor(
-        private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
+        private formBuilder: FormBuilder, private experienceService: ExperienceService) {
         this.showDiv = true;
     }
 
     ngOnInit(): void {
-        this.experience = [];
         this.experienceForm = this.formBuilder.group({
             id: [null],
             project: ['', [Validators.required]],
@@ -62,16 +58,10 @@ export class ExperienceComponent implements OnInit {
             environment: [''],
             responsibilites: ['', [Validators.required]],
             description: [''],
-            currentProject: [''],
+            isCurrentProject: [''],
         });
 
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EXPERIENCE, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.experience = res && res.experience ? res.experience : [];
-            console.log('Experience', this.experience);
-        });
+        this.experience = this.experienceService.getExperience();
     }
 
     onAddClick() {
@@ -80,24 +70,44 @@ export class ExperienceComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: ExperienceForm, valid: boolean }) {
-
-
-        // this.experience = [{
-        //     id: this.experience.length + 1,
-        //     project: value.project,
-        //     client: value.client,
-        //     startDate: moment(value.startDate).format('DD/MM/YYYY'),
-        //     endDate: moment(value.endDate).format('DD/MM/YYYY'),
-        //     role: value.role,
-        //     environment: value.environment,
-        //     responsibilites: value.responsibilites,
-        //     description: value.description,
-        //     currentProject: value.currentProject,
-        //     duration: '8 years',
-        //     status: 'status',
-        //     comment: 'Comment'
-        // }];
-        this.showDiv = true;
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Project: value.project,
+                Client: value.client,
+                StartDate: moment(value.startDate).format('DD/MM/YYYY'),
+                EndDate: moment(value.endDate).format('DD/MM/YYYY'),
+                Role: value.role,
+                Environment: value.environment,
+                Responsibilites: value.responsibilites,
+                Description: value.description,
+                IsCurrentProject: value.isCurrentProject,
+            };
+            this.experienceService.updateExperience(value.id, params).subscribe(res => {
+                if (res) {
+                    this.experience = this.experienceService.getExperience();
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Project: value.project,
+                Client: value.client,
+                StartDate: moment(value.startDate).format('DD/MM/YYYY'),
+                EndDate: moment(value.endDate).format('DD/MM/YYYY'),
+                Role: value.role,
+                Environment: value.environment,
+                Responsibilites: value.responsibilites,
+                Description: value.description,
+                IsCurrentProject: value.isCurrentProject,
+            };
+            this.experienceService.addExperience(params).subscribe(res => {
+                if (res) {
+                    this.experience = this.experienceService.getExperience();
+                    this.showDiv = true;
+                }
+            });
+        }
     }
 
     cancel() {
@@ -106,19 +116,19 @@ export class ExperienceComponent implements OnInit {
     }
     editExperienceData(experienceData) {
         this.showDiv = false;
-        var startDate = experienceData.startDate.split('/');
-        var endDate = experienceData.endDate.split('/');
+        var startDate = experienceData.StartDate.split('/');
+        var endDate = experienceData.EndDate.split('/');
         this.experienceForm.setValue({
-            id: experienceData.id,
-            project: experienceData.project,
-            client: experienceData.client,
+            id: experienceData.ID,
+            project: experienceData.Project.Name,
+            client: experienceData.Client.Name,
             startDate: new Date(startDate[2] + '-' + startDate[1] + '-' + startDate[0]),
             endDate: new Date(endDate[2] + '-' + endDate[1] + '-' + endDate[0]),
-            role: experienceData.role,
-            environment: experienceData.environment,
-            responsibilites: experienceData.responsibilites,
-            description: experienceData.description,
-            currentProject: experienceData.currentProject
+            role: experienceData.Role,
+            environment: experienceData.Environment,
+            responsibilites: experienceData.Responsibilites,
+            description: experienceData.Description,
+            isCurrentProject: experienceData.IsCurrentProject
         });
     }
 }

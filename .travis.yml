@@ -31,7 +31,12 @@ after_success: |
     git init
     git add .
     git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m CommitFromTravisCI
-    git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
+    if [ "$TRAVIS_BRANCH" == "develop" ] || [ "$TRAVIS_BRANCH" == "devMahesh" ]; then
+      git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
+    fi
+    if [ "$TRAVIS_BRANCH" == "framework" ]; then
+      git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/AngularDemo.git master
+    fi
     cd ..
     cd ..
     echo "Application Deployed!" | ./slacktee.sh -t "Heroku Deploy"

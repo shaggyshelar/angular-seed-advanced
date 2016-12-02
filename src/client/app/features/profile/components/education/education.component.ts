@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Level Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../services/profile.actions';
+import { EducationService } from '../../services/education.service';
+import { Education } from '../../models/education';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -44,7 +44,7 @@ export interface EducationForm {
     styleUrls: ['education.component.css']
 })
 export class EducationComponent implements OnInit {
-    education: any[];
+    education: Observable<Education>;
     class: SelectItem[];
     grade: SelectItem[];
     showDiv: boolean;
@@ -53,8 +53,7 @@ export class EducationComponent implements OnInit {
     public profile_Observable: Observable<any>;
 
     constructor(
-        private router: Router, private formBuilder: FormBuilder, private store: Store<any>, private logService: LogService) {
-        this.education = [];
+        private router: Router, private formBuilder: FormBuilder, private educationService: EducationService) {
         this.class = [];
         this.grade = [];
         this.showDiv = true;
@@ -75,13 +74,7 @@ export class EducationComponent implements OnInit {
         this.grade.push({ label: 'Second Class', value: { id: 3, name: 'Second Class' } });
         this.grade.push({ label: 'Pass', value: { id: 4, name: 'Pass' } });
 
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EDUCATION, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.education = res && res.education ? res.education : [];
-            console.log('Education', this.education);
-        });
+        this.education = this.educationService.getEducation();
 
         this.educationForm = this.formBuilder.group({
             id: [''],
@@ -94,18 +87,36 @@ export class EducationComponent implements OnInit {
     }
 
     onSubmit({ value, valid }: { value: EducationForm, valid: boolean }) {
-        this.education = [{
-            id: this.education.length + 1,
-            class: value.class.name,
-            degree: value.degree,
-            grade: value.grade.name,
-            percentage: value.percentage,
-            yearOfPassing: value.yearOfPassing,
-            certificate: '',
-            status: 'status',
-            hrComment: 'hr Comment'
-        }];
-        this.showDiv = true;
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Name: value.class.name,
+                Degree: value.degree,
+                Grade: value.grade.name,
+                Percentage: value.percentage,
+                YearOfPassing: value.yearOfPassing
+            };
+            this.educationService.updateEducation(value.id, params).subscribe(res => {
+                if (res) {
+                    this.education = this.educationService.getEducation();
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Name: value.class.name,
+                Degree: value.degree,
+                Grade: value.grade.name,
+                Percentage: value.percentage,
+                YearOfPassing: value.yearOfPassing
+            };
+            this.educationService.addEducation(params).subscribe(res => {
+                if (res) {
+                    this.education = this.educationService.getEducation();
+                    this.showDiv = true;
+                }
+            });
+        }
     }
 
     onFileSelect(event) {
@@ -124,12 +135,12 @@ export class EducationComponent implements OnInit {
     editEducation(educationData) {
         this.showDiv = false;
         this.educationForm.setValue({
-            id: educationData.id,
-            degree: educationData.degree,
-            class: _.find(this.class, ['label', educationData.class]).value,
-            grade: _.find(this.grade, ['label', educationData.grade]).value,
-            yearOfPassing: educationData.yearOfPassing,
-            percentage: educationData.percentage
+            id: educationData.ID,
+            degree: educationData.Degree,
+            class: _.find(this.class, ['label', educationData.Class.Name]) ? _.find(this.class, ['label', educationData.Class.Name]).value : '',
+            grade: _.find(this.grade, ['label', educationData.Grade]) ? _.find(this.grade, ['label', educationData.Grade]).value : '',
+            yearOfPassing: educationData.YearOfPassing,
+            percentage: educationData.Percentage
         });
     }
 

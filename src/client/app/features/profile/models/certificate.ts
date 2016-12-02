@@ -6,5 +6,6 @@ export interface Certificate {
     ExpiryDate: string;
     FilePath: string;
     Status: string;
-    Comments: string; 
+    Comments: string;
+    FromESPL: boolean;
 }

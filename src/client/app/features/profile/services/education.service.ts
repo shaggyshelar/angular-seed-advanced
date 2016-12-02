@@ -26,7 +26,15 @@ export class EducationService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getEducation(id): Observable<Education> {
-        return this.get$(id).map(res => res.json());
+    getEducation(): Observable<Education> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addEducation(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateEducation(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

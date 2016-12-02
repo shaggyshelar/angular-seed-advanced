@@ -26,8 +26,8 @@ export class AchievementService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getAchievements(id): Observable<Achievement> {
-        return this.get$(id).map(res => res.json());
+    getAchievements(): Observable<Achievement> {
+        return this.getList$().map(res => res.json());
     }
 
     addAchievement(params): Observable<boolean> {

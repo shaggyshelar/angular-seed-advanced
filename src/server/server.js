@@ -27,7 +27,7 @@ require('./nominees/nominees')(app);
 require('./passport/passport')(app);
 require('./uan/uan')(app);
 require('./visa/visa')(app);
-require('./leave/leave')(app);
+require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
 
 app.get('/', function (req, res) {

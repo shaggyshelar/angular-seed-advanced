@@ -54,7 +54,39 @@ export class LeaveService extends BaseService {
         return this.getChildList$(methodParam).map(res => res.json());
     }
 
+    /**
+     * addLeaveRecord method
+     * Adds leave record. returns true if successful, false if not.
+     */
     addLeaveRecord(leavePayload): Observable<boolean> {
         return this.post$(leavePayload).map(res => res.status === 201 ? true : false);
+    }
+
+    /**
+     * getChildRecord method
+     * Gets data form the path extension specified.
+     * @params : Parameter : path extension
+     */
+    getChildRecord(params): Observable<any> {
+        return this.getChildList$(params).map(res => res.json());
+    }
+
+    /**
+     * updateLeaveRecord method
+     * Put request to update a record.
+     * @ID : Parameter : ID of entity to update
+     * @payload : Parameter : Object with properties of entity to be updated
+     */
+    updateLeaveRecord(ID, payload): Observable<boolean> {
+        return this.put$(ID, payload).map(res => res.status === 201 ? true : false);
+    }
+
+    /**
+     * deleteLeaveRecord method
+     * Delete request to delete a record.
+     * @ID : Parameter : ID of entity to update
+     */
+    deleteLeaveRecord(ID): Observable<boolean> {
+        return this.delete$(ID).map(res => res.status === 200 ? true : false);
     }
 }
