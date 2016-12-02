@@ -32,15 +32,15 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ 'EMPLOYEE_ID' | translate }}</td>
-                                        <td> 24568 </td>
+                                        <td> {{ (leaveObs | async)?.User.ID }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'EMPLOYEE' | translate }}</td>
-                                        <td> Person1 LName </td>
+                                        <td> {{ (leaveObs | async)?.User.Name }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'DEPARTMENT' | translate }}</td>
-                                        <td> EBS </td>
+                                        <td> {{ (leaveObs | async)?.User.Department }} </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -51,23 +51,23 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ 'LEAVE_TYPE' | translate }}</td>
-                                        <td> Leave </td>
+                                        <td> {{ (leaveObs | async)?.Type.Title }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'NO_LEAVES' | translate }}</td>
-                                        <td> 3 </td>
+                                        <td> {{ (leaveObs | async)?.NumberOfLeave }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'REASON' | translate }}</td>
-                                        <td> Personal </td>
+                                        <td> {{ (leaveObs | async)?.Reason }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'START_DATE' | translate }}</td>
-                                        <td> 01-10-2016 </td>
+                                        <td> {{ (leaveObs | async)?.StartDate }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'END_DATE' | translate }}</td>
-                                        <td> 10-10-2016 </td>
+                                        <td> {{ (leaveObs | async)?.EndDate }} </td>
                                     </tr>
                                     <tr>
                                         <td>{{ 'ACTION' | translate }}</td>
@@ -86,16 +86,17 @@
                 <div class="portlet light bordered">
                     <div class="portlet-body">
                         <h4>Requestor Details</h4>
-                        <p-dataTable [value]="requests" [responsive]="true">
-                            <p-column field="project" header="{{ 'PROJECT' | translate }}" [sortable]="true"></p-column>
-                            <p-column field="manager" header="{{ 'MANAGER' | translate }}" [sortable]="true"></p-column>
-                            <p-column field="status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
-                            <p-column field="comments" header="{{ 'COMMENTS' | translate }}" [sortable]="true"></p-column>
+                        <p-dataTable [value]="(leaveObs | async)?.Approvers" [responsive]="true">
+                            <p-column field="Project" header="{{ 'PROJECT' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="Manager" header="{{ 'MANAGER' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="Status" header="{{ 'STATUS' | translate }}" [sortable]="true"></p-column>
+                            <p-column field="Comment" header="{{ 'COMMENTS' | translate }}" [sortable]="true"></p-column>
                         </p-dataTable>
-                        <form #form="ngForm" (submit)="submitForm(form)"  novalidate>
+                        <form #form="ngForm" (submit)="submitForm(form)" novalidate>
                             <div class="form-group">
                                 <label class="control-label">{{ 'COMMENTS' | translate }}</label>
-                                <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments" pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
+                                <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments"
+                                    pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched">
                                 </textarea>
                             </div>
 
@@ -114,7 +115,7 @@
                                     <div class="pull-right">
                                         <button id="approve" [disabled]="form.invalid" type="submit" name="approve" (click)="approveClicked()" class="btn"> {{ 'APPROVE' | translate }} </button>
                                         <button id="reject" [disabled]="form.invalid" type="submit" name="reject" (click)="rejectClicked()" class="btn"> {{ 'REJECT' | translate }} </button>
-                                        <button id="close" type="reset" (click)=" closeClicked()" class="btn" > {{ 'CLOSE' | translate }} </button>
+                                        <button id="close" type="reset" (click)=" closeClicked()" class="btn"> {{ 'CLOSE' | translate }} </button>
                                     </div>
                                 </div>
                             </div>

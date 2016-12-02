@@ -12,4 +12,12 @@ export interface Leave {
     Status: string;
     Reason: string;
     Comment: string;
+    Approvers: [
+        {
+            Project: string,
+            Manager: string,
+            Status: string,
+            Comment: string
+        }
+    ];
 }

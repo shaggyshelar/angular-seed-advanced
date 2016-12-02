@@ -9,80 +9,110 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
-import { LEAVE_ACTIONS } from '../../services/leave.actions';
+import { LeaveService } from '../../services/leave.service';
+import { Leave } from '../../models/leave';
+import { User } from '../../models/user';
 
 /** Component Declaration */
 
 class FormFieldClass {
-  constructor(
-    public comments: string
-  ) { }
+    constructor(
+        public comments: string
+    ) { }
 }
 
 @BaseComponent({
-  moduleId: module.id,
-  selector: 'singleapproval',
-  templateUrl: 'single-approval.component.html',
-  styleUrls: ['single-approval.component.css']
+    moduleId: module.id,
+    selector: 'singleapproval',
+    templateUrl: 'single-approval.component.html',
+    styleUrls: ['single-approval.component.css']
 })
 export class SingleApprovalComponent {
-  reqId: number;
-  leaveObs: Observable<any>;
-  requests: any;
-  servRows = 6;
-  model: FormFieldClass;
-  validationMessage: string = '';
-  approved: boolean = false;
-  rejected: boolean = false;
+    leaveID: number;
+    leaveObs: Observable<Leave>;
+    userDetObs: Observable<User>;
+    requests: any;
+    servRows = 6;
+    model: FormFieldClass;
+    validationMessage: string = '';
+    approved: boolean = false;
+    rejected: boolean = false;
 
-  constructor(
-    private router: Router,
-    private store: Store<any>,
-    private logService: LogService,
-    private route: ActivatedRoute
-  ) {
-    this.requests = [
-      { project: 'RMS', manager: 'Sagar Shelar', status: 'Pending', comments: 'Comment1 here...' },
-      { project: 'PLSV 2', manager: 'Manager Name', status: 'Approved', comments: 'Comment2 here...' }
-    ];
-    this.model = new FormFieldClass('');
+    constructor(
+        private router: Router,
+        private store: Store<any>,
+        private logService: LogService,
+        private leaveService: LeaveService,
+        private route: ActivatedRoute
+    ) {
+        this.model = new FormFieldClass('');
 
-  }
+    }
 
-  ngOnInit() {
-    this.logService.debug('Single leave approval Comonent');
+    ngOnInit() {
+        this.logService.debug('Single leave approval Comonent');
+        this.route.params.subscribe(params => {
+            this.leaveID = +params['id'];
+        });
+        this.leaveObs = this.leaveService.getLeave(this.leaveID);
+    }
 
-    this.requests = this.route.params.subscribe(params => {
-      this.reqId = +params['id'];
-    });
+    approveClicked() {
+        this.rejected = false;
+        this.approved = true;
+        //    BACKEND CALL HERE
 
-    this.logService.debug('SingleApprovalComponent OnInit');
-    this.store.dispatch({ type: LEAVE_ACTIONS.LEAVE_RECORD, payload: this.reqId });
-    this.leaveObs = this.store.select('leave');
-   
+        var params = {
+            ID: this.leaveID,
+            Comment: this.model.comments.trim(),
+            Status: 'Approved'
+        };
 
-  }
+        this.leaveService.updateLeaveRecord(this.leaveID, params)
+            .subscribe(res => {
+                if (res) {
+                    this.rejected = false;
+                    this.approved = true;
+                    this.closeClicked();
+                } else {
+                    this.rejected = true;
+                    this.approved = false;
+                    this.validationMessage = 'Error occured';
+                }
+            });
+    }
 
-  approveClicked() {
-    this.rejected = false;
-    this.approved = true;
-    //    BACKEND CALL HERE
-    return;
-  }
+    rejectClicked() {
+        this.rejected = true;
+        this.approved = false;
+        //    BACKEND CALL HERE
 
-  rejectClicked() {
-    this.rejected = true;
-    this.approved = false;
-    //    BACKEND CALL HERE
-    return;
-  }
+        var params = {
+            ID: this.leaveID,
+            Comment: this.model.comments.trim(),
+            Status: 'Rejected'
+        };
 
-  closeClicked() {
-    this.model.comments = '';
-    this.router.navigate(['/leave/approve-leave']);
-  }
+        this.leaveService.updateLeaveRecord(this.leaveID, params)
+            .subscribe(res => {
+                if (res) {
+                    this.closeClicked();
+                    this.rejected = true;
+                    this.approved = false;
+                } else {
+                    this.rejected = false;
+                    this.approved = true;
+                    this.validationMessage = 'Error occured';
+                }
+            });
+    }
 
-  submitForm(form) {
-    // BACKEND CALL HERE
-  }
+    closeClicked() {
+        this.model.comments = '';
+        this.router.navigate(['/leave/approve-leave']);
+    }
+
+    submitForm(form) {
+        // BACKEND CALL HERE
+    }
 }
