@@ -1,10 +1,6 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
 
-/** Third Party Dependencies */
-import { EffectsModule } from '@ngrx/effects';
-import { ActionReducer } from '@ngrx/store';
-
 /** Module Level Dependencies */
 // Components Declarations
 import { CommonModule } from '../core/index';
@@ -15,14 +11,15 @@ import { ApprovedTimesheetComponent } from './components/approved-timesheet/appr
 import { ReportTimesheetComponent } from './components/report-timesheet/report-timesheet.component';
 // Services Delarations
 import { TimesheetService } from './services/timesheet.service';
-import { TimesheetEffects } from './services/timesheet.effects';
-import { timesheetReducer } from './services/timesheet.reducer';
+import { TimesheetRoutingModule } from './timesheet-routes.module';
+import { RouterModule } from '@angular/router';
 
 /** Module Definition */
 @NgModule({
     imports: [
         CommonModule,
-        EffectsModule.run(TimesheetEffects)
+        RouterModule,
+        TimesheetRoutingModule
     ],
     exports: [],
     declarations: [
@@ -34,7 +31,4 @@ import { timesheetReducer } from './services/timesheet.reducer';
     providers: [TimesheetService],
 })
 export class TimesheetModule {
-    static reducers(): { [key: string]: ActionReducer<any> } {
-        return { timesheet: timesheetReducer };
-    }
 }

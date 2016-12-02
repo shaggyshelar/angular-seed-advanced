@@ -4,7 +4,6 @@ import { Http } from '@angular/http';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
@@ -14,8 +13,6 @@ import { LogService } from '../../framework.ref';
 import { BaseService } from '../../core/index';
 import { Timesheet } from '../models/timesheet';
 import { Employee } from '../models/employee';
-import { TimesheetState } from '../models/timesheet.state';
-import { TIMESHEET_ACTIONS } from './timesheet.actions';
 
 /** Context for service calls */
 export const CONTEXT = 'timesheet';
@@ -24,10 +21,9 @@ export const CONTEXT = 'timesheet';
 @Injectable()
 export class TimesheetService extends BaseService {
 
-    constructor(public http: Http, public logService: LogService, private store: Store<TimesheetState>) {
+    constructor(public http: Http, public logService: LogService) {
         super(http, CONTEXT, logService);
         this.logService.debug('Timehsheet Service Initialized Successfully');
-        this.store.dispatch({ type: TIMESHEET_ACTIONS.INIT });
     }
 
     /**
