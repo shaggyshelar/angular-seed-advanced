@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TopNavigationBarComponent } from './top-navigation-bar.component';
 import { t } from '../../../../../frameworks/test/index';
-import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.module';
 import { LoginService } from '../../../shared/services/login.service';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -17,7 +16,7 @@ export function main() {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [
-                    MultilingualModule, CommonModule,
+                    CommonModule,
                 ],
                 declarations: [TopNavigationBarComponent, TestComponent, RouterLinkStubDirective],
                 providers: [

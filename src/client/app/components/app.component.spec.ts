@@ -7,8 +7,6 @@ import { StoreModule } from '@ngrx/store';
 
 import { t } from '../frameworks/test/index';
 import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../frameworks/core/testing/index';
-import { NameListService, NavbarComponent, ToolbarComponent } from '../frameworks/sample/index';
-import { MultilingualModule } from '../frameworks/i18n/multilingual.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -23,19 +21,17 @@ const testModuleConfig = () => {
   TestBed.configureTestingModule({
     imports: [
       FormsModule,
-      MultilingualModule,
       StoreModule.provideStore({}),
       RouterTestingModule.withRoutes(config)
     ],
     declarations: [
       TestComponent, AppComponent,
       HomeComponent, AboutComponent,
-      NavbarComponent, ToolbarComponent
+      //NavbarComponent, ToolbarComponent
     ],
     providers: [
       TEST_CORE_PROVIDERS(),
       TEST_HTTP_PROVIDERS(),
-      NameListService
     ]
   });
 };

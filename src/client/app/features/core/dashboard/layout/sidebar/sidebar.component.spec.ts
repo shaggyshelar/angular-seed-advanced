@@ -4,7 +4,6 @@ import { Component, Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../../frameworks/test/index';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
-import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.module';
 import { CommonModule } from '@angular/common';
 import { LogService } from '../../../../framework.ref';
 
@@ -16,7 +15,7 @@ export function main() {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [
-                    MultilingualModule, CommonModule
+                    CommonModule
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 declarations: [SidebarComponent, TestComponent, RouterLinkStubDirective, IfAuthorizeStubDirective],
