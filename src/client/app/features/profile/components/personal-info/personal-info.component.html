@@ -3,7 +3,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_employeeID">{{ 'EMPLOYEE_ID' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_employeeID">Employee ID : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <span> {{ profileInfo.ID }} </span>
@@ -13,7 +13,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_employeeName">{{ 'EMPLOYEE_NAME' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_employeeName">Employee Name : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <span> {{ profileInfo.Name }} </span>
@@ -25,7 +25,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_currentAddress">{{ 'CURRENT_ADDRESS' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_currentAddress">Current Address : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <span> {{ profileInfo.CurrentAdd }} </span>
@@ -35,7 +35,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_contactNo">{{ 'CONTACT_NO' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_contactNo">Contact No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.ContactNo && !isAddContactNo" (click)="addContactNo()"></i>
@@ -56,7 +56,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_employeeEmail">{{ 'EMAIL' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_employeeEmail">Email : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <span> {{ profileInfo.Email }} </span>
@@ -66,7 +66,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_dateOfBirth">{{ 'DATE_OF_BIRTH' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_dateOfBirth">Date of Birth : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <span> {{ profileInfo.DOB }} </span>
@@ -78,7 +78,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_esplPFNo">{{ 'ESPL_PF_NO' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_esplPFNo">ESPL PF No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CurrentOrgPFNumber && !isAddEsplPfNo" (click)="addEsplPfNo()"></i>
@@ -97,7 +97,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_previousPFNo">{{ 'PREVIOUS_PF_NO' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_previousPFNo">Previous PF No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.PreviousOrgPFNumber && !isAddPreviousPfNo" (click)="addPreviousPfNo()"></i>
@@ -118,7 +118,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_careerStartDate">{{ 'CAREER_START_DATE' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_careerStartDate">Career Start Date : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CareerStartDate && !isAddCareerStartDate" (click)="addCareerStartDate()"></i>
@@ -137,7 +137,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_lastWorkingDay">{{ 'LAST_WORKING_DAY' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_lastWorkingDay">Last working day of previous employer : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.LastWorkingDayOfPrevEmployer && !isAddLastWorkingDay" (click)="addLastWorkingDay()"></i>
@@ -146,7 +146,8 @@
                         <i class="fa fa-pencil icon-size" (click)="editLastWorkingDay()"></i>
                     </div>
                     <div *ngIf="isEditLastWorkingDay">
-                        <input type="text" placeholder="" id="personalInfo_lastWorkingDayValue" [(ngModel)]="profileInfo.LastWorkingDayOfPrevEmployer" class="input-border">
+                        <input type="text" placeholder="" id="personalInfo_lastWorkingDayValue" [(ngModel)]="profileInfo.LastWorkingDayOfPrevEmployer"
+                            class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveLastWorkingDay()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelLastWorkingDay()"></i>
                     </div>
@@ -158,7 +159,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_emergencyContactName">{{ 'EMERGENCY_CONTACT_NAME' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_emergencyContactName">Emergency Contact Name : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactName && !isAddEmergencyContactName" (click)="addEmergencyContactName()"></i>
@@ -178,7 +179,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_bloodGroup">{{ 'BLOOD_GROUP' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_bloodGroup">Blood Group : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.BloodGroup && !isAddBloodGroup" (click)="addBloodGroup()"></i>
@@ -199,7 +200,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_emergencyContactNo">{{ 'EMERGEANCY_CONTACT_NO' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_emergencyContactNo">Emergency Contact No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactNo && !isAddEmergencyContact" (click)="addEmergencyContactNo()"></i>
@@ -219,7 +220,7 @@
         <div class="col-md-6 col-margin">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <span class="personal-info-label" id="personalInfo_skypeID">{{ 'SKYPE_ID' | translate }} : </span>
+                    <span class="personal-info-label" id="personalInfo_skypeID">Skype ID : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.SkypeID && !isAddSkypeID" (click)="addSkypeID()"></i>

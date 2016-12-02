@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -41,6 +42,7 @@ export class ExperienceComponent implements OnInit {
     showDiv: boolean;
     experienceForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
 
     constructor(
         private formBuilder: FormBuilder, private experienceService: ExperienceService) {
@@ -86,6 +88,8 @@ export class ExperienceComponent implements OnInit {
             this.experienceService.updateExperience(value.id, params).subscribe(res => {
                 if (res) {
                     this.experience = this.experienceService.getExperience();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Experience updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -104,6 +108,8 @@ export class ExperienceComponent implements OnInit {
             this.experienceService.addExperience(params).subscribe(res => {
                 if (res) {
                     this.experience = this.experienceService.getExperience();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Experience saved successfully.' });
                     this.showDiv = true;
                 }
             });

@@ -1,7 +1,7 @@
 <div class="portlet box yellow border-color">
 	<div class="portlet-title div-color">
 		<div class="caption title">
-			{{ 'NOMINEES' | translate }}
+			Nominees
 			<i class="fa fa-pencil icon-css" (click)="add()" *ngIf="showDiv"></i>
 		</div>
 	</div>
@@ -9,25 +9,25 @@
 		<table class="table table-bordered detail-table">
 			<tbody>
 				<tr>
-					<td><b>{{ 'NOMINEE_NAME_1' | translate }}</b></td>
+					<td><b>Nominee 1 Name</b></td>
 					<td>
 						{{ nomineesData.length > 0 ? nomineesData[0].FirstNomineeName : '' }}
 					</td>
 				</tr>
 				<tr>
-					<td><b>{{ 'NOMINEE_1_RELATION_EMP' | translate }}</b></td>
+					<td><b>Nominee 1 Relationship with Emp</b></td>
 					<td>
 						<span> {{ nomineesData.length > 0 ? nomineesData[0].FirstNomineeRelationWithEmp : '' }}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><b>{{ 'NOMINEE_NAME_2' | translate }}</b></td>
+					<td><b>Nominee 2 Name</b></td>
 					<td>
 						{{ nomineesData.length > 0 ? nomineesData[0].SecondNomineeName : '' }}
 					</td>
 				</tr>
 				<tr>
-					<td><b>{{ 'NOMINEE_2_RELATION_EMP' | translate }}</b></td>
+					<td><b>Nominee 2 Relationship with Emp</b></td>
 					<td>
 						<span> {{ nomineesData.length > 0 ? nomineesData[0].SecondNomineeRelationWithEmp : '' }}</span>
 					</td>
@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>{{ 'NOMINEE_NAME_1' | translate }} </label>
+						<label>Nominee 1 Name </label>
 						<div class="div-margin">
 							<input type="text" id="nominee_firstNomineeName" [(ngModel)]="nomineeObj.firstNomineeName" class="form-control" placeholder="">
 						</div>
@@ -48,9 +48,10 @@
 
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>{{ 'NOMINEE_1_RELATION_EMP' | translate }} </label>
+						<label>Nominee 1 Relationship with Emp </label>
 						<div class="div-margin">
-							<input type="text" id="nominee_firstNomineeRelationWithEmp" [(ngModel)]="nomineeObj.firstNomineeRelationWithEmp" class="form-control" placeholder="">
+							<input type="text" id="nominee_firstNomineeRelationWithEmp" [(ngModel)]="nomineeObj.firstNomineeRelationWithEmp" class="form-control"
+								placeholder="">
 						</div>
 					</div>
 				</div>
@@ -58,7 +59,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>{{ 'NOMINEE_NAME_2' | translate }} </label>
+						<label>Nominee 2 Name</label>
 						<div class="div-margin">
 							<input type="text" id="nominee_secondNomineeName" [(ngModel)]="nomineeObj.secondNomineeName" class="form-control" placeholder="">
 						</div>
@@ -67,9 +68,10 @@
 
 				<div class="col-md-6">
 					<div class="form-group">
-						<label>{{ 'NOMINEE_2_RELATION_EMP' | translate }} </label>
+						<label>Nominee 2 Relationship with Emp </label>
 						<div class="div-margin">
-							<input type="text" id="nominee_secondNomineeRelationWithEmp" [(ngModel)]="nomineeObj.secondNomineeRelationWithEmp" class="form-control" placeholder="">
+							<input type="text" id="nominee_secondNomineeRelationWithEmp" [(ngModel)]="nomineeObj.secondNomineeRelationWithEmp" class="form-control"
+								placeholder="">
 						</div>
 					</div>
 				</div>
@@ -77,12 +79,14 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="div-margin nominee-info">
-						<input type="checkbox" name="nomineesInfo" id="nominee_nomineesInfo" [(ngModel)]="nomineeObj.nomineesInfo"> {{ 'NOMINEE_INFO' | translate }}
+						<input type="checkbox" name="nomineesInfo" id="nominee_nomineesInfo" [(ngModel)]="nomineeObj.nomineesInfo"> I hereby
+						Nominate above nominees for all financials related to organization including Provident Fund, Medical, Salary & Full
+						& Final
 					</div>
 				</div>
 			</div>
-			<button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
-			<button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+			<button pButton type="text" label="Submit" (click)="submit()"></button>
+			<button pButton type="text" label="Cancel" (click)="cancel()"></button>
 		</div>
 	</div>
 </div>

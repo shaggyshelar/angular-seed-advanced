@@ -5,6 +5,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
+
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
 
@@ -31,6 +33,7 @@ export class AchievementComponent implements OnInit {
     showDiv: boolean;
     achievementForm: FormGroup;
     public achievements: Observable<Achievement>;
+    msgs: Message[] = [];
 
     constructor(private formBuilder: FormBuilder, private achievementService: AchievementService) {
         this.showDiv = true;
@@ -57,6 +60,8 @@ export class AchievementComponent implements OnInit {
             this.achievementService.updateAchievement(value.id, params).subscribe(res => {
                 if (res) {
                     this.achievements = this.achievementService.getAchievements();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Achievement updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -67,6 +72,8 @@ export class AchievementComponent implements OnInit {
             this.achievementService.addAchievement(params).subscribe(res => {
                 if (res) {
                     this.achievements = this.achievementService.getAchievements();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Achievement saved successfully.' });
                     this.showDiv = true;
                 }
             });
