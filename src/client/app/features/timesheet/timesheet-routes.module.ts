@@ -11,7 +11,7 @@ import { ReportTimesheetComponent } from './components/report-timesheet/report-t
 /** TimesheetRoutes Definition */
 export const TimesheetRoutes: Routes = [
     {
-        path: 'timesheet',
+        path: '',
         redirectTo: 'my',
         pathMatch: 'full'
     },

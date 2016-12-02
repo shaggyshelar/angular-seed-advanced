@@ -8,7 +8,7 @@ import { DashboardComponent, DashboardContainerComponent } from './core/dashboar
 import { AuthGuard } from './core/index';
 
 // import { UsersRoutes, UserModule } from './users/index';
-// import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
+//import { TimesheetModule } from './timesheet/index';
 
 // //Routes
 //import { AuthRoutes } from './core/index';
@@ -50,6 +50,12 @@ const routes: Routes = [
         path: '',
         component: DashboardContainerComponent,
         canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'timesheet',
+                loadChildren: 'app/features/timesheet/timesheet.module#TimesheetModule'
+            }
+        ]
         // children: [
         //     ...featureRoutes,
         //     ...ErrorPagesRoutes,
