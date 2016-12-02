@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -51,6 +52,7 @@ export class EducationComponent implements OnInit {
     educationObj: any;
     educationForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
 
     constructor(
         private router: Router, private formBuilder: FormBuilder, private educationService: EducationService) {
@@ -99,6 +101,8 @@ export class EducationComponent implements OnInit {
             this.educationService.updateEducation(value.id, params).subscribe(res => {
                 if (res) {
                     this.education = this.educationService.getEducation();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Education Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -113,6 +117,8 @@ export class EducationComponent implements OnInit {
             this.educationService.addEducation(params).subscribe(res => {
                 if (res) {
                     this.education = this.educationService.getEducation();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Education Information saved successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -146,6 +152,5 @@ export class EducationComponent implements OnInit {
 
     onChange(event) {
         var files = event.srcElement.files;
-        console.log(files);
     }
 }

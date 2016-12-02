@@ -9,7 +9,7 @@ module.exports = function (app) {
     app.post('/api/EmploymentHistory', function (req, res) {
         var employmentHistory = req.body;
         employmentHistoryData.push({
-            ID: employmentHistory.length + 1,
+            ID: employmentHistoryData.length + 1,
             EmploymentDetail: employmentHistory.EmploymentDetail,
             Designation: employmentHistory.Designation,
             StartDate: employmentHistory.StartDate,

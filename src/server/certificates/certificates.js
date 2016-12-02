@@ -9,7 +9,7 @@ module.exports = function (app) {
     app.post('/api/Certificate', function (req, res) {
         var certificate = req.body;
         certificateData.push({
-            ID: certificate.length + 1,
+            ID: certificateData.length + 1,
             Name: certificate.Name,
             Code: certificate.Code,
             FromESPL: certificate.FromESPL,

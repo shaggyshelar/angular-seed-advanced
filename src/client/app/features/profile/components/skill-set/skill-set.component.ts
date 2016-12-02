@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -41,6 +42,7 @@ export class SkillSetComponent implements OnInit {
   skillTypes: SelectItem[];
   showDiv: boolean;
   skillSetForm: FormGroup;
+  msgs: Message[] = [];
 
   constructor(
     private router: Router, private formBuilder: FormBuilder, private skillService: SkillService) {
@@ -77,6 +79,8 @@ export class SkillSetComponent implements OnInit {
       this.skillService.updateSkill(value.id, params).subscribe(res => {
         if (res) {
           this.skillSet = this.skillService.getSkills();
+          this.msgs = [];
+          this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Skill updated successfully.' });
           this.showDiv = true;
         }
       });
@@ -88,6 +92,8 @@ export class SkillSetComponent implements OnInit {
       this.skillService.addSkill(params).subscribe(res => {
         if (res) {
           this.skillSet = this.skillService.getSkills();
+          this.msgs = [];
+          this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Skill saved successfully.' });
           this.showDiv = true;
         }
       });

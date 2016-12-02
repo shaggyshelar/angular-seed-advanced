@@ -1,11 +1,11 @@
 <div class="portlet box yellow border-color">
     <div class="portlet-title div-color">
         <div class="caption title">
-            {{ 'IDENTITY_PROOFS' | translate }}
+            Identity Proofs
         </div>
         <div class="actions">
             <span class="div-actions"> 
-                <i class="fa fa-check-circle"></i> {{ 'REQUIRES_APPROVAL' | translate }}  
+                <i class="fa fa-check-circle"></i> Requires Approval  
             </span>
         </div>
     </div>
@@ -14,23 +14,23 @@
             <table class="table table-bordered no-record-table" cellspacing="0">
                 <tbody>
                     <tr>
-                        <td>{{ 'NO_RECORDS' | translate }}</td>
+                        <td>No Records Found!</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div *ngIf="identityProofs.length > 0">
-            <p-dataTable [value]="identityProofs" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-                <p-column header="{{ 'EDIT' | translate }}">
+            <p-dataTable [value]="identityProofs" [responsive]="true" emptyMessage="No Records Found!">
+                <p-column header="Edit">
                     <template let-identity="rowData" pTemplate type="body">
                         <i class="fa fa-pencil icon-color" (click)="editIdentityProof(identity)"></i>
                     </template>
                 </p-column>
-                <p-column header="{{ 'IDENTITY_TYPE' | translate }}" field="Type.Name"></p-column>
-                <p-column header="{{ 'VALUE' | translate }}" field="Value"></p-column>
-                <p-column header="{{ 'DOCUMENT' | translate }}" field="FilePath"></p-column>
-                <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
-                <p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
+                <p-column header="Identity Type" field="Type.Name"></p-column>
+                <p-column header="Value" field="Value"></p-column>
+                <p-column header="Document" field="FilePath"></p-column>
+                <p-column header="Status" field="Status"></p-column>
+                <p-column header="HR Comments" field="Comments"></p-column>
             </p-dataTable>
         </div>
 
@@ -39,13 +39,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label><b>{{ 'IDENTITY_TYPE' | translate }}</b> <span class="req-field">*</span></label>
+                        <label><b>Identity Type</b> <span class="req-field">*</span></label>
                         <div class="div-margin">
                             <div class="col-md-6">
-                                <p-dropdown [options]="identityTypes" id="identity_type" [(ngModel)]="selectedIdentityType" (onChange)="onIdentityTypeChange($event)" [style]="{'width':'100%'}"></p-dropdown>
+                                <p-dropdown [options]="identityTypes" id="identity_type" [(ngModel)]="selectedIdentityType" (onChange)="onIdentityTypeChange($event)"
+                                    [style]="{'width':'100%'}"></p-dropdown>
                             </div>
                             <div class="col-md-6">
-                                <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancelIdentityType()"></button>
+                                <button pButton type="text" label="Cancel" (click)="cancelIdentityType()"></button>
                             </div>
                         </div>
                     </div>
@@ -57,9 +58,9 @@
                 <div class="col-md-6 col-margin">
                     <div class="form-group">
                         <span [ngSwitch]="selectedIdentityType.id">
-                                    <label *ngSwitchCase=1><b>{{ 'ADHAAR_CARD_NUMBER' | translate }}</b> <span class="req-field">*</span></label>
-                        <label *ngSwitchCase=2><b>{{ 'PAN_CARD' | translate }}</b> <span class="req-field">*</span></label>
-                        <label *ngSwitchCase=3><b>{{ 'VOTER_ID' | translate }}</b> <span class="req-field">*</span></label>
+                                    <label *ngSwitchCase=1><b>Adhaar Card Number</b> <span class="req-field">*</span></label>
+                        <label *ngSwitchCase=2><b>PAN Card</b> <span class="req-field">*</span></label>
+                        <label *ngSwitchCase=3><b>Voter ID</b> <span class="req-field">*</span></label>
                         </span>
                         <div class="div-margin">
                             <input type="text" class="form-control" id="identity_value" placeholder="" [(ngModel)]="identity.value">
@@ -68,7 +69,7 @@
                 </div>
                 <div class="col-md-6 col-margin">
                     <div class="form-group">
-                        <label><b>{{ 'SCANNED_COPY' | translate }}</b> <span class="req-field">*</span></label>
+                        <label><b>Scanned Copy</b> <span class="req-field">*</span></label>
                         <div class="div-margin">
                             <input type="file" id="identity_document" [(ngModel)]="identity.document">
                         </div>
@@ -76,12 +77,12 @@
                 </div>
             </div>
             <div class="row row-margin button-margin">
-                <button pButton type="text" label="{{ 'SUBMIT' | translate }}" (click)="submit()"></button>
-                <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+                <button pButton type="text" label="Submit" (click)="submit()"></button>
+                <button pButton type="text" label="Cancel" (click)="cancel()"></button>
             </div>
         </div>
         <div class="row row-margin button-margin" *ngIf="!showDiv && !showSubDiv">
-            <button pButton type="text" icon="fa fa-plus" (click)="addClick()" label="{{ 'ADD_NEW_ID_PROOFS' | translate }}"></button>
+            <button pButton type="text" icon="fa fa-plus" (click)="addClick()" label="Add New ID Proof Details"></button>
         </div>
     </div>
 </div>

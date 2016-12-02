@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -37,6 +38,7 @@ export class EmploymentHistoryComponent implements OnInit {
     showEmployerDiv: boolean;
     employmentHistoryForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
 
     constructor(private formBuilder: FormBuilder, private employmentHistoryService: EmploymentHistoryService) {
         this.lastEmployerDetails = [];
@@ -45,13 +47,6 @@ export class EmploymentHistoryComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // let ProfileID = 1;
-        // this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_EMPLOYMENT_HISTORY, payload: ProfileID });
-        // this.profile_Observable = this.store.select('profile');
-        // this.profile_Observable.subscribe(res => {
-        //     this.employmentHistory = res && res.employmentHistory ? res.employmentHistory : [];
-        //     console.log('EmploymentHistory', this.employmentHistory);
-        // });
         this.employmentHistory = this.employmentHistoryService.getEmploymentHistory();
 
         this.employmentHistoryForm = this.formBuilder.group({
@@ -81,6 +76,8 @@ export class EmploymentHistoryComponent implements OnInit {
             this.employmentHistoryService.updateEmploymentHistory(value.id, params).subscribe(res => {
                 if (res) {
                     this.employmentHistory = this.employmentHistoryService.getEmploymentHistory();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Employment History updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -94,6 +91,8 @@ export class EmploymentHistoryComponent implements OnInit {
             this.employmentHistoryService.addEmploymentHistory(params).subscribe(res => {
                 if (res) {
                     this.employmentHistory = this.employmentHistoryService.getEmploymentHistory();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Employment History saved successfully.' });
                     this.showDiv = true;
                 }
             });

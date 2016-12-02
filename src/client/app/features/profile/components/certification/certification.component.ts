@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -46,6 +47,7 @@ export class CertificationComponent implements OnInit {
     showDiv: boolean;
     certificationForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
 
     constructor(private formBuilder: FormBuilder, private certificateService: CertificateService) {
         this.certificationOptions = [];
@@ -98,6 +100,8 @@ export class CertificationComponent implements OnInit {
             this.certificateService.updateCertificate(value.id, params).subscribe(res => {
                 if (res) {
                     this.certifications = this.certificateService.getCertificates();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Certificate Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -112,6 +116,8 @@ export class CertificationComponent implements OnInit {
             this.certificateService.addCertificate(params).subscribe(res => {
                 if (res) {
                     this.certifications = this.certificateService.getCertificates();
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Certificate Information saved successfully.' });
+                    this.showDiv = true;
                     this.showDiv = true;
                 }
             });

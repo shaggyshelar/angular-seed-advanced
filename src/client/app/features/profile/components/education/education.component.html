@@ -1,33 +1,34 @@
 <form novalidate (ngSubmit)="onSubmit(educationForm)" [formGroup]="educationForm">
     <div class="portlet-body">
+        <p-growl [value]="msgs"></p-growl>
         <div class="alert alert-warning message-align">
-            {{ 'EDUCATION_MESSAGE' | translate }}
+            Details of SSC, HSC and Graduation are mandatory
         </div>
         <div *ngIf="(education | async)?.length == 0">
             <hr>
-            <h5> {{ 'NO_RECORDS' | translate }}</h5>
+            <h5> No Records Found!</h5>
         </div>
         <div *ngIf="(education | async)?.length > 0">
-            <p-dataTable [value]="education | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
-                <p-column header="{{ 'EDIT' | translate }}">
+            <p-dataTable [value]="education | async" [responsive]="true" emptyMessage="No Records Found!">
+                <p-column header="Edit">
                     <template let-educationData="rowData" pTemplate type="body">
                         <i class="fa fa-pencil icon-color" (click)="editEducation(educationData)"></i>
                     </template>
                 </p-column>
-                <p-column header="{{ 'CLASS' | translate }}" field="Class.Name"></p-column>
-                <p-column header="{{ 'DEGREE' | translate }}" field="Degree"></p-column>
-                <p-column header="{{ 'GRADE' | translate }}" field="Grade"></p-column>
-                <p-column header="{{ 'PERCENTAGE' | translate }}" field="Percentage"></p-column>
-                <p-column header="{{ 'YEAR_OF_PASSING' | translate }}" field="YearOfPassing"></p-column>
-                <p-column header="{{ 'CERTIFICATE' | translate }}" field="FilePath"></p-column>
-                <p-column header="{{ 'STATUS' | translate }}" field="Status"></p-column>
-                <p-column header="{{ 'HR_COMMENT' | translate }}" field="Comments"></p-column>
+                <p-column header="Class" field="Class.Name"></p-column>
+                <p-column header="Degree" field="Degree"></p-column>
+                <p-column header="Grade" field="Grade"></p-column>
+                <p-column header="Precentage" field="Percentage"></p-column>
+                <p-column header="Year Of Passing" field="YearOfPassing"></p-column>
+                <p-column header="Certificate" field="FilePath"></p-column>
+                <p-column header="Status" field="Status"></p-column>
+                <p-column header="HR Comments" field="Comments"></p-column>
             </p-dataTable>
         </div>
         <div *ngIf="!showDiv">
             <div class="row row-margin">
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'CLASS' | translate }}</span>
+                    <span>Class</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <p-dropdown [options]="class" [style]="{'width':'100%'}" formControlName="class" id="education_class"></p-dropdown>
@@ -37,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'DEGREE' | translate }}</span>
+                    <span>Degree</span>
                     <span class="req-field"> *</span>
                     <div class="form-group div-margin">
                         <input type="text" class="form-control" placeholder="" formControlName="degree" id="education_degree">
@@ -50,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'GRADE' | translate }}</span>
+                    <span>Grade</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <p-dropdown [options]="grade" [style]="{'width':'100%'}" formControlName="grade" id="education_grade"></p-dropdown>
@@ -60,33 +61,33 @@
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'PERCENTAGE' | translate }}</span>
+                    <span>Precentage</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <input type="text" class="form-control" placeholder="" formControlName="percentage" id="education_percentage">
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('required') && educationForm.get('percentage').touched">
-                        {{ 'PERCENTAGE' | translate }} is required
+                        Precentage is required
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('minlength') && educationForm.get('percentage').touched">
                         Minimum of 2 characters
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'YEAR_OF_PASSING' | translate }}</span>
+                    <span>Year Of Passing</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <input type="text" class="form-control" placeholder="" formControlName="yearOfPassing" id="education_yearOfPassing">
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('required') && educationForm.get('yearOfPassing').touched">
-                        {{ 'YEAR_OF_PASSING' | translate }} is required
+                        Year Of Passing is required
                     </div>
                     <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('minlength') && educationForm.get('yearOfPassing').touched">
                         Minimum of 2 characters
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
-                    <span>{{ 'SCANNED_COPY' | translate }}</span>
+                    <span>Scanned Copy</span>
                     <span class="req-field"> *</span>
                     <div class="div-margin">
                         <input type="file" id="education_certificate" (change)="onChange($event)">
@@ -94,12 +95,12 @@
                 </div>
             </div>
             <div class="row row-margin button-margin">
-                <button pButton type="submit" label="{{ 'SUBMIT' | translate }}" [disabled]="educationForm.invalid"></button>
-                <button pButton type="text" label="{{ 'CANCEL' | translate }}" (click)="cancel()"></button>
+                <button pButton type="submit" label="Submit" [disabled]="educationForm.invalid"></button>
+                <button pButton type="text" label="Cancel" (click)="cancel()"></button>
             </div>
         </div>
         <div class="row row-margin button-margin" *ngIf="showDiv">
-            <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="{{ 'ADD_NEW' | translate }}"></button>
+            <button pButton type="text" icon="fa fa-plus" (click)="onAddClick()" label="Add New Education Record"></button>
         </div>
     </div>
 </form>
