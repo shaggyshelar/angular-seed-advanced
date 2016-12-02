@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 //Components
 import { DashboardComponent, DashboardContainerComponent } from './core/dashboard/index';
 //Modules
-// import { ErrorPagesRoutes, AuthGuard } from './core/index';
+import { AuthGuard } from './core/index';
 
 // import { UsersRoutes, UserModule } from './users/index';
 // import { TimesheetRoutes, TimesheetModule } from './timesheet/index';
 
 // //Routes
-// import { AuthRoutes } from './core/index';
+//import { AuthRoutes } from './core/index';
 
 /** Feature Routes Definition */
 export const featureRoutes: Routes = [
@@ -49,7 +49,7 @@ const routes: Routes = [
     {
         path: '',
         component: DashboardContainerComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         // children: [
         //     ...featureRoutes,
         //     ...ErrorPagesRoutes,

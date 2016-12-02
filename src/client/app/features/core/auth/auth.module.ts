@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { AuthRoutingModule } from './auth-routes.module';
 
 /** Module Definition */
 @NgModule({
-    imports: [RouterModule],
+    imports: [RouterModule, AuthRoutingModule],
     exports: [],
     declarations: [AuthComponent],
     providers: [AuthService, AuthGuard,],

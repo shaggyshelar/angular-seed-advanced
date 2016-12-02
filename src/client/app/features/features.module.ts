@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 //Routes
 import { routing } from './features.routes';
 // Modules
-//import { AuthModule } from './core/auth/auth.module';
+import { AuthModule } from './core/auth/auth.module';
 import { DashboardModule } from './core/dashboard/dashboard.module';
 // import { UserModule } from './users/users.module';
 // import { TimesheetModule } from './timesheet/index';
@@ -27,7 +27,7 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
     imports: [
         // StoreModule.provideStore(FeaturesModule.reducers()),
         // UserModule,
-        // AuthModule,
+        AuthModule,
         DashboardModule,
         routing,
         FormsModule,
