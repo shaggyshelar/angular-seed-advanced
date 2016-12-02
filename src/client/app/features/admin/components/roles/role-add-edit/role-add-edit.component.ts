@@ -10,6 +10,7 @@ import { BaseComponent } from '../../../../framework.ref';
 import { RoleService } from '../../../services/role.service';
 import { PermissionService } from '../../../services/permission.service';
 import { Role } from '../../../models/role';
+import { Message } from 'primeng/primeng';
 
 /** Component Declaration */
 @BaseComponent({
@@ -26,6 +27,8 @@ export class RoleAddEditComponent implements OnInit {
     selectedPermission: any;
     rolePermissionList: Observable<any>;
     roleForm: FormGroup;
+    msgs: Message[] = [];
+
     constructor(
         private formBuilder: FormBuilder,
         private roleService: RoleService,
@@ -60,6 +63,8 @@ export class RoleAddEditComponent implements OnInit {
             this.roleService.editRole(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
                     this.router.navigate(['/admin/role']);
                 },
                 error => this.errorMessage = <any>error);
@@ -67,6 +72,8 @@ export class RoleAddEditComponent implements OnInit {
             this.roleService.addRole(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Added' });
                     this.router.navigate(['/admin/role']);
                 },
                 error => this.errorMessage = <any>error);
@@ -81,6 +88,8 @@ export class RoleAddEditComponent implements OnInit {
             results => {
                 this.getPermissionsByRole();
                 this.selectedPermission = null;
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Permission Added' });
             },
             error => this.errorMessage = <any>error);
     }
@@ -101,6 +110,8 @@ export class RoleAddEditComponent implements OnInit {
             .subscribe(
             results => {
                 this.getPermissionsByRole();
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Permission Revoked' });
             },
             error => this.errorMessage = <any>error);
     }

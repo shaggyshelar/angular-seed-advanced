@@ -1,6 +1,6 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 /** Other Module Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -9,6 +9,7 @@ import { BaseComponent } from '../../../../framework.ref';
 
 import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../models/role';
+import { Message } from 'primeng/primeng';
 
 /** Component Declaration */
 @BaseComponent({
@@ -22,7 +23,8 @@ export class RoleListComponent implements OnInit {
     roleList: Observable<Role[]>;
     role: Role;
     errorMessage: any;
-    constructor(private roleService: RoleService,private router: Router) {
+    msgs: Message[] = [];
+    constructor(private roleService: RoleService, private router: Router) {
         this.role = new Role(0, '');
     }
     ngOnInit() {
@@ -30,16 +32,18 @@ export class RoleListComponent implements OnInit {
     }
 
     getRole() {
-       this.roleList= this.roleService.getRoles();
+        this.roleList = this.roleService.getRoles();
     }
-    onEditClick(role:Role) {
-         this.router.navigate(['/admin/role/edit',role.id]);
+    onEditClick(role: Role) {
+        this.router.navigate(['/admin/role/edit', role.id]);
     }
     onDelete(role: Role) {
-         this.roleService.deleteRole(role.id)
+        this.roleService.deleteRole(role.id)
             .subscribe(
             results => {
                 this.getRole();
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
             },
             error => this.errorMessage = <any>error);
     }

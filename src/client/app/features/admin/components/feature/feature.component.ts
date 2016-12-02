@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 
 import { FeatureService } from '../../services/feature.service';
 import { Feature } from '../../models/feature';
-
+import { Message } from 'primeng/primeng';
 /** Component Declaration */
 @BaseComponent({
     moduleId: module.id,
@@ -25,6 +25,7 @@ export class FeatureComponent implements OnInit {
     isAddEdit: boolean;
     errorMessage: any;
     featureForm: FormGroup;
+    msgs: Message[] = [];
     constructor(private formBuilder: FormBuilder, private featureService: FeatureService) {
         this.isAddEdit = false;
     }
@@ -36,23 +37,25 @@ export class FeatureComponent implements OnInit {
         });
     }
     onSubmit({ value, valid }: { value: Feature, valid: boolean }) {
-        if (value.id === 0) {
+        if (value.id === 0 || value.id === null) {
             this.featureService.addFeature(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Saved' });
                     this.getFeature();
-                },
-                error => this.errorMessage = <any>error);
+                });
         } else {
             this.featureService.editFeature(value)
                 .subscribe(
                 results => {
                     this.getFeature();
-                },
-                error => this.errorMessage = <any>error);
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
+                });
         }
-        this.featureForm.reset();
         this.isAddEdit = false;
+        this.featureForm.reset();
     }
 
     getFeature() {
@@ -75,8 +78,9 @@ export class FeatureComponent implements OnInit {
             .subscribe(
             results => {
                 this.getFeature();
-            },
-            error => this.errorMessage = <any>error);
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
+            });
     }
 }
 
