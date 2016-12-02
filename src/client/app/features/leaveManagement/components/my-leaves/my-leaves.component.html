@@ -9,15 +9,15 @@
         <div class="hidden-xs">
             <ul class="page-breadcrumb breadcrumb">
                 <li>
-                    <span>{{ 'LINK_UP' | translate }}</span>
+                    <span>LINK UP</span>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <span>{{ 'LEAVE' | translate }}</span>
+                    <span>Leave</span>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <span> {{ 'MY_LEAVES' | translate }}</span>
+                    <span>My Leaves</span>
                 </li>
             </ul>
         </div>
@@ -30,9 +30,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th> {{ 'LEAVE_TYPE' | translate }} </th>
-                                        <th> {{ 'TAKEN' | translate }} </th>
-                                        <th> {{ 'BALANCE' | translate }} </th>
+                                        <th>Leave Type</th>
+                                        <th>Taken</th>
+                                        <th>Balance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +59,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a id="applyLeave" (click)="applyLeaveClicked()" class="btn green btn-outline"> {{ 'APPLY_LEAVE' | translate }} </a>
+                        <a id="applyLeave" (click)="applyLeaveClicked()" class="btn green btn-outline">Apply Leave</a>
                     </div>
 
                 </div>
@@ -70,12 +70,12 @@
             <div class="col-lg-9 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
                     <p-dataTable [value]="leaveObs | async" [paginator]="true" [rows]=(servRows) [responsive]="true">
-                        <p-column field="User.Name" header="{{ 'EMPLOYEE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="StartDate" header="{{ 'START_DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="EndDate" header="{{ 'END_DATE' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="NumberOfLeave" header="{{ 'NO_LEAVES' | translate }}" [sortable]="true"></p-column>
-                        <p-column field="Status" header="{{ 'STATUS' | translate }} " [sortable]="true"></p-column>
-                        <p-column styleClass="col-button" header="{{ 'ACTION' | translate }}" field="color">
+                        <p-column field="User.Name" header="Employee" [sortable]="true"></p-column>
+                        <p-column field="StartDate" header="Start Date" [sortable]="true"></p-column>
+                        <p-column field="EndDate" header="End Date" [sortable]="true"></p-column>
+                        <p-column field="NumberOfLeave" header="No. of Leaves" [sortable]="true"></p-column>
+                        <p-column field="Status" header="Status" [sortable]="true"></p-column>
+                        <p-column styleClass="col-button" header="Edit" field="color">
                             <template let-leave="rowData" pTemplate type="body">
                                 <button id="actionUpdate" type="button" pButton (click)="updateBtnClicked(leave.ID)" icon="fa-edit"></button>
                             </template>

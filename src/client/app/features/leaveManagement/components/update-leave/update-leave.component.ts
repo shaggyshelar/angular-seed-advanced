@@ -18,13 +18,15 @@ import { Leave } from '../../models/leave';
 @BaseComponent({
     moduleId: module.id,
     selector: 'update-leave',
-    templateUrl: 'update-leave.component.html'
+    templateUrl: 'update-leave.component.html',
+    styleUrls: ['update-leave.component.css']
 })
 export class UpdateLeaveComponent {
     public leaveObs: Observable<Leave>;
     leaveID: any;
     isCancellable: boolean;
     errorMsg: string;
+    today: Date;
 
     constructor(
         private router: Router,
@@ -35,6 +37,7 @@ export class UpdateLeaveComponent {
     ) {
         this.isCancellable = false;
         this.errorMsg = '';
+        this.today = new Date();
     }
 
     ngOnInit() {
@@ -44,10 +47,6 @@ export class UpdateLeaveComponent {
         });
 
         this.leaveObs = this.leaveService.getLeave(this.leaveID);
-        this.leaveObs.subscribe(res => {
-            if (res.StartDate > new Date())
-                this.isCancellable = true;
-        });
     }
 
     closeClicked() {
@@ -56,7 +55,9 @@ export class UpdateLeaveComponent {
 
     cancelClicked() {
         this.logService.debug(this.leaveID);
-        this.leaveService.deleteLeaveRecord(this.leaveID) ? this.closeClicked() : this.errorMsg = 'Could not complete action';
+        this.leaveService.deleteLeaveRecord(this.leaveID).subscribe(res => {
+            res ? this.closeClicked() : this.errorMsg = 'Could not complete action';
+        });
     }
 
 }

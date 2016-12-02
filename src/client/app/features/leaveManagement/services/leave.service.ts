@@ -78,7 +78,7 @@ export class LeaveService extends BaseService {
      * @payload : Parameter : Object with properties of entity to be updated
      */
     updateLeaveRecord(ID, payload): Observable<boolean> {
-        return this.put$(ID, payload).map(res => res.status === 201 ? true : false);
+        return this.put$(ID, payload).map(res => res.status === 200 ? true : false);
     }
 
     /**
@@ -87,6 +87,8 @@ export class LeaveService extends BaseService {
      * @ID : Parameter : ID of entity to update
      */
     deleteLeaveRecord(ID): Observable<boolean> {
-        return this.delete$(ID).map(res => res.status === 200 ? true : false);
+        return this.delete$(ID).map((res) => {
+            return res.status === 200 ? true : false;
+        });
     }
 }

@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Rx';
 
 class FormFieldClass {
   constructor(
-    public User: {ID:number, Name: string},
+    public User: { ID: number, Name: string },
     public numDays: number,
     public leaveType: any,
     public end: any,
@@ -35,19 +35,15 @@ class FormFieldClass {
 
 export class ApplyLeaveComponent implements OnInit {
   leaveObs: Observable<boolean>;
-  leave: any;
   leaveTypeValid: boolean = true;
   leaveID: number;
   strtDt: any;
   endDt: any;
   minDate: Date;
-  numDays: number = 0;
   charsLeft: number = 600;
-  leavesHidden: boolean = true;
   isLeaveAdded: boolean = false;
   isEndDtEnable: boolean = true;
   dayCount: any;
-  showLeaveData: any;
   leaves: any = [
     { label: 'Leave', value: 1 },
     { label: 'Half-day Leave', value: 2 },
@@ -57,9 +53,12 @@ export class ApplyLeaveComponent implements OnInit {
   model: FormFieldClass;
 
   constructor(
-    private router: Router, private store: Store<any>, private logService: LogService, private leaveService: LeaveService
+    private router: Router,
+    private store: Store<any>,
+    private logService: LogService,
+    private leaveService: LeaveService
   ) {
-    this.model = new FormFieldClass({ID:12345,Name:'Lname Fname'},1, 'select', new Date(), new Date(), '');
+    this.model = new FormFieldClass({ ID: 12345, Name: 'Lname Fname' }, 1, 'select', new Date(), new Date(), '');
   }
 
   ngOnInit() {
@@ -73,7 +72,7 @@ export class ApplyLeaveComponent implements OnInit {
       return;
 
     //call to backend submit
-    let params= {
+    let params = {
       User: this.model.User,
       NumberOfLeave: this.model.numDays,
       StartDate: this.model.start,
@@ -81,9 +80,31 @@ export class ApplyLeaveComponent implements OnInit {
       Comment: '',
       Status: '',
       Reason: this.model.reason,
-      Type: {ID:this.leaveID,Title:this.model.leaveType}
+      Approvers: [
+        {
+          Project: 'HRMS',
+          Manager: 'Sagar Shelar',
+          Status: 'Approved',
+          Comment: 'Approved'
+        },
+        {
+          Project: 'EBS',
+          Manager: 'Kunal Adhikari',
+          Status: 'Approved',
+          Comment: 'Approved'
+        },
+        {
+          Project: 'HR',
+          Manager: 'Pooja Merchant',
+          Status: 'Approved',
+          Comment: 'Approved'
+        }
+      ],
+      Type: { ID: this.leaveID, Title: this.model.leaveType }
     };
-    this.leaveObs = this.leaveService.addLeaveRecord(params);
+    this.leaveService.addLeaveRecord(params).subscribe(res => {
+      res ? this.router.navigate(['/leave/my-leaves']) : this.logService.debug('res : ' + res);
+    });
   }
 
   startChanged() {

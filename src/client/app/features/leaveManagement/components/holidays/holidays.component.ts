@@ -40,20 +40,21 @@ export class HolidaysComponent {
   dialogVisible: boolean = false;
 
   holidayDetails: boolean = false;
-  holidayTitle: string;
-  holidayDay: string;
-  holidayDate: string;
-  holidayType: string;
+  holiday: Holiday;
 
   constructor(
     private router: Router, private store: Store<any>, private logService: LogService, private holidayService: HolidayService
   ) {
     this.holidays = [];
+    this.holiday = { ID: null, HolidayDate: '', HolidayType: '', WeekDay: '', Title: '' };
   }
 
 
   ngOnInit() {
     this.holidaysObs = this.holidayService.getHolidays();
+    this.holidaysObs.subscribe(res => {
+      this.logService.debug('holiday : ' + JSON.stringify(res));
+    });
 
   }
   ngOnDestroy() {
@@ -62,16 +63,21 @@ export class HolidaysComponent {
   handleEventClicked(event) {
     let start = event.calEvent.start;
     start.stripTime();
-    this.holidayTitle = event.calEvent.title;
-    this.holidayDate = start.format();
+    this.holiday.Title = event.calEvent.title;
+    this.holiday.HolidayDate = start._i;
+    this.logService.debug(start);
+    this.logService.debug(start._i);
     this.dialogVisible = true;
   }
 
-  clicked(holiday) {
-    this.holidayDate = holiday.date;
-    this.holidayDay = holiday.day;
-    this.holidayTitle = holiday.title;
-    this.holidayType = holiday.type;
+  typeClicked(holiday) {
+    this.holiday = {
+      ID: null,
+      HolidayDate: holiday.start,
+      HolidayType: holiday.HolidayType,
+      WeekDay: holiday.WeekDay,
+      Title: holiday.title
+    };
     this.holidayDetails = true;
 
   }

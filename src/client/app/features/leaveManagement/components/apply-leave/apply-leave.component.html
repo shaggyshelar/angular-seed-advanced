@@ -9,11 +9,11 @@
         <div class="hidden-xs">
             <ul class="page-breadcrumb breadcrumb ">
                 <li>
-                    <span>{{ 'LINK_UP' | translate }}</span>
+                    <span>LINK UP</span>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <span> {{ 'APPLY_LEAVES' | translate }}</span>
+                    <span>Apply Leaves</span>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -23,7 +23,7 @@
             <div class="col-lg-4 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
                     <div class="portlet-body">
-                        <h4> {{ 'REQUESTOR_DETAILS' | translate }} </h4>
+                        <h4>Requestor Details</h4>
                         <div class="table-responsive">
                             <table>
                                 <tbody>
@@ -42,7 +42,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <h4> {{ 'ACTIVE_ON_PROJECTS' | translate }} </h4>
+                        <h4>Active on Projects</h4>
                         <div class="table-responsive">
                             <table>
                                 <thead>
@@ -82,14 +82,14 @@
                                 </div>
                             </div>
                         </div>
-                        <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+                        <form #form="ngForm" novalidate>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label" [class.warning]="leaveTypeInvalid && leaveType.touched"> {{ 'LEAVE_TYPE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span></label>
+                                        <label class="control-label" [class.warning]="leaveTypeInvalid && leaveType.touched">Leave Type<span class="warning">*</span></label>
                                         <div>
-                                            <select id="leaveType" required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType" (blur)="validateLeaveType()"
-                                                [class.validationClass]="!leaveTypeValid && leaveType.touched">
+                                            <select id="leaveType" required class="form-control" name="leaveType" #leaveType="ngModel" [(ngModel)]="model.leaveType"
+                                                (blur)="validateLeaveType()" [class.validationClass]="!leaveTypeValid && leaveType.touched">
                                                 <option value="select">Select</option>
                                                 <option *ngFor="let leave of leaves">
                                                     {{leave.label}}
@@ -100,9 +100,10 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label"> {{ 'NUMBER_LEAVES' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <label class="control-label">Number of Leaves<span class="warning">*</span> </label>
                                         <div>
-                                            <input id="numLeaves" type="text" disabled="disabled" class="form-control" required [(ngModel)]="model.numDays" name="numDays" #numDays="ngModel"/>
+                                            <input id="numLeaves" type="text" disabled="disabled" class="form-control" required [(ngModel)]="model.numDays" name="numDays"
+                                                #numDays="ngModel" />
                                         </div>
                                     </div>
                                 </div>
@@ -110,27 +111,29 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label"> {{ 'START_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <label class="control-label">Start Date<span class="warning">*</span> </label>
                                         <div>
-                                            <p-calendar id="start" required dateFormat="dd/mm/yy" [showIcon]="true" (onSelect)="startChanged()" [(ngModel)]="model.start" name="start" #start="ngModel"></p-calendar>
+                                            <p-calendar id="start" required dateFormat="dd/mm/yy" [showIcon]="true" (onSelect)="startChanged()" [(ngModel)]="model.start"
+                                                name="start" #start="ngModel"></p-calendar>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label"> {{ 'END_DATE' | translate }} <span class="warning">{{ 'ASTERISK' | translate }}</span> </label>
+                                        <label class="control-label">End Date<span class="warning">*</span> </label>
                                         <div>
-                                            <p-calendar [disabled]="!isEndDtEnable" id="end"  required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()" [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
+                                            <p-calendar [disabled]="!isEndDtEnable" id="end" required dateFormat="dd/mm/yy" [(minDate)]="minDate" [showIcon]="true" (onSelect)="endChanged()"
+                                                [(ngModel)]="model.end" name="end" #end="ngModel"></p-calendar>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group" [class.warning]="reason.invalid && reason.touched">
-                                        <label class="control-label"> {{ 'REASON' | translate }} 
-                                            <span class="warning">{{ 'ASTERISK' | translate }}</span> 
+                                        <label class="control-label">Reason<span class="warning">*</span> 
                                         </label>
                                         <div>
-                                            <textarea id="reason" required name="reason" pattern="...+" #reason="ngModel" (keyup)="reasonTextChanged()" maxlength="600" [(ngModel)]="model.reason" class="fullWidth" [class.validationClass]="reason.invalid && reason.touched"></textarea>
+                                            <textarea id="reason" required name="reason" pattern="...+" #reason="ngModel" (keyup)="reasonTextChanged()" maxlength="600"
+                                                [(ngModel)]="model.reason" class="fullWidth" [class.validationClass]="reason.invalid && reason.touched"></textarea>
                                             <div class="charsLeft pull-right">{{charsLeft}} characters left</div>
                                         </div>
                                     </div>
@@ -140,12 +143,12 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <p-dataTable [value]="finalLeaveData" [responsive]="true" [hidden]="leavesHidden">
-                                            <p-column field="leave.name" header=" {{ 'LEAVE_TYPE' | translate }} " [sortable]="false"></p-column>
-                                            <p-column field="numDays" header=" {{ 'NO_LEAVES' | translate }} " [sortable]="false"></p-column>
-                                            <p-column field="reason" header=" {{ 'REASON' | translate }} " [sortable]="false"></p-column>
-                                            <p-column field="start" header=" {{ 'START_DATE' | translate }} " [sortable]="false"></p-column>
-                                            <p-column field="end" header=" {{ 'END_DATE' | translate }} " [sortable]="false"></p-column>
-                                            <p-column header=" {{ 'DELETE' | translate }} " styleClass="col-button" field="color">
+                                            <p-column field="leave.name" header="Leave Type" [sortable]="false"></p-column>
+                                            <p-column field="numDays" header="No. of Leaves" [sortable]="false"></p-column>
+                                            <p-column field="reason" header="Reason" [sortable]="false"></p-column>
+                                            <p-column field="start" header="Start Date" [sortable]="false"></p-column>
+                                            <p-column field="end" header="End Date" [sortable]="false"></p-column>
+                                            <p-column header="Delete" styleClass="col-button" field="color">
                                                 <template let-day="rowData" pTemplate type="body">
                                                     <button type="button" (click)="delLeaveRec(day)" pButton icon="fa fa-trash"></button>
                                                 </template>
@@ -157,9 +160,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <button id="addLeave" [disabled]="form.invalid" class="btn btn-outline" (click)="addLeaves()"> {{ 'ADD_LEAVE' | translate }} </button>
-                                        <button id="submit" [disabled]="form.invalid || !isLeaveAdded" type="submit" class="btn btn-outline"> {{ 'SUBMIT' | translate }} </button>
-                                        <button id="cancel" type="reset" (click)="cancelClick()" class="btn btn-outline"> {{ 'CANCEL' | translate }} </button>
+                                        <button id="addLeave" [disabled]="form.invalid" class="btn btn-outline" (click)="addLeaves()">Add Leave</button>
+                                        <button id="submit" [disabled]="form.invalid || !isLeaveAdded" type="submit" class="btn btn-outline" (click)="submitForm(form)">Submit</button>
+                                        <button id="cancel" type="reset" (click)="cancelClick()" class="btn btn-outline">Cancel</button>
                                     </div>
                                 </div>
                             </div>
