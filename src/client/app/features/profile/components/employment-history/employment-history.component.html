@@ -11,12 +11,12 @@
             </div>
         </div>
         <div class="portlet-body">
-            <div *ngIf="employmentHistory.length == 0">
+            <div *ngIf="(employmentHistory | async)?.length == 0">
                 <hr>
                 <h5> {{ 'NO_RECORDS' | translate }}</h5>
             </div>
-            <div *ngIf="employmentHistory.length > 0">
-                <p-dataTable [value]="employmentHistory" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+            <div *ngIf="(employmentHistory | async)?.length > 0">
+                <p-dataTable [value]="employmentHistory | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
                     <p-column header="{{ 'EDIT' | translate }}">
                         <template let-employmentHistoryData="rowData" pTemplate type="body">
                             <i class="fa fa-pencil icon-color" (click)="editEmploymentHistory(employmentHistoryData)"></i>

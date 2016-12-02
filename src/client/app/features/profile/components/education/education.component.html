@@ -3,12 +3,12 @@
         <div class="alert alert-warning message-align">
             {{ 'EDUCATION_MESSAGE' | translate }}
         </div>
-        <div *ngIf="education.length == 0">
+        <div *ngIf="(education | async)?.length == 0">
             <hr>
             <h5> {{ 'NO_RECORDS' | translate }}</h5>
         </div>
-        <div *ngIf="education.length > 0">
-            <p-dataTable [value]="education" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
+        <div *ngIf="(education | async)?.length > 0">
+            <p-dataTable [value]="education | async" [responsive]="true" emptyMessage="{{ 'NO_RECORDS' | translate }}">
                 <p-column header="{{ 'EDIT' | translate }}">
                     <template let-educationData="rowData" pTemplate type="body">
                         <i class="fa fa-pencil icon-color" (click)="editEducation(educationData)"></i>

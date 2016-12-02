@@ -4,13 +4,11 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-//import { PROFILE_ACTIONS } from '../../services/profile.actions';
 import { AchievementService } from '../../services/achievement.service';
 import { Achievement } from '../../models/achievement';
 
@@ -29,17 +27,16 @@ export interface AchievementForm {
     templateUrl: 'achievement.component.html',
     styleUrls: ['achievement.component.css']
 })
-export class AchievementComponent implements OnInit {   
+export class AchievementComponent implements OnInit {
     showDiv: boolean;
-    achievementForm: FormGroup;   
+    achievementForm: FormGroup;
     public achievements: Observable<Achievement>;
 
-    constructor(private formBuilder: FormBuilder, private store: Store<any>, private achievementService: AchievementService) {
+    constructor(private formBuilder: FormBuilder, private achievementService: AchievementService) {
         this.showDiv = true;
     }
     ngOnInit(): void {
-        let ProfileID = 1;        
-        this.achievements = this.achievementService.getAchievements(ProfileID);
+        this.achievements = this.achievementService.getAchievements();
 
         this.achievementForm = this.formBuilder.group({
             id: [null],
@@ -59,7 +56,7 @@ export class AchievementComponent implements OnInit {
             };
             this.achievementService.updateAchievement(value.id, params).subscribe(res => {
                 if (res) {
-                    this.achievements = this.achievementService.getAchievements(1);
+                    this.achievements = this.achievementService.getAchievements();
                     this.showDiv = true;
                 }
             });
@@ -69,7 +66,7 @@ export class AchievementComponent implements OnInit {
             };
             this.achievementService.addAchievement(params).subscribe(res => {
                 if (res) {
-                    this.achievements = this.achievementService.getAchievements(1);
+                    this.achievements = this.achievementService.getAchievements();
                     this.showDiv = true;
                 }
             });

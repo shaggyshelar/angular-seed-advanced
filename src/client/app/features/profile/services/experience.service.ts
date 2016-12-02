@@ -26,7 +26,15 @@ export class ExperienceService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getExperience(id): Observable<Experience> {
-        return this.get$(id).map(res => res.json());
+    getExperience(): Observable<Experience> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addExperience(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateExperience(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

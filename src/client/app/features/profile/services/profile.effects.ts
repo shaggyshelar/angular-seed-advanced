@@ -18,7 +18,7 @@ import { LogService } from '../../framework.ref';
 import { PROFILE_ACTIONS } from './profile.actions';
 import { ProfileService } from './profile.service';
 import { AchievementService } from './achievement.service';
-import { CerificateService } from './certificate.service';
+import { CertificateService } from './certificate.service';
 import { SkillService } from './skill.service';
 import { EducationService } from './education.service';
 import { EmploymentHistoryService } from './employmentHistory.service';
@@ -44,22 +44,14 @@ export class ProfileEffects {
     //Achievement
     @Effect() getAchievement$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_ACHIEVEMENTS)
-        .switchMap(action => this.achievementService.getAchievements(action.payload))
+        .switchMap(action => this.achievementService.getAchievements())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_ACHIEVEMENTS, payload: res });
         });
-
-    // @Effect() addAchievement$ = this.actions$
-    //     .ofType(PROFILE_ACTIONS.INITIALIZE_ADD_ACHIEVEMENT)
-    //     .switchMap(action => this.achievementService.addAchievements(action.payload))
-    //     .map(res => {          
-    //         return ({ type: PROFILE_ACTIONS.ADD_ACHIEVEMENT, payload: res });
-    //     });
-
     //Ceritificates
     @Effect() getCertificate$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_CERTIFICATES)
-        .switchMap(action => this.cerificateService.getCertificates(action.payload))
+        .switchMap(action => this.cerificateService.getCertificates())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_CERTIFICATES, payload: res });
         });
@@ -67,7 +59,7 @@ export class ProfileEffects {
     //Skills
     @Effect() getSkill$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_SKILLS)
-        .switchMap(action => this.skillService.getSkills(action.payload))
+        .switchMap(action => this.skillService.getSkills())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_SKILLS, payload: res });
         });
@@ -75,7 +67,7 @@ export class ProfileEffects {
     //Education
     @Effect() getEducation$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_EDUCATION)
-        .switchMap(action => this.educationService.getEducation(action.payload))
+        .switchMap(action => this.educationService.getEducation())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_EDUCATION, payload: res });
         });
@@ -83,7 +75,7 @@ export class ProfileEffects {
     //Employment History
     @Effect() getEmploymentHistory$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_EMPLOYMENT_HISTORY)
-        .switchMap(action => this.employmentHistoryService.getEmploymentHistory(action.payload))
+        .switchMap(action => this.employmentHistoryService.getEmploymentHistory())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_EMPLOYMENT_HISTORY, payload: res });
         });
@@ -91,7 +83,7 @@ export class ProfileEffects {
     //Experience
     @Effect() getExperience$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_EXPERIENCE)
-        .switchMap(action => this.experienceService.getExperience(action.payload))
+        .switchMap(action => this.experienceService.getExperience())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_EXPERIENCE, payload: res });
         });
@@ -149,7 +141,7 @@ export class ProfileEffects {
         private actions$: Actions,
         private profileService: ProfileService,
         private achievementService: AchievementService,
-        private cerificateService: CerificateService,
+        private cerificateService: CertificateService,
         private skillService: SkillService,
         private educationService: EducationService,
         private employmentHistoryService: EmploymentHistoryService,
