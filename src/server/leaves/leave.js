@@ -140,6 +140,41 @@ var leave = [
                 Comment: 'Approved'
             }
         ]
+    },
+    {
+        ID: 6000,
+        User: {
+            ID: 12345,
+            Name: 'FName Lname',
+            Department: 'EBS'
+        },
+        Type: leaveType[3],
+        StartDate: new Date('12/1/2016 00:00:00'),
+        EndDate: new Date('12/1/2016 00:00:00'),
+        NumberOfLeave: 0.5,
+        Comment: 'Approved',
+        Status: 'Approved',
+        Reason: 'Personal',
+        Approvers: [
+            {
+                Project: 'HRMS',
+                Manager: 'Sagar Shelar',
+                Status: 'Approved',
+                Comment: 'Approved'
+            },
+            {
+                Project: 'EBS',
+                Manager: 'Kunal Adhikari',
+                Status: 'Approved',
+                Comment: 'Approved'
+            },
+            {
+                Project: 'HR',
+                Manager: 'Pooja Merchant',
+                Status: 'Approved',
+                Comment: 'Approved'
+            }
+        ]
     }
 ];
 

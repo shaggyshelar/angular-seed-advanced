@@ -9,11 +9,11 @@
         <div class="hidden-xs">
             <ul class="page-breadcrumb breadcrumb">
                 <li>
-                    <span>{{ 'LINK_UP' | translate }} </span>
+                    <span>LINK UP</span>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <span> {{ 'BULK_APPROVAL' | translate }} </span>
+                    <span>Bulk Approval</span>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -23,19 +23,19 @@
             <div class="col-lg-12 col-xs-12 col-sm-12">
                 <div class="portlet light bordered">
                     <p-dataTable [value]="leaveObs | async" [(selection)]="selectedEmployees" [paginator]="true" [responsive]="true" [rows]=(servRows)>
-                        <p-column selectionMode="multiple"></p-column>
-                        <p-column field="User.ID" header="{{ 'EMPLOYEE_ID' | translate }} "></p-column>
-                        <p-column field="User.Name" header="{{ 'EMPLOYEE' | translate }} "></p-column>
-                        <p-column field="NumberOfLeave" header="{{ 'NO_LEAVES' | translate }} "></p-column>
-                        <p-column field="Status" header="{{ 'STATUS' | translate }} "></p-column>
-                        <p-column field="StartDate" header="{{ 'START_DATE' | translate }} "></p-column>
-                        <p-column field="EndDate" header="{{ 'END_DATE' | translate }} "></p-column>
-                        <p-column field="approvers" header="{{ 'APPROVERS' | translate }} "></p-column>
-                        <p-column field="pending" header="{{ 'PENDING_APPROVERS' | translate }} "></p-column>
+                        <p-column selectionMode="multiple" header="Select" [sortable]="true"></p-column>
+                        <p-column field="User.ID" header="Employee ID" [sortable]="true"></p-column>
+                        <p-column field="User.Name" header="Employee" [sortable]="true"></p-column>
+                        <p-column field="NumberOfLeave" header="No. of Leaves" [sortable]="true"></p-column>
+                        <p-column field="Status" header="Status" [sortable]="true"></p-column>
+                        <p-column field="StartDate" header="Start Date" [sortable]="true"></p-column>
+                        <p-column field="EndDate" header="End Date" [sortable]="true"></p-column>
+                        <p-column field="approvers" header="Approvers" [sortable]="true"></p-column>
+                        <p-column field="pending" header="Pending Approvers" [sortable]="true"></p-column>
                     </p-dataTable>
                     <form #form="ngForm" novalidate>
                         <div class="form-group">
-                            <label class="control-label">{{ 'COMMENTS' | translate }}</label>
+                            <label class="control-label">Comments</label>
                             <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments"
                                 pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched"></textarea>
                         </div>
@@ -51,8 +51,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="pull-right">
-                                    <button id="approve" [disabled]="form.invalid" (click)="approveClicked()" class="btn "> {{ 'APPROVE' | translate }} </button>
-                                    <button id="reject" [disabled]="form.invalid" (click)="rejectClicked()" class="btn "> {{ 'REJECT' | translate }} </button>
+                                    <button id="approve" [disabled]="form.invalid" (click)="approveClicked()" class="btn ">Approve</button>
+                                    <button id="reject" [disabled]="form.invalid" (click)="rejectClicked()" class="btn ">Reject</button>
                                 </div>
                             </div>
                         </div>

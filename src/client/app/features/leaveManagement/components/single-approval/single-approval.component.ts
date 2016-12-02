@@ -62,11 +62,11 @@ export class SingleApprovalComponent {
         this.approved = true;
         //    BACKEND CALL HERE
 
-        var params = {
+        var params = [{
             ID: this.leaveID,
             Comment: this.model.comments.trim(),
             Status: 'Approved'
-        };
+        }];
 
         this.leaveService.updateLeaveRecord(this.leaveID, params)
             .subscribe(res => {
@@ -87,11 +87,11 @@ export class SingleApprovalComponent {
         this.approved = false;
         //    BACKEND CALL HERE
 
-        var params = {
+        var params = [{
             ID: this.leaveID,
             Comment: this.model.comments.trim(),
             Status: 'Rejected'
-        };
+        }];
 
         this.leaveService.updateLeaveRecord(this.leaveID, params)
             .subscribe(res => {

@@ -14,15 +14,6 @@ import { Leave } from '../../models/leave';
 
 /** Component Declaration */
 
-class ShowLeaveReq {
-  eid: number;
-  employee: string;
-  numberofleaves: number;
-  status: string;
-  start: string;
-  end: string;
-  approvers: string;
-}
 
 class FormFieldClass {
   constructor(
@@ -40,9 +31,9 @@ export class BulkApproveComponent {
 
   leaveObs: Observable<Leave>;
 
-  servRows = 5;
+  servRows = 20;
   requests: any[];
-  selectedEmployees: ShowLeaveReq[];
+  selectedEmployees: any[];
 
   model: FormFieldClass;
   approved: boolean = false;
@@ -66,20 +57,49 @@ export class BulkApproveComponent {
 
   approveClicked() {
     if (this.selectedEmployees.length > 0) {
-      this.rejected = false;
-      this.approved = true;
       //    BACKEND CALL HERE
-      return;
+      this.sendRequest('Approved');
     }
   }
 
   rejectClicked() {
     if (this.selectedEmployees.length > 0) {
-      this.rejected = true;
-      this.approved = false;
       //    BACKEND CALL HERE
-      return;
+      this.sendRequest('Rejected');
     }
+  }
+
+  assembleReqPayload(status: string) {
+    var payload = [];
+    for (var index in this.selectedEmployees) {
+      payload.push(
+        {
+          ID: this.selectedEmployees[index].ID,
+          Comment: this.model.comments,
+          Status: status
+        });
+    }
+
+    return payload;
+  }
+
+  sendRequest(status) {
+    return this.leaveService.updateLeaveRecord(1, this.assembleReqPayload(status)).subscribe(res => {
+      if (res) {
+        if (status === 'Rejected') {
+          this.rejected = false;
+          this.approved = true;
+        } else {
+          this.rejected = true;
+          this.approved = false;
+        }
+        this.leaveObs = this.leaveService.getLeaves();
+        this.model.comments = '';
+        this.selectedEmployees = [];
+      } else {
+        this.logService.debug('Fail');
+      }
+    });    // remove '1', update base service method
   }
 
 }
