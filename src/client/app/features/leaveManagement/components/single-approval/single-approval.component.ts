@@ -7,6 +7,8 @@ import { BaseComponent, LogService } from '../../../framework.ref';
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
+
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
@@ -37,6 +39,7 @@ export class SingleApprovalComponent {
     validationMessage: string = '';
     approved: boolean = false;
     rejected: boolean = false;
+    msgs: Message[] = [];
 
     constructor(
         private router: Router,
@@ -73,11 +76,14 @@ export class SingleApprovalComponent {
                 if (res) {
                     this.rejected = false;
                     this.approved = true;
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
                     this.closeClicked();
                 } else {
                     this.rejected = true;
                     this.approved = false;
-                    this.validationMessage = 'Error occured';
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }
@@ -96,13 +102,16 @@ export class SingleApprovalComponent {
         this.leaveService.updateLeaveRecord(this.leaveID, params)
             .subscribe(res => {
                 if (res) {
-                    this.closeClicked();
                     this.rejected = true;
                     this.approved = false;
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
+                    this.closeClicked();
                 } else {
                     this.rejected = false;
                     this.approved = true;
-                    this.validationMessage = 'Error occured';
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }
