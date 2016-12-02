@@ -5,15 +5,15 @@
         <!-- BEGIN PAGE BREADCRUMB -->
         <ul class="page-breadcrumb breadcrumb  hidden-xs">
             <li>
-                <a href="index.html">{{"LINK_UP" | translate }}</a>
+                <a href="index.html">LINK UP</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">{{"CONFERENCE_BOOKING_TITLE" | translate }}</span>
+                <span class="active">Conference Booking</span>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">{{"MY_BOOKING_TITLE" | translate }}</span>
+                <span class="active">My Booking</span>
             </li>
         </ul>
         <!-- END PAGE BREADCRUMB -->
@@ -23,8 +23,8 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-sm-5">
-                        <button class="btn btn-default col-sm-6 selected-link" id="manageBooking" [routerLink]="['../myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
-                        <button class="btn btn-default col-sm-6" id="manageAllRoom" [routerLink]="['../conferenceBooking', 'AllRooms']">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
+                        <button class="btn btn-default col-sm-6 selected-link" id="manageBooking" [routerLink]="['../myBookings']">Manage My Booking</button>
+                        <button class="btn btn-default col-sm-6" id="manageAllRoom" [routerLink]="['../conferenceBooking', 'AllRooms']">All Conference Rooms</button>
                     </div>
                     <div class="col-sm-7">
                         <ul class="legend">
@@ -42,9 +42,9 @@
             </nav>
             <div class="portlet-title">
                 <div class="caption">
-                    <a [routerLink]="['../conferenceBooking']" id="conferenceRoomLink" class="portlet-link">{{"MY_BOOKING_CONFERENCE_ROOM" | translate }}</a>&nbsp;&nbsp;
-                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">{{"MY_BOOKING_ALL_EVENT" | translate }}</a>&nbsp;&nbsp;
-                    <a [routerLink]="['../myBookings']" id="myBookingLink" class="selected">{{"MY_BOOKING_TITLE" | translate }}</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="conferenceRoomLink" class="portlet-link">Conference Room Booking</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">MY_BOOKING_ALL_EVENT</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../myBookings']" id="myBookingLink" class="selected">MyBookings</a>&nbsp;&nbsp;
                     <a class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i> </a>
                         <ul class="dropdown-menu" role="menu">

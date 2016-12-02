@@ -1,6 +1,7 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
@@ -22,16 +23,22 @@ export class ManageTicketComponent implements OnInit {
     departments: SelectItem[];
     priorities: SelectItem[];
     concerns: SelectItem[];
-    ticketModel: Ticket;
     params: Params;
+    ticketForm: FormGroup;
     constructor(
+        private formBuilder: FormBuilder,
         private ticketService: TicketService,
         private route: ActivatedRoute,
         private router: Router) {
-        this.ticketModel = new Ticket('', '', '', '', '', '', '', '', '', '', '', '');
     }
     ngOnInit(): void {
-
+        this.ticketForm = this.formBuilder.group({
+            Id: [null],
+            Department: ['', [Validators.required]],
+            Priority: ['', [Validators.required]],
+            Concern: ['', [Validators.required]],
+            Description: ['', [Validators.required]],
+        });
         this.departments = [];
         this.departments.push({ label: 'Select Department', value: null });
         this.departments.push({ label: 'IT', value: 'IT' });
@@ -54,22 +61,28 @@ export class ManageTicketComponent implements OnInit {
                 this.params = params['id'];
                 this.ticketService.getTicketById(this.params).subscribe(result => {
                     if (result) {
-                        this.ticketModel = result;
+                        this.ticketForm.setValue({
+                            Id: result.Id,
+                            Department: result.Department,
+                            Priority: result.Priority,
+                            Concern: result.Concern,
+                            Description: result.Description,
+                        });
                     }
                 });
             }
         });
     }
 
-    save() {
+    onSubmit({ value, valid }: { value: Ticket, valid: boolean }) {
         if (this.params) {
-            this.ticketService.editTicket(this.ticketModel).subscribe(result => {
+            this.ticketService.editTicket(value).subscribe(result => {
                 if (result) {
                     this.router.navigate(['/corporate/log-ticket']);
                 }
             });
         } else {
-            this.ticketService.saveTicket(this.ticketModel).subscribe(result => {
+            this.ticketService.saveTicket(value).subscribe(result => {
                 if (result) {
                     this.router.navigate(['/corporate/log-ticket']);
                 }

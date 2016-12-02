@@ -43,7 +43,7 @@ export class TicketService extends BaseService {
      * getTicketById method
      */
     editTicket(ticket): Observable<any> {
-        return this.put$(ticket.id, ticket).map(res => res.json());
+        return this.put$(ticket.Id, ticket).map(res => res.json());
     }
 
     /**

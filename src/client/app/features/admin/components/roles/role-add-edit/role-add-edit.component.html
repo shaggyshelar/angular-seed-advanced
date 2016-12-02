@@ -5,15 +5,15 @@
     <!-- BEGIN PAGE BREADCRUMB -->
     <ul class="page-breadcrumb breadcrumb  hidden-xs">
       <li>
-        <a href="index.html">{{"LINK_UP" | translate }}</a>
+        <a href="index.html">LINK UP</a>
         <i class="fa fa-circle"></i>
       </li>
       <li>
-        <span class="active">{{"ADMIN_TITLE" | translate }}</span>
+        <span class="active">Admin</span>
         <i class="fa fa-circle"></i>
       </li>
       <li>
-        <span class="active">{{"ROLE_TITLE" | translate }}</span>
+        <span class="active">Role</span>
         <i class="fa fa-circle"></i>
       </li>
       <li>
@@ -22,21 +22,25 @@
     </ul>
     <!-- END PAGE BREADCRUMB -->
     <!-- BEGIN PAGE BASE CONTENT -->
+    <p-growl [value]="msgs"></p-growl>
     <div class="row">
       <div class="col-md-6">
         <div class="portlet light bordered legends-portlet">
           <div class="portlet-body">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" novalidate (ngSubmit)="onSubmit(roleForm)" [formGroup]="roleForm">
               <div class="form-group">
                 <label class="col-md-2 control-label">Name</label>
-                <div class="col-md-4">
-                  <input type="text" [(ngModel)]="role.name" name="roleName" class="form-control">
+                <div class="col-md-10">
+                  <input type="text" formControlName="name" name="roleName" class="form-control">
+                  <div class="alert alert-danger" *ngIf="roleForm.get('name').hasError('required') && roleForm.get('name').touched">
+                    Please enter Role Name
+                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                  <button type="button" (click)="onSave()" class="btn green">Save</button>
-                  <a [routerLink]="['/admin/role']" class="btn btn-default">Cancel</a>
+                  <button pButton type="submit" label="Save" [disabled]="roleForm.invalid"></button>
+                  <button pButton type="button" label="Cancel" [routerLink]="['/admin/role']"></button>
                 </div>
               </div>
             </form>

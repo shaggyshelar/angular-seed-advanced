@@ -1,6 +1,6 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
-
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 
@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 
 import { FeatureService } from '../../services/feature.service';
 import { Feature } from '../../models/feature';
-
+import { Message } from 'primeng/primeng';
 /** Component Declaration */
 @BaseComponent({
     moduleId: module.id,
@@ -21,58 +21,66 @@ import { Feature } from '../../models/feature';
 })
 
 export class FeatureComponent implements OnInit {
-    featureList:Observable<Feature[]>;
-    feature: Feature;
+    featureList: Observable<Feature[]>;
     isAddEdit: boolean;
     errorMessage: any;
-    constructor(private featureService: FeatureService) {
+    featureForm: FormGroup;
+    msgs: Message[] = [];
+    constructor(private formBuilder: FormBuilder, private featureService: FeatureService) {
         this.isAddEdit = false;
-        this.feature = new Feature(0, '');
     }
     ngOnInit() {
         this.getFeature();
+        this.featureForm = this.formBuilder.group({
+            id: [0],
+            name: ['', [Validators.required]],
+        });
     }
-    onSave() {
-        if (this.feature.id === 0) {
-             // this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_ADD, payload: this.feature });
-            this.featureService.addFeature(this.feature)
+    onSubmit({ value, valid }: { value: Feature, valid: boolean }) {
+        if (value.id === 0 || value.id === null) {
+            this.featureService.addFeature(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Saved' });
                     this.getFeature();
-                },
-                error => this.errorMessage = <any>error);
+                });
         } else {
-            //this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_EDIT, payload: this.feature });
-            this.featureService.editFeature(this.feature)
+            this.featureService.editFeature(value)
                 .subscribe(
                 results => {
                     this.getFeature();
-                },
-                error => this.errorMessage = <any>error);
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
+                });
         }
-        this.feature = new Feature(0, '');
         this.isAddEdit = false;
+        this.featureForm.reset();
     }
 
     getFeature() {
-        this.featureList= this.featureService.getFeatures();
+        this.featureList = this.featureService.getFeatures();
     }
     onCancel() {
-        this.feature = new Feature(0, '');
+        this.featureForm.reset();
         this.isAddEdit = false;
     }
     onEditClick(feature: Feature) {
-        this.feature = _.cloneDeep(feature);
+        let selectedFeature = _.cloneDeep(feature);
+        this.featureForm.setValue({
+            id: selectedFeature.id,
+            name: selectedFeature.name
+        });
         this.isAddEdit = true;
     }
     onDelete(feature: Feature) {
-        //this.store.dispatch({ type: ADMIN_ACTIONS.FEATURE_DELETE, payload: this.feature.id });
         this.featureService.deleteFeature(feature.id)
             .subscribe(
             results => {
                 this.getFeature();
-            },
-            error => this.errorMessage = <any>error);
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
+            });
     }
 }
 

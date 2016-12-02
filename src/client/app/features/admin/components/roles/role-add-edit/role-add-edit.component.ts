@@ -1,7 +1,7 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Other Module Dependencies */
 import { Observable } from 'rxjs/Rx';
 /** Framework Dependencies */
@@ -10,6 +10,7 @@ import { BaseComponent } from '../../../../framework.ref';
 import { RoleService } from '../../../services/role.service';
 import { PermissionService } from '../../../services/permission.service';
 import { Role } from '../../../models/role';
+import { Message } from 'primeng/primeng';
 
 /** Component Declaration */
 @BaseComponent({
@@ -19,26 +20,36 @@ import { Role } from '../../../models/role';
 })
 
 export class RoleAddEditComponent implements OnInit {
-    role: Role;
     errorMessage: any;
     params: number;
     permissionList: any;
     filteredPermissionList: any;
-    selectedPermission:any;
-    rolePermissionList:Observable<any>;
-    constructor(private roleService: RoleService,
+    selectedPermission: any;
+    rolePermissionList: Observable<any>;
+    roleForm: FormGroup;
+    msgs: Message[] = [];
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private roleService: RoleService,
         private permissionService: PermissionService,
         private route: ActivatedRoute, private router: Router) {
-        this.role = new Role(0, '');
     }
     ngOnInit() {
+        this.roleForm = this.formBuilder.group({
+            id: [0],
+            name: ['', [Validators.required]],
+        });
         this.route.params.forEach((params: Params) => {
             this.params = params['roleId'];
             if (this.params) {
                 this.roleService.getRoleById(this.params)
                     .subscribe(
                     results => {
-                        this.role = <Role>results;
+                        this.roleForm.setValue({
+                            id: results.id,
+                            name: results.name
+                        });
                     },
                     error => this.errorMessage = <any>error);
                 this.getAllPermissions();
@@ -47,36 +58,42 @@ export class RoleAddEditComponent implements OnInit {
         });
     }
 
-    onSave() {
+    onSubmit({ value, valid }: { value: Role, valid: boolean }) {
         if (this.params) {
-            this.roleService.editRole(this.role)
+            this.roleService.editRole(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
                     this.router.navigate(['/admin/role']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
-            this.roleService.addRole(this.role)
+            this.roleService.addRole(value)
                 .subscribe(
                 results => {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Added' });
                     this.router.navigate(['/admin/role']);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
-   
+
     onAddPermission() {
-       this.selectedPermission.RoleId = this.params;
+        this.selectedPermission.RoleId = this.params;
         this.permissionService.addPermissionToRole(this.selectedPermission)
             .subscribe(
             results => {
                 this.getPermissionsByRole();
                 this.selectedPermission = null;
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Permission Added' });
             },
             error => this.errorMessage = <any>error);
     }
-  
+
     filterPermission(event: any) {
         let query = event.query;
         this.filteredPermissionList = [];
@@ -88,18 +105,20 @@ export class RoleAddEditComponent implements OnInit {
         }
     }
     revokePermission(permission) {
-        permission.RoleId=this.params;
+        permission.RoleId = this.params;
         this.permissionService.revokePermission(permission)
-          .subscribe(
+            .subscribe(
             results => {
                 this.getPermissionsByRole();
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Permission Revoked' });
             },
             error => this.errorMessage = <any>error);
     }
-     private getPermissionsByRole() {
-          this.rolePermissionList = this.permissionService.getPermissionsByRole(this.params);
+    private getPermissionsByRole() {
+        this.rolePermissionList = this.permissionService.getPermissionsByRole(this.params);
     }
-    private  getAllPermissions() {
+    private getAllPermissions() {
         this.permissionService.getAllPermission()
             .subscribe(
             results => {
