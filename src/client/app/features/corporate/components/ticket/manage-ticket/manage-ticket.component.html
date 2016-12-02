@@ -4,11 +4,11 @@
 	<div class="page-content" [ifAuthorize]="['Timesheet.READ']">
 		<ul class="page-breadcrumb breadcrumb hidden-xs">
 			<li>
-				<span>{{ 'LINK_UP' | translate }}</span>
+				<span>LINK UP</span>
 				<i class="fa fa-circle"></i>
 			</li>
 			<li>
-				<span class="active">{{ 'MANAGE_TICKET' | translate }}</span>
+				<span class="active">Manage Ticket</span>
 			</li>
 		</ul>
 		<div class="row">
@@ -17,7 +17,7 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<div class="form-group">
-								<label class="control-label">{{ 'DEPARTMENT' | translate }}</label>
+								<label class="control-label">Department</label>
 								<div>
 									<p-dropdown [options]="departments"  [(ngModel)]="ticketModel.Department" name="departments" [styleClass]="form-control"></p-dropdown>
 								</div>
@@ -25,7 +25,7 @@
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<div class="form-group">
-								<label class="control-label">{{ 'PRIORITY' | translate }}</label>
+								<label class="control-label">Priority</label>
 								<div>
 									<p-dropdown [options]="priorities"   [(ngModel)]="ticketModel.Priority" name="priorities" [styleClass]="form-control"></p-dropdown>
 								</div>
@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<div class="form-group">
-								<label class="control-label">{{ 'CONCERN' | translate }}</label>
+								<label class="control-label">Concern</label>
 								<div>
 									<p-dropdown [options]="concerns"   [(ngModel)]="ticketModel.Concern" name="concerns" [styleClass]="form-control"></p-dropdown>
 								</div>
@@ -45,7 +45,7 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<div class="form-group">
-								<label class="control-label"> {{ 'DESCRIPTION' | translate }} </label>
+								<label class="control-label">Description </label>
 								<div>
 									<textarea  [(ngModel)]="ticketModel.Description" name="description" class="fullWidth"></textarea>
 								</div>
@@ -58,8 +58,8 @@
 							<div class="form-body">
 								<label class="control-label"></label>
 								<div>
-									<button pButton type="button" label="{{ 'SAVE' | translate }}"  (click)="save()" ></button>
-									<button pButton type="button" label="{{ 'CANCEL' | translate }}"  (click)="cancel()" ></button>
+									<button pButton type="button" label="Save"  (click)="save()" ></button>
+									<button pButton type="button" label="Cancel"  (click)="cancel()" ></button>
 								</div>
 							</div>
 						</div>

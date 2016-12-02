@@ -5,11 +5,11 @@
     <!-- BEGIN PAGE BREADCRUMB -->
     <ul class="page-breadcrumb breadcrumb hidden-xs">
       <li>
-        <a href="index.html">{{"LINK_UP" | translate }}</a>
+        <a href="index.html">LINK UP</a>
         <i class="fa fa-circle"></i>
       </li>
       <li>
-        <span class="active">{{"CONFERENCE_BOOKING_TITLE" | translate }}</span>
+        <span class="active">Conference Booking</span>
       </li>
     </ul>
     <!-- END PAGE BREADCRUMB -->
@@ -18,8 +18,8 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-sm-5">
-            <button class="btn btn-default col-sm-6" id="manageBooking" [routerLink]="['/corporate/myBookings']">{{"CONFERENCE_BTN_MANAGE_BOOKING" | translate }}</button>
-            <button class="btn btn-default col-sm-6" id="manageAllRoom"  [class.selected-link]="selectedRoom=='AllRooms'" (click)="getEventByRooms('AllRooms')">{{"CONFERENCE_BTN_ALL_ROOMS" | translate }}</button>
+            <button class="btn btn-default col-sm-6" id="manageBooking" [routerLink]="['/corporate/myBookings']">Manage My Booking</button>
+            <button class="btn btn-default col-sm-6" id="manageAllRoom"  [class.selected-link]="selectedRoom=='AllRooms'" (click)="getEventByRooms('AllRooms')">All Conference Rooms</button>
           </div>
           <div class="col-sm-7">
             <ul class="legend">
@@ -42,16 +42,16 @@
       <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false">
         <div class="ui-grid ui-grid-responsive ui-fluid">
           <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="title">{{"CONFERENCE_LABEL_TITLE" | translate }}</label></div>
+            <div class="ui-grid-col-4"><label for="title">Title</label></div>
             <div class="ui-grid-col-8"><label id="title">{{selectedEvent.title}}</label></div>
           </div>
           <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="date">{{"CONFERENCE_LABEL_START" | translate }}</label></div>
-            <div class="ui-grid-col-8"><label id="title">{{selectedEvent.start }}</label></div>
+            <div class="ui-grid-col-4"><label for="date">Start</label></div>
+            <div class="ui-grid-col-8"><label id="start">{{selectedEvent.start }}</label></div>
           </div>
            <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="date">{{"CONFERENCE_LABEL_END" | translate }}</label></div>
-            <div class="ui-grid-col-8"><label id="title">{{selectedEvent.end}}</label></div>
+            <div class="ui-grid-col-4"><label for="date">End</label></div>
+            <div class="ui-grid-col-8"><label id="end">{{selectedEvent.end}}</label></div>
           </div>
         </div>
       </p-dialog>
