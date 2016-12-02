@@ -37,6 +37,25 @@ after_success: |
     echo "Application Deployed Succsffully!" | ./slacktee.sh -t "Heroku Deploy"
   fi
 
+after_success: |
+  if [ -n "$GITHUB_API_KEY" -a "$TRAVIS_EVENT_TYPE" == "push" ]; then
+    npm run build.prod
+    cp -r ./coverage ./dist/prod/
+    cd ./dist/prod
+    git init
+    git add .
+    git -c user.name='shaggyshelar' -c user.email='shaggy.shelar@gmail.com' commit -m CommitFromTravisCI
+    if [ "$TRAVIS_BRANCH" == "develop" ]; then
+      git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/Temp.git master
+    fi
+    if [ "$TRAVIS_BRANCH" == "framework" ]; then
+      git push -f -q https://$GITHUB_API_KEY@github.com/shaggyshelar/AngularDemo.git master
+    fi
+    cd ..
+    cd ..
+    echo "Application Deployed Successfully!" | ./slacktee.sh -t "Heroku Deploy"
+  fi
+
 branches:
   only: 
   - production
