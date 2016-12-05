@@ -23,6 +23,7 @@ import { CorporateModule } from './corporate/index';
 import { AdminModule } from './admin/index';
 import { ProfileModule } from './profile/index';
 import { LeaveModule } from './leaveManagement/index';
+import { ChangePasswordModule } from './changePassword/index';
 
 /**
  * 
@@ -45,7 +46,8 @@ import { ChangePasswordModule } from './app/components/changePassword/index';
         CorporateModule,
         AdminModule,
         ProfileModule,
-        LeaveModule
+        LeaveModule,
+        ChangePasswordModule
     ],
     exports: [],
     declarations: [FeaturesComponent],

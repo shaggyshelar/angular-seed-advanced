@@ -107,7 +107,7 @@ export class BulkApproveComponent {
         this.msgs = [];
         this.msgs.push({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
       }
-    });    // remove '1', update base service method
+    });
   }
 
 }
