@@ -5,10 +5,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Other Module Dependencies */
-import { SelectItem, Message } from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
 //import * as localForage from 'localforage';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
-
+import { MessageService } from '../../../../core/shared/services/message.service';
 /** Component Declaration */
 @BaseComponent({
     moduleId: module.id,
@@ -25,9 +25,8 @@ export class BookComponent implements OnInit {
     selectedRoom: any;
     startTime: Date;
     endTime: Date;
-    msgs: Message[] = [];
     conferenceForm: FormGroup;
-    constructor(private formBuilder: FormBuilder, private conferenceBookingService: ConferenceBookingService, private router: Router) {
+    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private conferenceBookingService: ConferenceBookingService, private router: Router) {
         this.conferenceRooms = [];
         this.conferenceRooms.push({ label: 'Select Room', value: null });
         this.conferenceRooms.push({ label: 'Bahamas', value: { id: 1, Name: 'Bahamas', Color: '#E7C5F5' } });
@@ -49,9 +48,10 @@ export class BookComponent implements OnInit {
         });
     }
     onSubmit({ value, valid }: { value: IConferenceForm, valid: boolean }) {
-        value.color=value.Room.Color;
+        value.color = value.Room.Color;
         this.conferenceBookingService.saveConference(value).subscribe(result => {
             if (result) {
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Conference Room Booked' });
                 this.router.navigate(['/corporate/conferenceBooking']);
             }
         });

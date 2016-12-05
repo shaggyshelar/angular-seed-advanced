@@ -16,7 +16,7 @@ module.exports = function (app) {
             var token = utils.CreateJWT(users[userIndex]);
             res.send({ token: token });
         } else {
-            res.status(500).end('Invalid credentials.');
+            res.status(500).json({error:'Invalid credentials.'});
         }
     });
 

@@ -15,6 +15,7 @@ import { MultilingualModule, translateFactory } from '../../framework.ref';
 
 /* Module Level Dependencies */
 import { LoginService } from './services/login.service';
+import { MessageService } from './services/message.service';
 import { IfAuthorize } from './directives/ifAuthorize.directive';
 import {UnauthorizedAccessComponent} from '../errorPages/unauthorizedAccess/unauthorizedAccess.component';
 
@@ -77,7 +78,7 @@ let declarations = [
 /**
  * Providers Declaration
  */
-let providers = [LoginService, ConfirmationService];
+let providers = [LoginService, ConfirmationService,MessageService];
 
 /* Module Definition */
 @NgModule({

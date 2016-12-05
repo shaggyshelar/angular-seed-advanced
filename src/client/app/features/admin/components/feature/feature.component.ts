@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 
 import { FeatureService } from '../../services/feature.service';
 import { Feature } from '../../models/feature';
-import { Message } from 'primeng/primeng';
+import { MessageService } from '../../../core/shared/services/message.service';
 /** Component Declaration */
 @BaseComponent({
     moduleId: module.id,
@@ -25,8 +25,7 @@ export class FeatureComponent implements OnInit {
     isAddEdit: boolean;
     errorMessage: any;
     featureForm: FormGroup;
-    msgs: Message[] = [];
-    constructor(private formBuilder: FormBuilder, private featureService: FeatureService) {
+    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private featureService: FeatureService) {
         this.isAddEdit = false;
     }
     ngOnInit() {
@@ -41,8 +40,7 @@ export class FeatureComponent implements OnInit {
             this.featureService.addFeature(value)
                 .subscribe(
                 results => {
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Saved' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record Saved' });
                     this.getFeature();
                 });
         } else {
@@ -50,8 +48,7 @@ export class FeatureComponent implements OnInit {
                 .subscribe(
                 results => {
                     this.getFeature();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record Updated' });
                 });
         }
         this.isAddEdit = false;
@@ -78,8 +75,7 @@ export class FeatureComponent implements OnInit {
             .subscribe(
             results => {
                 this.getFeature();
-                this.msgs = [];
-                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
             });
     }
 }
