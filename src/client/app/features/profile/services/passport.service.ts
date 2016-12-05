@@ -26,7 +26,14 @@ export class PassportService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getPassport(id): Observable<Passport> {
-        return this.get$(id).map(res => res.json());
+    getPassport(): Observable<Passport> {
+        return this.getList$().map(res => res.json());
+    }
+    addPassport(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updatePassport(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

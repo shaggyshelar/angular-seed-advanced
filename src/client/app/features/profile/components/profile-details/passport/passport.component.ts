@@ -3,19 +3,21 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../../services/profile.actions';
+import { Passport } from '../../../models/passport';
+import { PassportService } from '../../../services/passport.service';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
 
 export interface PassportForm {
+    id: number;
     number: string;
     expiryDate: string;
 }
@@ -29,38 +31,38 @@ export interface PassportForm {
 })
 export class PassportComponent implements OnInit {
 
-    employmentHistory: any[];
-    passport: any[];
+    passport: Observable<Passport>;
     showDiv: boolean;
     passportForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
+    passportList: any;
 
-    constructor(private formBuilder: FormBuilder, private store: Store<any>) {
-        this.passport = [];
+    constructor(private formBuilder: FormBuilder, private passportService: PassportService) {
         this.showDiv = true;
+        this.passportList = [];
     }
 
     ngOnInit(): void {
         this.passportForm = this.formBuilder.group({
+            id: null,
             number: ['', [Validators.required]],
             expiryDate: ['', [Validators.required]]
         });
 
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_PASSPORT, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.passport = res && res.passport ? res.passport : [];
-            console.log('Passport', this.passport);
+        this.passport = this.passportService.getPassport();
+        this.passport.subscribe(result => {
+            this.passportList = result ? result : [];
         });
     }
 
-    addClick() {
+    addClick(passport) {
         this.showDiv = false;
-        if (this.passport.length > 0) {
-            var expiryDate = this.passport[0].ExpDate.split('/');
+        if (this.passportList && this.passportList.length > 0) {
+            var expiryDate = this.passportList[0].ExpDate.split('/');
             this.passportForm.setValue({
-                number: this.passport[0].Number,
+                id: this.passportList[0].ID,
+                number: this.passportList[0].Number,
                 expiryDate: new Date(expiryDate[2] + '-' + expiryDate[1] + '-' + expiryDate[0]),
             });
         }
@@ -68,14 +70,34 @@ export class PassportComponent implements OnInit {
 
     onSubmit({ value, valid }: { value: PassportForm, valid: boolean }) {
         this.showDiv = true;
-        this.passport = [{
-            id: 1,
-            passportNumber: value.number,
-            passportExpiryDate: moment(value.expiryDate).format('DD/MM/YYYY'),
-            document: '',
-            status: 'pending for approval',
-            hrComment: ''
-        }];
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Number: value.number,
+                ExpDate: moment(value.expiryDate).format('DD/MM/YYYY')
+            };
+            this.passportService.updatePassport(value.id, params).subscribe(res => {
+                if (res) {
+                    this.passport = this.passportService.getPassport();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Passport Information updated successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Number: value.number,
+                ExpDate: moment(value.expiryDate).format('DD/MM/YYYY')
+            };
+            this.passportService.addPassport(params).subscribe(res => {
+                if (res) {
+                    this.passport = this.passportService.getPassport();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Passport Information saved successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        }
     }
 
     cancel() {

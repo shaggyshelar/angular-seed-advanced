@@ -8,9 +8,9 @@ var address = [
         Comments: '',
     }, {
         ID: 2,
-        Type: 'Permanant',
+        Type: 'Permanent',
         FilePath: '',
-        Description: 'PermanantAdd',
+        Description: 'PermanentAdd',
         Status: 'Pending for Approval',
         Comments: '',
     }

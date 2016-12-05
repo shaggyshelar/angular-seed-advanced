@@ -3,19 +3,22 @@ import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../../services/profile.actions';
+import { Address } from '../../../models/address';
+import { AddressService } from '../../../services/address.service';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 
 export interface AddressForm {
+    currentID: number;
+    permanentID: number;
     currentAddress: string;
     permanentAddress: string;
 }
@@ -29,62 +32,85 @@ export interface AddressForm {
 })
 export class ProfileAddressComponent implements OnInit {
 
-    addressList: any[];
+    addressList: Observable<Address>;;
     showDiv: boolean;
     address: any;
     addressForm: FormGroup;
     public profile_Observable: Observable<any>;
+    msgs: Message[] = [];
+    addressArray: any;
 
-    constructor(private formBuilder: FormBuilder, private store: Store<any>) {
-        this.addressList = [];
+    constructor(private formBuilder: FormBuilder, private addressService: AddressService) {
         this.showDiv = true;
         this.address = {};
+        this.addressArray = [];
     }
 
     ngOnInit(): void {
         this.addressForm = this.formBuilder.group({
+            currentID: null,
+            permanentID: null,
             currentAddress: ['', [Validators.required]],
             permanentAddress: ['', [Validators.required]]
         });
 
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_ADDRESS, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.addressList = res && res.address ? res.address : [];
-            console.log('Address', this.addressList);
+        this.addressList = this.addressService.getAddress();
+        this.addressList.subscribe(result => {
+            this.addressArray = result ? result : [];
         });
     }
 
     addClick() {
         this.showDiv = false;
-        if (this.addressList.length > 0) {
-            var currentAddress = _.find(this.addressList, ['Type', 'Current']);
-            var permanentAddress = _.find(this.addressList, ['Type', 'Permanent']);
+         //TODO: Update Add Address Logic
+        if (this.addressArray.length > 0) {
+            var currentAddressIndex = _.findIndex(this.addressArray, { Type: 'Current' });
+            var permanentAddressIndex = _.findIndex(this.addressArray, { Type: 'Permanent' });
             this.addressForm.setValue({
-                currentAddress: currentAddress ? currentAddress.address : '',
-                permanentAddress: permanentAddress ? permanentAddress.address : ''
+                currentID: this.addressArray[currentAddressIndex].ID,
+                currentAddress: this.addressArray[currentAddressIndex].Description,
+                permanentID: this.addressArray[permanentAddressIndex].ID,
+                permanentAddress: this.addressArray[permanentAddressIndex].Description
             });
         }
     }
 
     onSubmit({ value, valid }: { value: AddressForm, valid: boolean }) {
         this.showDiv = true;
-        this.addressList = [{
-            id: 1,
-            type: 'current',
-            address: value.currentAddress,
-            document: '',
-            status: 'pending for approval',
-            hrComment: ''
-        }, {
-            id: 2,
-            type: 'permanent',
-            address: value.permanentAddress,
-            document: '',
-            status: 'pending for approval',
-            hrComment: ''
-        }];
+        //TODO: Update Add Address Logic
+        if (value.currentID && value.permanentID) {
+            let params = [{
+                ID: value.currentID,
+                Description: value.currentAddress
+            }, {
+                ID: value.permanentID,
+                Description: value.permanentAddress
+            }];
+            this.addressService.updateAddress(value.currentID, params).subscribe(res => {
+                if (res) {
+                    this.addressList = this.addressService.getAddress();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Address updated successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = [{
+                Type: 'Current',
+                Description: value.currentAddress
+            }, {
+                Type: 'Permanent',
+                Description: value.permanentAddress
+            }];
+            this.addressService.addAddress(params).subscribe(res => {
+                if (res) {
+                    this.addressList = this.addressService.getAddress();
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Address saved successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        }
     }
     cancel() {
         this.showDiv = true;
