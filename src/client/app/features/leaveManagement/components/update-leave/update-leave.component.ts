@@ -7,6 +7,7 @@ import { BaseComponent, LogService } from '../../../framework.ref';
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
@@ -27,6 +28,7 @@ export class UpdateLeaveComponent {
     isCancellable: boolean;
     errorMsg: string;
     today: Date;
+    msgs: Message[] = [];
 
     constructor(
         private router: Router,
@@ -47,6 +49,17 @@ export class UpdateLeaveComponent {
         });
 
         this.leaveObs = this.leaveService.getLeave(this.leaveID);
+        this.leaveObs.subscribe(res => {
+            if (res.StartDate >= new Date())
+                this.setCancellable(true);
+            else
+                this.setCancellable(false);
+        });
+    }
+
+    setCancellable(param) {
+        debugger;
+        this.isCancellable = param;
     }
 
     closeClicked() {
@@ -56,7 +69,15 @@ export class UpdateLeaveComponent {
     cancelClicked() {
         this.logService.debug(this.leaveID);
         this.leaveService.deleteLeaveRecord(this.leaveID).subscribe(res => {
-            res ? this.closeClicked() : this.errorMsg = 'Could not complete action';
+            if (res) {
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave application deleted!' });
+                this.closeClicked()
+            }
+            else {
+                this.msgs = [];
+                this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+            }
         });
     }
 

@@ -69,6 +69,7 @@
 
             <!-- START HOLIDAY LIST COMPONENT BY PRIMENG -->
             <div class="col-lg-8 col-xs-12 col-sm-12">
+                <p-growl [value]="msgs"></p-growl>
                 <div class="portlet light bordered">
                     <h4>Update Leave</h4>
                     <div class="row">
@@ -90,11 +91,11 @@
                                         </thead>
                                         <tbody>
                                             <tr class="ui-widget-content">
-                                                <td class="table-cell">Type</td>
-                                                <td class="table-cell">No. Of Leaves</td>
-                                                <td class="table-cell">Start Date</td>
-                                                <td class="table-cell">End Date</td>
-                                                <td class="table-cell">Action</td>
+                                                <td class="table-cell">{{ (leaveObs | async)?.Type.Title }}</td>
+                                                <td class="table-cell">{{ (leaveObs | async)?.NumberOfLeave }}</td>
+                                                <td class="table-cell">{{ (leaveObs | async)?.StartDate }}</td>
+                                                <td class="table-cell">{{ (leaveObs | async)?.EndDate }}</td>
+                                                <td class="table-cell">-</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -112,8 +113,10 @@
                             <p-column field="Comment" header="Comments"></p-column>
                         </p-dataTable>
                     </div>
-                    <div>
-                        <button *ngIf="true" id="cancel" class="btn red btn-outline" (click)="cancelClicked()">Cancel Leave</button>
+                    <div><br>
+                        <div *ngIf="isCancellable">
+                            <button id="cancel" class="btn red btn-outline" (click)="cancelClicked()">Cancel Leave</button>
+                        </div>
                         <button id="close" class="btn blue btn-outline" (click)="closeClicked()">Close</button>
                     </div>
                 </div>
