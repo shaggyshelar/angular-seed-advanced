@@ -11,6 +11,7 @@ import { SelectItem } from 'primeng/primeng';
 /** Module Level Dependencies */
 import { Ticket } from '../../../models/ticket';
 import { TicketService } from '../../../services/ticket.service';
+import { MessageService } from '../../../../core/shared/services/message.service';
 /** Third Party Dependencies */
 
 /** Component Declaration */
@@ -26,6 +27,7 @@ export class ManageTicketComponent implements OnInit {
     params: Params;
     ticketForm: FormGroup;
     constructor(
+        private messageService: MessageService,
         private formBuilder: FormBuilder,
         private ticketService: TicketService,
         private route: ActivatedRoute,
@@ -78,12 +80,14 @@ export class ManageTicketComponent implements OnInit {
         if (this.params) {
             this.ticketService.editTicket(value).subscribe(result => {
                 if (result) {
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Ticket Edit' });
                     this.router.navigate(['/corporate/log-ticket']);
                 }
             });
         } else {
             this.ticketService.saveTicket(value).subscribe(result => {
                 if (result) {
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Ticket Logged' });
                     this.router.navigate(['/corporate/log-ticket']);
                 }
             });

@@ -16,30 +16,32 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements OnInit {
     public errorMessage: string;
+    showError: boolean = false;
     private model: User;
-    constructor( private _router: Router , private logService: LogService, private authService: AuthService) {
+    constructor(private _router: Router, private logService: LogService, private authService: AuthService) {
         logService.debug('AuthComponent : constructor');
-         this.model = new User('', '');
+        this.model = new User('', '');
     }
 
     ngOnInit() {
-         if (localStorage.getItem('accessToken') !== null) {
+        if (localStorage.getItem('accessToken') !== null) {
             this._router.navigate(['/']);
         }
         this.logService.debug('AuthComponent : ngOnInit');
     }
 
     login() {
-         this.authService.authenticate(this.model)
+        this.showError = false;
+        this.authService.authenticate(this.model)
             .subscribe(
             results => {
                 this.getLoggedInUserPermission();
             },
             error => {
-                this.errorMessage = <any>error;
+                this.showError = true;
             });
     }
-     getLoggedInUserPermission(): void {
+    getLoggedInUserPermission(): void {
         this.authService.getLoggedInUserPermission()
             .subscribe(
             results => {

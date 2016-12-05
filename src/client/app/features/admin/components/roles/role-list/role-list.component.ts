@@ -9,7 +9,7 @@ import { BaseComponent } from '../../../../framework.ref';
 
 import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../models/role';
-import { Message } from 'primeng/primeng';
+import { MessageService } from '../../../../core/shared/services/message.service';
 
 /** Component Declaration */
 @BaseComponent({
@@ -23,8 +23,7 @@ export class RoleListComponent implements OnInit {
     roleList: Observable<Role[]>;
     role: Role;
     errorMessage: any;
-    msgs: Message[] = [];
-    constructor(private roleService: RoleService, private router: Router) {
+    constructor(private messageService: MessageService, private roleService: RoleService, private router: Router) {
         this.role = new Role(0, '');
     }
     ngOnInit() {
@@ -42,8 +41,7 @@ export class RoleListComponent implements OnInit {
             .subscribe(
             results => {
                 this.getRole();
-                this.msgs = [];
-                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record Deleted' });
             },
             error => this.errorMessage = <any>error);
     }
