@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
@@ -9,11 +10,18 @@ import { Observable } from 'rxjs/Rx';
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../../services/profile.actions';
+import { IdentityProofService } from '../../../services/identityProof.service';
+import { IdentityProof } from '../../../models/identityProof';
+import { MessageService } from '../../../../core/shared/services/message.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
+import * as _ from 'lodash';
 
+export interface NomineeForm {
+    id: number;
+    value: string;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -24,20 +32,17 @@ import { SelectItem } from 'primeng/primeng';
 })
 export class IdentityProofsComponent implements OnInit {
 
-    employmentHistory: any[];
-    identityProofs: any[];
+    identityProofs: Observable<IdentityProof>;
     identityTypes: SelectItem[];
     showDiv: boolean;
     showSubDiv: boolean;
     selectedIdentityType: any;
-    identity: any;
     public profile_Observable: Observable<any>;
+    identityProofForm: FormGroup;
 
-    constructor(private store: Store<any>) {
-        this.identityProofs = [];
+    constructor(private formBuilder: FormBuilder, private identityProofService: IdentityProofService, private messageService: MessageService) {
         this.showDiv = false;
         this.showSubDiv = false;
-        this.identity = {};
         this.selectedIdentityType = {};
     }
 
@@ -48,37 +53,62 @@ export class IdentityProofsComponent implements OnInit {
             { label: 'PAN Card', value: { id: 2, name: 'PAN Card' } },
             { label: 'Voter ID', value: { id: 3, name: 'Voter ID' } }
         ];
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_IDENTITY_PROOF, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.identityProofs = res && res.identityProofs ? res.identityProofs : [];
-            console.log('IdentityProofs', this.identityProofs);
+
+        this.identityProofForm = this.formBuilder.group({
+            id: null,
+            value: ['', [Validators.required]]
         });
+
+        this.identityProofs = this.identityProofService.getIdentityProof();
+
     }
     addClick() {
         this.showDiv = true;
+        this.selectedIdentityType = {};
+        this.identityProofForm.reset();
     }
-    submit() {
-        this.identityProofs = [{
-            id: 1,
-            identityType: 'AdharCard',
-            value: '1234',
-            document: '',
-            status: 'pending for approval',
-            hrComment: ''
-        }];
-        this.showDiv = false;
-        this.showSubDiv = false;
+
+    onSubmit({ value, valid }: { value: NomineeForm, valid: boolean }) {
+
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Type: this.selectedIdentityType.name,
+                Value: value.value,
+            };
+            this.identityProofService.updateIdentityProof(value.id, params).subscribe(res => {
+                if (res) {
+                    this.identityProofs = this.identityProofService.getIdentityProof();
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Identity Proof updated successfully.' });
+                    this.showDiv = false;
+                    this.showSubDiv = false;
+                }
+            });
+        } else {
+            let params = {
+                Type: this.selectedIdentityType.name,
+                Value: value.value,
+            };
+            this.identityProofService.addIdentityProof(params).subscribe(res => {
+                if (res) {
+                    this.identityProofs = this.identityProofService.getIdentityProof();
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Identity Proof saved successfully.' });
+                    this.showDiv = false;
+                    this.showSubDiv = false;
+                }
+            });
+        }
     }
     cancel() {
         this.showSubDiv = false;
         this.selectedIdentityType = {};
+        this.identityProofForm.reset();
     }
     cancelIdentityType() {
         this.showSubDiv = false;
         this.showDiv = false;
         this.selectedIdentityType = {};
+        this.identityProofForm.reset();
     }
     onIdentityTypeChange(event) {
         this.showSubDiv = true;
@@ -87,8 +117,11 @@ export class IdentityProofsComponent implements OnInit {
     editIdentityProof(identity) {
         this.showDiv = false;
         this.showSubDiv = true;
-        this.selectedIdentityType = this.identityTypes[1].value;
-        this.identity.value = this.identity.value;
-        this.identity.document = this.identity.document;
+        var typeIndex = _.findIndex(this.identityTypes, { label: identity.Type.Name });
+        this.selectedIdentityType = this.identityTypes[typeIndex].value;
+        this.identityProofForm.setValue({
+            id: identity.ID,
+            value: identity.Value
+        })
     }
 }

@@ -1,6 +1,5 @@
 <form novalidate (ngSubmit)="onSubmit(experienceForm)" [formGroup]="experienceForm">
 	<div class="portlet-body">
-		<p-growl [value]="msgs"></p-growl>
 		<div *ngIf="(experience | async)?.length == 0">
 			<hr>
 			<h5> No Records Found!</h5>

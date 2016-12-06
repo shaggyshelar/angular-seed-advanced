@@ -5,7 +5,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -13,6 +12,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Module Level Dependencies */
 import { EducationService } from '../../services/education.service';
 import { Education } from '../../models/education';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -49,17 +49,14 @@ export class EducationComponent implements OnInit {
     class: SelectItem[];
     grade: SelectItem[];
     showDiv: boolean;
-    educationObj: any;
     educationForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
 
     constructor(
-        private router: Router, private formBuilder: FormBuilder, private educationService: EducationService) {
+        private router: Router, private formBuilder: FormBuilder, private educationService: EducationService, private messageService: MessageService) {
         this.class = [];
         this.grade = [];
         this.showDiv = true;
-        this.educationObj = {};
     }
 
     ngOnInit(): void {
@@ -101,8 +98,7 @@ export class EducationComponent implements OnInit {
             this.educationService.updateEducation(value.id, params).subscribe(res => {
                 if (res) {
                     this.education = this.educationService.getEducation();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Education Information updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Education Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -117,8 +113,7 @@ export class EducationComponent implements OnInit {
             this.educationService.addEducation(params).subscribe(res => {
                 if (res) {
                     this.education = this.educationService.getEducation();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Education Information saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Education Information saved successfully.' });
                     this.showDiv = true;
                 }
             });

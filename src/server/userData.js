@@ -5,12 +5,12 @@ var users = [
         Password: 'password',
         Permissions: [
             'Timesheet.READ', 'Timesheet.CREATE', 'Timesheet.UPDATE', 'Timesheet.DELETE',
-            'CORPORATE.MANAGE','CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE',
+            'CORPORATE.MANAGE', 'CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE',
             'Leave.READ', 'Leave.CREATE', 'Leave.UPDATE', 'Leave.DELETE',
             'Holiday.READ', 'Holiday.CREATE', 'Holiday.UPDATE', 'Holiday.DELETE',
             'LeaveApproval.READ', 'LeaveApproval.CREATE', 'LeaveApproval.UPDATE', 'LeaveApproval.DELETE',
             'BulkLeaveApproval.READ', 'BulkLeaveApproval.CREATE', 'BulkLeaveApproval.UPDATE', 'BulkLeaveApproval.DELETE', 'TICKET.READ',
-            'ADMIN.MANAGE','FEATURE.READ','ROLE.READ','ROLE.CREATE','ROLE.UPDATE'
+            'ADMIN.MANAGE', 'FEATURE.READ', 'ROLE.READ', 'ROLE.CREATE', 'ROLE.UPDATE', 'PROFILE.READ', 'PROFILE.UPDATE', 'PROFILE.MANAGE'
         ]
     },
     {
@@ -29,7 +29,7 @@ var users = [
         Id: 13,
         UserName: 'user3',
         Password: 'password',
-        Permissions: ['CORPORATE.MANAGE','CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE']
+        Permissions: ['CORPORATE.MANAGE', 'CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE']
     },
 
     {

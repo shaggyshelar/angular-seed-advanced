@@ -1,15 +1,23 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../../services/profile.actions';
+import { Uan } from '../../../models/uan';
+import { UanService } from '../../../services/uan.service';
+import { MessageService } from '../../../../core/shared/services/message.service';
+
+export interface UanForm {
+    id: number;
+    number: string;
+    fromESPL: boolean;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -19,46 +27,75 @@ import { PROFILE_ACTIONS } from '../../../services/profile.actions';
     styleUrls: ['uan.component.css']
 })
 export class UANComponent implements OnInit {
-    uanData: any[];
     showDiv: boolean;
-    uanObj: any;
-    public profile_Observable: Observable<any>;
+    public uanData: Observable<Uan>;
+    uanForm: FormGroup;
+    uan: any;
 
-    constructor(private store: Store<any>) {
-        this.uanData = [];
+    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private uanService: UanService) {
+        this.uan = [];
         this.showDiv = true;
-        this.uanObj = {};
     }
 
     ngOnInit(): void {
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_UAN, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.uanData = res && res.uan ? res.uan : [];
-            console.log('UAN', this.uanData);
+        this.uanForm = this.formBuilder.group({
+            id: null,
+            number: ['', [Validators.required]],
+            fromESPL: false
+        });
+        this.uanData = this.uanService.getUan();
+        this.uanData.subscribe(result => {
+            this.uan = result ? result : [];
         });
     }
 
-    submit() {
-        this.uanData = [{
-            id: 1,
-            uanNumber: 'details1',
-            fromESPL: 'false',
-            status: 'pending for approval',
-            comment: ''
-        }];
-        this.showDiv = true;
+    onSubmit({ value, valid }: { value: UanForm, valid: boolean }) {
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                Number: value.number,
+                FromESPL: value.fromESPL,
+            };
+            this.uanService.updateUan(value.id, params).subscribe(res => {
+                if (res) {
+                    this.uanData = this.uanService.getUan();
+                    this.uanData.subscribe(result => {
+                        this.uan = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'UAN updated successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                Number: value.number,
+                FromESPL: value.fromESPL,
+            };
+            this.uanService.addUan(params).subscribe(res => {
+                if (res) {
+                    this.uanData = this.uanService.getUan();
+                    this.uanData.subscribe(result => {
+                        this.uan = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'UAN saved successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        }
     }
+
     cancel() {
         this.showDiv = true;
     }
 
     add() {
         this.showDiv = false;
-        if (this.uanData.length > 0) {
-            this.uanObj.number = this.uanData[0].uanNumber;
-            this.uanObj.fromESPL = this.uanData[0].fromESPL;
+        if (this.uan.length > 0) {
+            this.uanForm.setValue({
+                id: this.uan[0].ID,
+                number: this.uan[0].Number,
+                fromESPL: this.uan[0].FromESPL
+            })
         }
     }
 }

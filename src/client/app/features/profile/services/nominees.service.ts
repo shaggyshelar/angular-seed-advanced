@@ -26,7 +26,15 @@ export class NomineesService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getNominees(id): Observable<Nominee> {
-        return this.get$(id).map(res => res.json());
+    getNominees(): Observable<Nominee> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addNominee(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateNominee(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }
