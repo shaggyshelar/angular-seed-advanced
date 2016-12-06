@@ -5,7 +5,7 @@ import { OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 /** Framework Level Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { PROFILE_ACTIONS } from '../../services/profile.actions';
@@ -44,7 +44,7 @@ export class PersonalInfoComponent implements OnInit {
   isAddSkypeID: boolean;
   isEditSkypeID: boolean;
 
-  constructor(private store: Store<any>, private logService: LogService) {
+  constructor(private store: Store<any>) {
     this.profile = {};
     this.profileInfo = {};
     this.isAddContactNo = false;

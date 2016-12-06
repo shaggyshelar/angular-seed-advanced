@@ -85,9 +85,12 @@ export class ProfileAddressComponent implements OnInit {
             }];
             this.addressService.updateAddress(value.currentID, params).subscribe(res => {
                 if (res) {
+                     this.showDiv = true;
                     this.addressList = this.addressService.getAddress();
-                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address updated successfully.' });
-                    this.showDiv = true;
+                    this.addressList.subscribe(result => {
+                        this.addressArray = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address updated successfully.' });                   
                 }
             });
         } else {
@@ -100,9 +103,13 @@ export class ProfileAddressComponent implements OnInit {
             }];
             this.addressService.addAddress(params).subscribe(res => {
                 if (res) {
-                    this.addressList = this.addressService.getAddress();
-                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address saved successfully.' });
                     this.showDiv = true;
+                    this.addressList = this.addressService.getAddress();
+                    this.addressList.subscribe(result => {
+                        this.addressArray = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address saved successfully.' });
+                   
                 }
             });
         }
