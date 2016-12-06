@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
 
@@ -33,7 +32,6 @@ export class UpdateLeaveComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private store: Store<any>,
         private logService: LogService,
         private leaveService: LeaveService
     ) {

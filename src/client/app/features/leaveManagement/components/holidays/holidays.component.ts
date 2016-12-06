@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
@@ -43,7 +42,7 @@ export class HolidaysComponent {
   holiday: Holiday;
 
   constructor(
-    private router: Router, private store: Store<any>, private logService: LogService, private holidayService: HolidayService
+    private router: Router, private logService: LogService, private holidayService: HolidayService
   ) {
     this.holidays = [];
     this.holiday = { ID: null, HolidayDate: '', HolidayType: '', WeekDay: '', Title: '' };

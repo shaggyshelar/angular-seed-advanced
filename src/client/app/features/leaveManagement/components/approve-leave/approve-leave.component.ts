@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
@@ -29,7 +28,6 @@ export class ApproveLeaveComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<any>,
     private logService: LogService,
     private leaveService: LeaveService
   ) { }

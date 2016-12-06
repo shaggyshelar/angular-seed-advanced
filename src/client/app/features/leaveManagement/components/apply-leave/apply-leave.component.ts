@@ -12,7 +12,6 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Component Declaration */
@@ -38,6 +37,9 @@ class FormFieldClass {
 export class ApplyLeaveComponent implements OnInit {
     leaveObs: Observable<boolean>;
     userObs: Observable<User>;
+
+    addLeaveArr: any[];
+
     leaveTypeValid: boolean = true;
     leaveID: number;
     strtDt: any;
@@ -57,12 +59,12 @@ export class ApplyLeaveComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private store: Store<any>,
         private logService: LogService,
         private userService: UserService,
         private leaveService: LeaveService
     ) {
         this.model = new FormFieldClass({ ID: 12345, Name: 'Lname Fname' }, 1, 'select', new Date(), new Date(), '');
+        this.addLeaveArr = [];
     }
 
     ngOnInit() {
@@ -124,8 +126,43 @@ export class ApplyLeaveComponent implements OnInit {
     }
 
     addLeaves() {
+        if (this.model.numDays === 0.5) {
+            this.addLeaveArr = [];
+            this.addLeaveArr.push({ leave: this.model.leaveType, numDays: this.model.numDays, reason: this.model.reason, start: this.model.start, end: this.model.end });
+        } else if (this.model.numDays >= 0.5) {
+            this.addLeaveArr = [];
+            var start = this.model.start;
+            var current = this.model.start;
+            var end = this.model.end;
+            for (var i = 0; i < this.model.numDays; i++) {
+                if (current.getDay() < 5) {
+                    this.addLeaveArr.push({ leave: this.model.leaveType, numDays: 1, reason: this.model.reason, start: current, end: current });
+                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
+                } else if (current.getDay() === 5) {
+                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 2);
+                } else if (current.getDay() === 6) {
+                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
+                }
+            }
+        }
+        this.logService.debug('Dates => ' + JSON.stringify(this.addLeaveArr));
         //TODO : Add leave fuunctinality
         this.isLeaveAdded = true;
+    }
+
+    daysInMonth(m, y) { // m is 0 indexed: 0-11
+        switch (m) {
+            case 1:
+                return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;
+            case 8: case 3: case 5: case 10:
+                return 30;
+            default:
+                return 31
+        }
+    }
+
+    isValid(d, m, y) {
+        return m >= 0 && m < 12 && d > 0 && d <= this.daysInMonth(m, y);
     }
 
     validateLeaveType() {
@@ -191,6 +228,7 @@ export class ApplyLeaveComponent implements OnInit {
         iDateDiff -= iAdjust; // take into account both days on weekend
 
         this.model.numDays = this.dayCount = (iDateDiff + 1); // add 1 because dates are 
+        this.logService.debug('difference : ' + this.dayCount);
         return this.dayCount;
     }
 

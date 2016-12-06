@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
@@ -31,7 +30,7 @@ export class MyLeavesComponent {
   leave: any;
 
   constructor(
-    private router: Router, private store: Store<any>, private logService: LogService, private leaveService: LeaveService, private userService: UserService
+    private router: Router, private logService: LogService, private leaveService: LeaveService, private userService: UserService
   ) {
     this.leaves = [];
   }

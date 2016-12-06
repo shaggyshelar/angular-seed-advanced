@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
 
@@ -43,7 +42,6 @@ export class SingleApprovalComponent {
 
     constructor(
         private router: Router,
-        private store: Store<any>,
         private logService: LogService,
         private leaveService: LeaveService,
         private route: ActivatedRoute

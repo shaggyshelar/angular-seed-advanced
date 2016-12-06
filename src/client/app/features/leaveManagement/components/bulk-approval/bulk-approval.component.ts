@@ -1,11 +1,10 @@
 /** Angular Dependencies */
-import { Router } from '@angular/router';
+
 /** Framework Dependencies */
 //import { BaseComponent } from '../views/base-component';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
 
@@ -42,8 +41,6 @@ export class BulkApproveComponent {
   rejected: boolean = false;
 
   constructor(
-    private router: Router,
-    private store: Store<any>,
     private logService: LogService,
     private leaveService: LeaveService
   ) {

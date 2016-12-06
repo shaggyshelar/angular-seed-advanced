@@ -11,7 +11,6 @@ import { ChangePasswordService } from '../../services/change-password.service';
 import { ChangePassword } from '../../models/changePassword';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
 
@@ -45,7 +44,6 @@ export class ChangePasswordComponent {
     msgs: Message[] = [];
 
     constructor(
-        private store: Store<any>,
         private logService: LogService,
         private passwordService: ChangePasswordService,
 
