@@ -8,6 +8,7 @@ import { CoreModule } from '../../../../frameworks/core/core.module';
 import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router } from '@angular/router';
 
+import { MessageService } from '../../../core/shared/services/message.service';
 import { Observable } from 'rxjs/Rx';
 import { HolidayService } from '../../services/holiday.service';
 import { Holiday } from '../../models/holiday';
@@ -24,7 +25,8 @@ export function main() {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: Router, useClass: RouterStub },
-                    { provide: HolidayService, useClass: HolidayServiceStub }
+                    { provide: HolidayService, useClass: HolidayServiceStub },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -110,5 +112,11 @@ class HolidayServiceStub {
 
     getHolidays() {
         return new Observable<Holiday>(observer => { observer.next(this.dummyHolidays) });
+    }
+}
+
+class MessageServiceStub {
+    addMessage(message) {
+        return;
     }
 }

@@ -8,6 +8,7 @@ import { CoreModule } from '../../../../frameworks/core/core.module';
 
 import { Router } from '@angular/router';
 
+import { MessageService } from '../../../core/shared/services/message.service';
 import { Observable } from 'rxjs/Rx';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
@@ -28,7 +29,8 @@ export function main () {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: Router, useClass: RouterStub },
-                    { provide: LeaveService, useClass: LeaveServiceStub }
+                    { provide: LeaveService, useClass: LeaveServiceStub },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -257,5 +259,10 @@ class LeaveServiceStub {
     getLeaves() {
         return new Observable<Leave>(observer => { observer.next(this.stubLeaves) })
     }
+}
 
+class MessageServiceStub {
+    addMessage(message) {
+        return;
+    }
 }

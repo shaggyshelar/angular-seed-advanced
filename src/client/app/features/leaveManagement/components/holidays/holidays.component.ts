@@ -11,6 +11,9 @@ import { Observable } from 'rxjs/Rx';
 import { HolidayService } from '../../services/holiday.service';
 import { Holiday } from '../../models/holiday';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Component Declaration */
 
 export class MyEvent {
@@ -42,7 +45,10 @@ export class HolidaysComponent {
   holiday: Holiday;
 
   constructor(
-    private router: Router, private logService: LogService, private holidayService: HolidayService
+    private messageService: MessageService,
+    private router: Router, 
+    private logService: LogService, 
+    private holidayService: HolidayService
   ) {
     this.holidays = [];
     this.holiday = { ID: null, HolidayDate: '', HolidayType: '', WeekDay: '', Title: '' };

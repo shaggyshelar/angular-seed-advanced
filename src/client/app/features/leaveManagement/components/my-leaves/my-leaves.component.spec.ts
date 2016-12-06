@@ -10,6 +10,7 @@ import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.mod
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
+import { MessageService } from '../../../core/shared/services/message.service';
 import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service'
 import { Leave } from '../../models/leave';
@@ -32,7 +33,8 @@ export function main() {
                 providers: [
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: LeaveServiceStub },
-                    { provide: UserService, useClass: UserServiceStub }
+                    { provide: UserService, useClass: UserServiceStub },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -464,5 +466,11 @@ class LeaveServiceStub {
     ];
     getLeaves() {
         return new Observable<Leave>(observer => { observer.next(this.stubLeaves) })
+    }
+}
+
+class MessageServiceStub {
+    addMessage(message) {
+        return;
     }
 }

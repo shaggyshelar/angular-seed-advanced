@@ -9,6 +9,7 @@ import { CoreModule } from '../../../../frameworks/core/core.module';
 import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
@@ -33,7 +34,8 @@ export function main() {
                 providers: [
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: ServiceStub },
-                    { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 6527 }]) } }
+                    { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 6527 }]) } },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -101,7 +103,13 @@ class ServiceStub {
         ]
     };
 
-    getLeave() {
+    getLeave(id) {
         return new Observable<Leave>(observer => { observer.next(this.leaveRecord) })
+    }
+}
+
+class MessageServiceStub {
+    addMessage(message) {
+        return;
     }
 }

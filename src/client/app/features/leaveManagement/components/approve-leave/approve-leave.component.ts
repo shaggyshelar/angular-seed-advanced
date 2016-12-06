@@ -11,6 +11,9 @@ import { Observable } from 'rxjs/Rx';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Component Declaration */
 
 import { OnInit } from '@angular/core';
@@ -27,6 +30,7 @@ export class ApproveLeaveComponent implements OnInit {
   servRows = 10;
 
   constructor(
+    private messageService: MessageService,
     private router: Router,
     private logService: LogService,
     private leaveService: LeaveService

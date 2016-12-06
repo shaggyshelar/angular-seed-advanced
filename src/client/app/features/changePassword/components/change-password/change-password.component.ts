@@ -10,6 +10,9 @@ import { BaseComponent, LogService } from '../../../framework.ref';
 import { ChangePasswordService } from '../../services/change-password.service';
 import { ChangePassword } from '../../models/changePassword';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
@@ -41,9 +44,8 @@ export class ChangePasswordComponent {
     newPasswordWarning: string;
     oldPasswordWarning: string;
 
-    msgs: Message[] = [];
-
     constructor(
+        private messageService: MessageService,
         private logService: LogService,
         private passwordService: ChangePasswordService,
 
@@ -76,15 +78,13 @@ export class ChangePasswordComponent {
             this.passwrdObs.subscribe(res => {
                 this.logService.debug(res);
                 if (res) {
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
                     debugger;
                     this.newPasswordWarning = '';
                     this.oldPasswordWarning = '';
                     this.model = new FormFieldClass('', '', '');
                 } else {
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'error', summary: 'Failed', detail: 'Password not changed!' });
+                    this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Password not changed!' });
                     debugger;
                     this.newPasswordWarning = res.message;
                     this.oldPasswordWarning = '';

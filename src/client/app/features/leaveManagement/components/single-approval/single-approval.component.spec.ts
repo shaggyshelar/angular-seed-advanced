@@ -10,6 +10,7 @@ import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.mod
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
+import { MessageService } from '../../../core/shared/services/message.service';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 import { User } from '../../models/user';
@@ -30,7 +31,8 @@ export function main() {
                 providers: [
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: ServiceStub },
-                    { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 6527 }]) } }
+                    { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 6527 }]) } },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -120,5 +122,10 @@ class ServiceStub {
         }
         return false;
     }
+}
 
+class MessageServiceStub {
+    addMessage(message) {
+        return;
+    }
 }

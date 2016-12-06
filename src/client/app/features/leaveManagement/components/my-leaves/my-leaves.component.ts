@@ -13,6 +13,9 @@ import { UserService } from '../../services/user.service'
 import { Leave } from '../../models/leave';
 import { LeaveDetail } from '../../models/leaveDetail';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Component Declaration */
 
 
@@ -30,7 +33,11 @@ export class MyLeavesComponent {
   leave: any;
 
   constructor(
-    private router: Router, private logService: LogService, private leaveService: LeaveService, private userService: UserService
+    private messageService: MessageService,
+    private router: Router, 
+    private logService: LogService, 
+    private leaveService: LeaveService, 
+    private userService: UserService
   ) {
     this.leaves = [];
   }

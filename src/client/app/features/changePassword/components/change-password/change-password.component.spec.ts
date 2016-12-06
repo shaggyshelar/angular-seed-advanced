@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { ChangePasswordService } from '../../services/change-password.service';
 import { ChangePassword } from '../../models/changePassword';
+import { MessageService } from '../../../core/shared/services/message.service';
 // app
 import { ChangePasswordComponent } from './change-password.component';
 
@@ -23,7 +24,8 @@ export function main() {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: Router, useClass: RouterStub },
-                    { provide: ChangePasswordService, useClass: ChangePasswordServiceStub }
+                    { provide: ChangePasswordService, useClass: ChangePasswordServiceStub },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -61,5 +63,11 @@ class ChangePasswordServiceStub {
     };
     changePassword(param) {
         return true;
+    }
+}
+
+class MessageServiceStub {
+    addMessage(message) {
+        return;
     }
 }

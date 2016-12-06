@@ -12,6 +12,9 @@ import { Message } from 'primeng/primeng';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Component Declaration */
 
 
@@ -34,13 +37,13 @@ export class BulkApproveComponent {
   servRows = 20;
   requests: any[];
   selectedEmployees: any[];
-  msgs: Message[] = [];
 
   model: FormFieldClass;
   approved: boolean = false;
   rejected: boolean = false;
 
   constructor(
+    private messageService: MessageService,
     private logService: LogService,
     private leaveService: LeaveService
   ) {
@@ -88,21 +91,18 @@ export class BulkApproveComponent {
         if (status === 'Rejected') {
           this.rejected = false;
           this.approved = true;
-          this.msgs = [];
-          this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leaves rejected!' });
+          this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leaves rejected!' });
         } else {
           this.rejected = true;
           this.approved = false;
-          this.msgs = [];
-          this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leaves approved!' });
+          this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leaves approved!' });
         }
         this.leaveObs = this.leaveService.getLeaves();
         this.model.comments = '';
         this.selectedEmployees = [];
       } else {
         this.logService.debug('Fail');
-        this.msgs = [];
-        this.msgs.push({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
+        this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
       }
     });
   }

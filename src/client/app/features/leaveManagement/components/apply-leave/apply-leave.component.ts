@@ -11,6 +11,9 @@ import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
 
@@ -58,6 +61,7 @@ export class ApplyLeaveComponent implements OnInit {
     model: FormFieldClass;
 
     constructor(
+        private messageService: MessageService,
         private router: Router,
         private logService: LogService,
         private userService: UserService,

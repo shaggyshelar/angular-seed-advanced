@@ -7,6 +7,7 @@ import { CoreModule } from '../../../../frameworks/core/core.module';
 
 import { Router } from '@angular/router';
 
+import { MessageService } from '../../../core/shared/services/message.service';
 import { Observable } from 'rxjs/Rx';
 import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service';
@@ -25,7 +26,8 @@ export function main() {
                 providers: [
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: LeaveServiceStub },
-                    { provide: UserService, useClass: UserServiceStub }
+                    { provide: UserService, useClass: UserServiceStub },
+                    { provide: MessageService, useclass: MessageServiceStub }
                 ]
             });
         });
@@ -119,5 +121,11 @@ class LeaveServiceStub {
         else {
             return false;
         }
+    }
+}
+
+class MessageServiceStub {
+    addMessage(message) {
+        return;
     }
 }

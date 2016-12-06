@@ -14,6 +14,9 @@ import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 import { User } from '../../models/user';
 
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
+
 /** Component Declaration */
 
 class FormFieldClass {
@@ -38,9 +41,9 @@ export class SingleApprovalComponent {
     validationMessage: string = '';
     approved: boolean = false;
     rejected: boolean = false;
-    msgs: Message[] = [];
-
+    
     constructor(
+        private messageService: MessageService,
         private router: Router,
         private logService: LogService,
         private leaveService: LeaveService,
@@ -74,14 +77,12 @@ export class SingleApprovalComponent {
                 if (res) {
                     this.rejected = false;
                     this.approved = true;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
                     this.closeClicked();
                 } else {
                     this.rejected = true;
                     this.approved = false;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }
@@ -102,14 +103,12 @@ export class SingleApprovalComponent {
                 if (res) {
                     this.rejected = true;
                     this.approved = false;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
                     this.closeClicked();
                 } else {
                     this.rejected = false;
                     this.approved = true;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }
