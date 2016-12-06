@@ -4,9 +4,9 @@ var leaveDetails = require('./leaveDetail');
 var leave = require('./leave');
 var _ = require('lodash');
 
-module.exports = function (app) {
+module.exports = function(app) {
 
-    app.get('/api/Leave/:id', function (req, res) {
+    app.get('/api/Leave/:id', function(req, res) {
         var id = req.params.id;
         for (var index in leave) {
             if (leave[index].ID == id) {
@@ -16,11 +16,11 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/api/Leave', function (req, res) {
+    app.get('/api/Leave', function(req, res) {
         res.json(leave);
     });
 
-    app.post('/api/Leave', function (req, res) {
+    app.post('/api/Leave', function(req, res) {
         if (req.body != null) {
             req.body.ID = leave.length + 1;
             req.body.Status = 'Pending';
@@ -31,7 +31,7 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/api/Leave', function (req, res) {
+    app.put('/api/Leave', function(req, res) {
         if (req.body != null && req.body.length > 0) {
             var i;
             var reqBdy = req.body;
@@ -48,7 +48,7 @@ module.exports = function (app) {
         }
     });
 
-    app.delete('/api/Leave/:id', function (req, res) {
+    app.delete('/api/Leave/:id', function(req, res) {
         var leaveParamID = parseInt(req.params.id);
         if (leaveParamID > -1) {
             var index = _.findIndex(leave, {
@@ -62,12 +62,12 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/api/Leaves/Detail', function (req, res) {
+    app.get('/api/Users/LeaveDetails', function(req, res) {
         res.json(leaveDetails);
     });
 
 
-    app.get('/api/Leaves/GetUserDetails', function (req, res) {
+    app.get('/api/Users/', function(req, res) {
         res.json(user);
     });
 

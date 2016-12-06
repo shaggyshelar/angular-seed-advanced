@@ -107,7 +107,7 @@ export class ProfileEffects {
     //Passport
     @Effect() getPassport$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_PASSPORT)
-        .switchMap(action => this.passportService.getPassport(action.payload))
+        .switchMap(action => this.passportService.getPassport())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_PASSPORT, payload: res });
         });
@@ -115,7 +115,7 @@ export class ProfileEffects {
     //Address
     @Effect() getAddress$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_ADDRESS)
-        .switchMap(action => this.addressService.getAddress(action.payload))
+        .switchMap(action => this.addressService.getAddress())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_ADDRESS, payload: res });
         });
@@ -131,7 +131,7 @@ export class ProfileEffects {
     //Visa
     @Effect() getVisa$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_VISA)
-        .switchMap(action => this.visaService.getVisa(action.payload))
+        .switchMap(action => this.visaService.getVisa())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_VISA, payload: res });
         });

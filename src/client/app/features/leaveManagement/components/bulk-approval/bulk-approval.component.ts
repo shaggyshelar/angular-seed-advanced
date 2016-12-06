@@ -7,6 +7,7 @@ import { BaseComponent, LogService } from '../../../framework.ref';
 /** Third Party Dependencies */
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { Message } from 'primeng/primeng';
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
@@ -34,6 +35,7 @@ export class BulkApproveComponent {
   servRows = 20;
   requests: any[];
   selectedEmployees: any[];
+  msgs: Message[] = [];
 
   model: FormFieldClass;
   approved: boolean = false;
@@ -89,15 +91,21 @@ export class BulkApproveComponent {
         if (status === 'Rejected') {
           this.rejected = false;
           this.approved = true;
+          this.msgs = [];
+          this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leaves rejected!' });
         } else {
           this.rejected = true;
           this.approved = false;
+          this.msgs = [];
+          this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leaves approved!' });
         }
         this.leaveObs = this.leaveService.getLeaves();
         this.model.comments = '';
         this.selectedEmployees = [];
       } else {
         this.logService.debug('Fail');
+        this.msgs = [];
+        this.msgs.push({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
       }
     });    // remove '1', update base service method
   }

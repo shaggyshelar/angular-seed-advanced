@@ -11,12 +11,13 @@
 			</div>
 		</div>
 		<div class="portlet-body">
-			<div *ngIf="visa.length == 0">
+			<p-growl [value]="msgs"></p-growl>
+			<div *ngIf="(visa | async)?.length == 0">
 				<hr>
 				<h5> No Records Found!</h5>
 			</div>
-			<div *ngIf="visa.length > 0">
-				<p-dataTable [value]="visa" [responsive]="true" emptyMessage="No Records Found!">
+			<div *ngIf="(visa | async)?.length > 0">
+				<p-dataTable [value]="visa | async" [responsive]="true" emptyMessage="No Records Found!">
 					<p-column header="Edit">
 						<template let-visaData="rowData" pTemplate type="body">
 							<i class="fa fa-pencil icon-color" (click)="editVisa(visaData)"></i>

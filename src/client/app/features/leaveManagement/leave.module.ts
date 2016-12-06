@@ -23,26 +23,28 @@ import { LeaveEffects } from './services/leave.effects';
 import { leaveReducer } from './services/leave.reducer';
 import { HolidayEffects } from './services/holiday.effect';
 import { HolidayService } from './services/holiday.service';
+import { UserService } from './services/user.service';
 
 /** Module Definition */
 @NgModule({
-    imports: [ 
+    imports: [
         CommonModule,
         TranslateModule,
         EffectsModule.run(LeaveEffects),
-        EffectsModule.run(HolidayEffects)
-     ],
-    exports: [  ],
-    declarations: [ 
+        EffectsModule.run(HolidayEffects),
+        EffectsModule.run(UserService)
+    ],
+    exports: [],
+    declarations: [
         ApplyLeaveComponent,
         ApproveLeaveComponent,
         BulkApproveComponent,
         HolidaysComponent,
         MyLeavesComponent,
         SingleApprovalComponent,
-        UpdateLeaveComponent        
-     ],
-    providers: [ LeaveService, HolidayService ],
+        UpdateLeaveComponent
+    ],
+    providers: [LeaveService, HolidayService, UserService],
 })
 
 export class LeaveModule {

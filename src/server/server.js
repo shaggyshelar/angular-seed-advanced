@@ -3,7 +3,9 @@ var express = require('express'),
     server = require('http').createServer(app);
 var path = require('path');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 
+app.use(compression());
 app.use(express.static(__dirname));
 app.use('/node_modules', express.static(__dirname + '/../../node_modules'));
 app.use(bodyParser.json());

@@ -38,22 +38,22 @@
                                 <tbody>
                                     <tr>
                                         <td> Leave </td>
-                                        <td> 3 </td>
-                                        <td> 2 </td>
+                                        <td> {{ (leaveDetObs | async)?.NumberOfLeave }} </td>
+                                        <td> - </td>
                                     </tr>
                                     <tr>
                                         <td> Half Day Leave </td>
-                                        <td> 0 </td>
+                                        <td> {{ (leaveDetObs | async)?.HalfDayLeave }} </td>
                                         <td> - </td>
                                     </tr>
                                     <tr>
                                         <td> Absent </td>
-                                        <td> 2 </td>
+                                        <td> {{ (leaveDetObs | async)?.Absent }} </td>
                                         <td> - </td>
                                     </tr>
                                     <tr>
                                         <td> Half Day Absent </td>
-                                        <td> 0 </td>
+                                        <td> {{ (leaveDetObs | async)?.HalfDayAbsent }} </td>
                                         <td> - </td>
                                     </tr>
                                 </tbody>

@@ -29,15 +29,15 @@
                                 <tbody>
                                     <tr>
                                         <td> Employee ID </td>
-                                        <td class="empInfo">24568 </td>
+                                        <td class="empInfo">{{(userObs | async)?.ID}}</td>
                                     </tr>
                                     <tr>
                                         <td> Employee Name </td>
-                                        <td class="empInfo"> PERSON LNAME</td>
+                                        <td class="empInfo">{{(userObs | async)?.Name}}</td>
                                     </tr>
                                     <tr>
                                         <td> Department </td>
-                                        <td class="empInfo"> EBS</td>
+                                        <td class="empInfo">{{(userObs | async)?.Department}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -52,13 +52,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td> RMS </td>
-                                        <td> <span class="empInfo">Sagar Shelar</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td> PLSV 1 </td>
-                                        <td> <span class="empInfo">Some Person</span> </td>
+                                    <tr *ngFor="let prjctDet of (userObs | async)?.Project">
+                                        <td>{{prjctDet.Title}}</td>
+                                        <td><span class="empInfo">{{prjctDet.Manager}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -142,7 +138,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                        <p-dataTable [value]="finalLeaveData" [responsive]="true" [hidden]="leavesHidden">
+                                        <p-dataTable [value]="finalLeaveData" [responsive]="true" [hidden]="true">
                                             <p-column field="leave.name" header="Leave Type" [sortable]="false"></p-column>
                                             <p-column field="numDays" header="No. of Leaves" [sortable]="false"></p-column>
                                             <p-column field="reason" header="Reason" [sortable]="false"></p-column>

@@ -56,5 +56,5 @@ export class HomeComponent implements OnInit {
         name: 'slideTop',
       }
     });
-  }
+  }  
 }
