@@ -110,6 +110,9 @@ export class RoleAddEditComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
+    onCancel() {
+        this.router.navigate(['/admin/role']);
+    }
     private getPermissionsByRole() {
         this.rolePermissionList = this.permissionService.getPermissionsByRole(this.params);
     }
