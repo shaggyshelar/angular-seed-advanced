@@ -124,11 +124,17 @@ export class BaseService extends Analytics implements HttpServices {
      */
     protected handleError(error: Response | any): Observable<any> {
         // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
+        let errMsg: any;
         if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            let err: any;
+            try {
+                const body = error.json() || '';
+                err = body.error || JSON.stringify(body);
+            } catch (exp) {
+                err = error.statusText;
+            }
+            //errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            errMsg = { status: error.status, message: err };
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
