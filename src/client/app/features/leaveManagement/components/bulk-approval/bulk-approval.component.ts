@@ -1,8 +1,7 @@
 /** Angular Dependencies */
 
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -24,7 +23,7 @@ class FormFieldClass {
   ) { }
 }
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'bulkapproval',
   templateUrl: 'bulk-approval.component.html',
@@ -44,7 +43,6 @@ export class BulkApproveComponent {
 
   constructor(
     private messageService: MessageService,
-    private logService: LogService,
     private leaveService: LeaveService
   ) {
     this.requests = [];
@@ -101,7 +99,6 @@ export class BulkApproveComponent {
         this.model.comments = '';
         this.selectedEmployees = [];
       } else {
-        this.logService.debug('Fail');
         this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
       }
     });

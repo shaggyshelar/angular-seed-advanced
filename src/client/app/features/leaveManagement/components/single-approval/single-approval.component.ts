@@ -1,8 +1,8 @@
 /** Angular Dependencies */
 import { Router, ActivatedRoute } from '@angular/router';
+
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -25,7 +25,7 @@ class FormFieldClass {
     ) { }
 }
 
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'singleapproval',
     templateUrl: 'single-approval.component.html',
@@ -45,7 +45,6 @@ export class SingleApprovalComponent {
     constructor(
         private messageService: MessageService,
         private router: Router,
-        private logService: LogService,
         private leaveService: LeaveService,
         private route: ActivatedRoute
     ) {
@@ -54,7 +53,6 @@ export class SingleApprovalComponent {
     }
 
     ngOnInit() {
-        this.logService.debug('Single leave approval Comonent');
         this.route.params.subscribe(params => {
             this.leaveID = +params['id'];
         });

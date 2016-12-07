@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
+
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
@@ -30,7 +30,7 @@ class FormFieldClass {
     ) { }
 }
 
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'apply-leave',
     templateUrl: 'apply-leave.component.html',
@@ -63,7 +63,6 @@ export class ApplyLeaveComponent implements OnInit {
     constructor(
         private messageService: MessageService,
         private router: Router,
-        private logService: LogService,
         private userService: UserService,
         private leaveService: LeaveService
     ) {
@@ -73,7 +72,6 @@ export class ApplyLeaveComponent implements OnInit {
 
     ngOnInit() {
 
-        this.logService.debug('ApplyLeaveComponent OnInit');
         this.userObs = this.userService.getUserDetails();
     }
 
@@ -114,7 +112,7 @@ export class ApplyLeaveComponent implements OnInit {
             Type: { ID: this.leaveID, Title: this.model.leaveType }
         };
         this.leaveService.addLeaveRecord(params).subscribe(res => {
-            res ? this.router.navigate(['/leave/my-leaves']) : this.logService.debug('res : ' + res);
+            res ? this.router.navigate(['/leave/my-leaves']) : false;
         });
     }
 
@@ -149,7 +147,6 @@ export class ApplyLeaveComponent implements OnInit {
                 }
             }
         }
-        this.logService.debug('Dates => ' + JSON.stringify(this.addLeaveArr));
         //TODO : Add leave fuunctinality
         this.isLeaveAdded = true;
     }
@@ -232,7 +229,6 @@ export class ApplyLeaveComponent implements OnInit {
         iDateDiff -= iAdjust; // take into account both days on weekend
 
         this.model.numDays = this.dayCount = (iDateDiff + 1); // add 1 because dates are 
-        this.logService.debug('difference : ' + this.dayCount);
         return this.dayCount;
     }
 

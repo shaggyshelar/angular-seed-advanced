@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
+
 
 /** Module Level Dependencies */
 import { ChangePasswordService } from '../../services/change-password.service';
@@ -27,7 +27,7 @@ class FormFieldClass {
     ) { }
 }
 
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'change-password-component',
     templateUrl: 'change-password.component.html',
@@ -46,7 +46,6 @@ export class ChangePasswordComponent {
 
     constructor(
         private messageService: MessageService,
-        private logService: LogService,
         private passwordService: ChangePasswordService,
 
     ) {
@@ -55,7 +54,6 @@ export class ChangePasswordComponent {
     }
 
     ngOnInit() {
-        this.logService.debug('ChangePassword OnInit');
     }
 
     doPasswordsMatch() {
@@ -76,7 +74,6 @@ export class ChangePasswordComponent {
         if (this.isFormClean && this.isConfirmPasswordSame) {
             this.passwrdObs = this.passwordService.changePassword(this.model);
             this.passwrdObs.subscribe(res => {
-                this.logService.debug(res);
                 if (res) {
                     this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
                     debugger;
