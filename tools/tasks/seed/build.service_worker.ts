@@ -5,6 +5,7 @@ export = () => {
     var handleFetch = true;
     var rootDir = Config.PROD_DEST;
     var config = {
+        maximumFileSizeToCacheInBytes : '4194304',
         cacheId: 'linkup',
         // If handleFetch is false (i.e. because this is called from generate-service-worker-dev), then
         // the service worker will precache resources but won't actually serve them.
