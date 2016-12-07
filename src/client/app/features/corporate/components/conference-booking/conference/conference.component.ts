@@ -72,7 +72,7 @@ export class ConferenceComponent implements OnInit {
             }
         });
         this.minTime = '07:00:00';
-        this.maxTime = '20:00:00';
+        this.maxTime = '22:00:00';
         if (window.screen.width < 768) {
             this.headerConfig = {
                 left: 'prev,next today',
@@ -122,7 +122,8 @@ export class ConferenceComponent implements OnInit {
         },
         ];
     };
-    handleDayClick() {
+    handleDayClick(event) {
+        this.conferenceBookingService.setSelectedSlot(event);
         this.router.navigate(['/corporate/newBooking']);
     }
 

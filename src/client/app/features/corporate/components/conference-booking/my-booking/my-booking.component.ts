@@ -53,7 +53,7 @@ export class MyBookingComponent implements OnInit {
         this.getMyBooking();
     }
     getMyBooking() {
-        this.bookings = this.conferenceBookingService.getMyBooking(0);
+        this.bookings = this.conferenceBookingService.getConferenceBooking();
     }
     confirm(ticket) {
         this.confirmationService.confirm({

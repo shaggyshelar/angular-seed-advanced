@@ -11,9 +11,11 @@ var saveConference = function (req, res) {
   conferenceBooking.conferenceBookingList.push(conference);
   res.json(conference);
 };
+
 var getMyBookings = function (req, res) {
   res.json(conferenceBooking.conferenceBookingList);
 };
+
 var deleteMyBooking = function (req, res) {
   var id = parseInt(req.params.id);
   var index = _.findIndex(conferenceBooking.conferenceBookingList, {
@@ -22,9 +24,17 @@ var deleteMyBooking = function (req, res) {
   conferenceBooking.conferenceBookingList.splice(index, 1)
   res.sendStatus(200);
 };
+
+var getConferenceById = function (req, res) {
+  var id = parseInt(req.params.id);
+  var index = _.findIndex(conferenceBooking.conferenceBookingList, {
+    Id: id
+  });
+  res.json(conferenceBooking.conferenceBookingList[index]);
+}
 module.exports = function (app) {
   app.get('/api/conferenceBooking', getConferenceBookingEvents);
   app.post('/api/conferenceBooking', saveConference);
-  app.get('/api/conferenceBooking/:id', getMyBookings);
+  app.get('/api/conferenceBooking/:id', getConferenceById);
   app.delete('/api/conferenceBooking/:id', deleteMyBooking);
 };

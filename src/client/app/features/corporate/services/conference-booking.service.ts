@@ -21,12 +21,17 @@ export const CONTEXT = 'conferenceBooking';
 /** Service Definition */
 @Injectable()
 export class ConferenceBookingService extends BaseService {
-
+    selectedSlot: any;
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('CorporateService  Initialized Successfully');
     }
-
+    setSelectedSlot(event) {
+        this.selectedSlot = event;
+    }
+    getSelectedSlot() {
+       return this.selectedSlot;
+    }
     getConferenceBooking(): Observable<Conference[]> {
         this.logService.debug('ConferenceBookingService : getConferenceBooking method');
         return this.getList$(0, 0, true).map(res => res.json());
@@ -36,7 +41,7 @@ export class ConferenceBookingService extends BaseService {
         return this.post$(conference, true).map(res => res.json());
     }
 
-    getMyBooking(id): Observable<Conference[]> {
+    getConferenceById(id): Observable<Conference> {
         return this.get$(id, true).map(res => res.json());
     }
 
