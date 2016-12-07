@@ -56,7 +56,7 @@ export function main() {
                         let linkDes = fixture.debugElement.queryAll(By.directive(RouterLinkStubDirective));
                         let links = linkDes.map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
                         expect(links[0].linkParams).toBe('/profile');
-                        expect(links[1].linkParams).toBe('/change-password');
+                        expect(links[1].linkParams).toBe('/password/change');
                     });
             }));
         t.it('should call logout method',

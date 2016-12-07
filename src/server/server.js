@@ -31,6 +31,7 @@ require('./uan/uan')(app);
 require('./visa/visa')(app);
 require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
+require('./changePassword/changePassword')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

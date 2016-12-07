@@ -9,6 +9,7 @@ import { ApproveLeaveComponent } from './components/approve-leave/approve-leave.
 import { UpdateLeaveComponent } from './components/update-leave/update-leave.component';
 import { BulkApproveComponent } from './components/bulk-approval/bulk-approval.component';
 import { SingleApprovalComponent } from './components/single-approval/single-approval.component';
+import { AuthGuard } from '../core/index';
 
 export const LeaveRoutes: Route[] = [
   {
@@ -18,30 +19,58 @@ export const LeaveRoutes: Route[] = [
   },
   {
     path: 'holidays',
-    component: HolidaysComponent
+    component: HolidaysComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['HOLIDAY.READ']
+    }
   },
   {
     path: 'my-leaves',
-    component: MyLeavesComponent
+    component: MyLeavesComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.READ']
+    }
   },
   {
     path: 'apply-leave',
-    component: ApplyLeaveComponent
+    component: ApplyLeaveComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.CREATE']
+    }
   },
   {
     path: 'approve-leave',
-    component: ApproveLeaveComponent
+    component: ApproveLeaveComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.UPDATE', 'LEAVE.READ']
+    }
   },
   {
     path: 'bulk-approval',
-    component: BulkApproveComponent
+    component: BulkApproveComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.UPDATE', 'LEAVE.READ']
+    }
   },
   {
     path: 'update-leave/:id',
-    component: UpdateLeaveComponent
+    component: UpdateLeaveComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.UPDATE', 'LEAVE.READ']
+    }
   },
   {
     path: 'single-approval/:id',
-    component: SingleApprovalComponent
+    component: SingleApprovalComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permissions: ['LEAVE.UPDATE', 'LEAVE.READ']
+    }
   }
 ];

@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
 
@@ -14,6 +13,9 @@ import { Message } from 'primeng/primeng';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 import { User } from '../../models/user';
+
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
@@ -39,11 +41,10 @@ export class SingleApprovalComponent {
     validationMessage: string = '';
     approved: boolean = false;
     rejected: boolean = false;
-    msgs: Message[] = [];
-
+    
     constructor(
+        private messageService: MessageService,
         private router: Router,
-        private store: Store<any>,
         private logService: LogService,
         private leaveService: LeaveService,
         private route: ActivatedRoute
@@ -76,14 +77,12 @@ export class SingleApprovalComponent {
                 if (res) {
                     this.rejected = false;
                     this.approved = true;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
                     this.closeClicked();
                 } else {
                     this.rejected = true;
                     this.approved = false;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }
@@ -104,14 +103,12 @@ export class SingleApprovalComponent {
                 if (res) {
                     this.rejected = true;
                     this.approved = false;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
                     this.closeClicked();
                 } else {
                     this.rejected = false;
                     this.approved = true;
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
                 }
             });
     }

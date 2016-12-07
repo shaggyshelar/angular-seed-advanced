@@ -12,7 +12,6 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { LeaveState } from '../models/leave.state';
 import { User } from '../models/user';
 import { LeaveDetail } from '../models/leaveDetail';
 
@@ -22,7 +21,7 @@ export const CONTEXT = 'Users';
 /** Service Definition */
 @Injectable()
 export class UserService extends BaseService {
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<LeaveState>) {
+    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
         this.logService.debug('Profile Service Initialized Successfully');
         // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });

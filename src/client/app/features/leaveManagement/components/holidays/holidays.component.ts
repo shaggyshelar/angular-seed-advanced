@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
 import { HolidayService } from '../../services/holiday.service';
 import { Holiday } from '../../models/holiday';
+
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
@@ -43,7 +45,10 @@ export class HolidaysComponent {
   holiday: Holiday;
 
   constructor(
-    private router: Router, private store: Store<any>, private logService: LogService, private holidayService: HolidayService
+    private messageService: MessageService,
+    private router: Router, 
+    private logService: LogService, 
+    private holidayService: HolidayService
   ) {
     this.holidays = [];
     this.holiday = { ID: null, HolidayDate: '', HolidayType: '', WeekDay: '', Title: '' };

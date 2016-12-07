@@ -13,6 +13,7 @@ import { CorporateRoutes } from './corporate/index';
 import { AdminRoutes } from './admin/index';
 import { ProfileRoutes, ProfileModule } from './profile/index';
 import { LeaveRoutes, LeaveModule } from './leaveManagement/index';
+import { ChangePasswordRoutes, ChangePasswordModule } from './changePassword/index'
 
 //Routes
 import { AuthRoutes } from './core/index';
@@ -59,10 +60,10 @@ export const featureRoutes: Routes = [
         }
     }, {
         path: 'leave',
-        children: [...LeaveRoutes],
-        data: {
-            reducers: LeaveModule.reducers()
-        }
+        children: [...LeaveRoutes]
+    }, {
+        path: 'password',
+        children: [...ChangePasswordRoutes]
     }
 ];
 

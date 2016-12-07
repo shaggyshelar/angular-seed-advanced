@@ -19,9 +19,6 @@ import { UpdateLeaveComponent } from './components/update-leave/update-leave.com
 
 // Service Declarations
 import { LeaveService } from './services/leave.service';
-import { LeaveEffects } from './services/leave.effects';
-import { leaveReducer } from './services/leave.reducer';
-import { HolidayEffects } from './services/holiday.effect';
 import { HolidayService } from './services/holiday.service';
 import { UserService } from './services/user.service';
 
@@ -29,10 +26,7 @@ import { UserService } from './services/user.service';
 @NgModule({
     imports: [
         CommonModule,
-        TranslateModule,
-        EffectsModule.run(LeaveEffects),
-        EffectsModule.run(HolidayEffects),
-        EffectsModule.run(UserService)
+        TranslateModule
     ],
     exports: [],
     declarations: [
@@ -48,7 +42,4 @@ import { UserService } from './services/user.service';
 })
 
 export class LeaveModule {
-    static reducers(): { [key: string]: ActionReducer<any> } {
-        return { leave: leaveReducer };
-    }
 }

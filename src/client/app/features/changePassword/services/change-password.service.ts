@@ -12,27 +12,28 @@ import { LogService, AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
-import { Holiday } from '../models/holiday';
-// import { Employee } from '../models/employee';
+import { ChangePassword } from '../models/changePassword';
 
 /** Context for service calls */
-export const CONTEXT = 'Holiday';
+export const CONTEXT = 'ChangePassword';
 
 /** Service Definition */
 @Injectable()
-export class HolidayService extends BaseService {
-
+export class ChangePasswordService extends BaseService {
     constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
         super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Holiday Service Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+        this.logService.debug('ChangePassword Service Initialized Successfully');
+        // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
     }
 
+
     /**
-     * getHolidays method
-     * Gets array of Holiday objects
+     * changePassword method
+     * Put request to change password.
+     * @ID : Parameter : ID of user to update
+     * @payload : Parameter : Object of entity to be updated
      */
-    getHolidays(): Observable<Holiday> {
-        return this.getList$().map(res=> res.json());
+    changePassword(payload): Observable<boolean> {
+        return this.post$(payload).map(res => res.status === 200 ? true : false);
     }
 }

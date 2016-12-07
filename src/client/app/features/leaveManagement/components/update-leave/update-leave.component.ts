@@ -5,9 +5,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'primeng/primeng';
+
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
@@ -28,12 +30,11 @@ export class UpdateLeaveComponent {
     isCancellable: boolean;
     errorMsg: string;
     today: Date;
-    msgs: Message[] = [];
-
+    
     constructor(
+        private messageService: MessageService,
         private router: Router,
         private route: ActivatedRoute,
-        private store: Store<any>,
         private logService: LogService,
         private leaveService: LeaveService
     ) {
@@ -70,13 +71,11 @@ export class UpdateLeaveComponent {
         this.logService.debug(this.leaveID);
         this.leaveService.deleteLeaveRecord(this.leaveID).subscribe(res => {
             if (res) {
-                this.msgs = [];
-                this.msgs.push({ severity: 'success', summary: 'Success', detail: 'Leave application deleted!' });
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave application deleted!' });
                 this.closeClicked()
             }
             else {
-                this.msgs = [];
-                this.msgs.push({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
             }
         });
     }

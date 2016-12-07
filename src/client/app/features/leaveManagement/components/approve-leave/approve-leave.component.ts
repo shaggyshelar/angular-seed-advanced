@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { BaseComponent, LogService } from '../../../framework.ref';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
+
+/** Other Module Dependencies */
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
@@ -28,8 +30,8 @@ export class ApproveLeaveComponent implements OnInit {
   servRows = 10;
 
   constructor(
+    private messageService: MessageService,
     private router: Router,
-    private store: Store<any>,
     private logService: LogService,
     private leaveService: LeaveService
   ) { }
