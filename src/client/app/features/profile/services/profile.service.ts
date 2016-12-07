@@ -8,12 +8,11 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
 import { User } from '../models/user';
-import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
 export const CONTEXT = 'profile';
@@ -22,15 +21,10 @@ export const CONTEXT = 'profile';
 @Injectable()
 export class ProfileService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
-        super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('Profile Service Initialized Successfully');
-       // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
-    /**
-     * getProfile method
-     */
     getProfile(id): Observable<User> {
         return this.get$(id).map(res => res.json());
     }

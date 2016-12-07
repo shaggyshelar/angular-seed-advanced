@@ -1,12 +1,9 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Passport } from '../../../models/passport';
@@ -23,7 +20,7 @@ export interface PassportForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'passport',
     templateUrl: 'passport.component.html',

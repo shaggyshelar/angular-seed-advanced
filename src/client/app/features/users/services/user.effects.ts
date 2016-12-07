@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 /** Framework Dependencies */
-import { LogService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { USER_LIST_ACTIONS } from './user.actions';
@@ -45,5 +44,5 @@ export class UserListEffects {
             return ({ type: USER_LIST_ACTIONS.DETAILS_FETCHED, payload: user });
         });
 
-    constructor(private store: Store<any>, private actions$: Actions, private userList: UserListService, private http: Http, private logService: LogService) { }
+    constructor(private store: Store<any>, private actions$: Actions, private userList: UserListService, private http: Http) { }
 }

@@ -13,16 +13,14 @@ import { AddEditTimesheetComponent } from './components/add-edit-timesheet/add-e
 import { ApproveTimesheetComponent } from './components/approve-timesheet/approve-timesheet.component';
 import { ApprovedTimesheetComponent } from './components/approved-timesheet/approved-timesheet.component';
 import { ReportTimesheetComponent } from './components/report-timesheet/report-timesheet.component';
+import { ViewApproveTimesheetComponent } from './components/approve-timesheet/view-approve-timesheet.component'
 // Services Delarations
 import { TimesheetService } from './services/timesheet.service';
-import { TimesheetEffects } from './services/timesheet.effects';
-import { timesheetReducer } from './services/timesheet.reducer';
 
 /** Module Definition */
 @NgModule({
     imports: [
-        CommonModule,
-        EffectsModule.run(TimesheetEffects)
+        CommonModule
     ],
     exports: [],
     declarations: [
@@ -30,11 +28,10 @@ import { timesheetReducer } from './services/timesheet.reducer';
         AddEditTimesheetComponent,
         ApproveTimesheetComponent,
         ApprovedTimesheetComponent,
-        ReportTimesheetComponent],
+        ReportTimesheetComponent,
+        ViewApproveTimesheetComponent
+    ],
     providers: [TimesheetService],
 })
 export class TimesheetModule {
-    static reducers(): { [key: string]: ActionReducer<any> } {
-        return { timesheet: timesheetReducer };
-    }
 }

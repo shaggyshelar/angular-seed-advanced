@@ -1,12 +1,9 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { CertificateService } from '../../services/certificate.service';
@@ -34,7 +31,7 @@ export interface CertificationForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'certification',
     templateUrl: 'certification.component.html',

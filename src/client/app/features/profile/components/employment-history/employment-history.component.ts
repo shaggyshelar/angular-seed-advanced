@@ -1,12 +1,9 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { EmploymentHistoryService } from '../../services/employmentHistory.service';
@@ -25,7 +22,7 @@ export interface EmploymentHistoryForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'employment-history',
     templateUrl: 'employment-history.component.html',
