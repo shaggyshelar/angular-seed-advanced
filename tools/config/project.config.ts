@@ -12,8 +12,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
   FONTS_DEST = `${this.APP_DEST}/fonts`;
   FONTS_SRC = [
     'node_modules/font-awesome/fonts/**',
-    'node_modules/simple-line-icons/fonts/**',
-    'node_modules/open-sans-all/fonts/**'
+    'node_modules/simple-line-icons/fonts/**'
   ];
 
   constructor() {
@@ -32,7 +31,6 @@ export class ProjectConfig extends SeedAdvancedConfig {
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
       { src: 'simple-line-icons/css/simple-line-icons.css', inject: true },
-      { src: 'open-sans-all/css/open-sans.min.css', inject: true },
       { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
       { src: 'fullcalendar/dist/fullcalendar.min.js', inject: true },
       { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
