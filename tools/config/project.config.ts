@@ -10,7 +10,11 @@ export class ProjectConfig extends SeedAdvancedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
   FONTS_DEST = `${this.APP_DEST}/fonts`;
-  FONTS_SRC = ['node_modules/font-awesome/fonts/**', 'node_modules/simple-line-icons/fonts/**'];
+  FONTS_SRC = [
+    'node_modules/font-awesome/fonts/**',
+    'node_modules/simple-line-icons/fonts/**',
+    'node_modules/open-sans-all/fonts/**'
+  ];
 
   constructor() {
     super();
@@ -20,7 +24,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     // this.TYPED_COMPILE_INTERVAL = 5;
 
     // Add `NPM` third-party libraries to be injected/bundled.
- this.NPM_DEPENDENCIES = [
+    this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       //TODO: Check if all third party libraries are matching with template version.
       { src: 'jquery/dist/jquery.min.js', inject: 'libs' },
@@ -28,6 +32,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
       { src: 'primeng/resources/themes/omega/theme.css', inject: true },
       { src: 'font-awesome/css/font-awesome.min.css', inject: true },
       { src: 'simple-line-icons/css/simple-line-icons.css', inject: true },
+      { src: 'open-sans-all/css/open-sans.min.css', inject: true },
       { src: 'fullcalendar/dist/fullcalendar.min.css', inject: true },
       { src: 'fullcalendar/dist/fullcalendar.min.js', inject: true },
       { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },

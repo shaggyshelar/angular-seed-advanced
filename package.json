@@ -142,8 +142,10 @@
     "karma-mocha-reporter": "^2.2.0",
     "karma-remap-istanbul": "^0.2.1",
     "merge-stream": "^1.0.0",
+    "minimatch": "^3.0.3",
     "ngrx-store-freeze": "^0.1.0",
     "open": "0.0.5",
+    "open-sans-all": "^0.1.0",
     "protractor": "^4.0.9",
     "proxy-middleware": "^0.15.0",
     "remap-istanbul": "^0.7.0",
@@ -162,8 +164,7 @@
     "typedoc": "^0.5.0",
     "typescript": "~2.0.9",
     "walk": "^2.3.9",
-    "yargs": "^6.0.0",
-    "minimatch": "^3.0.3"
+    "yargs": "^6.0.0"
   },
   "dependencies": {
     "@angular/common": "~2.2.3",

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <base href="<%= APP_BASE %>">
-  <!-- base href="/" -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>
@@ -12,52 +10,37 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="/manifest.json">
-  <link rel="shortcut icon" href="favicon.ico?v=2" />
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
-  />
-  <link rel="icon" href="assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" />
 
   <!-- inject:css -->
   <!-- endinject -->
-
   <% if (TARGET_DESKTOP) { %>
     <!-- shims:js -->
     <!-- endinject -->
   <% } %>
-
 </head>
-
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
-
   <sd-app>Loading...</sd-app>
-
   <script>
   // Fixes undefined module function in SystemJS bundle
   function module() {}
   </script>
-
   <% if (!TARGET_DESKTOP) { %>
     <!-- shims:js -->
     <!-- endinject -->
     <% } %>
-
       <% if (BUILD_TYPE === 'dev') { %>
         <script src="<%= APP_BASE %>system-config.js"></script>
         <% } %>
-
       <!--[if lt IE 9]>
         <script src="../assets/global/plugins/respond.min.js"></script>
         <script src="../assets/global/plugins/excanvas.min.js"></script> 
         <script src="../assets/global/plugins/ie8.fix.min.js"></script> 
       <![endif]-->
-
           <!-- libs:js -->
           <!-- endinject -->
-
           <!-- inject:js -->
           <!-- endinject -->
-
           <% if (BUILD_TYPE === 'dev') { %>
             <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
@@ -67,12 +50,8 @@
     });
   </script>
             <% } %>
-
               <% if (TARGET_DESKTOP && BUILD_TYPE !== 'prod') { %>
                 <script>require('electron-connect').client.create()</script>
                 <% } %>
-
-
 </body>
-
 </html>
