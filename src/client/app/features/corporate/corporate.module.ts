@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 /** Module Level Dependencies */
 // Components Declarations
-import { CommonModule, TranslateModule } from '../core/index';
+import { CommonModule } from '../core/index';
 import { ConferenceComponent } from './components/conference-booking/conference/conference.component';
 import { BookComponent } from './components/conference-booking/book-conference/book-conference.component';
 import { MyBookingComponent } from './components/conference-booking/my-booking/my-booking.component';
@@ -18,8 +18,7 @@ import { TicketService } from './services/ticket.service';
 /** Module Definition */
 @NgModule({
     imports: [
-        CommonModule,
-        TranslateModule,
+        CommonModule
     ],
     exports: [],
     declarations: [
