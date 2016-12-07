@@ -1,16 +1,12 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-/** Framework Dependencies */
-import { BaseComponent, LogService } from '../../framework.ref';
-
 import { AuthService } from './auth.service';
 
 /** Component Definition*/
-@BaseComponent({
+@Component({
     moduleId: module.id,
-    selector: 'authenticate',
+    selector: 'linkup-authenticate',
     templateUrl: 'auth.component.html',
     styleUrls: ['auth.component.css']
 })
@@ -18,8 +14,7 @@ export class AuthComponent implements OnInit {
     public errorMessage: string;
     showError: boolean = false;
     private model: User;
-    constructor(private _router: Router, private logService: LogService, private authService: AuthService) {
-        logService.debug('AuthComponent : constructor');
+    constructor(private _router: Router, private authService: AuthService) {
         this.model = new User('', '');
     }
 
@@ -27,7 +22,6 @@ export class AuthComponent implements OnInit {
         if (localStorage.getItem('accessToken') !== null) {
             this._router.navigate(['/']);
         }
-        this.logService.debug('AuthComponent : ngOnInit');
     }
 
     login() {

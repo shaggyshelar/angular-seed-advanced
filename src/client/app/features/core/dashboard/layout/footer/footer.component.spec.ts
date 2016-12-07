@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FooterComponent } from './footer.component';
 import { Component } from '@angular/core';
 import { t } from '../../../../../frameworks/test/index';
-import { LogService } from '../../../../framework.ref';
 
 export function main() {
 
@@ -11,9 +10,6 @@ export function main() {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
                 declarations: [FooterComponent, TestComponent],
-                providers: [
-                    { provide: LogService, useClass: LogServiceStub }
-                ],
                 schemas: [NO_ERRORS_SCHEMA]
             });
         });
@@ -47,12 +43,6 @@ export function main() {
             }));
     });
 };
-
-class LogServiceStub {
-    debug(message: any) {
-        return message;
-    }
-}
 
 @Component({
     selector: 'test-cmp',

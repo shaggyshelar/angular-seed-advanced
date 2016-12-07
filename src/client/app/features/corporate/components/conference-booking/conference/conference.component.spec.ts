@@ -185,4 +185,10 @@ class ConferenceBookingServiceStub {
             observer.next(conferenceList);
         });
     }
+    setSelectedSlot(event) {
+        return;
+    }
+    getSelectedSlot() {
+       return;
+    }
 }
