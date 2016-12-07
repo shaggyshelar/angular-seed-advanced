@@ -45,5 +45,8 @@ export class RoleListComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
+    goToAdd() {
+        this.router.navigate(['/admin/role/add']);
+    }
 }
 

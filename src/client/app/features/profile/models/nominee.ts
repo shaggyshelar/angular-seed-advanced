@@ -4,4 +4,5 @@ export interface Nominee {
     FirstNomineeRelationWithEmp: string;
     SecondNomineeName: string;
     SecondNomineeRelationWithEmp: string;
+    IsDeclaration: boolean;
 }

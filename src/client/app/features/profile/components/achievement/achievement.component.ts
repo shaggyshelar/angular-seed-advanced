@@ -5,7 +5,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -13,6 +12,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Module Level Dependencies */
 import { AchievementService } from '../../services/achievement.service';
 import { Achievement } from '../../models/achievement';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 //import * as _ from 'lodash';
@@ -33,9 +33,8 @@ export class AchievementComponent implements OnInit {
     showDiv: boolean;
     achievementForm: FormGroup;
     public achievements: Observable<Achievement>;
-    msgs: Message[] = [];
 
-    constructor(private formBuilder: FormBuilder, private achievementService: AchievementService) {
+    constructor(private formBuilder: FormBuilder, private achievementService: AchievementService, private messageService: MessageService) {
         this.showDiv = true;
     }
     ngOnInit(): void {
@@ -60,8 +59,7 @@ export class AchievementComponent implements OnInit {
             this.achievementService.updateAchievement(value.id, params).subscribe(res => {
                 if (res) {
                     this.achievements = this.achievementService.getAchievements();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Achievement updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Achievement updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -72,8 +70,7 @@ export class AchievementComponent implements OnInit {
             this.achievementService.addAchievement(params).subscribe(res => {
                 if (res) {
                     this.achievements = this.achievementService.getAchievements();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Achievement saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Achievement saved successfully.' });
                     this.showDiv = true;
                 }
             });

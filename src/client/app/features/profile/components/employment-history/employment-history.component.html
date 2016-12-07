@@ -11,7 +11,6 @@
             </div>
         </div>
         <div class="portlet-body">
-            <p-growl [value]="msgs"></p-growl>
             <div *ngIf="(employmentHistory | async)?.length == 0">
                 <hr>
                 <h5> No Records Found!</h5>

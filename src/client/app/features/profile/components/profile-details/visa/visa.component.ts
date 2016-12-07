@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../../framework.ref';
 /** Module Level Dependencies */
 import { Visa } from '../../../models/visa';
 import { VisaService } from '../../../services/visa.service';
+import { MessageService } from '../../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
@@ -33,14 +33,11 @@ export interface VisaForm {
 export class VisaComponent implements OnInit {
     visa: Observable<Visa>;;
     showDiv: boolean;
-    visaObj: any;
     visaForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
 
-    constructor(private formBuilder: FormBuilder, private visaService: VisaService) {
+    constructor(private formBuilder: FormBuilder, private visaService: VisaService, private messageService: MessageService) {
         this.showDiv = true;
-        this.visaObj = {};
     }
 
     ngOnInit(): void {
@@ -68,8 +65,7 @@ export class VisaComponent implements OnInit {
             this.visaService.updateVisa(value.id, params).subscribe(res => {
                 if (res) {
                     this.visa = this.visaService.getVisa();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Visa Information updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Visa Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -82,8 +78,7 @@ export class VisaComponent implements OnInit {
             this.visaService.addVisa(params).subscribe(res => {
                 if (res) {
                     this.visa = this.visaService.getVisa();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Visa Information saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Visa Information saved successfully.' });
                     this.showDiv = true;
                 }
             });

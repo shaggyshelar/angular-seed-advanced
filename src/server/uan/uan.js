@@ -3,7 +3,7 @@ var _ = require('lodash');
 var uanData = require('./uanData');
 
 module.exports = function (app) {
-    app.get('/api/Uan/:id', function (req, res) {
+    app.get('/api/Uan', function (req, res) {
         res.json(uanData);
     });
     app.post('/api/Uan', function (req, res) {

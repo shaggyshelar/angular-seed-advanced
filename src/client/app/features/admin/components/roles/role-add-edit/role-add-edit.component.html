@@ -39,7 +39,7 @@
               <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                   <button pButton type="submit" label="Save" [disabled]="roleForm.invalid"></button>
-                  <button pButton type="button" label="Cancel" [routerLink]="['/admin/role']"></button>
+                  <button pButton type="button" label="Cancel" (click)="onCancel()"></button>
                 </div>
               </div>
             </form>

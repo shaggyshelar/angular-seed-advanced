@@ -28,7 +28,7 @@ var users = [
         Id: 13,
         UserName: 'user3',
         Password: 'password',
-        Permissions: ['CORPORATE.MANAGE','CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE']
+        Permissions: ['CORPORATE.MANAGE', 'CONFERENCE_BOOK.READ', 'CONFERENCE_BOOK.CREATE', 'CONFERENCE_BOOK.UPDATE', 'CONFERENCE_BOOK.DELETE']
     },
 
     {

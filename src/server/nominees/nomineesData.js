@@ -4,7 +4,8 @@ var nominees = [
         FirstNomineeName: 'First',
         FirstNomineeRelationWithEmp: 'friend',
         SecondNomineeName: 'Second',
-        SecondNomineeRelationWithEmp: 'friend'
+        SecondNomineeRelationWithEmp: 'friend',
+        IsDeclaration: false
     }
 ];
 

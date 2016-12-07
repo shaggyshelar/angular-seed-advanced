@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Module Level Dependencies */
 import { CertificateService } from '../../services/certificate.service';
 import { Certificate } from '../../models/certificate';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -47,9 +47,8 @@ export class CertificationComponent implements OnInit {
     showDiv: boolean;
     certificationForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
 
-    constructor(private formBuilder: FormBuilder, private certificateService: CertificateService) {
+    constructor(private formBuilder: FormBuilder, private certificateService: CertificateService, private messageService: MessageService) {
         this.certificationOptions = [];
         this.certificationCodes = [];
         this.showDiv = true;
@@ -100,8 +99,7 @@ export class CertificationComponent implements OnInit {
             this.certificateService.updateCertificate(value.id, params).subscribe(res => {
                 if (res) {
                     this.certifications = this.certificateService.getCertificates();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Certificate Information updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Certificate Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -116,8 +114,7 @@ export class CertificationComponent implements OnInit {
             this.certificateService.addCertificate(params).subscribe(res => {
                 if (res) {
                     this.certifications = this.certificateService.getCertificates();
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Certificate Information saved successfully.' });
-                    this.showDiv = true;
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Certificate Information saved successfully.' });
                     this.showDiv = true;
                 }
             });

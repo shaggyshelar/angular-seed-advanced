@@ -91,7 +91,7 @@ export class ProfileEffects {
     //Indentity Proof
     @Effect() getIdentityProof$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_IDENTITY_PROOF)
-        .switchMap(action => this.identityProofService.getIdentityProof(action.payload))
+        .switchMap(action => this.identityProofService.getIdentityProof())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_IDENTITY_PROOF, payload: res });
         });
@@ -99,7 +99,7 @@ export class ProfileEffects {
     //Nominees
     @Effect() getNominees$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_NOMINEES)
-        .switchMap(action => this.nomineesService.getNominees(action.payload))
+        .switchMap(action => this.nomineesService.getNominees())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_NOMINEES, payload: res });
         });
@@ -123,7 +123,7 @@ export class ProfileEffects {
     //Uan
     @Effect() getUan$ = this.actions$
         .ofType(PROFILE_ACTIONS.INITIALIZE_GET_UAN)
-        .switchMap(action => this.uanService.getUan(action.payload))
+        .switchMap(action => this.uanService.getUan())
         .map(res => {
             return ({ type: PROFILE_ACTIONS.GET_UAN, payload: res });
         });

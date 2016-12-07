@@ -26,7 +26,15 @@ export class UanService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getUan(id): Observable<Uan> {
-        return this.get$(id).map(res => res.json());
+    getUan(): Observable<Uan> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addUan(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateUan(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

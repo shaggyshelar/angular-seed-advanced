@@ -26,7 +26,15 @@ export class IdentityProofService extends BaseService {
         super(analyticsService, http, CONTEXT, logService);
     }
 
-    getIdentityProof(id): Observable<IdentityProof> {
-        return this.get$(id).map(res => res.json());
+    getIdentityProof(): Observable<IdentityProof> {
+        return this.getList$().map(res => res.json());
+    }
+
+    addIdentityProof(params): Observable<boolean> {
+        return this.post$(params).map(res => res.status === 200 ? true : false);
+    }
+
+    updateIdentityProof(id, params): Observable<boolean> {
+        return this.put$(id, params).map(res => res.status === 200 ? true : false);
     }
 }

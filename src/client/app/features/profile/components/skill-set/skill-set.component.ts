@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -15,6 +14,7 @@ import { SelectItem } from 'primeng/primeng';
 /** Module Level Dependencies */
 import { Skill } from '../../models/skill';
 import { SkillService } from '../../services/skill.service';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -42,10 +42,9 @@ export class SkillSetComponent implements OnInit {
   skillTypes: SelectItem[];
   showDiv: boolean;
   skillSetForm: FormGroup;
-  msgs: Message[] = [];
 
   constructor(
-    private router: Router, private formBuilder: FormBuilder, private skillService: SkillService) {
+    private router: Router, private formBuilder: FormBuilder, private skillService: SkillService, private messageService: MessageService) {
     this.skillTypes = [];
     this.showDiv = true;
   }
@@ -79,8 +78,7 @@ export class SkillSetComponent implements OnInit {
       this.skillService.updateSkill(value.id, params).subscribe(res => {
         if (res) {
           this.skillSet = this.skillService.getSkills();
-          this.msgs = [];
-          this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Skill updated successfully.' });
+          this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Skill updated successfully.' });
           this.showDiv = true;
         }
       });
@@ -92,8 +90,7 @@ export class SkillSetComponent implements OnInit {
       this.skillService.addSkill(params).subscribe(res => {
         if (res) {
           this.skillSet = this.skillService.getSkills();
-          this.msgs = [];
-          this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Skill saved successfully.' });
+          this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Skill saved successfully.' });
           this.showDiv = true;
         }
       });
