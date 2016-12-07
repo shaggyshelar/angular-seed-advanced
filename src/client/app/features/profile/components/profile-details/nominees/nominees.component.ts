@@ -1,12 +1,10 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Nominee } from '../../../models/nominee';
@@ -23,7 +21,7 @@ export interface NomineeForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'nominees',
     templateUrl: 'nominees.component.html',

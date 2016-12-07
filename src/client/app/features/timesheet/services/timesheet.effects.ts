@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 /** Framework Dependencies */
-import { LogService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { TIMESHEET_ACTIONS } from './timesheet.actions';
@@ -24,7 +23,6 @@ export class TimesheetEffects {
         .ofType(TIMESHEET_ACTIONS.INIT)
         .switchMap(
         action => {
-            this.logService.debug('Timesheets Effects Init Action called');
             return this.timesheetService.getChildList$('employee', 0, 0, false);
         }
         )
@@ -46,8 +44,6 @@ export class TimesheetEffects {
         private actions$: Actions,
         private timesheetService: TimesheetService,
         private http: Http,
-        private logService: LogService
     ) {
-        this.logService.debug('TimesheetEffects : constructor');
     }
 }

@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Employee } from '../../models/employee';
@@ -27,9 +27,7 @@ export class MyTimesheetComponent implements OnInit {
     private store: Store<TimesheetState>,
     private router: Router,
     private timesheetService: TimesheetService,
-    private logService: LogService
   ) {
-    this.logService.debug('MyTimesheetComponent : constructor');
     this.timesheets = this.store.select('timesheets');
     this.employee = this.store.select('employee');
   }

@@ -2,12 +2,10 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -31,7 +29,7 @@ export interface SkillSetForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'skillSet',
   templateUrl: 'skill-set.component.html',

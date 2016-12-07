@@ -2,6 +2,7 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -23,7 +24,7 @@ export interface AchievementForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'achievement',
     templateUrl: 'achievement.component.html',

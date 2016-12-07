@@ -1,12 +1,10 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Address } from '../../../models/address';
@@ -24,7 +22,7 @@ export interface AddressForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'profile-address',
     templateUrl: 'profile-address.component.html',
@@ -59,7 +57,6 @@ export class ProfileAddressComponent implements OnInit {
 
     addClick() {
         this.showDiv = false;
-        //TODO: Update Add Address Logic
         if (this.addressArray.length > 0) {
             var currentAddressIndex = _.findIndex(this.addressArray, { Type: 'Current' });
             var permanentAddressIndex = _.findIndex(this.addressArray, { Type: 'Permanent' });
@@ -74,7 +71,6 @@ export class ProfileAddressComponent implements OnInit {
 
     onSubmit({ value, valid }: { value: AddressForm, valid: boolean }) {
         this.showDiv = true;
-        //TODO: Update Add Address Logic
         if (value.currentID && value.permanentID) {
             let params = [{
                 ID: value.currentID,

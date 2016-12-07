@@ -5,7 +5,7 @@ import { OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Timesheet } from '../../models/timesheet';
@@ -21,12 +21,8 @@ export class ReportTimesheetComponent implements OnInit {
   employee: SelectItem[];
   status: SelectItem[];
   timesheetReport: Timesheet[];
-  constructor(private logService: LogService) {
-    this.logService.debug('ReportTimesheetComponent : constructor');
-  }
 
   ngOnInit(): void {
-    this.logService.debug('ReportTimesheetComponent : ngOnInit');
     this.projects = [];
     this.projects.push({ label: 'Select City', value: null });
     this.projects.push({ label: 'project1', value: { id: 1, name: 'project1' } });

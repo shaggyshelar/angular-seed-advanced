@@ -56,7 +56,7 @@ export const featureRoutes: Routes = [
         path: 'profile',
         children: [...ProfileRoutes],
         data: {
-            reducers: ProfileModule.reducers()
+           permissions: ['PROFILE.MANAGE']
         }
     }, {
         path: 'leave',

@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Employee } from '../../models/employee';
@@ -17,12 +17,7 @@ import { Employee } from '../../models/employee';
 export class ApproveTimesheetComponent implements OnInit {
   approveEmployee: Employee[];
 
-  constructor(private router: Router, private logService: LogService) {
-    this.logService.debug('ApproveTimesheetComponent : constructor');
-  }
-
   ngOnInit(): void {
-    this.logService.debug('ApproveTimesheetComponent : ngOnInit');
     this.approveEmployee = [{
       id: 1,
       employee: 'xyz',

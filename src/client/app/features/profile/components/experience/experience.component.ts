@@ -1,12 +1,10 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Experience } from '../../models/experience';
@@ -31,7 +29,7 @@ export interface ExperienceForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'experience',
     templateUrl: 'experience.component.html',

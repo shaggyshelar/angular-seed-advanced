@@ -2,7 +2,7 @@
 import { OnInit } from '@angular/core';
 
 /** Framework Dependencies */
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { BaseComponent } from '../../../framework.ref';
 
 /** Component Definition */
 @BaseComponent({
@@ -11,10 +11,7 @@ import { BaseComponent, LogService } from '../../../framework.ref';
   templateUrl: 'add-edit-timesheet.component.html'
 })
 export class AddEditTimesheetComponent implements OnInit {
-  constructor(private logService: LogService) {
-    this.logService.debug('AddEditTimesheetComponent : constructor');
-  }
   ngOnInit() {
-    this.logService.debug('AddEditTimesheetComponent : ngOnInit');
+    // AddEditTimesheetComponent
   }
 }
