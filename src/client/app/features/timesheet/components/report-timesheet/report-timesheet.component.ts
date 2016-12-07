@@ -1,17 +1,14 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 
 /** Third Party Dependencies */
-import { SelectItem } from 'primeng/primeng';
-
-/** Framework Dependencies */
-import { BaseComponent } from '../../../framework.ref';
+import {SelectItem} from 'primeng/primeng';
 
 /** Module Level Dependencies */
 import { Timesheet } from '../../models/timesheet';
 
-/** Component Definition */
-@BaseComponent({
+/** Component Declaration */
+@Component({
   moduleId: module.id,
   selector: 'report-timesheet',
   templateUrl: 'report-timesheet.component.html'
@@ -23,6 +20,7 @@ export class ReportTimesheetComponent implements OnInit {
   timesheetReport: Timesheet[];
 
   ngOnInit(): void {
+
     this.projects = [];
     this.projects.push({ label: 'Select City', value: null });
     this.projects.push({ label: 'project1', value: { id: 1, name: 'project1' } });
@@ -47,59 +45,71 @@ export class ReportTimesheetComponent implements OnInit {
       billableHours: 8,
       nonBillableHours: 2,
       status: 'Submitted',
-      totalHours: 10
-    },
-    {
-      id: 2,
-      employeeName: 'abc',
-      project: 'project1',
-      date: '02-10-2015',
-      task: 'Development',
-      billableHours: 6,
-      nonBillableHours: 2,
-      status: 'Submitted',
-      totalHours: 8
+      totalHours: 10,
+      noteBillableHours: 'note Billable Hours1',
+      noteNonBillableHours: 'note NonBillable Hours1'
     }, {
-      id: 3,
-      employeeName: 'abc',
-      project: 'project1',
-      date: '03-10-2015',
-      task: 'Development',
-      billableHours: 8,
-      nonBillableHours: 2,
-      status: 'Submitted',
-      totalHours: 10
-    }, {
-      id: 4,
-      employeeName: 'abc',
-      project: 'project1',
-      date: '04-10-2015',
-      task: 'Development',
-      billableHours: 7,
-      nonBillableHours: 2,
-      status: 'Submitted',
-      totalHours: 9
-    }, {
-      id: 5,
-      employeeName: 'abc',
-      project: 'project1',
-      date: '05-10-2015',
-      task: 'Development',
-      billableHours: 8,
-      nonBillableHours: 2,
-      status: 'Submitted',
-      totalHours: 10
-    }, {
-      id: 6,
-      employeeName: 'abc',
-      project: 'project1',
-      date: '02-11-2015',
-      task: 'Development',
-      billableHours: 8,
-      nonBillableHours: 0,
-      status: 'Submitted',
-      totalHours: 8
-    },
+        id: 2,
+        employeeName: 'abc',
+        project: 'project1',
+        date: '02-10-2015',
+        task: 'Development',
+        billableHours: 6,
+        nonBillableHours: 2,
+        status: 'Submitted',
+        totalHours: 8,
+        noteBillableHours: 'note Billable Hours2',
+        noteNonBillableHours: 'note NonBillable Hours2'
+      }, {
+        id: 3,
+        employeeName: 'abc',
+        project: 'project1',
+        date: '03-10-2015',
+        task: 'Development',
+        billableHours: 8,
+        nonBillableHours: 2,
+        status: 'Submitted',
+        totalHours: 10,
+        noteBillableHours: 'note Billable Hours3',
+        noteNonBillableHours: 'note NonBillable Hours3'
+      }, {
+        id: 4,
+        employeeName: 'abc',
+        project: 'project1',
+        date: '04-10-2015',
+        task: 'Development',
+        billableHours: 7,
+        nonBillableHours: 2,
+        status: 'Submitted',
+        totalHours: 9,
+        noteBillableHours: 'note Billable Hours4',
+        noteNonBillableHours: 'note NonBillable Hours4'
+      }, {
+        id: 5,
+        employeeName: 'abc',
+        project: 'project1',
+        date: '05-10-2015',
+        task: 'Development',
+        billableHours: 8,
+        nonBillableHours: 2,
+        status: 'Submitted',
+        totalHours: 10,
+        noteBillableHours: 'note Billable Hours5',
+        noteNonBillableHours: 'note NonBillable Hours5'
+      }, {
+        id: 6,
+        employeeName: 'abc',
+        project: 'project1',
+        date: '02-11-2015',
+        task: 'Development',
+        billableHours: 8,
+        nonBillableHours: 0,
+        status: 'Submitted',
+        totalHours: 8,
+        noteBillableHours: 'note Billable Hours6',
+        noteNonBillableHours: 'note NonBillable Hours6'
+      },
     ];
   }
+
 }

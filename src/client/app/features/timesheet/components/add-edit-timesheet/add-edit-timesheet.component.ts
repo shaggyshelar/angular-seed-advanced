@@ -1,17 +1,12 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-/** Framework Dependencies */
-import { BaseComponent } from '../../../framework.ref';
-
-/** Component Definition */
-@BaseComponent({
+/** Component Declaration */
+@Component({
   moduleId: module.id,
   selector: 'add-edit-timesheet',
-  templateUrl: 'add-edit-timesheet.component.html'
+  templateUrl: 'add-edit-timesheet.component.html'  
 })
-export class AddEditTimesheetComponent implements OnInit {
-  ngOnInit() {
-    // AddEditTimesheetComponent
-  }
+export class AddEditTimesheetComponent {  
+    
 }

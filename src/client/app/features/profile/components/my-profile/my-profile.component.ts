@@ -1,7 +1,6 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
 
 /** Module Level Dependencies */
 

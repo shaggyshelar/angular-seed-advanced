@@ -1,6 +1,5 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';

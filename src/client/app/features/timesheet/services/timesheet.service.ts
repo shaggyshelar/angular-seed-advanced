@@ -14,8 +14,6 @@ import { AnalyticsService } from '../../framework.ref';
 import { BaseService } from '../../core/index';
 import { Timesheet } from '../models/timesheet';
 import { Employee } from '../models/employee';
-import { TimesheetState } from '../models/timesheet.state';
-import { TIMESHEET_ACTIONS } from './timesheet.actions';
 
 /** Context for service calls */
 export const CONTEXT = 'timesheet';
@@ -24,9 +22,8 @@ export const CONTEXT = 'timesheet';
 @Injectable()
 export class TimesheetService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, private store: Store<TimesheetState>) {
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
         super(analyticsService, http, CONTEXT);
-        this.store.dispatch({ type: TIMESHEET_ACTIONS.INIT });
     }
 
     /**

@@ -34,10 +34,7 @@ export const featureRoutes: Routes = [
     }, {
         path: 'timesheet',
         children: [...TimesheetRoutes],
-        canActivate: [AuthGuard],
-        data: {
-            reducers: TimesheetModule.reducers()
-        }
+        canActivate: [AuthGuard]
     }, {
         path: 'corporate',
         children: [...CorporateRoutes],

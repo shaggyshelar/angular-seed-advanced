@@ -1,10 +1,10 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content">
-        <ul class="page-breadcrumb breadcrumb">
+    <div class="page-content" [ifAuthorize]="['Timesheet.READ']">
+        <ul class="page-breadcrumb breadcrumb hidden-xs">
             <li>
-                <span>LINK UP</span>
+                <span>LINK UP </span>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
