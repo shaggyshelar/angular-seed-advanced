@@ -29,14 +29,18 @@ export class ConferenceBookingService extends BaseService {
 
     getConferenceBooking(): Observable<Conference[]> {
         this.logService.debug('ConferenceBookingService : getConferenceBooking method');
-        return this.getList$().map(res => res.json());
+        return this.getList$(0, 0, true).map(res => res.json());
     }
 
     saveConference(conference): Observable<any> {
-        return this.post$(conference).map(res => res.json());
+        return this.post$(conference, true).map(res => res.json());
     }
 
     getMyBooking(id): Observable<Conference[]> {
-        return this.get$(id).map(res => res.json());
+        return this.get$(id, true).map(res => res.json());
+    }
+
+    deleteMyBooking(id): Observable<any> {
+        return this.delete$(id, true);
     }
 }

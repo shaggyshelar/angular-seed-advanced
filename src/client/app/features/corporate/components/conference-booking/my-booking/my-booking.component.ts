@@ -1,4 +1,4 @@
-import { OnInit,Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 
 /** Other Module Dependencies */
 import { ConfirmationService } from 'primeng/primeng';
@@ -50,15 +50,21 @@ export class MyBookingComponent implements OnInit {
         ];
     }
     ngOnInit() {
+        this.getMyBooking();
+    }
+    getMyBooking() {
         this.bookings = this.conferenceBookingService.getMyBooking(0);
     }
-    confirm() {
+    confirm(ticket) {
         this.confirmationService.confirm({
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'fa fa-trash',
             accept: () => {
-                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record deleted' });
+                this.conferenceBookingService.deleteMyBooking(ticket.Id).subscribe(results => {
+                    this.getMyBooking();
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record deleted' });
+                });
             }
         });
     }
