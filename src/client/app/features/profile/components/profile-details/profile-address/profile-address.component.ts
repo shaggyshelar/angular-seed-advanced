@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../../framework.ref';
 /** Module Level Dependencies */
 import { Address } from '../../../models/address';
 import { AddressService } from '../../../services/address.service';
+import { MessageService } from '../../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -34,15 +34,12 @@ export class ProfileAddressComponent implements OnInit {
 
     addressList: Observable<Address>;;
     showDiv: boolean;
-    address: any;
     addressForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
     addressArray: any;
 
-    constructor(private formBuilder: FormBuilder, private addressService: AddressService) {
+    constructor(private formBuilder: FormBuilder, private addressService: AddressService, private messageService: MessageService) {
         this.showDiv = true;
-        this.address = {};
         this.addressArray = [];
     }
 
@@ -62,7 +59,7 @@ export class ProfileAddressComponent implements OnInit {
 
     addClick() {
         this.showDiv = false;
-         //TODO: Update Add Address Logic
+        //TODO: Update Add Address Logic
         if (this.addressArray.length > 0) {
             var currentAddressIndex = _.findIndex(this.addressArray, { Type: 'Current' });
             var permanentAddressIndex = _.findIndex(this.addressArray, { Type: 'Permanent' });
@@ -88,10 +85,12 @@ export class ProfileAddressComponent implements OnInit {
             }];
             this.addressService.updateAddress(value.currentID, params).subscribe(res => {
                 if (res) {
+                     this.showDiv = true;
                     this.addressList = this.addressService.getAddress();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Address updated successfully.' });
-                    this.showDiv = true;
+                    this.addressList.subscribe(result => {
+                        this.addressArray = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address updated successfully.' });                   
                 }
             });
         } else {
@@ -104,10 +103,13 @@ export class ProfileAddressComponent implements OnInit {
             }];
             this.addressService.addAddress(params).subscribe(res => {
                 if (res) {
-                    this.addressList = this.addressService.getAddress();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Address saved successfully.' });
                     this.showDiv = true;
+                    this.addressList = this.addressService.getAddress();
+                    this.addressList.subscribe(result => {
+                        this.addressArray = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Address saved successfully.' });
+                   
                 }
             });
         }

@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Module Level Dependencies */
 import { EmploymentHistoryService } from '../../services/employmentHistory.service';
 import { EmploymentHistory } from '../../models/employmentHistory';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
@@ -38,9 +38,8 @@ export class EmploymentHistoryComponent implements OnInit {
     showEmployerDiv: boolean;
     employmentHistoryForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
 
-    constructor(private formBuilder: FormBuilder, private employmentHistoryService: EmploymentHistoryService) {
+    constructor(private formBuilder: FormBuilder, private employmentHistoryService: EmploymentHistoryService, private messageService: MessageService) {
         this.lastEmployerDetails = [];
         this.showDiv = true;
         this.showEmployerDiv = true;
@@ -76,8 +75,7 @@ export class EmploymentHistoryComponent implements OnInit {
             this.employmentHistoryService.updateEmploymentHistory(value.id, params).subscribe(res => {
                 if (res) {
                     this.employmentHistory = this.employmentHistoryService.getEmploymentHistory();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Employment History updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Employment History updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -91,8 +89,7 @@ export class EmploymentHistoryComponent implements OnInit {
             this.employmentHistoryService.addEmploymentHistory(params).subscribe(res => {
                 if (res) {
                     this.employmentHistory = this.employmentHistoryService.getEmploymentHistory();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Employment History saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Employment History saved successfully.' });
                     this.showDiv = true;
                 }
             });

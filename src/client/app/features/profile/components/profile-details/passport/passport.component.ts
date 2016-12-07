@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../../framework.ref';
 /** Module Level Dependencies */
 import { Passport } from '../../../models/passport';
 import { PassportService } from '../../../services/passport.service';
+import { MessageService } from '../../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
@@ -35,10 +35,9 @@ export class PassportComponent implements OnInit {
     showDiv: boolean;
     passportForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
     passportList: any;
 
-    constructor(private formBuilder: FormBuilder, private passportService: PassportService) {
+    constructor(private formBuilder: FormBuilder, private passportService: PassportService, private messageService: MessageService) {
         this.showDiv = true;
         this.passportList = [];
     }
@@ -79,8 +78,7 @@ export class PassportComponent implements OnInit {
             this.passportService.updatePassport(value.id, params).subscribe(res => {
                 if (res) {
                     this.passport = this.passportService.getPassport();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Passport Information updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Passport Information updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -92,8 +90,7 @@ export class PassportComponent implements OnInit {
             this.passportService.addPassport(params).subscribe(res => {
                 if (res) {
                     this.passport = this.passportService.getPassport();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Passport Information saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Passport Information saved successfully.' });
                     this.showDiv = true;
                 }
             });

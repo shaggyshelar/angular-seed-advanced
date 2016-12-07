@@ -4,7 +4,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-import { Message } from 'primeng/primeng';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../framework.ref';
@@ -12,6 +11,7 @@ import { BaseComponent } from '../../../framework.ref';
 /** Module Level Dependencies */
 import { Experience } from '../../models/experience';
 import { ExperienceService } from '../../services/experience.service';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 // import * as _ from 'lodash';
@@ -42,10 +42,9 @@ export class ExperienceComponent implements OnInit {
     showDiv: boolean;
     experienceForm: FormGroup;
     public profile_Observable: Observable<any>;
-    msgs: Message[] = [];
 
     constructor(
-        private formBuilder: FormBuilder, private experienceService: ExperienceService) {
+        private formBuilder: FormBuilder, private experienceService: ExperienceService, private messageService: MessageService) {
         this.showDiv = true;
     }
 
@@ -88,8 +87,7 @@ export class ExperienceComponent implements OnInit {
             this.experienceService.updateExperience(value.id, params).subscribe(res => {
                 if (res) {
                     this.experience = this.experienceService.getExperience();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Experience updated successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Experience updated successfully.' });
                     this.showDiv = true;
                 }
             });
@@ -108,8 +106,7 @@ export class ExperienceComponent implements OnInit {
             this.experienceService.addExperience(params).subscribe(res => {
                 if (res) {
                     this.experience = this.experienceService.getExperience();
-                    this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Experience saved successfully.' });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Experience saved successfully.' });
                     this.showDiv = true;
                 }
             });

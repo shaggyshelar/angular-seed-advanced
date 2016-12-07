@@ -1,15 +1,26 @@
 /** Angular Dependencies */
 import { OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 /** Framework Level Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../../services/profile.actions';
+import { Nominee } from '../../../models/nominee';
+import { MessageService } from '../../../../core/shared/services/message.service';
+import { NomineesService } from '../../../services/nominees.service';
+
+export interface NomineeForm {
+    id: number;
+    firstNomineeName: string;
+    firstNomineeRelationWithEmp: string;
+    secondNomineeName: string;
+    secondNomineeRelationWithEmp: string;
+    isDeclaration: boolean;
+}
 
 /** Component Declaration */
 @BaseComponent({
@@ -19,34 +30,71 @@ import { PROFILE_ACTIONS } from '../../../services/profile.actions';
     styleUrls: ['nominees.component.css']
 })
 export class NomineesComponent implements OnInit {
-    nomineesData: any[];
+    nomineesList: any;
     showDiv: boolean;
-    nomineeObj: any;
     public profile_Observable: Observable<any>;
+    nomineeForm: FormGroup;
+    nomineesData: Observable<Nominee>;;
 
-    constructor(private store: Store<any>) {
-        this.nomineesData = [];
+    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private nomineesService: NomineesService) {
+        this.nomineesList = [];
         this.showDiv = true;
-        this.nomineeObj = {};
     }
     ngOnInit(): void {
-        let ProfileID = 1;
-        this.store.dispatch({ type: PROFILE_ACTIONS.INITIALIZE_GET_NOMINEES, payload: ProfileID });
-        this.profile_Observable = this.store.select('profile');
-        this.profile_Observable.subscribe(res => {
-            this.nomineesData = res && res.nominees ? res.nominees : [];
-            console.log('Nominees', this.nomineesData);
+
+        this.nomineeForm = this.formBuilder.group({
+            id: null,
+            firstNomineeName: ['', [Validators.required]],
+            firstNomineeRelationWithEmp: ['', [Validators.required]],
+            secondNomineeName: ['', [Validators.required]],
+            secondNomineeRelationWithEmp: ['', [Validators.required]],
+            isDeclaration: false
+        });
+
+        this.nomineesData = this.nomineesService.getNominees();
+        this.nomineesData.subscribe(result => {
+            this.nomineesList = result ? result : [];
         });
     }
-    submit() {
-        this.nomineesData = [{
-            id: 1,
-            firstNomineeName: 'First Name',
-            secondNomineeName: 'Second Name',
-            firstNomineeRelationWithEmp: 'Emp Rel 1',
-            secondNomineeRelationWithEmp: 'Emp Rel 2',
-        }];
-        this.showDiv = true;
+    onSubmit({ value, valid }: { value: NomineeForm, valid: boolean }) {
+        if (value.id) {
+            let params = {
+                ID: value.id,
+                FirstNomineeName: value.firstNomineeName,
+                FirstNomineeRelationWithEmp: value.firstNomineeRelationWithEmp,
+                SecondNomineeName: value.secondNomineeName,
+                SecondNomineeRelationWithEmp: value.secondNomineeRelationWithEmp,
+                IsDeclaration: value.isDeclaration
+            };
+            this.nomineesService.updateNominee(value.id, params).subscribe(res => {
+                if (res) {
+                    this.nomineesData = this.nomineesService.getNominees();
+                    this.nomineesData.subscribe(result => {
+                        this.nomineesList = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Nominees updated successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        } else {
+            let params = {
+                FirstNomineeName: value.firstNomineeName,
+                FirstNomineeRelationWithEmp: value.firstNomineeRelationWithEmp,
+                SecondNomineeName: value.secondNomineeName,
+                SecondNomineeRelationWithEmp: value.secondNomineeRelationWithEmp,
+                IsDeclaration: value.isDeclaration
+            };
+            this.nomineesService.addNominee(params).subscribe(res => {
+                if (res) {
+                    this.nomineesData = this.nomineesService.getNominees();
+                    this.nomineesData.subscribe(result => {
+                        this.nomineesList = result ? result : [];
+                    });
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Nominees saved successfully.' });
+                    this.showDiv = true;
+                }
+            });
+        }
     }
     cancel() {
         this.showDiv = true;
@@ -54,12 +102,15 @@ export class NomineesComponent implements OnInit {
 
     add() {
         this.showDiv = false;
-        if (this.nomineesData.length > 0) {
-            this.nomineeObj.firstNomineeName = this.nomineesData[0].firstNomineeName;
-            this.nomineeObj.firstNomineeRelationWithEmp = this.nomineesData[0].firstNomineeRelationWithEmp;
-            this.nomineeObj.secondNomineeName = this.nomineesData[0].secondNomineeName;
-            this.nomineeObj.secondNomineeRelationWithEmp = this.nomineesData[0].secondNomineeRelationWithEmp;
-            this.nomineeObj.nomineesInfo = true;
+        if (this.nomineesList.length > 0) {
+            this.nomineeForm.setValue({
+                id: this.nomineesList[0].ID,
+                firstNomineeName: this.nomineesList[0].FirstNomineeName,
+                firstNomineeRelationWithEmp: this.nomineesList[0].FirstNomineeRelationWithEmp,
+                secondNomineeName: this.nomineesList[0].SecondNomineeName,
+                secondNomineeRelationWithEmp: this.nomineesList[0].SecondNomineeRelationWithEmp,
+                isDeclaration: this.nomineesList[0].IsDeclaration ? this.nomineesList[0].IsDeclaration : false
+            });
         }
     }
 }

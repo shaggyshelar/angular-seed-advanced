@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="portlet-body">
-        <div *ngIf="identityProofs.length == 0">
+        <div *ngIf="(identityProofs | async)?.length == 0">
             <table class="table table-bordered no-record-table" cellspacing="0">
                 <tbody>
                     <tr>
@@ -19,8 +19,8 @@
                 </tbody>
             </table>
         </div>
-        <div *ngIf="identityProofs.length > 0">
-            <p-dataTable [value]="identityProofs" [responsive]="true" emptyMessage="No Records Found!">
+        <div *ngIf="(identityProofs | async)?.length > 0">
+            <p-dataTable [value]="(identityProofs | async)" [responsive]="true" emptyMessage="No Records Found!">
                 <p-column header="Edit">
                     <template let-identity="rowData" pTemplate type="body">
                         <i class="fa fa-pencil icon-color" (click)="editIdentityProof(identity)"></i>
@@ -54,32 +54,42 @@
             </div>
         </div>
         <div *ngIf="showSubDiv && selectedIdentityType">
-            <div class="row row-margin">
-                <div class="col-md-6 col-margin">
-                    <div class="form-group">
-                        <span [ngSwitch]="selectedIdentityType.id">
+            <form novalidate (ngSubmit)="onSubmit(identityProofForm)" [formGroup]="identityProofForm">
+                <div class="row row-margin">
+                    <div class="col-md-6 col-margin">
+                        <div class="form-group">
+                            <span [ngSwitch]="selectedIdentityType.id">
                                     <label *ngSwitchCase=1><b>Adhaar Card Number</b> <span class="req-field">*</span></label>
-                        <label *ngSwitchCase=2><b>PAN Card</b> <span class="req-field">*</span></label>
-                        <label *ngSwitchCase=3><b>Voter ID</b> <span class="req-field">*</span></label>
-                        </span>
-                        <div class="div-margin">
-                            <input type="text" class="form-control" id="identity_value" placeholder="" [(ngModel)]="identity.value">
+                            <label *ngSwitchCase=2><b>PAN Card</b> <span class="req-field">*</span></label>
+                            <label *ngSwitchCase=3><b>Voter ID</b> <span class="req-field">*</span></label>
+                            </span>
+                            <div class="div-margin">
+                                <input type="text" id="identity_value" formControlName="value" class="form-control" placeholder="">
+                                <div class="alert alert-danger" *ngIf="identityProofForm.get('value').hasError('required') && identityProofForm.get('value').touched">
+                                    Please Enter
+                                    <span [ngSwitch]="selectedIdentityType.id">
+                                        <span *ngSwitchCase=1>Adhaar Card Number</span>
+                                        <span *ngSwitchCase=2>PAN Card </span>
+                                        <span *ngSwitchCase=3>Voter ID</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-margin">
+                        <div class="form-group">
+                            <label><b>Scanned Copy</b> <span class="req-field">*</span></label>
+                            <div class="div-margin">
+                                <input type="file" id="identity_document">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-margin">
-                    <div class="form-group">
-                        <label><b>Scanned Copy</b> <span class="req-field">*</span></label>
-                        <div class="div-margin">
-                            <input type="file" id="identity_document" [(ngModel)]="identity.document">
-                        </div>
-                    </div>
+                <div class="row row-margin button-margin">
+                    <button pButton type="submit" label="Submit" [disabled]="identityProofForm.invalid"></button>
+                    <button pButton type="text" label="Cancel" (click)="cancel()"></button>
                 </div>
-            </div>
-            <div class="row row-margin button-margin">
-                <button pButton type="text" label="Submit" (click)="submit()"></button>
-                <button pButton type="text" label="Cancel" (click)="cancel()"></button>
-            </div>
+            </form>
         </div>
         <div class="row row-margin button-margin" *ngIf="!showDiv && !showSubDiv">
             <button pButton type="text" icon="fa fa-plus" (click)="addClick()" label="Add New ID Proof Details"></button>
