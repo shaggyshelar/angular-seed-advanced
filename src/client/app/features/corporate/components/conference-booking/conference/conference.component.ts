@@ -1,10 +1,7 @@
 /** Angular Dependencies */
-import { OnInit, Inject, ElementRef } from '@angular/core';
+import { OnInit, Inject, ElementRef,Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 //import * as localForage from 'localforage';
-
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -18,7 +15,7 @@ import { ConferenceBookingService } from '../../../services/conference-booking.s
 import { Conference } from '../../../models/conference';
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'conference-booking',
     templateUrl: 'conference.component.html',

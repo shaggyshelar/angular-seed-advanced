@@ -1,8 +1,6 @@
 import { Router } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { OnInit,Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Other Module Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -10,7 +8,7 @@ import { SelectItem } from 'primeng/primeng';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'book-conference',
     templateUrl: 'book-conference.component.html'

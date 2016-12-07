@@ -1,10 +1,8 @@
-import { OnInit } from '@angular/core';
+import { OnInit,Component } from '@angular/core';
 
 /** Other Module Dependencies */
 import { ConfirmationService } from 'primeng/primeng';
 import { MessageService } from '../../../../core/shared/services/message.service';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -12,7 +10,7 @@ import { ConferenceBookingService } from '../../../services/conference-booking.s
 import { Conference } from '../../../models/conference';
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'my-booking',
     templateUrl: 'my-booking.component.html',
