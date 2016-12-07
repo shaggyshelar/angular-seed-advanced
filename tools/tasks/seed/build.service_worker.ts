@@ -27,11 +27,15 @@ export = () => {
         staticFileGlobs: [
             rootDir + '/**.html',
             rootDir + '/css/**.css',
-            rootDir + '/assets/**/**.*',
+            rootDir + '/assets/i18n/en.json',
+            rootDir + '/assets/svg/logo-light.svg',
+            rootDir + '/assets/logo.ico',
+            rootDir + '/assets/images/**.*',
             rootDir + '/images/**/**.*',
             rootDir + '/fonts/**/**.*',
             rootDir + '/manifest.json',
-            rootDir + '/js/**.js'
+            rootDir + '/service-worker.js',
+            rootDir + '/js/*.js'
         ],
         stripPrefix: rootDir + '/',
     };
