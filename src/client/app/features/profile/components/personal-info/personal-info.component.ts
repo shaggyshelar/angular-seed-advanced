@@ -1,21 +1,16 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
-import { PROFILE_ACTIONS } from '../../services/profile.actions';
-//import { Profile } from '../../models/profile';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'personal-info',
   templateUrl: 'personal-info.component.html',
@@ -44,7 +39,7 @@ export class PersonalInfoComponent implements OnInit {
   isAddSkypeID: boolean;
   isEditSkypeID: boolean;
 
-  constructor(private store: Store<any>) {
+  constructor() {
     this.profile = {};
     this.profileInfo = {};
     this.isAddContactNo = false;
@@ -68,12 +63,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch({ type: PROFILE_ACTIONS.DETAILS, payload: 1 });
-    this.profileInfoObs = this.store.select('profile');
-    this.profileInfoObs.subscribe(res => {
-      this.profileInfo = res ? res.profile : {};
-      console.log('Profile', this.profileInfo);
-    });
+    //TODO get records from Service
   }
 
   addBloodGroup() {

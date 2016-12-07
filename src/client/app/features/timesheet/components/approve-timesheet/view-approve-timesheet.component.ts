@@ -1,15 +1,12 @@
 /** Angular Declarations */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-/** Framework Component */
-import {BaseComponent} from '../views/base-component';
-
-/** Entity Objects */
-import { Timesheet } from '../../entity/timesheet';
+/** Module Level Dependencies */
+import { Timesheet } from '../../models/timesheet';
 
 /** Component Declarations */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'view-approve-timesheet',
     templateUrl: 'view-approve-timesheet.component.html',

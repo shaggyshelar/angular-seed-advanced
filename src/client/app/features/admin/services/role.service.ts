@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 //import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -19,13 +19,11 @@ export const CONTEXT = 'role';
 @Injectable()
 export class RoleService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
-        super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('RoleService  Initialized Successfully');
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
     getRoles(): Observable<Role[]> {
-        this.logService.debug('RoleService : getConferenceBooking method');
         return this.getList$(0,0,true).map(res => res.json());
     }
     addRole(role:Role): Observable<any> {
