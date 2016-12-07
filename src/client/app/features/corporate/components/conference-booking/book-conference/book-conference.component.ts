@@ -56,6 +56,9 @@ export class BookComponent implements OnInit {
             }
         });
     }
+    onCancel() {
+        this.router.navigate(['/corporate/conferenceBooking']);
+    }
 }
 export interface IConferenceForm {
     id: number;

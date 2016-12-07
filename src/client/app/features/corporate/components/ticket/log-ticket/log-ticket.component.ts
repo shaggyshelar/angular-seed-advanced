@@ -10,7 +10,6 @@ import { Ticket } from '../../../models/ticket';
 import { TicketService } from '../../../services/ticket.service';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
 
@@ -22,12 +21,11 @@ import { MenuItem } from 'primeng/primeng';
   styleUrls: ['log-ticket.component.css']
 })
 export class LogTicketComponent implements OnInit {
-  ticket:Observable<Ticket[]>;
+  ticket: Observable<Ticket[]>;
   private items: MenuItem[];
   constructor(
     private ticketService: TicketService,
-    private router: Router,
-    private store: Store<any>) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -62,6 +60,6 @@ export class LogTicketComponent implements OnInit {
   }
 
   editTicket(ticket) {
-    this.router.navigate(['/corporate/manage-ticket',ticket.Id]);
+    this.router.navigate(['/corporate/manage-ticket', ticket.Id]);
   }
 }

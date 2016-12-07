@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, Component, Directive, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConferenceComponent } from './conference.component';
 import { t } from '../../../../../frameworks/test/index';
 import { CoreModule } from '../../../../../frameworks/core/core.module';
 import { SharedModule, ScheduleModule } from 'primeng/primeng';
 import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ConferenceBookingService } from '../../../services/conference-booking.service';
+import { Conference } from '../../../models/conference';
 import * as moment from 'moment/moment';
 
 export function main() {
@@ -20,7 +22,8 @@ export function main() {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: Router, useClass: RouterStub },
-                    { provide: ActivatedRoute, useValue:  { 'params': Observable.from([{ 'room': 1 }]) } }
+                    { provide: ConferenceBookingService, useClass: ConferenceBookingServiceStub },
+                    { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'room': 1 }]) } }
                 ]
             });
         });
@@ -41,7 +44,7 @@ export function main() {
                         let fixture = TestBed.createComponent(TestComponent);
                         let componentInstance = fixture.debugElement.children[0].componentInstance;
                         fixture.detectChanges();
-                        t.e(componentInstance.allEvents.length).toBe(8);
+                        t.e(componentInstance.allEvents.length).toBe(2);
                         t.e(componentInstance.conferenceRooms.length).toBe(8);
                         t.e(TestComponent).toBeDefined();
                     });
@@ -53,7 +56,7 @@ export function main() {
                         let fixture = TestBed.createComponent(TestComponent);
                         let componentInstance = fixture.debugElement.children[0].componentInstance;
                         fixture.detectChanges();
-                        componentInstance.handleEventClicked({calEvent:{start:new Date, end:new Date}});
+                        componentInstance.handleEventClicked({ calEvent: { start: new Date, end: new Date } });
                         t.e(componentInstance.selectedEvent.start).toBe(moment().format('DD/MM/YY hh:MM a'));
                         t.e(componentInstance.selectedEvent.end).toBe(moment().format('DD/MM/YY hh:MM a'));
                     });
@@ -86,7 +89,7 @@ export function main() {
                         fixture.detectChanges();
                         t.expect(fixture.nativeElement.querySelectorAll('.fc-agendaDay-view').length).toBe(1);
                         t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(8);
-                        t.expect(fixture.nativeElement.querySelector('button.btn.btn-default').innerHTML).toBe('CONFERENCE_BTN_MANAGE_BOOKING');
+                        t.expect(fixture.nativeElement.querySelector('button.btn.btn-default').innerHTML).toBe('Manage My Booking');
                         t.expect(fixture.nativeElement.querySelectorAll('button.fc-month-button').length).toBe(1);
                         t.expect(fixture.nativeElement.querySelectorAll('button.fc-agendaWeek-button').length).toBe(1);
                         t.expect(fixture.nativeElement.querySelectorAll('button.fc-agendaDay-button').length).toBe(1);
@@ -119,22 +122,13 @@ export function main() {
                         t.expect(fixture.nativeElement.querySelectorAll('.fc-agendaDay-view').length).toBe(1);
                     });
             }));
-        // t.it('TC_06:To check whether current date is Present above the Day View or not',
-        //     t.async(() => {
-        //         TestBed.compileComponents()
-        //             .then(() => {
-        //                 let fixture = TestBed.createComponent(TestComponent);
-        //                 fixture.detectChanges();
-        //                 t.expect(fixture.nativeElement.querySelector('.fc-toolbar').innerHTML.search(moment().format('MMMM DD, YYYY'))).not.toBe(-1);
-        //             });
-        //     }));
         t.it('TC_07:To check whether any option provided For booking conference room or not',
             t.async(() => {
                 TestBed.compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
-                        t.expect(fixture.nativeElement.querySelector('button.btn.btn-default').innerHTML).toBe('CONFERENCE_BTN_MANAGE_BOOKING');
+                        t.expect(fixture.nativeElement.querySelector('button.btn.btn-default').innerHTML).toBe('Manage My Booking');
                     });
             }));
     });
@@ -156,4 +150,39 @@ class RouterStub {
 })
 export class RouterLinkStubDirective {
     @Input('routerLink') linkParams: any;
+}
+
+var conferenceList = [
+    {
+        Id: 1,
+        'title': 'Inteview',
+        'start': moment().add(2, 'hours'),
+        'end': moment().add(4, 'hours'),
+        'Room': {
+            'Color': '#8877A9',
+            'Name': 'Caribbean'
+        },
+        'color': '#8877A9',
+        'Attendees': 'xyz'
+    },
+    {
+        Id: 2,
+        'title': 'Jenzabar Client call',
+        'start': moment(),
+        'end': moment().add(3, 'hours'),
+        'Room': {
+            'Color': '#3FABA4',
+            'Name': 'Dubai'
+        },
+        'color': '#3FABA4',
+        'Attendees': 'xyz'
+
+    }
+];
+class ConferenceBookingServiceStub {
+    getConferenceBooking() {
+        return new Observable<Conference[]>(observer => {
+            observer.next(conferenceList);
+        });
+    }
 }

@@ -39,6 +39,7 @@ export class AuthComponent implements OnInit {
             },
             error => {
                 this.showError = true;
+                this.errorMessage = error.message;
             });
     }
     getLoggedInUserPermission(): void {
@@ -47,7 +48,10 @@ export class AuthComponent implements OnInit {
             results => {
                 this._router.navigate(['/']);
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.showError = true;
+                this.errorMessage = error.message;
+            });
     }
 
 }

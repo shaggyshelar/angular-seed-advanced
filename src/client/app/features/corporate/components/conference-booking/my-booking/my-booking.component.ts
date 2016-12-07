@@ -2,8 +2,7 @@ import { OnInit } from '@angular/core';
 
 /** Other Module Dependencies */
 import { ConfirmationService } from 'primeng/primeng';
-import { Message } from 'primeng/primeng';
-
+import { MessageService } from '../../../../core/shared/services/message.service';
 /** Framework Dependencies */
 import { BaseComponent } from '../../../../framework.ref';
 
@@ -22,9 +21,8 @@ import { Conference } from '../../../models/conference';
 
 export class MyBookingComponent implements OnInit {
     bookings: Observable<Conference[]>;
-    msgs: Message[] = [];
     conferenceRooms: any[];
-    constructor(private conferenceBookingService: ConferenceBookingService, private confirmationService: ConfirmationService) {
+    constructor(private messageService: MessageService, private conferenceBookingService: ConferenceBookingService, private confirmationService: ConfirmationService) {
         this.conferenceRooms = [{
             name: 'Bahamas',
             color: '#E7C5F5'
@@ -62,8 +60,7 @@ export class MyBookingComponent implements OnInit {
             header: 'Delete Confirmation',
             icon: 'fa fa-trash',
             accept: () => {
-                this.msgs = [];
-                this.msgs.push({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Record deleted' });
             }
         });
     }

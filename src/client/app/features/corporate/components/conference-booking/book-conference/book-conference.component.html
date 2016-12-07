@@ -165,7 +165,7 @@
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button pButton type="submit" label="Save" id="saveBtn" [disabled]="conferenceForm.invalid"></button>
-              <button pButton type="text" label="Cancel" id="cancelBtn" [routerLink]="['../conferenceBooking']"></button>
+              <button pButton type="text" label="Cancel" id="cancelBtn" (cancel)="onCancel()"></button>
             </div>
           </div>
         </form>
