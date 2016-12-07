@@ -5,6 +5,9 @@ import { OnInit, Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 /** Module Level Dependencies */
+import { ProfileService } from '../../services/profile.service';
+import { User } from '../../models/user';
+import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -18,8 +21,9 @@ import * as _ from 'lodash';
 })
 export class PersonalInfoComponent implements OnInit {
   public profileInfoObs: Observable<any>;
+  public profileObj: Observable<User>;
   profile: any;
-  profileInfo: any;
+  profileInfo: User;
   isAddContactNo: boolean;
   isEditContactNo: boolean;
   isAddPreviousPfNo: boolean;
@@ -39,9 +43,9 @@ export class PersonalInfoComponent implements OnInit {
   isAddSkypeID: boolean;
   isEditSkypeID: boolean;
 
-  constructor() {
+  constructor( private profileService : ProfileService) {
     this.profile = {};
-    this.profileInfo = {};
+   // this.profileInfo = {};
     this.isAddContactNo = false;
     this.isEditContactNo = false;
     this.isAddEsplPfNo = false;
@@ -62,8 +66,13 @@ export class PersonalInfoComponent implements OnInit {
     this.isEditSkypeID = false;
   }
 
-  ngOnInit(): void {
-    //TODO get records from Service
+  ngOnInit(): void {    
+    var ProfileID = 1;
+     this.profileObj = this.profileService.getProfile(ProfileID);
+     this.profileObj.subscribe(result => {
+      this.profile = result ? result : {};
+      this.profileInfo = _.cloneDeep(this.profile);
+     })
   }
 
   addBloodGroup() {
@@ -75,15 +84,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveBloodGroup() {
-    if (!_.isEmpty(this.profileInfo.bloodGroup)) {
+    if (!_.isEmpty(this.profileInfo.BloodGroup)) {
       this.isEditBloodGroup = false;
-      this.profile.bloodGroup = this.profileInfo.bloodGroup;
+      this.profile.bloodGroup = this.profileInfo.BloodGroup;
     }
   }
 
   cancelBloodGroup() {
     this.isEditBloodGroup = false;
-    this.profileInfo.bloodGroup = this.profile.bloodGroup;
+    this.profileInfo.BloodGroup = this.profile.bloodGroup;
     this.isAddBloodGroup = false;
   }
 
@@ -96,15 +105,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveEmergencyContactName() {
-    if (!_.isEmpty(this.profileInfo.emergencyContactName)) {
+    if (!_.isEmpty(this.profileInfo.Contact.Name)) {
       this.isEditEmergencyContactName = false;
-      this.profile.emergencyContactName = this.profileInfo.emergencyContactName;
+      this.profile.emergencyContactName = this.profileInfo.Contact.Name;
     }
   }
 
   cancelEmergencyContactName() {
     this.isEditEmergencyContactName = false;
-    this.profileInfo.emergencyContactName = this.profile.emergencyContactName;
+    this.profileInfo.Contact.Name = this.profile.emergencyContactName;
     this.isAddEmergencyContactName = false;
   }
 
@@ -117,15 +126,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveLastWorkingDay() {
-    if (!_.isEmpty(this.profileInfo.lastWorkingDay)) {
+    if (!_.isEmpty(this.profileInfo.LastWorkingDayOfPrevEmployer)) {
       this.isEditLastWorkingDay = false;
-      this.profile.lastWorkingDay = this.profileInfo.lastWorkingDay;
+      this.profile.lastWorkingDay = this.profileInfo.LastWorkingDayOfPrevEmployer;
     }
   }
 
   cancelLastWorkingDay() {
     this.isEditLastWorkingDay = false;
-    this.profileInfo.lastWorkingDay = this.profile.lastWorkingDay;
+    this.profileInfo.LastWorkingDayOfPrevEmployer = this.profile.lastWorkingDay;
     this.isAddLastWorkingDay = false;
   }
 
@@ -138,15 +147,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveCareerStartDate() {
-    if (!_.isEmpty(this.profileInfo.careerStartDate)) {
+    if (!_.isEmpty(this.profileInfo.CareerStartDate)) {
       this.isEditCareerStartDate = false;
-      this.profile.careerStartDate = this.profileInfo.careerStartDate;
+      this.profile.careerStartDate = this.profileInfo.CareerStartDate;
     }
   }
 
   cancelCareerStartDate() {
     this.isEditCareerStartDate = false;
-    this.profileInfo.careerStartDate = this.profile.careerStartDate;
+    this.profileInfo.CareerStartDate = this.profile.careerStartDate;
     this.isAddCareerStartDate = false;
   }
 
@@ -159,15 +168,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveEsplPfNo() {
-    if (!_.isEmpty(this.profileInfo.esplPfNo)) {
+    if (!_.isEmpty(this.profileInfo.PF.CurrentOrgPFNumber)) {
       this.isEditEsplPfNo = false;
-      this.profile.esplPfNo = this.profileInfo.esplPfNo;
+      this.profile.esplPfNo = this.profileInfo.CurrentOrgPFNumber;
     }
   }
 
   cancelEsplPfNo() {
     this.isEditEsplPfNo = false;
-    this.profileInfo.esplPfNo = this.profile.esplPfNo;
+    this.profileInfo.CurrentOrgPFNumber = this.profile.esplPfNo;
     this.isAddEsplPfNo = false;
   }
 
@@ -180,15 +189,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   savePreviousPfNo() {
-    if (!_.isEmpty(this.profileInfo.previousPfNo)) {
+    if (!_.isEmpty(this.profileInfo.PF.PreviousOrgPFNumber)) {
       this.isEditPreviousPfNo = false;
-      this.profile.previousPfNo = this.profileInfo.previousPfNo;
+      this.profile.previousPfNo = this.profileInfo.PF.PreviousOrgPFNumber;
     }
   }
 
   cancelPreviousPfNo() {
     this.isEditPreviousPfNo = false;
-    this.profileInfo.previousPfNo = this.profile.previousPfNo;
+    this.profileInfo.PF.PreviousOrgPFNumber = this.profile.previousPfNo;
     this.isAddPreviousPfNo = false;
   }
 
@@ -201,15 +210,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveContactNo() {
-    if (!_.isEmpty(this.profileInfo.contactNo)) {
+    if (!_.isEmpty(this.profileInfo.ContactNo)) {
       this.isEditContactNo = false;
-      this.profile.contactNo = this.profileInfo.contactNo;
+      this.profile.contactNo = this.profileInfo.ContactNo;
     }
   }
 
   cancelContactNo() {
     this.isEditContactNo = false;
-    this.profileInfo.contactNo = this.profile.contactNo;
+    this.profileInfo.ContactNo = this.profile.contactNo;
     this.isAddContactNo = false;
   }
 
@@ -222,15 +231,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveEmergencyContactNo() {
-    if (!_.isEmpty(this.profileInfo.emergencyContactNo)) {
+    if (!_.isEmpty(this.profileInfo.Contact.Number)) {
       this.isEditEmergencyContact = false;
-      this.profile.emergencyContactNo = this.profileInfo.emergencyContactNo;
+      this.profile.emergencyContactNo = this.profileInfo.Contact.Number;
     }
   }
 
   cancelEmergencyContactNo() {
     this.isEditEmergencyContact = false;
-    this.profileInfo.emergencyContactNo = this.profile.emergencyContactNo;
+    this.profileInfo.Contact.Number = this.profile.emergencyContactNo;
     this.isAddEmergencyContact = false;
   }
 
@@ -243,15 +252,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveSkypeID() {
-    if (!_.isEmpty(this.profileInfo.skypeID)) {
+    if (!_.isEmpty(this.profileInfo.SkypeID)) {
       this.isEditSkypeID = false;
-      this.profile.skypeID = this.profileInfo.skypeID;
+      this.profile.skypeID = this.profileInfo.SkypeID;
     }
   }
 
   cancelSkypeID() {
     this.isEditSkypeID = false;
-    this.profileInfo.skypeID = this.profile.skypeID;
+    this.profileInfo.SkypeID = this.profile.skypeID;
     this.isAddSkypeID = false;
   }
 }
