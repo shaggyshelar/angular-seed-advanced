@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -20,10 +20,8 @@ export const CONTEXT = 'ChangePassword';
 /** Service Definition */
 @Injectable()
 export class ChangePasswordService extends BaseService {
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
-        super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('ChangePassword Service Initialized Successfully');
-        // this.store.dispatch({ type: PROFILE_ACTIONS.INIT });
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
 

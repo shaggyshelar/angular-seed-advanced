@@ -1,10 +1,6 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
 
-/** Third Party Dependencies */
-import { EffectsModule } from '@ngrx/effects';
-import { ActionReducer } from '@ngrx/store';
-
 /** Module level Dependencies */
 // Components Declarations
 import { CommonModule, TranslateModule } from '../core/index';
@@ -39,15 +35,11 @@ import { PassportService } from './services/passport.service';
 import { UanService } from './services/uan.service';
 import { VisaService } from './services/visa.service';
 
-import { ProfileEffects } from './services/profile.effects';
-import { profileReducer } from './services/profile.reducer';
-
 /** Module Definition */
 @NgModule({
     imports: [
         CommonModule,
-        TranslateModule,
-        EffectsModule.run(ProfileEffects)
+        TranslateModule
     ],
     declarations: [
         MyProfileComponent,
@@ -71,7 +63,4 @@ import { profileReducer } from './services/profile.reducer';
 })
 
 export class ProfileModule {
-    static reducers(): { [key: string]: ActionReducer<any> } {
-        return { profile: profileReducer };
-    }
 }

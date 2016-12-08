@@ -43,7 +43,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <a [routerLink]="['../conferenceBooking']" id="conferenceRoomLink" class="portlet-link">Conference Room Booking</a>&nbsp;&nbsp;
-                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">MY_BOOKING_ALL_EVENT</a>&nbsp;&nbsp;
+                    <a [routerLink]="['../conferenceBooking']" id="allEventLink"  class="portlet-link">All Events</a>&nbsp;&nbsp;
                     <a [routerLink]="['../myBookings']" id="myBookingLink" class="selected">MyBookings</a>&nbsp;&nbsp;
                     <a class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i> </a>
@@ -68,8 +68,8 @@
                     <p-column field="Attendees" header="Attendees" [sortable]="true"></p-column>
                     <p-column field="Room.Name" header="Conference Rooms" [sortable]="true"></p-column>
                     <p-column header="Delete">
-                        <template let-car="rowData" pTemplate type="body">
-                            <button class="btn btn-danger" (click)="confirm()" id="deleteBtn"><i class="fa fa-trash"></i></button>
+                        <template let-ticket="rowData" pTemplate type="body">
+                            <button class="btn btn-danger" (click)="confirm(ticket)" id="deleteBtn"><i class="fa fa-trash"></i></button>
                         </template>
                     </p-column>
                 </p-dataTable>

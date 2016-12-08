@@ -1,16 +1,16 @@
 import { Router } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Other Module Dependencies */
 import { SelectItem } from 'primeng/primeng';
 //import * as localForage from 'localforage';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import * as moment from 'moment/moment';
+
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'book-conference',
     templateUrl: 'book-conference.component.html'
@@ -26,6 +26,7 @@ export class BookComponent implements OnInit {
     startTime: Date;
     endTime: Date;
     conferenceForm: FormGroup;
+    endTimeError:boolean= false;
     constructor(private messageService: MessageService, private formBuilder: FormBuilder, private conferenceBookingService: ConferenceBookingService, private router: Router) {
         this.conferenceRooms = [];
         this.conferenceRooms.push({ label: 'Select Room', value: null });
@@ -45,16 +46,28 @@ export class BookComponent implements OnInit {
             start: ['', [Validators.required]],
             end: ['', [Validators.required]],
             Room: ['', [Validators.required]],
+            allDay: [false],
+            Description: [''],
+            SpecialComment: [''],
+            NoOfGuest: ['', Validators.pattern('[0-9]+')],
+
         });
+        let event = this.conferenceBookingService.getSelectedSlot();
     }
     onSubmit({ value, valid }: { value: IConferenceForm, valid: boolean }) {
-        value.color = value.Room.Color;
-        this.conferenceBookingService.saveConference(value).subscribe(result => {
-            if (result) {
-                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Conference Room Booked' });
-                this.router.navigate(['/corporate/conferenceBooking']);
-            }
-        });
+        if (moment(value.end).diff(value.start, 'minutes') > 0) {
+            value.color = value.Room.Color;
+            value.start = moment(value.start).format();
+            value.end = moment(value.end).format();
+            this.conferenceBookingService.saveConference(value).subscribe(result => {
+                if (result) {
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Conference Room Booked' });
+                    this.router.navigate(['/corporate/conferenceBooking']);
+                }
+            });
+        } else {
+            this.endTimeError = true;
+        }
     }
     onCancel() {
         this.router.navigate(['/corporate/conferenceBooking']);
@@ -64,8 +77,8 @@ export interface IConferenceForm {
     id: number;
     Room: Select;
     title: string;
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
     allDay: boolean;
     color: string;
 }

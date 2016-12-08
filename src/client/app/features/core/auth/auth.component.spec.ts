@@ -64,7 +64,7 @@ export function main() {
 
 @Component({
     selector: 'test-cmp',
-    template: '<authenticate></authenticate>'
+    template: '<linkup-authenticate></linkup-authenticate>'
 })
 class TestComponent { }
 

@@ -5,6 +5,7 @@ export = () => {
     var handleFetch = true;
     var rootDir = Config.PROD_DEST;
     var config = {
+        maximumFileSizeToCacheInBytes : '4194304',
         cacheId: 'linkup',
         // If handleFetch is false (i.e. because this is called from generate-service-worker-dev), then
         // the service worker will precache resources but won't actually serve them.
@@ -27,11 +28,15 @@ export = () => {
         staticFileGlobs: [
             rootDir + '/**.html',
             rootDir + '/css/**.css',
-            rootDir + '/assets/**/**.*',
+            rootDir + '/assets/i18n/en.json',
+            rootDir + '/assets/svg/logo-light.svg',
+            rootDir + '/assets/logo.ico',
+            rootDir + '/assets/images/**.*',
             rootDir + '/images/**/**.*',
             rootDir + '/fonts/**/**.*',
             rootDir + '/manifest.json',
-            rootDir + '/js/**.js'
+            rootDir + '/service-worker.js',
+            rootDir + '/js/*.js'
         ],
         stripPrefix: rootDir + '/',
     };

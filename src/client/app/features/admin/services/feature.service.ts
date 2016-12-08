@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 //import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -20,13 +20,11 @@ export const CONTEXT = 'feature';
 @Injectable()
 export class FeatureService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
-        super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('FeatureService  Initialized Successfully');
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
     getFeatures(): Observable<Feature[]> {
-        this.logService.debug('FeatureService : getConferenceBooking method');
         return this.getList$(0, 0, true).map(res => res.json());
     }
 

@@ -1,13 +1,11 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
 
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 /** Module Level Dependencies */
 import { EducationService } from '../../services/education.service';
@@ -38,7 +36,7 @@ export interface EducationForm {
 
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'education',
     templateUrl: 'education.component.html',
@@ -77,11 +75,11 @@ export class EducationComponent implements OnInit {
 
         this.educationForm = this.formBuilder.group({
             id: [''],
-            degree: ['', [Validators.required, Validators.minLength(2)]],
+            degree: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
             class: ['', [Validators.required]],
             grade: ['', [Validators.required]],
-            percentage: ['', [Validators.required, Validators.minLength(2)]],
-            yearOfPassing: ['', [Validators.required, Validators.minLength(2)]]
+            percentage: ['', [Validators.required, Validators.pattern('^[1-9][0-9]?$|^100$')]],
+            yearOfPassing: ['', [Validators.required, Validators.pattern('(?:(?:19|20)[0-9]{2})')]]
         });
     }
 

@@ -57,7 +57,7 @@
                     field="Text" [size]="30" placeholder="Permissions" [minLength]="1"></p-autoComplete>
                 </div>
                 <div class="col-md-2">
-                  <button class="btn btn-default" (click)="onAddPermission();"> ADD </button>
+                  <button class="btn btn-default" (click)="onAddPermission();" [disabled]="this.selectedPermission==null || this.selectedPermission==''"> ADD </button>
                 </div>
               </div>
             </div>

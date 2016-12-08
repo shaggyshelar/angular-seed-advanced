@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 //import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
@@ -20,9 +20,8 @@ export const CONTEXT = 'ticket';
 @Injectable()
 export class TicketService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService) {
-        super(analyticsService, http, CONTEXT, logService);
-        this.logService.debug('getTicketList  Initialized Successfully');
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
     /**
@@ -50,7 +49,6 @@ export class TicketService extends BaseService {
      * getTicketList method
      */
     getTicketList(): Observable<Ticket[]> {
-        this.logService.debug('TicketService : getTicketList method');
         return this.getList$().map(res => res.json());
     }
 }

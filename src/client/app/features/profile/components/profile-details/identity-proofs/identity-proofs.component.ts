@@ -1,13 +1,9 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { IdentityProofService } from '../../../services/identityProof.service';
@@ -24,7 +20,7 @@ export interface NomineeForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'identity-proofs',
     templateUrl: 'identity-proofs.component.html',

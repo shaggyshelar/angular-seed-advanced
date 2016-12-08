@@ -84,6 +84,9 @@ class ConferenceBookingServiceStub {
             observer.next();
         });
     }
+    getSelectedSlot() {
+       return;
+    }
 }
 
 class MessageServiceStub {

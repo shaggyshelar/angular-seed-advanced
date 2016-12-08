@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 
 /** Other Module Dependencies */
-import { CommonModule, TranslateModule } from '../core/index';
+import { CommonModule } from '../core/index';
 
 /** Module level Dependencies */
 import { FeatureComponent } from './components/feature/feature.component';
@@ -15,8 +15,7 @@ import { PermissionService } from './services/permission.service';
 /** Module Definition */
 @NgModule({
     imports: [
-        CommonModule,
-        TranslateModule,
+        CommonModule
     ],
     exports: [],
     declarations: [
@@ -24,7 +23,7 @@ import { PermissionService } from './services/permission.service';
         RoleListComponent,
         RoleAddEditComponent
     ],
-    providers: [FeatureService,RoleService,PermissionService],
+    providers: [FeatureService, RoleService, PermissionService],
 })
 export class AdminModule {
 }

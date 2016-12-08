@@ -1,13 +1,10 @@
 /** Angular Dependencies */
-
-/** Framework Dependencies */
-import {BaseComponent} from '../views/base-component';
+import { Component } from '@angular/core';
 
 /** Module Level Dependencies */
 
-
 /** Component Declaration */
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'profile-details',
   templateUrl: 'profile-details.component.html'

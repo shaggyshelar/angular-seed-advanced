@@ -8,12 +8,11 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 
 /** Framework Level Dependencies */
-import { LogService, AnalyticsService } from '../../framework.ref';
+import { AnalyticsService } from '../../framework.ref';
 
 /** Module Level Dependencies */
 import { BaseService } from '../../core/index';
 import { Nominee } from '../models/nominee';
-import { ProfileState } from '../models/profile.state';
 
 /** Context for service calls */
 export const CONTEXT = 'Nominee';
@@ -22,8 +21,8 @@ export const CONTEXT = 'Nominee';
 @Injectable()
 export class NomineesService extends BaseService {
 
-    constructor(public analyticsService: AnalyticsService, public http: Http, public logService: LogService, private store: Store<ProfileState>) {
-        super(analyticsService, http, CONTEXT, logService);
+    constructor(public analyticsService: AnalyticsService, public http: Http) {
+        super(analyticsService, http, CONTEXT);
     }
 
     getNominees(): Observable<Nominee> {

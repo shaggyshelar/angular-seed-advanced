@@ -1,12 +1,9 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-
-/** Framework Level Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Uan } from '../../../models/uan';
@@ -20,7 +17,7 @@ export interface UanForm {
 }
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'UAN',
     templateUrl: 'uan.component.html',
