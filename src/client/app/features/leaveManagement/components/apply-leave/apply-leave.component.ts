@@ -10,7 +10,7 @@ import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Select } from '../../models/select';
-import { ApplyLeaveValidation } from '../../models/ApplyLeaveValidation';
+import { ApplyLeaveValidation } from '../../models/applyLeaveValidation';
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
@@ -124,6 +124,7 @@ export class ApplyLeaveComponent implements OnInit {
             ],
             Type: { ID: this.model.leaveType.id, Title: this.model.leaveType.name }
         };
+        console.log('mode : ' + JSON.stringify(this.model));
         this.leaveService.addLeaveRecord(params).subscribe(res => {
             if (res) {
                 this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave applied!' });
@@ -222,6 +223,6 @@ export class ApplyLeaveComponent implements OnInit {
     }
 
     addLeaves() {
-        console.log('mode : ' + JSON.stringify(this.model));
+        
     }
 }
