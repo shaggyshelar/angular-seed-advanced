@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.module';
 import { CommonModule } from '@angular/common';
-import { LogService } from '../../../../framework.ref';
 
 var isAuthneticatedStatus = false;
 
@@ -23,7 +22,6 @@ export function main() {
                 providers: [
                     { provide: AuthService, useValue: new MockLoginService() },
                     { provide: Router, useClass: RouterStub },
-                    { provide: LogService, useClass: LogServiceStub }
                 ]
             });
         });
