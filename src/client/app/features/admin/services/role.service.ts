@@ -30,7 +30,7 @@ export class RoleService extends BaseService {
         return this.post$(role,true).map(res => res.json());
     }
     editRole(role:Role): Observable<any> {
-        return this.put$(role.id,role,true).map(res => res.json());
+        return this.put$(role.ID,role,true).map(res => res.json());
     }
     getRoleById(roleID): Observable<any> {
         return this.get$(roleID,true).map(res => res.json());

@@ -121,43 +121,43 @@ var permissions = {
 }
 
 permissions.permissionsList = [{
-  Id: 1,
+  ID: 1,
   Key: 'DASHBOARD.READ',
   Text: 'Can read Dasboard'
 }, {
-  Id: 2,
+  ID: 2,
   Key: 'CORPORATE.MANAGE',
   Text: 'Can manage Corporate'
 }, {
-  Id: 3,
+  ID: 3,
   Key: 'CONFERENCE_BOOKING.READ',
   Text: 'Can read Conference booking'
 }, {
-  Id: 4,
+  ID: 4,
   Key: 'TICKET.READ',
   Text: 'Can read log a Ticket'
 }, {
-  Id: 5,
+  ID: 5,
   Key: 'TIMESHEET.READ',
   Text: 'Can read Timesheet'
 }, {
-  Id: 6,
+  ID: 6,
   Key: 'ADMIN.MANAGE',
   Text: 'Can manage Admin'
 }, {
-  Id: 7,
+  ID: 7,
   Key: 'LEAVE.MANAGE',
   Text: 'Can manage Leave'
 }, {
-  Id: 8,
+  ID: 8,
   Key: 'ROLE.READ',
   Text: 'Can read Role'
 }, {
-  Id: 9,
+  ID: 9,
   Key: 'Holiday.READ',
   Text: 'Can read Holiday'
 }, {
-  Id: 10,
+  ID: 10,
   Key: 'BulkLeaveApproval.READ',
   Text: 'Can read BulkLeaveApproval'
 }, ]

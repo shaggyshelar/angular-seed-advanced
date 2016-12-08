@@ -8,7 +8,7 @@ var getRoles = function (req, res) {
 
 var addRole = function (req, res) {
   var role = req.body;
-  role.id = ++roles.ids;
+  role.ID = ++roles.ids;
   role.Permissions = [];
   roles.roleList.push(role);
   res.json(role);
@@ -17,7 +17,7 @@ var addRole = function (req, res) {
 var deleteRole = function (req, res) {
   var roleId = parseInt(req.params.id);
   var index = _.findIndex(roles.roleList, {
-    id: roleId
+    ID: roleId
   });
   roles.roleList.splice(index, 1)
   res.sendStatus(200);
@@ -26,7 +26,7 @@ var deleteRole = function (req, res) {
 var getRoleById = function (req, res) {
   var roleID = parseInt(req.params.id);
   var index = _.findIndex(roles.roleList, {
-    id: roleID
+    ID: roleID
   });
   res.json(roles.roleList[index]);
 };
@@ -34,7 +34,7 @@ var getRoleById = function (req, res) {
 var editRole = function (req, res) {
   var role = req.body;
   var index = _.findIndex(roles.roleList, {
-    id: role.id
+    ID: role.ID
   });
   roles.roleList[index] = role
   res.json(role);

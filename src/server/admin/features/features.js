@@ -8,7 +8,7 @@ var getFeatures = function (req, res) {
 
 var addFeature = function (req, res) {
   var feature = req.body;
-  feature.id = ++features.ids;
+  feature.ID = ++features.ids;
   features.featuresList.push(feature);
   res.json(features.featuresList);
 };
@@ -16,7 +16,7 @@ var addFeature = function (req, res) {
 var deleteFeature = function (req, res) {
   var featureID =  parseInt(req.params.id);
   var index = _.findIndex(features.featuresList, {
-    id: featureID
+    ID: featureID
   });
   features.featuresList.splice(index, 1)
   res.sendStatus(200);
@@ -25,7 +25,7 @@ var deleteFeature = function (req, res) {
 var getFeatureById = function (req, res) {
   var featureID = parseInt(req.params.id);
   var index = _.findIndex(features.featuresList, {
-    id: featureID
+    ID: featureID
   });
   res.json(features.featuresList[index]);
 };
@@ -33,7 +33,7 @@ var getFeatureById = function (req, res) {
 var editFeature = function (req, res) {
   var feature = req.body;
   var index = _.findIndex(features.featuresList, {
-    id: feature.id
+    ID: feature.ID
   });
   features.featuresList[index] = feature
   res.json(feature);
