@@ -33,6 +33,10 @@ require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
 require('./changePassword/changePassword')(app);
 require('./master/leaveTypeMaster/leaveTypeMaster')(app);
+require('./master/conferenceRoom/conferenceRoom')(app);
+require('./master/priority/priority')(app);
+require('./master/concern/concern')(app);
+require('./master/department/department')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

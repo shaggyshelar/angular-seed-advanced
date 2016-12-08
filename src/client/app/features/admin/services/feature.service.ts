@@ -33,7 +33,7 @@ export class FeatureService extends BaseService {
     }
 
     editFeature(feature): Observable<any> {
-        return this.put$(feature.id, feature, true).map(res => res.json());
+        return this.put$(feature.ID, feature, true).map(res => res.json());
     }
 
     deleteFeature(featureId): Observable<any> {

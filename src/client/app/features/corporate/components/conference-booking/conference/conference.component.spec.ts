@@ -10,6 +10,7 @@ import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.
 import { RouterTestingModule } from '@angular/router/testing';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { Conference } from '../../../models/conference';
+import { RoomService } from '../../../../core/shared/services/master/room.service';
 import * as moment from 'moment/moment';
 
 export function main() {
@@ -23,6 +24,7 @@ export function main() {
                 providers: [
                     { provide: Router, useClass: RouterStub },
                     { provide: ConferenceBookingService, useClass: ConferenceBookingServiceStub },
+                    { provide: RoomService, useClass: RoomServiceStub },
                     { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'room': 1 }]) } }
                 ]
             });
@@ -45,7 +47,6 @@ export function main() {
                         let componentInstance = fixture.debugElement.children[0].componentInstance;
                         fixture.detectChanges();
                         t.e(componentInstance.allEvents.length).toBe(2);
-                        t.e(componentInstance.conferenceRooms.length).toBe(8);
                         t.e(TestComponent).toBeDefined();
                     });
             }));
@@ -88,7 +89,7 @@ export function main() {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
                         t.expect(fixture.nativeElement.querySelectorAll('.fc-agendaDay-view').length).toBe(1);
-                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(8);
+                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(2);
                         t.expect(fixture.nativeElement.querySelector('button.btn.btn-default').innerHTML).toBe('Manage My Booking');
                         t.expect(fixture.nativeElement.querySelectorAll('button.fc-month-button').length).toBe(1);
                         t.expect(fixture.nativeElement.querySelectorAll('button.fc-agendaWeek-button').length).toBe(1);
@@ -101,7 +102,7 @@ export function main() {
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
-                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(8);
+                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(2);
                     });
             }));
         t.it('TC_04: To check whether each conference Rooms are having unique colors or not',
@@ -110,7 +111,7 @@ export function main() {
                     .then(() => {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
-                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(8);
+                        t.expect(fixture.nativeElement.querySelectorAll('.color-list').length).toBe(2);
                     });
             }));
         t.it('TC_05:To check whether Day View is Displayed on the main page or not',
@@ -189,6 +190,22 @@ class ConferenceBookingServiceStub {
         return;
     }
     getSelectedSlot() {
-       return;
+        return;
+    }
+}
+var conferenceRooms = [{
+    ID: 1,
+    Name: 'Bahamas',
+    Color: '#E7C5F5'
+}, {
+    ID: 2,
+    Name: 'Dubai',
+    Color: '#3FABA4'
+}]
+class RoomServiceStub {
+    getConferenceRooms() {
+        return new Observable<any>(observer => {
+            observer.next(conferenceRooms);
+        });
     }
 }

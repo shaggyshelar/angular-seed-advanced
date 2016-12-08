@@ -78,19 +78,19 @@ class RoleServiceStub {
     getRoleById(id) {
         return new Observable<any>(observer => {
             observer.next({
-                id: 1,
-                name: 'SuperAdmin'
+                ID: 1,
+                Name: 'SuperAdmin'
             });
         });
     }
 }
 var roleList = [{
-    id: 1,
-    name: 'SuperAdmin'
+    ID: 1,
+    Name: 'SuperAdmin'
 },
 {
-    id: 2,
-    name: 'Management Team',
+    ID: 2,
+    Name: 'Management Team',
 }];
 class PermissionServiceStub {
     addPermissionToRole(permission) {

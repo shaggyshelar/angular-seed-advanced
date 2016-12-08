@@ -29,12 +29,12 @@ export class FeatureComponent implements OnInit {
     ngOnInit() {
         this.getFeature();
         this.featureForm = this.formBuilder.group({
-            id: [0],
-            name: ['', [Validators.required]],
+            ID: [0],
+            Name: ['', [Validators.required]],
         });
     }
     onSubmit({ value, valid }: { value: Feature, valid: boolean }) {
-        if (value.id === 0 || value.id === null) {
+        if (value.ID === 0 || value.ID === null) {
             this.featureService.addFeature(value)
                 .subscribe(
                 results => {
@@ -63,13 +63,13 @@ export class FeatureComponent implements OnInit {
     onEditClick(feature: Feature) {
         let selectedFeature = _.cloneDeep(feature);
         this.featureForm.setValue({
-            id: selectedFeature.id,
-            name: selectedFeature.name
+            ID: selectedFeature.ID,
+            Name: selectedFeature.Name
         });
         this.isAddEdit = true;
     }
     onDelete(feature: Feature) {
-        this.featureService.deleteFeature(feature.id)
+        this.featureService.deleteFeature(feature.ID)
             .subscribe(
             results => {
                 this.getFeature();

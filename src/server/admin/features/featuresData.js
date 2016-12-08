@@ -2,23 +2,23 @@
 var features = {
     featuresList: [
         {
-            id: 1,
-            name: 'Dashboard'
+            ID: 1,
+            Name: 'Dashboard'
         }, {
-            id: 2,
-            name: 'TimeSheet'
+            ID: 2,
+            Name: 'TimeSheet'
         }, {
-            id: 3,
-            name: 'ConferenceBooking'
+            ID: 3,
+            Name: 'ConferenceBooking'
         }, {
-            id: 4,
-            name: 'Role'
+            ID: 4,
+            Name: 'Role'
         }, {
-            id: 5,
-            name: 'Permission'
+            ID: 5,
+            Name: 'Permission'
         }, {
-            id: 6,
-            name: 'Feature'
+            ID: 6,
+            Name: 'Feature'
         }
     ],
     ids: 6

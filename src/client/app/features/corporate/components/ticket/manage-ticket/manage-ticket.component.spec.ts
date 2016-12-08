@@ -12,6 +12,9 @@ import { TicketService } from '../../../services/ticket.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import { Ticket } from '../../../models/ticket';
 import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ConcernService } from '../../../../core/shared/services/master/concern.service';
+import { DepartmentService } from '../../../../core/shared/services/master/department.service';
+import { PriorityService } from '../../../../core/shared/services/master/priority.service';
 
 export function main() {
 
@@ -25,6 +28,9 @@ export function main() {
                     { provide: Router, useClass: RouterStub },
                     { provide: TicketService, useClass: TicketServiceStub },
                     { provide: MessageService, useClass: MessageServiceStub },
+                    { provide: ConcernService, useClass: ConcernServiceStub },
+                    { provide: DepartmentService, useClass: DepartmentServiceStub },
+                    { provide: PriorityService, useClass: PriorityServiceStub },
                     { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 1 }]) } }
                 ]
             });
@@ -46,7 +52,7 @@ export function main() {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
                         let componentInstance = fixture.debugElement.children[0].componentInstance;
-                        t.expect(componentInstance.departments.length).toBe(4);
+                        t.expect(componentInstance.departments).toBeDefined();
                     });
             }));
     });
@@ -86,4 +92,26 @@ class MessageServiceStub {
         return;
     }
 
+}
+
+class ConcernServiceStub {
+    getConcernList() {
+        return new Observable<any>(observer => {
+            observer.next();
+        });
+    }
+}
+class DepartmentServiceStub {
+    getDepartmentList() {
+        return new Observable<any>(observer => {
+            observer.next();
+        });
+    }
+}
+class PriorityServiceStub {
+    getPriorityList() {
+        return new Observable<any>(observer => {
+            observer.next();
+        });
+    }
 }
