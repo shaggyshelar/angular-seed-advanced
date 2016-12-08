@@ -1,14 +1,14 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Module Level Dependencies */
 import { ChangePasswordService } from '../../services/change-password.service';
 import { ChangePassword } from '../../models/changePassword';
+import { PasswordForm } from '../../models/passwordFormValidation'
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
@@ -19,15 +19,9 @@ import { Message } from 'primeng/primeng';
 
 /** Component Declaration */
 
-class FormFieldClass {
-    constructor(
-        public OldPassword: string,
-        public NewPassword: string,
-        public ConfirmPassword: string
-    ) { }
-}
 
-@BaseComponent({
+
+@Component({
     moduleId: module.id,
     selector: 'change-password-component',
     templateUrl: 'change-password.component.html',
@@ -36,61 +30,47 @@ class FormFieldClass {
 
 export class ChangePasswordComponent {
     passwrdObs: Observable<any>;
-    model: FormFieldClass;
+    passwordForm: FormGroup;
 
     isFormClean: boolean = false;
     isConfirmPasswordSame;
 
-    newPasswordWarning: string;
-    oldPasswordWarning: string;
-
     constructor(
         private messageService: MessageService,
-        private logService: LogService,
         private passwordService: ChangePasswordService,
-
+        private formBuilder: FormBuilder
     ) {
-        this.model = new FormFieldClass('', '', '');
-        this.newPasswordWarning = this.oldPasswordWarning = '';
     }
 
     ngOnInit() {
-        this.logService.debug('ChangePassword OnInit');
-    }
-
-    doPasswordsMatch() {
-        if (this.model.NewPassword === this.model.ConfirmPassword) {
-            this.isConfirmPasswordSame = true;
-            this.newPasswordWarning = '';
-        } else {
-            this.isConfirmPasswordSame = false;
-            this.newPasswordWarning = 'Passwords do not match!';
-        }
-        (this.model.OldPassword !== '' && this.isConfirmPasswordSame) ? this.isFormClean = true : this.isFormClean = false;
+        this.passwordForm = this.formBuilder.group({
+            OldPassword: ['', [Validators.required]],
+            NewPassword: ['', [Validators.required, Validators.minLength(7)]],
+            ConfirmPassword: ['', [Validators.required, Validators.minLength(7)]]
+        });
     }
 
     checkForm() {
     }
 
-    submitForm(form) {
-        if (this.isFormClean && this.isConfirmPasswordSame) {
-            this.passwrdObs = this.passwordService.changePassword(this.model);
-            this.passwrdObs.subscribe(res => {
-                this.logService.debug(res);
-                if (res) {
-                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
-                    debugger;
-                    this.newPasswordWarning = '';
-                    this.oldPasswordWarning = '';
-                    this.model = new FormFieldClass('', '', '');
-                } else {
-                    this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Password not changed!' });
-                    debugger;
-                    this.newPasswordWarning = res.message;
-                    this.oldPasswordWarning = '';
-                    this.model = new FormFieldClass('', '', '');
-                }
-            });
-        }
+    onSubmit({ value, valid }: { value: PasswordForm, valid: boolean }) {
+        var params = {
+            NewPassword: value.NewPassword,
+            OldPassword: value.OldPassword,
+            ConfirmPassword: value.ConfirmPassword
+        };
+        this.passwrdObs = this.passwordService.changePassword(params);
+        this.passwrdObs.subscribe(res => {
+            debugger;
+            if (res.resp === 1) {
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
+                this.passwordForm.reset();
+                debugger;
+            } else {
+                this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: res.message });
+                this.passwordForm.reset();
+                debugger;
+            }
+        })
     }
 }

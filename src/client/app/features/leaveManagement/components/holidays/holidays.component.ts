@@ -1,8 +1,8 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -24,7 +24,7 @@ export class MyEvent {
   allDay: boolean = true;
 }
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'view-holidays',
   templateUrl: 'holidays.component.html'
@@ -47,7 +47,6 @@ export class HolidaysComponent {
   constructor(
     private messageService: MessageService,
     private router: Router, 
-    private logService: LogService, 
     private holidayService: HolidayService
   ) {
     this.holidays = [];
@@ -58,7 +57,6 @@ export class HolidaysComponent {
   ngOnInit() {
     this.holidaysObs = this.holidayService.getHolidays();
     this.holidaysObs.subscribe(res => {
-      this.logService.debug('holiday : ' + JSON.stringify(res));
     });
 
   }
@@ -70,8 +68,6 @@ export class HolidaysComponent {
     start.stripTime();
     this.holiday.Title = event.calEvent.title;
     this.holiday.HolidayDate = start._i;
-    this.logService.debug(start);
-    this.logService.debug(start._i);
     this.dialogVisible = true;
   }
 

@@ -1,8 +1,8 @@
 /** Angular Dependencies */
 import { Router, ActivatedRoute } from '@angular/router';
+
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -17,8 +17,7 @@ import { Leave } from '../../models/leave';
 
 /** Component Declaration */
 
-
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'update-leave',
     templateUrl: 'update-leave.component.html',
@@ -35,10 +34,9 @@ export class UpdateLeaveComponent {
         private messageService: MessageService,
         private router: Router,
         private route: ActivatedRoute,
-        private logService: LogService,
         private leaveService: LeaveService
     ) {
-        this.isCancellable = false;
+        this.isCancellable = true;
         this.errorMsg = '';
         this.today = new Date();
     }
@@ -51,15 +49,11 @@ export class UpdateLeaveComponent {
 
         this.leaveObs = this.leaveService.getLeave(this.leaveID);
         this.leaveObs.subscribe(res => {
-            if (res.StartDate >= new Date())
-                this.setCancellable(true);
-            else
-                this.setCancellable(false);
+            res.Status === 'Approved' ? this.isCancellable = true : this.isCancellable = false;
         });
     }
 
     setCancellable(param) {
-        debugger;
         this.isCancellable = param;
     }
 
@@ -68,7 +62,6 @@ export class UpdateLeaveComponent {
     }
 
     cancelClicked() {
-        this.logService.debug(this.leaveID);
         this.leaveService.deleteLeaveRecord(this.leaveID).subscribe(res => {
             if (res) {
                 this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave application deleted!' });

@@ -1,8 +1,8 @@
 /** Angular Dependencies */
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -18,13 +18,11 @@ import { MessageService } from '../../../core/shared/services/message.service';
 /** Component Declaration */
 
 
-class FormFieldClass {
-  constructor(
-    public comments: string
-  ) { }
+export interface BulkApprovalForm {
+  comments: string;
 }
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'bulkapproval',
   templateUrl: 'bulk-approval.component.html',
@@ -35,21 +33,25 @@ export class BulkApproveComponent {
   leaveObs: Observable<Leave>;
 
   servRows = 20;
-  requests: any[];
   selectedEmployees: any[];
+  bulkApprovalForm: FormGroup;
+  model: any;
 
-  model: FormFieldClass;
   approved: boolean = false;
   rejected: boolean = false;
 
   constructor(
     private messageService: MessageService,
-    private logService: LogService,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private formBuilder: FormBuilder
   ) {
-    this.requests = [];
+    this.model = {
+      comments: ''
+    };
 
-    this.model = new FormFieldClass('');
+    this.bulkApprovalForm = this.formBuilder.group({
+      comments: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(600)]]
+    })
     this.selectedEmployees = [];
   }
 
@@ -57,17 +59,23 @@ export class BulkApproveComponent {
     this.leaveObs = this.leaveService.getLeaves();
   }
 
-  approveClicked() {
-    if (this.selectedEmployees.length > 0) {
-      //    BACKEND CALL HERE
-      this.sendRequest('Approved');
+  approveClicked({ value, valid }: { value: BulkApprovalForm, valid: boolean }) {
+    if (valid) {
+      this.model.comments = value.comments;
+      if (this.selectedEmployees.length > 0) {
+        //    BACKEND CALL HERE
+        this.sendRequest('Approved');
+      }
     }
   }
 
-  rejectClicked() {
-    if (this.selectedEmployees.length > 0) {
-      //    BACKEND CALL HERE
-      this.sendRequest('Rejected');
+  rejectClicked({ value, valid }: { value: BulkApprovalForm, valid: boolean }) {
+    if (valid) {
+      this.model.comments = value.comments;
+      if (this.selectedEmployees.length > 0) {
+        //    BACKEND CALL HERE
+        this.sendRequest('Rejected');
+      }
     }
   }
 
@@ -98,10 +106,9 @@ export class BulkApproveComponent {
           this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leaves approved!' });
         }
         this.leaveObs = this.leaveService.getLeaves();
-        this.model.comments = '';
+        this.bulkApprovalForm.reset();
         this.selectedEmployees = [];
       } else {
-        this.logService.debug('Fail');
         this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
       }
     });

@@ -1,8 +1,8 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+
 /** Framework Dependencies */
-//import { BaseComponent } from '../views/base-component';
-import { BaseComponent, LogService } from '../../../framework.ref';
+import { Component } from '@angular/core';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -19,7 +19,7 @@ import { MessageService } from '../../../core/shared/services/message.service';
 /** Component Declaration */
 
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'leaves',
   templateUrl: 'my-leaves.component.html'
@@ -35,7 +35,6 @@ export class MyLeavesComponent {
   constructor(
     private messageService: MessageService,
     private router: Router, 
-    private logService: LogService, 
     private leaveService: LeaveService, 
     private userService: UserService
   ) {

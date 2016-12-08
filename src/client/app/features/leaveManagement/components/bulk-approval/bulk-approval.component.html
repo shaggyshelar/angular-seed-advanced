@@ -1,7 +1,7 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content" [ifAuthorize]="['BulkLeaveApproval.UPDATE','BulkLeaveApproval.READ']">
+    <div class="page-content">
         <div class="page-head">
             <!-- BEGIN PAGE TITLE -->
             <!-- END PAGE TITLE -->
@@ -33,11 +33,22 @@
                         <p-column field="approvers" header="Approvers" [sortable]="true"></p-column>
                         <p-column field="pending" header="Pending Approvers" [sortable]="true"></p-column>
                     </p-dataTable>
-                    <form #form="ngForm" novalidate>
+                    <form novalidate [formGroup]="bulkApprovalForm">
                         <div class="form-group">
                             <label class="control-label">Comments</label>
-                            <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" [(ngModel)]="model.comments" name="comments"
-                                pattern="...+" #comments="ngModel" required [class.validationClass]="comments.invalid && comments.touched"></textarea>
+                            <div class="div-margin">
+                                <textarea id="comments" autoresize="autoResize" cols="30" rows="3" class="form-control" formControlName="comments" required>
+                                </textarea>
+                                <div class="alert alert-danger" *ngIf="bulkApprovalForm.get('comments').hasError('required') && bulkApprovalForm.get('comments').touched">
+                                    Comment is required
+                                </div>
+                                <div class="alert alert-danger" *ngIf="bulkApprovalForm.get('comments').hasError('minlength') && bulkApprovalForm.get('comments').touched">
+                                    Minimum 2 characters
+                                </div>
+                                <div class="alert alert-danger" *ngIf="bulkApprovalForm.get('comments').hasError('maxlength') && bulkApprovalForm.get('comments').touched">
+                                    Maximum 600 characters
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -51,8 +62,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="pull-right">
-                                    <button id="approve" [disabled]="form.invalid" (click)="approveClicked()" class="btn ">Approve</button>
-                                    <button id="reject" [disabled]="form.invalid" (click)="rejectClicked()" class="btn ">Reject</button>
+                                    <button id="approve" [disabled]="bulkApprovalForm.invalid" (click)="approveClicked(bulkApprovalForm)" class="btn ">Approve</button>
+                                    <button id="reject" [disabled]="bulkApprovalForm.invalid" (click)="rejectClicked(bulkApprovalForm)" class="btn ">Reject</button>
                                 </div>
                             </div>
                         </div>

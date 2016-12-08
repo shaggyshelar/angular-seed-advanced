@@ -5,6 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
+import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,10 +26,11 @@ export function main() {
     t.describe('Component: SingleApprovalComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CoreModule, MultilingualModule, CommonModule],
+                imports: [CoreModule, FormsModule, ReactiveFormsModule, CommonModule],
                 declarations: [SingleApprovalComponent, TestComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
+                    FormBuilder,
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: ServiceStub },
                     { provide: ActivatedRoute, useValue: { 'params': Observable.from([{ 'id': 6527 }]) } },

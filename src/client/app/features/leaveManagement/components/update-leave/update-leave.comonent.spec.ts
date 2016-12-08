@@ -8,7 +8,6 @@ import { CoreModule } from '../../../../frameworks/core/core.module';
 
 import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BaseComponent, LogService } from '../../../framework.ref';
 import { MessageService } from '../../../core/shared/services/message.service';
 
 import { Observable } from 'rxjs/Rx';
