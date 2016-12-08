@@ -6,7 +6,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
 
-import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
@@ -27,7 +26,7 @@ export function main() {
     t.describe('Component: MyLeavesComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CoreModule, MultilingualModule, CommonModule],
+                imports: [CoreModule, CommonModule],
                 declarations: [MyLeavesComponent, TestComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
