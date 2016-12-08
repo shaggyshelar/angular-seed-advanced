@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Rx';
 import { EducationService } from '../../services/education.service';
 import { Education } from '../../models/education';
 import { MessageService } from '../../../core/shared/services/message.service';
+import { EducationFormValidation } from '../../models/validation/educationFormValidation';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -25,14 +26,7 @@ export interface Select {
     name: string;
 };
 
-export interface EducationForm {
-    id: number;
-    degree: string;
-    percentage: string;
-    yearOfPassing: string;
-    class: Select;
-    grade: Select;
-}
+
 
 
 /** Component Declaration */
@@ -83,7 +77,7 @@ export class EducationComponent implements OnInit {
         });
     }
 
-    onSubmit({ value, valid }: { value: EducationForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: EducationFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,

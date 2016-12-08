@@ -9,16 +9,10 @@ import { Observable } from 'rxjs/Rx';
 import { Visa } from '../../../models/visa';
 import { VisaService } from '../../../services/visa.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { VisaFormValidation } from '../../../models/validation/visaFormValidation';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
-
-export interface VisaForm {
-    id: number;
-    number: string;
-    expiryDate: string;
-    type: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -50,7 +44,7 @@ export class VisaComponent implements OnInit {
         this.showDiv = false;
         this.visaForm.reset();
     }
-    onSubmit({ value, valid }: { value: VisaForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: VisaFormValidation, valid: boolean }) {
         this.showDiv = true;
         if (value.id) {
             let params = {
