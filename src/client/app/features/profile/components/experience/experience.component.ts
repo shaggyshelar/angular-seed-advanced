@@ -9,23 +9,11 @@ import { Observable } from 'rxjs/Rx';
 import { Experience } from '../../models/experience';
 import { ExperienceService } from '../../services/experience.service';
 import { MessageService } from '../../../core/shared/services/message.service';
+import { ExperienceFormValidation } from '../../models/validation/experienceFormValidation';
 
 /** Other Module Dependencies */
 // import * as _ from 'lodash';
 import * as moment from 'moment/moment';
-
-export interface ExperienceForm {
-    id: number;
-    project: string;
-    client: string;
-    startDate: string;
-    endDate: string;
-    role: string;
-    environment: string;
-    responsibilites: string;
-    description: string;
-    isCurrentProject: boolean;
-}
 
 /** Component Declaration */
 @Component({
@@ -67,7 +55,7 @@ export class ExperienceComponent implements OnInit {
         this.experienceForm.reset();
     }
 
-    onSubmit({ value, valid }: { value: ExperienceForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: ExperienceFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,

@@ -9,15 +9,11 @@ import { Observable } from 'rxjs/Rx';
 import { IdentityProofService } from '../../../services/identityProof.service';
 import { IdentityProof } from '../../../models/identityProof';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { IdentityProofsFormValidation } from '../../../models/validation/identityProofsFormValidation';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
 import * as _ from 'lodash';
-
-export interface NomineeForm {
-    id: number;
-    value: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -64,7 +60,7 @@ export class IdentityProofsComponent implements OnInit {
         this.identityProofForm.reset();
     }
 
-    onSubmit({ value, valid }: { value: NomineeForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: IdentityProofsFormValidation, valid: boolean }) {
 
         if (value.id) {
             let params = {

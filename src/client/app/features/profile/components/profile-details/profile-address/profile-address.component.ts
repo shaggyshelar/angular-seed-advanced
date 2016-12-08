@@ -9,16 +9,10 @@ import { Observable } from 'rxjs/Rx';
 import { Address } from '../../../models/address';
 import { AddressService } from '../../../services/address.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { AddressFormValidation } from '../../../models/validation/addressFormValidation';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
-
-export interface AddressForm {
-    currentID: number;
-    permanentID: number;
-    currentAddress: string;
-    permanentAddress: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -68,7 +62,7 @@ export class ProfileAddressComponent implements OnInit {
         }
     }
 
-    onSubmit({ value, valid }: { value: AddressForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: AddressFormValidation, valid: boolean }) {
         this.showDiv = true;
         if (value.currentID && value.permanentID) {
             let params = [{
