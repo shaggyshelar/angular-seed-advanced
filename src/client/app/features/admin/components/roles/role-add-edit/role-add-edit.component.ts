@@ -34,8 +34,8 @@ export class RoleAddEditComponent implements OnInit {
     }
     ngOnInit() {
         this.roleForm = this.formBuilder.group({
-            id: [0],
-            name: ['', [Validators.required]],
+            ID: [0],
+            Name: ['', [Validators.required]],
         });
         this.route.params.forEach((params: Params) => {
             this.params = params['roleId'];
@@ -44,8 +44,8 @@ export class RoleAddEditComponent implements OnInit {
                     .subscribe(
                     results => {
                         this.roleForm.setValue({
-                            id: results.id,
-                            name: results.name
+                            ID: results.ID,
+                            Name: results.Name
                         });
                     },
                     error => this.errorMessage = <any>error);

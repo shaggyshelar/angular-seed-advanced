@@ -17,18 +17,18 @@ var getAllPermissions = function (req, res) {
 
 var getPermissionsByRole = function (req, res) {
     var roleId = parseInt(req.params.id);
-    var index = _.findIndex(roles.roleList, { id: roleId });
+    var index = _.findIndex(roles.roleList, { ID: roleId });
     res.json(roles.roleList[index].Permissions);
 };
 var addPermissionToRole = function (req, res) {
     var permission = req.body;
-    var index = _.findIndex(roles.roleList, { id: parseInt(permission.RoleId) });
+    var index = _.findIndex(roles.roleList, { ID: parseInt(permission.RoleId) });
     roles.roleList[index].Permissions.push(permission);
     res.json(permission);
 };
 var revokePermissionFromRole = function (req, res) {
     var permission = req.body;
-    var roleindex = _.findIndex(roles.roleList, { id: parseInt(permission.RoleId) });
+    var roleindex = _.findIndex(roles.roleList, { ID: parseInt(permission.RoleId) });
     var permissionindex = _.findIndex(roles.roleList[roleindex].Permissions, { Text: permission.text });
     roles.roleList[roleindex].Permissions.splice(permissionindex, 1);
     res.json(permission);
