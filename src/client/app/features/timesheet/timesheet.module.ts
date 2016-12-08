@@ -1,10 +1,6 @@
 /** Angular Dependencies */
 import { NgModule } from '@angular/core';
 
-/** Third Party Dependencies */
-import { EffectsModule } from '@ngrx/effects';
-import { ActionReducer } from '@ngrx/store';
-
 /** Module Level Dependencies */
 // Components Declarations
 import { CommonModule } from '../core/index';

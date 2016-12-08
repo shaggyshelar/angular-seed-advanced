@@ -9,17 +9,10 @@ import { Observable } from 'rxjs/Rx';
 import { EmploymentHistoryService } from '../../services/employmentHistory.service';
 import { EmploymentHistory } from '../../models/employmentHistory';
 import { MessageService } from '../../../core/shared/services/message.service';
+import { EmploymentHistoryFormValidation } from '../../models/validation/employmentHistoryFormValidation';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
-
-export interface EmploymentHistoryForm {
-    id: number;
-    employementDetails: string;
-    designation: string;
-    startDate: string;
-    endDate: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -59,7 +52,7 @@ export class EmploymentHistoryComponent implements OnInit {
         this.employmentHistoryForm.reset();
     }
 
-    onSubmit({ value, valid }: { value: EmploymentHistoryForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: EmploymentHistoryFormValidation, valid: boolean }) {
 
         if (value.id) {
             let params = {

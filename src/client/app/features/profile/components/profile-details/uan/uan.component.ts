@@ -9,12 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import { Uan } from '../../../models/uan';
 import { UanService } from '../../../services/uan.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
-
-export interface UanForm {
-    id: number;
-    number: string;
-    fromESPL: boolean;
-}
+import { UanFormValidation } from '../../../models/validation/uanFormValidation';
 
 /** Component Declaration */
 @Component({
@@ -46,7 +41,7 @@ export class UANComponent implements OnInit {
         });
     }
 
-    onSubmit({ value, valid }: { value: UanForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: UanFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,
