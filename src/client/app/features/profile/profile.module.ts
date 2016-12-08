@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 /** Module level Dependencies */
 // Components Declarations
-import { CommonModule, TranslateModule } from '../core/index';
+import { CommonModule } from '../core/index';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { EducationComponent } from './components/education/education.component';
@@ -38,8 +38,7 @@ import { VisaService } from './services/visa.service';
 /** Module Definition */
 @NgModule({
     imports: [
-        CommonModule,
-        TranslateModule
+        CommonModule        
     ],
     declarations: [
         MyProfileComponent,
