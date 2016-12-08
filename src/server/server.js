@@ -32,6 +32,7 @@ require('./visa/visa')(app);
 require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
 require('./changePassword/changePassword')(app);
+require('./master/leaveTypeMaster')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

@@ -19,6 +19,7 @@ import { UpdateLeaveComponent } from './components/update-leave/update-leave.com
 import { LeaveService } from './services/leave.service';
 import { HolidayService } from './services/holiday.service';
 import { UserService } from './services/user.service';
+import { LeaveTypeMasterService } from '../core/shared/services/master/leaveTypeMaster.service';
 
 /** Module Definition */
 @NgModule({
@@ -36,7 +37,7 @@ import { UserService } from './services/user.service';
         SingleApprovalComponent,
         UpdateLeaveComponent
     ],
-    providers: [LeaveService, HolidayService, UserService],
+    providers: [LeaveService, HolidayService, UserService, LeaveTypeMasterService],
 })
 
 export class LeaveModule {
