@@ -8,7 +8,7 @@ import { MessageService } from '../../../../core/shared/services/message.service
 import { Observable } from 'rxjs/Rx';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { Conference } from '../../../models/conference';
-
+import { RoomService } from '../../../../core/shared/services/master/room.service';
 /** Component Declaration */
 @Component({
     moduleId: module.id,
@@ -19,37 +19,13 @@ import { Conference } from '../../../models/conference';
 
 export class MyBookingComponent implements OnInit {
     bookings: Observable<Conference[]>;
-    conferenceRooms: any[];
-    constructor(private messageService: MessageService, private conferenceBookingService: ConferenceBookingService, private confirmationService: ConfirmationService) {
-        this.conferenceRooms = [{
-            name: 'Bahamas',
-            color: '#E7C5F5'
-        },
-        {
-            name: 'Dubai',
-            color: '#3FABA4'
-        }, {
-            name: 'Cape Town',
-            color: '#35AA47'
-        }, {
-            name: 'Hong Kong',
-            color: '#FF9655'
-        }, {
-            name: 'Caribbean',
-            color: '#8877A9'
-        }, {
-            name: 'Houston	',
-            color: '#428BCA'
-        }, {
-            name: 'Barcelona',
-            color: '#D05454'
-        }, {
-            name: 'Trainning Room',
-            color: '#DFBA49'
-        },
-        ];
+    conferenceRooms: Observable<any>;
+    constructor(
+        private roomService: RoomService,
+        private messageService: MessageService, private conferenceBookingService: ConferenceBookingService, private confirmationService: ConfirmationService) {
     }
     ngOnInit() {
+        this.conferenceRooms = this.roomService.getConferenceRooms();
         this.getMyBooking();
     }
     getMyBooking() {

@@ -14,6 +14,10 @@ import { ManageTicketComponent } from './components/ticket/manage-ticket/manage-
 // Services Delarations
 import { ConferenceBookingService } from './services/conference-booking.service';
 import { TicketService } from './services/ticket.service';
+import { RoomService } from '../core/shared/services/master/room.service';
+import { ConcernService } from '../core/shared/services/master/concern.service';
+import { DepartmentService } from '../core/shared/services/master/department.service';
+import { PriorityService } from '../core/shared/services/master/priority.service';
 
 /** Module Definition */
 @NgModule({
@@ -28,7 +32,14 @@ import { TicketService } from './services/ticket.service';
         LogTicketComponent,
         ManageTicketComponent
     ],
-    providers: [ConferenceBookingService,TicketService],
+    providers: [
+        ConferenceBookingService,
+        TicketService,
+        RoomService,
+        ConcernService,
+        DepartmentService,
+        PriorityService
+        ],
 })
 export class CorporateModule {
 }

@@ -1,5 +1,5 @@
 /** Angular Dependencies */
-import { OnInit, Inject, ElementRef,Component } from '@angular/core';
+import { OnInit, Inject, ElementRef, Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 //import * as localForage from 'localforage';
 
@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 /** Module Level Dependencies */
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { Conference } from '../../../models/conference';
+import { RoomService } from '../../../../core/shared/services/master/room.service';
 
 /** Component Declaration */
 @Component({
@@ -31,10 +32,15 @@ export class ConferenceComponent implements OnInit {
     headerConfig: any;
     minTime: string;
     maxTime: string;
-    conferenceRooms: any[];
+    conferenceRooms: Observable<any>;
     selectedRoom: string;
     serverEvents: Observable<Conference[]>;
-    constructor(private conferenceBookingService: ConferenceBookingService, private router: Router, private route: ActivatedRoute, @Inject(ElementRef) elementRef: ElementRef) {
+    constructor(
+        private roomService: RoomService,
+        private conferenceBookingService: ConferenceBookingService,
+        private router: Router, private route: ActivatedRoute,
+        @Inject(ElementRef) elementRef: ElementRef
+    ) {
         this.selectedEvent = new MyEvent(0, '', '', '', false);
         this.elementRef = elementRef;
     }
@@ -94,33 +100,7 @@ export class ConferenceComponent implements OnInit {
         //         this.events = this.allEvents;
         //     });
         //this.events = this.allEvents;
-        this.conferenceRooms = [{
-            name: 'Bahamas',
-            color: '#E7C5F5'
-        },
-        {
-            name: 'Dubai',
-            color: '#3FABA4'
-        }, {
-            name: 'Cape Town',
-            color: '#35AA47'
-        }, {
-            name: 'Hong Kong',
-            color: '#FF9655'
-        }, {
-            name: 'Caribbean',
-            color: '#8877A9'
-        }, {
-            name: 'Houston	',
-            color: '#428BCA'
-        }, {
-            name: 'Barcelona',
-            color: '#D05454'
-        }, {
-            name: 'Trainning Room',
-            color: '#DFBA49'
-        },
-        ];
+        this.conferenceRooms = this.roomService.getConferenceRooms();
     };
     handleDayClick(event) {
         this.conferenceBookingService.setSelectedSlot(event);

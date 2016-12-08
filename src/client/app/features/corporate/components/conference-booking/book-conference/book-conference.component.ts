@@ -8,7 +8,7 @@ import { SelectItem } from 'primeng/primeng';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import * as moment from 'moment/moment';
-
+import { RoomService } from '../../../../core/shared/services/master/room.service';
 /** Component Declaration */
 @Component({
     moduleId: module.id,
@@ -26,19 +26,14 @@ export class BookComponent implements OnInit {
     startTime: Date;
     endTime: Date;
     conferenceForm: FormGroup;
-    endTimeError:boolean= false;
-    constructor(private messageService: MessageService, private formBuilder: FormBuilder, private conferenceBookingService: ConferenceBookingService, private router: Router) {
-        this.conferenceRooms = [];
-        this.conferenceRooms.push({ label: 'Select Room', value: null });
-        this.conferenceRooms.push({ label: 'Bahamas', value: { id: 1, Name: 'Bahamas', Color: '#E7C5F5' } });
-        this.conferenceRooms.push({ label: 'Dubai', value: { id: 2, Name: 'Dubai', Color: '#3FABA4' } });
-        this.conferenceRooms.push({ label: 'Cape Town', value: { id: 3, Name: 'Cape Town', Color: '#35AA47' } });
-        this.conferenceRooms.push({ label: 'Hong Kong', value: { id: 4, Name: 'Hong Kong', Color: '#FF9655' } });
-        this.conferenceRooms.push({ label: 'Houston', value: { id: 4, Name: 'Houston', Color: '#428BCA' } });
-        this.conferenceRooms.push({ label: 'Barcelona', value: { id: 5, Name: 'Barcelona', Color: '#D05454' } });
-        this.conferenceRooms.push({ label: 'Caribbean', value: { id: 5, Name: 'Caribbean', Color: '#8877A9' } });
-        this.conferenceRooms.push({ label: 'Trainning Room', value: { id: 5, Name: 'Trainning Room', Color: '#DFBA49' } });
-    }
+    endTimeError: boolean = false;
+    constructor(
+        private roomService: RoomService,
+        private messageService: MessageService,
+        private formBuilder: FormBuilder,
+        private conferenceBookingService: ConferenceBookingService,
+        private router: Router
+        ) {}
     ngOnInit() {
         this.conferenceForm = this.formBuilder.group({
             //id: [null],
@@ -51,6 +46,16 @@ export class BookComponent implements OnInit {
             SpecialComment: [''],
             NoOfGuest: ['', Validators.pattern('[0-9]+')],
 
+        });
+        this.roomService.getConferenceRooms().subscribe(result => {
+            this.conferenceRooms = [];
+            this.conferenceRooms.push({ label: 'Select Room', value: null });
+            result.forEach(element => {
+                this.conferenceRooms.push({
+                    label: element.Name,
+                    value: element
+                });
+            });
         });
         let event = this.conferenceBookingService.getSelectedSlot();
     }

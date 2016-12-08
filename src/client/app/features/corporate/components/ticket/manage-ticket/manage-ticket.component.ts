@@ -1,5 +1,5 @@
 /** Angular Dependencies */
-import { OnInit,Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -10,6 +10,10 @@ import { SelectItem } from 'primeng/primeng';
 import { Ticket } from '../../../models/ticket';
 import { TicketService } from '../../../services/ticket.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { ConcernService } from '../../../../core/shared/services/master/concern.service';
+import { DepartmentService } from '../../../../core/shared/services/master/department.service';
+import { PriorityService } from '../../../../core/shared/services/master/priority.service';
+
 /** Third Party Dependencies */
 
 /** Component Declaration */
@@ -25,6 +29,9 @@ export class ManageTicketComponent implements OnInit {
     params: Params;
     ticketForm: FormGroup;
     constructor(
+        private concernService: ConcernService,
+        private departmentService: DepartmentService,
+        private priorityService: PriorityService,
         private messageService: MessageService,
         private formBuilder: FormBuilder,
         private ticketService: TicketService,
@@ -39,23 +46,37 @@ export class ManageTicketComponent implements OnInit {
             Concern: ['', [Validators.required]],
             Description: ['', [Validators.required]],
         });
-        this.departments = [];
-        this.departments.push({ label: 'Select Department', value: null });
-        this.departments.push({ label: 'IT', value: 'IT' });
-        this.departments.push({ label: 'Admin', value: 'Admin' });
-        this.departments.push({ label: 'Abc', value: 'Abc' });
+        this.concernService.getConcernList().subscribe(result => {
+            this.concerns = [];
+            this.concerns.push({ label: 'Select Concerns', value: null });
+            result.forEach(element => {
+                this.concerns.push({
+                    label: element.Name,
+                    value: element.Name
+                });
+            });
+        });
+        this.departmentService.getDepartmentList().subscribe(result => {
+            this.departments = [];
+            this.departments.push({ label: 'Select Department', value: null });
+            result.forEach(element => {
+                this.departments.push({
+                    label: element.Name,
+                    value: element.Name
+                });
+            });
+        });
+        this.priorityService.getPriorityList().subscribe(result => {
+            this.priorities = [];
+            this.priorities.push({ label: 'Select Priority', value: null });
+            result.forEach(element => {
+                this.priorities.push({
+                    label: element.Name,
+                    value: element.Name
+                });
+            });
+        });
 
-        this.priorities = [];
-        this.priorities.push({ label: 'Select Priority', value: null });
-        this.priorities.push({ label: 'Low', value: 'Low' });
-        this.priorities.push({ label: 'High', value: 'High' });
-        this.priorities.push({ label: 'Abc', value: 'Abc' });
-
-        this.concerns = [];
-        this.concerns.push({ label: 'Select Concerns', value: null });
-        this.concerns.push({ label: 'Soft install', value: 'Soft install' });
-        this.concerns.push({ label: 'Hardware req', value: 'Hardware req' });
-        this.concerns.push({ label: 'Abc', value: 'Abc' });
         this.route.params.forEach((params: Params) => {
             if (params['id']) {
                 this.params = params['id'];
