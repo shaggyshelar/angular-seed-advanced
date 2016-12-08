@@ -32,10 +32,10 @@ export class RoleListComponent implements OnInit {
         this.roleList = this.roleService.getRoles();
     }
     onEditClick(role: Role) {
-        this.router.navigate(['/admin/role/edit', role.id]);
+        this.router.navigate(['/admin/role/edit', role.ID]);
     }
     onDelete(role: Role) {
-        this.roleService.deleteRole(role.id)
+        this.roleService.deleteRole(role.ID)
             .subscribe(
             results => {
                 this.getRole();

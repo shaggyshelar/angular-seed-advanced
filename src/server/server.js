@@ -38,6 +38,10 @@ require('./master/certificationMaster/certificationMaster')(app);
 require('./master/classMaster/classMaster')(app);
 require('./master/identityTypeMaster/identityTypeMaster')(app);
 require('./master/gradeMaster/gradeMaster')(app);
+require('./master/conferenceRoom/conferenceRoom')(app);
+require('./master/priority/priority')(app);
+require('./master/concern/concern')(app);
+require('./master/department/department')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');

@@ -29,8 +29,8 @@
           <div class="form-group">
             <label class="col-md-2 control-label">Name</label>
             <div class="col-md-4">
-              <input type="text" formControlName="name" name="featureName" class="form-control" required="">
-              <div class="alert alert-danger" *ngIf="featureForm.get('name').hasError('required') && featureForm.get('name').touched">
+              <input type="text" formControlName="Name" name="featureName" class="form-control" required="">
+              <div class="alert alert-danger" *ngIf="featureForm.get('Name').hasError('required') && featureForm.get('Name').touched">
                 Please enter Feature Name
               </div>
             </div>
@@ -55,7 +55,7 @@
       </div>
       <div class="portlet-body">
         <p-dataTable [value]="featureList | async" [responsive]="true" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-          <p-column field="name" header="Feature Name" [sortable]="true"></p-column>
+          <p-column field="Name" header="Feature Name" [sortable]="true"></p-column>
           <p-column header="Edit">
             <template let-feature="rowData" pTemplate type="body">
               <button class="btn btn-danger" (click)="onEditClick(feature)"><i class="fa fa-edit"></i></button>

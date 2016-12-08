@@ -1,161 +1,161 @@
 // List of hardcoded users along with their details.
 var roles = {
     roleList: [{
-        id: 1,
-        name: 'SuperAdmin',
+        ID: 1,
+        Name: 'SuperAdmin',
         Permissions: [
             {
-                id: 1,
+                ID: 1,
                 Key: 'DASHBOARD.READ',
                 Text: 'Can read Dasboard'
             },
             {
-                id: 2,
+                ID: 2,
                 Key: 'PROFILE.MANAGE',
                 Text: 'Can manage Profile'
             },
             {
-                id: 3,
+                ID: 3,
                 Key: 'PROFILE.ALLPROFILES.READ',
                 Text: 'Can read ALL Profile'
             }]
     },
     {
-        id: 2,
-        name: 'Management Team',
+        ID: 2,
+        Name: 'Management Team',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
     },
     {
-        id: 3,
-        name: 'Recruitment Head',
+        ID: 3,
+        Name: 'Recruitment Head',
         Permissions: [
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             },
             {
-                id: 8,
+                ID: 8,
                 Key: 'RRF.MYRRF.READ',
                 Text: 'Can read MY RRF '
             },
             {
-                id: 9,
+                ID: 9,
                 Key: 'RRF.RRFAPPROVAL.READ',
                 Text: 'Can read RRF Approval'
             }]
     },
     {
-        id: 4,
-        name: 'Delivery Manager',
+        ID: 4,
+        Name: 'Delivery Manager',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
     },
     {
-        id: 5,
-        name: 'Project Manager',
+        ID: 5,
+        Name: 'Project Manager',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
     },
     {
-        id: 6,
-        name: 'HR Team',
+        ID: 6,
+        Name: 'HR Team',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
     },
     {
-        id: 7,
-        name: 'HR Head',
+        ID: 7,
+        Name: 'HR Head',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
     },
     {
-        id: 8,
-        name: 'ESPL Employees',
+        ID: 8,
+        Name: 'ESPL Employees',
         Permissions: [
             {
-                id: 5,
+                ID: 5,
                 Key: 'PROFILE.RECENTPROFILES.READ',
                 Text: 'Can read Recent Profile'
             },
             {
-                id: 6,
+                ID: 6,
                 Key: 'PROFILE.MYPROFILES.READ',
                 Text: 'Can read My Profile'
             },
             {
-                id: 7,
+                ID: 7,
                 Key: 'RRF.MANAGE',
                 Text: 'Can manage RRF'
             }]
