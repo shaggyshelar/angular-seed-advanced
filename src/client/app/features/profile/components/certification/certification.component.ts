@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 /** Module Level Dependencies */
 import { CertificateService } from '../../services/certificate.service';
 import { Certificate } from '../../models/certificate';
+import { CertificationFormValidation } from '../../models/validation/certificationFormValidation';
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Third Party Dependencies */
@@ -16,19 +17,6 @@ import { SelectItem } from 'primeng/primeng';
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 import * as moment from 'moment/moment';
-
-export interface Select {
-    id: number;
-    name: string;
-};
-
-export interface CertificationForm {
-    id: number;
-    option: Select;
-    code: Select;
-    fromEspl: boolean;
-    date: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -83,7 +71,7 @@ export class CertificationComponent implements OnInit {
         this.showDiv = false;
         this.certificationForm.reset();
     }
-    onSubmit({ value, valid }: { value: CertificationForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: CertificationFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,

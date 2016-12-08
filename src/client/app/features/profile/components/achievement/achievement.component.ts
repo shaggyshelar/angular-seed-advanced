@@ -9,15 +9,11 @@ import { Observable } from 'rxjs/Rx';
 /** Module Level Dependencies */
 import { AchievementService } from '../../services/achievement.service';
 import { Achievement } from '../../models/achievement';
+import { AchievementFormValidation } from '../../models/validation/achievementFormValidation';
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Other Module Dependencies */
 //import * as _ from 'lodash';
-
-export interface AchievementForm {
-    id: number;
-    description: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -47,7 +43,7 @@ export class AchievementComponent implements OnInit {
         this.achievementForm.reset();
     }
 
-    onSubmit({ value, valid }: { value: AchievementForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: AchievementFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,

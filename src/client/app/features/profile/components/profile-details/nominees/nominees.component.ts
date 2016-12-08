@@ -9,15 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import { Nominee } from '../../../models/nominee';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import { NomineesService } from '../../../services/nominees.service';
-
-export interface NomineeForm {
-    id: number;
-    firstNomineeName: string;
-    firstNomineeRelationWithEmp: string;
-    secondNomineeName: string;
-    secondNomineeRelationWithEmp: string;
-    isDeclaration: boolean;
-}
+import { NomineeFormValidation } from '../../../models/validation/nomineeFormValidation';
 
 /** Component Declaration */
 @Component({
@@ -53,7 +45,7 @@ export class NomineesComponent implements OnInit {
             this.nomineesList = result ? result : [];
         });
     }
-    onSubmit({ value, valid }: { value: NomineeForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: NomineeFormValidation, valid: boolean }) {
         if (value.id) {
             let params = {
                 ID: value.id,

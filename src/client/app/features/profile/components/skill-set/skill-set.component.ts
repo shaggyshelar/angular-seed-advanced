@@ -13,20 +13,10 @@ import { SelectItem } from 'primeng/primeng';
 import { Skill } from '../../models/skill';
 import { SkillService } from '../../services/skill.service';
 import { MessageService } from '../../../core/shared/services/message.service';
+import { SkillSetFormValidation } from '../../models/validation/skillSetFormValidation';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
-
-export interface Select {
-  id: number;
-  name: string;
-};
-
-export interface SkillSetForm {
-  id: number;
-  skillType: Select;
-  skills: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -66,7 +56,7 @@ export class SkillSetComponent implements OnInit {
     this.skillSetForm.reset();
   }
 
-  onSubmit({ value, valid }: { value: SkillSetForm, valid: boolean }) {
+  onSubmit({ value, valid }: { value: SkillSetFormValidation, valid: boolean }) {
     if (value.id) {
       let params = {
         ID: value.id,

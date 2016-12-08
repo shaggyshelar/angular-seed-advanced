@@ -9,15 +9,10 @@ import { Observable } from 'rxjs/Rx';
 import { Passport } from '../../../models/passport';
 import { PassportService } from '../../../services/passport.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { PassportFormValidation } from '../../../models/validation/passportFormValidation';
 
 /** Other Module Dependencies */
 import * as moment from 'moment/moment';
-
-export interface PassportForm {
-    id: number;
-    number: string;
-    expiryDate: string;
-}
 
 /** Component Declaration */
 @Component({
@@ -64,7 +59,7 @@ export class PassportComponent implements OnInit {
         }
     }
 
-    onSubmit({ value, valid }: { value: PassportForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: PassportFormValidation, valid: boolean }) {
         this.showDiv = true;
         if (value.id) {
             let params = {
