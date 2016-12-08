@@ -75,11 +75,11 @@ export class EducationComponent implements OnInit {
 
         this.educationForm = this.formBuilder.group({
             id: [''],
-            degree: ['', [Validators.required, Validators.minLength(2)]],
+            degree: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
             class: ['', [Validators.required]],
             grade: ['', [Validators.required]],
-            percentage: ['', [Validators.required, Validators.minLength(2)]],
-            yearOfPassing: ['', [Validators.required, Validators.minLength(2)]]
+            percentage: ['', [Validators.required, Validators.pattern('^[1-9][0-9]?$|^100$')]],
+            yearOfPassing: ['', [Validators.required, Validators.pattern('(?:(?:19|20)[0-9]{2})')]]
         });
     }
 

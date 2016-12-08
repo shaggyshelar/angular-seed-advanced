@@ -6,7 +6,8 @@
                     <span class="personal-info-label" id="personalInfo_employeeID">Employee ID : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <span> {{ profileInfo.ID }} </span>
+                    <!--<span> {{ profileInfo.ID }} </span>-->
+                    <span> {{(profileObj | async)?.ID}} </span>
                 </div>
             </div>
         </div>
@@ -16,7 +17,9 @@
                     <span class="personal-info-label" id="personalInfo_employeeName">Employee Name : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <span> {{ profileInfo.Name }} </span>
+                    <!--<span> {{ profileObj.Name }} </span>-->
+                     <span> {{(profileObj | async)?.Name}} </span>
+                     <!--<span> {{(((User_Obs | async)?.Contact)?.Type)?.Name}} </span>-->
                 </div>
             </div>
         </div>
@@ -28,7 +31,7 @@
                     <span class="personal-info-label" id="personalInfo_currentAddress">Current Address : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <span> {{ profileInfo.CurrentAdd }} </span>
+                    <span> {{ (profileObj | async)?.CurrentAdd }} </span>
                 </div>
             </div>
         </div>
@@ -38,7 +41,8 @@
                     <span class="personal-info-label" id="personalInfo_contactNo">Contact No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.ContactNo && !isAddContactNo" (click)="addContactNo()"></i>
+                     <span> {{ (profileObj | async)?.ContactNo }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.ContactNo && !isAddContactNo" (click)="addContactNo()"></i>
                     <div *ngIf="profileInfo.ContactNo && !isEditContactNo">
                         <span> {{ profileInfo.ContactNo }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editContactNo()"></i>
@@ -47,7 +51,7 @@
                         <input type="text" placeholder="" id="personalInfo_contactNoValue" [(ngModel)]="profileInfo.ContactNo" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveContactNo()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelContactNo()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -59,7 +63,7 @@
                     <span class="personal-info-label" id="personalInfo_employeeEmail">Email : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <span> {{ profileInfo.Email }} </span>
+                    <span> {{ (profileObj | async)?.Email }} </span>
                 </div>
             </div>
         </div>
@@ -69,7 +73,7 @@
                     <span class="personal-info-label" id="personalInfo_dateOfBirth">Date of Birth : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <span> {{ profileInfo.DOB }} </span>
+                    <span> {{ (profileObj | async)?.DOB }} </span>
                 </div>
             </div>
         </div>
@@ -81,7 +85,8 @@
                     <span class="personal-info-label" id="personalInfo_esplPFNo">ESPL PF No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CurrentOrgPFNumber && !isAddEsplPfNo" (click)="addEsplPfNo()"></i>
+                    <span> {{ ((profileObj | async)?.PF)?.CurrentOrgPFNumber }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CurrentOrgPFNumber && !isAddEsplPfNo" (click)="addEsplPfNo()"></i>
                     <div *ngIf="profileInfo.CurrentOrgPFNumber && !isEditEsplPfNo">
                         <span>{{ profileInfo.CurrentOrgPFNumber }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editEsplPfNo()"></i>
@@ -90,7 +95,7 @@
                         <input type="text" placeholder="" id="personalInfo_esplPfNoValue" [(ngModel)]="profileInfo.esplPfNo" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveEsplPfNo()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelEsplPfNo()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -100,7 +105,8 @@
                     <span class="personal-info-label" id="personalInfo_previousPFNo">Previous PF No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.PreviousOrgPFNumber && !isAddPreviousPfNo" (click)="addPreviousPfNo()"></i>
+                    <span> {{ ((profileObj | async)?.PF)?.PreviousOrgPFNumber }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.PreviousOrgPFNumber && !isAddPreviousPfNo" (click)="addPreviousPfNo()"></i>
                     <div *ngIf="profileInfo.PreviousOrgPFNumber && !isEditPreviousPfNo">
                         <span> {{ profileInfo.PreviousOrgPFNumber }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editPreviousPfNo()"></i>
@@ -109,7 +115,7 @@
                         <input type="text" placeholder="" id="personalInfo_previousPfNoValue" [(ngModel)]="profileInfo.PreviousOrgPFNumber" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="savePreviousPfNo()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelPreviousPfNo()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -121,16 +127,17 @@
                     <span class="personal-info-label" id="personalInfo_careerStartDate">Career Start Date : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CareerStartDate && !isAddCareerStartDate" (click)="addCareerStartDate()"></i>
+                    <span> {{ (profileObj | async)?.CareerStartDate }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.CareerStartDate && !isAddCareerStartDate" (click)="addCareerStartDate()"></i>
                     <div *ngIf="profileInfo.CareerStartDate && !isEditCareerStartDate">
-                        <span> {{ profileInfo.CareerStartDate }} </span>
+                        <span> {{ (profileObj | async)?.CareerStartDate }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editCareerStartDate()"></i>
                     </div>
                     <div *ngIf="isEditCareerStartDate">
                         <input type="text" placeholder="" id="personalInfo_careerStartDateValue" [(ngModel)]="profileInfo.CareerStartDate" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveCareerStartDate()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelCareerStartDate()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -140,7 +147,8 @@
                     <span class="personal-info-label" id="personalInfo_lastWorkingDay">Last working day of previous employer : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.LastWorkingDayOfPrevEmployer && !isAddLastWorkingDay" (click)="addLastWorkingDay()"></i>
+                    <span> {{ (profileObj | async)?.LastWorkingDayOfPrevEmployer }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.LastWorkingDayOfPrevEmployer && !isAddLastWorkingDay" (click)="addLastWorkingDay()"></i>
                     <div *ngIf="profileInfo.LastWorkingDayOfPrevEmployer && !isEditLastWorkingDay">
                         <span> {{ profileInfo.LastWorkingDayOfPrevEmployer }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editLastWorkingDay()"></i>
@@ -150,7 +158,7 @@
                             class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveLastWorkingDay()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelLastWorkingDay()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -162,7 +170,8 @@
                     <span class="personal-info-label" id="personalInfo_emergencyContactName">Emergency Contact Name : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactName && !isAddEmergencyContactName" (click)="addEmergencyContactName()"></i>
+                    <span> {{ ((profileObj | async)?.Contact)?.Name }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactName && !isAddEmergencyContactName" (click)="addEmergencyContactName()"></i>
                     <div *ngIf="profileInfo.emergencyContactName && !isEditEmergencyContactName">
                         <span> {{ profileInfo.emergencyContactName }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editEmergencyContactName()"></i>
@@ -172,7 +181,7 @@
                             class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveEmergencyContactName()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelEmergencyContactName()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -182,7 +191,8 @@
                     <span class="personal-info-label" id="personalInfo_bloodGroup">Blood Group : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.BloodGroup && !isAddBloodGroup" (click)="addBloodGroup()"></i>
+                    <span>{{ (profileObj | async)?.BloodGroup }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.BloodGroup && !isAddBloodGroup" (click)="addBloodGroup()"></i>
                     <div *ngIf="profileInfo.BloodGroup && !isEditBloodGroup">
                         <span>{{ profileInfo.BloodGroup }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editBloodGroup()"></i>
@@ -191,7 +201,7 @@
                         <input type="text" placeholder="" id="personalInfo_bloodGroupValue" [(ngModel)]="profileInfo.BloodGroup" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveBloodGroup()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelBloodGroup()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -203,7 +213,8 @@
                     <span class="personal-info-label" id="personalInfo_emergencyContactNo">Emergency Contact No : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactNo && !isAddEmergencyContact" (click)="addEmergencyContactNo()"></i>
+                     <span> {{ ((profileObj | async)?.Contact)?.Number }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.emergencyContactNo && !isAddEmergencyContact" (click)="addEmergencyContactNo()"></i>
                     <div *ngIf="profileInfo.emergencyContactNo && !isEditEmergencyContact">
                         <span> {{ profileInfo.emergencyContactNo }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editEmergencyContactNo()"></i>
@@ -213,7 +224,7 @@
                             class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveEmergencyContactNo()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelEmergencyContactNo()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -223,7 +234,8 @@
                     <span class="personal-info-label" id="personalInfo_skypeID">Skype ID : </span>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.SkypeID && !isAddSkypeID" (click)="addSkypeID()"></i>
+                    <span> {{ (profileObj | async)?.SkypeID }} </span>
+                    <!--<i class="fa fa-plus-circle icon-size" *ngIf="!profileInfo.SkypeID && !isAddSkypeID" (click)="addSkypeID()"></i>
                     <div *ngIf="profileInfo.SkypeID && !isEditSkypeID">
                         <span> {{ profileInfo.SkypeID }} </span>
                         <i class="fa fa-pencil icon-size" (click)="editSkypeID()"></i>
@@ -232,7 +244,7 @@
                         <input type="text" placeholder="" id="personalInfo_skypeIDValue" [(ngModel)]="profileInfo.SkypeID" class="input-border">
                         <i class="fa fa-floppy-o icon-size" (click)="saveSkypeID()"></i>
                         <i class="fa fa-times icon-size" (click)="cancelSkypeID()"></i>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

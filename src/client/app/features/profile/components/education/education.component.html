@@ -45,8 +45,8 @@
                     <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('required') && educationForm.get('degree').touched">
                         Degree is required
                     </div>
-                    <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('minlength') && educationForm.get('degree').touched">
-                        Minimum of 2 characters
+                    <div class="alert alert-danger" *ngIf="educationForm.get('degree').hasError('pattern') && educationForm.get('degree').touched">
+                        Invalid Degree
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
@@ -68,8 +68,8 @@
                     <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('required') && educationForm.get('percentage').touched">
                         Precentage is required
                     </div>
-                    <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('minlength') && educationForm.get('percentage').touched">
-                        Minimum of 2 characters
+                    <div class="alert alert-danger" *ngIf="educationForm.get('percentage').hasError('pattern') && educationForm.get('percentage').touched">
+                        Please enter an integer between than 1 and 100 and Value must be a whole number
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
@@ -81,8 +81,8 @@
                     <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('required') && educationForm.get('yearOfPassing').touched">
                         Year Of Passing is required
                     </div>
-                    <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('minlength') && educationForm.get('yearOfPassing').touched">
-                        Minimum of 2 characters
+                    <div class="alert alert-danger" *ngIf="educationForm.get('yearOfPassing').hasError('pattern') && educationForm.get('yearOfPassing').touched">
+                        Invalid Year
                     </div>
                 </div>
                 <div class="col-md-2 col-margin">
