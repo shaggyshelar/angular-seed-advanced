@@ -26,7 +26,7 @@ export class ConferenceComponent implements OnInit {
     elementRef: ElementRef;
     allEvents: any[];
     header: any;
-    selectedEvent: MyEvent;
+    selectedEvent: Conference;
     dialogVisible: boolean = false;
     idGen: number = 100;
     headerConfig: any;
@@ -41,7 +41,7 @@ export class ConferenceComponent implements OnInit {
         private router: Router, private route: ActivatedRoute,
         @Inject(ElementRef) elementRef: ElementRef
     ) {
-        this.selectedEvent = new MyEvent(0, '', '', '', false);
+        this.selectedEvent = new Conference(0,null, '', '', '', false,'');
         this.elementRef = elementRef;
     }
     ngAfterViewInit() {
@@ -130,13 +130,4 @@ export class ConferenceComponent implements OnInit {
             });
         }
     }
-}
-class MyEvent {
-    constructor(
-        public id: number,
-        public title: string,
-        public start: string,
-        public end: string,
-        public allDay: boolean
-    ) { }
 }
