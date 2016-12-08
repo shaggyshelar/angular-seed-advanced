@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
 
 /** Framework Dependencies */
 import { Component } from '@angular/core';
@@ -15,8 +16,6 @@ import { Leave } from '../../models/leave';
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
-
-import { OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,

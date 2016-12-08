@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 /** Framework Dependencies */
 import { Component } from '@angular/core';
@@ -11,16 +12,13 @@ import { Message } from 'primeng/primeng';
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
+import { ApprovalForm } from '../../models/leaveApprovalValidation';
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
-
-export interface BulkApprovalForm {
-  comments: string;
-}
 
 @Component({
   moduleId: module.id,
@@ -59,7 +57,7 @@ export class BulkApproveComponent {
     this.leaveObs = this.leaveService.getLeaves();
   }
 
-  approveClicked({ value, valid }: { value: BulkApprovalForm, valid: boolean }) {
+  approveClicked({ value, valid }: { value: ApprovalForm, valid: boolean }) {
     if (valid) {
       this.model.comments = value.comments;
       if (this.selectedEmployees.length > 0) {
@@ -69,7 +67,7 @@ export class BulkApproveComponent {
     }
   }
 
-  rejectClicked({ value, valid }: { value: BulkApprovalForm, valid: boolean }) {
+  rejectClicked({ value, valid }: { value: ApprovalForm, valid: boolean }) {
     if (valid) {
       this.model.comments = value.comments;
       if (this.selectedEmployees.length > 0) {
