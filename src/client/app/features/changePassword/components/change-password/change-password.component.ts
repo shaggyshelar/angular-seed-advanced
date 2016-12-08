@@ -35,16 +35,11 @@ export class ChangePasswordComponent {
     isFormClean: boolean = false;
     isConfirmPasswordSame;
 
-    //model: PasswordForm;
-
     constructor(
         private messageService: MessageService,
         private passwordService: ChangePasswordService,
         private formBuilder: FormBuilder
     ) {
-        // this.model.OldPassword = '';
-        // this.model.NewPassword = '';
-        // this.model.ConfirmPassword = '';
     }
 
     ngOnInit() {
@@ -55,9 +50,6 @@ export class ChangePasswordComponent {
         });
     }
 
-    checkForm() {
-        //this.model.ConfirmPassword === this.model.NewPassword ? this.isConfirmPasswordSame = true : this.isConfirmPasswordSame = false;
-    }
 
     onSubmit({ value, valid }: { value: PasswordForm, valid: boolean }) {
         var params = {
