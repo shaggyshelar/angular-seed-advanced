@@ -5,8 +5,6 @@ export interface User {
     ID: number;
     Name: string;
     DOB: string;
-    CurrentOrgPFNumber: string;
-    PreviousOrgPFNumber: string;
     PF: PF;
     Contact: Contact;
     ContactNo: string;
