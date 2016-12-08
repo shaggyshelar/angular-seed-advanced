@@ -5,7 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
-
+import * as _ from 'lodash';
 /** Module Level Dependencies */
 import { Ticket } from '../../../models/ticket';
 import { TicketService } from '../../../services/ticket.service';
@@ -49,7 +49,7 @@ export class ManageTicketComponent implements OnInit {
         this.concernService.getConcernList().subscribe(result => {
             this.concerns = [];
             this.concerns.push({ label: 'Select Concerns', value: null });
-            result.forEach(element => {
+            _.forEach(result, element => {
                 this.concerns.push({
                     label: element.Name,
                     value: element.Name
@@ -59,7 +59,7 @@ export class ManageTicketComponent implements OnInit {
         this.departmentService.getDepartmentList().subscribe(result => {
             this.departments = [];
             this.departments.push({ label: 'Select Department', value: null });
-            result.forEach(element => {
+            _.forEach(result, element => {
                 this.departments.push({
                     label: element.Name,
                     value: element.Name
@@ -69,7 +69,7 @@ export class ManageTicketComponent implements OnInit {
         this.priorityService.getPriorityList().subscribe(result => {
             this.priorities = [];
             this.priorities.push({ label: 'Select Priority', value: null });
-            result.forEach(element => {
+            _.forEach(result, element => {
                 this.priorities.push({
                     label: element.Name,
                     value: element.Name

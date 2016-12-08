@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Other Module Dependencies */
 import { SelectItem } from 'primeng/primeng';
+import * as _ from 'lodash';
 //import * as localForage from 'localforage';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
@@ -33,7 +34,7 @@ export class BookComponent implements OnInit {
         private formBuilder: FormBuilder,
         private conferenceBookingService: ConferenceBookingService,
         private router: Router
-        ) {}
+    ) { }
     ngOnInit() {
         this.conferenceForm = this.formBuilder.group({
             //id: [null],
@@ -50,7 +51,7 @@ export class BookComponent implements OnInit {
         this.roomService.getConferenceRooms().subscribe(result => {
             this.conferenceRooms = [];
             this.conferenceRooms.push({ label: 'Select Room', value: null });
-            result.forEach(element => {
+            _.forEach(result, element => {
                 this.conferenceRooms.push({
                     label: element.Name,
                     value: element

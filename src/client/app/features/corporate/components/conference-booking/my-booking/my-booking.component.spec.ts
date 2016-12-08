@@ -12,6 +12,8 @@ import { MultilingualModule } from '../../../../../frameworks/i18n/multilingual.
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { Conference } from '../../../models/conference';
 import { MessageService } from '../../../../core/shared/services/message.service';
+import { RoomService } from '../../../../core/shared/services/master/room.service';
+
 import * as moment from 'moment/moment';
 
 export function main() {
@@ -24,6 +26,7 @@ export function main() {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: ConferenceBookingService, useClass: ConferenceBookingServiceStub },
+                    { provide: RoomService, useClass: RoomServiceStub },
                     { provide: MessageService, useClass: MessageServiceStub },
                     ConfirmationService]
             });
@@ -119,6 +122,11 @@ class ConferenceBookingServiceStub {
 
 class MessageServiceStub {
     addMessage(message) {
+        return;
+    }
+}
+class RoomServiceStub {
+    getConferenceRooms() {
         return;
     }
 }

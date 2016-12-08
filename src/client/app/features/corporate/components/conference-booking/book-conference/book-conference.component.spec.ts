@@ -10,6 +10,8 @@ import { DropdownModule, SharedModule, CalendarModule, ButtonModule } from 'prim
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { RoomService } from '../../../../core/shared/services/master/room.service';
+
 export function main() {
 
     t.describe('Component: BookComponent', () => {
@@ -21,6 +23,7 @@ export function main() {
                 providers: [
                     FormBuilder,
                     { provide: Router, useClass: RouterStub },
+                    { provide: RoomService, useClass: RoomServiceStub },
                     { provide: ConferenceBookingService, useClass: ConferenceBookingServiceStub },
                     { provide: MessageService, useClass: MessageServiceStub },
                 ]
@@ -44,7 +47,7 @@ export function main() {
                         let fixture = TestBed.createComponent(TestComponent);
                         fixture.detectChanges();
                         let componentInstance = fixture.debugElement.children[0].componentInstance;
-                        t.expect(componentInstance.conferenceRooms.length).toBe(9);
+                        t.expect(componentInstance.conferenceRooms).toBeDefined();
                     });
             }));
         // t.it('should save a record',
@@ -85,7 +88,7 @@ class ConferenceBookingServiceStub {
         });
     }
     getSelectedSlot() {
-       return;
+        return;
     }
 }
 
@@ -102,3 +105,10 @@ export class RouterLinkStubDirective {
     @Input('routerLink') linkParams: any;
 }
 
+class RoomServiceStub {
+    getConferenceRooms() {
+        return new Observable<any>(observer => {
+            observer.next();
+        });
+    }
+}
