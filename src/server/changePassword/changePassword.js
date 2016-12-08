@@ -10,11 +10,14 @@ module.exports = function (app) {
                 res.status(200).json({ resp: 1, message: 'Password changed!' });
             }
             else {
-                res.status(500).json({ resp: 2, message: 'Old password is invalid!' });
+                res.status(200).json({ resp: 2, message: 'Old password is invalid, password not changed.' });
             }
         }
+        else if (req.body.NewPassword != req.body.ConfirmPassword){
+            res.status(200).json({ resp: 3, message: 'Passwords do not match, password not changed.' })
+        }
         else {
-            res.status(500).json({ resp: 3, message: 'Passwords do not match!' })
+            res.status(500).end('Bad request');
         }
     });
 }

@@ -31,7 +31,7 @@ export class ChangePasswordService extends BaseService {
      * @ID : Parameter : ID of user to update
      * @payload : Parameter : Object of entity to be updated
      */
-    changePassword(payload): Observable<boolean> {
-        return this.post$(payload).map(res => res.status === 200 ? true : false);
+    changePassword(payload): Observable<any> {
+        return this.post$(payload).map(res => res.status === 200 ? res.json() : res.json());
     }
 }

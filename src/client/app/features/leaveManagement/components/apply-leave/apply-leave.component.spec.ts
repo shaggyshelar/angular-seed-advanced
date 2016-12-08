@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
+import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
@@ -20,10 +21,11 @@ export function main() {
     t.describe('Component: ApplyLeaveComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CoreModule],
+                imports: [CoreModule, FormsModule, ReactiveFormsModule],
                 declarations: [ApplyLeaveComponent, TestComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
+                    FormBuilder,
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: LeaveServiceStub },
                     { provide: UserService, useClass: UserServiceStub },

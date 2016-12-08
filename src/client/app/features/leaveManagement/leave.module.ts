@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 //import { RouterModule  } from '@angular/router';
 
 /** Third Party Dependencies */
-import { EffectsModule } from '@ngrx/effects';
-import { ActionReducer } from '@ngrx/store';
 
 /** Module Level Dependencies */
 // Components Declarations

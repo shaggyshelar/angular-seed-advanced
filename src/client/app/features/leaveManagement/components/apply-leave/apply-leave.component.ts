@@ -2,33 +2,25 @@
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { OnInit } from '@angular/core';
-
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component } from '@angular/core';
-
 
 /** Module Level Dependencies */
 import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { Select } from '../../models/select';
+import { ApplyLeaveValidation } from '../../models/ApplyLeaveValidation';
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
+import { SelectItem } from 'primeng/primeng';
 
 /** Component Declaration */
 
-class FormFieldClass {
-    constructor(
-        public User: { ID: number, Name: string },
-        public numDays: number,
-        public leaveType: any,
-        public end: any,
-        public start: any,
-        public reason: string
-    ) { }
-}
 
 @Component({
     moduleId: module.id,
@@ -40,9 +32,8 @@ class FormFieldClass {
 export class ApplyLeaveComponent implements OnInit {
     leaveObs: Observable<boolean>;
     userObs: Observable<User>;
-
+    applyLeaveForm: FormGroup;
     addLeaveArr: any[];
-
     leaveTypeValid: boolean = true;
     leaveID: number;
     strtDt: any;
@@ -52,22 +43,44 @@ export class ApplyLeaveComponent implements OnInit {
     isLeaveAdded: boolean = false;
     isEndDtEnable: boolean = true;
     dayCount: any;
-    leaves: any = [
-        { label: 'Leave', value: 1 },
-        { label: 'Half-day Leave', value: 2 },
-        { label: 'Absent', value: 3 },
-        { label: 'Half-day Absent', value: 4 }
-    ];
-    model: FormFieldClass;
+    leaves: SelectItem[];
+    model: ApplyLeaveValidation;
 
     constructor(
         private messageService: MessageService,
         private router: Router,
         private userService: UserService,
-        private leaveService: LeaveService
+        private leaveService: LeaveService,
+        private formBuilder: FormBuilder
     ) {
-        this.model = new FormFieldClass({ ID: 12345, Name: 'Lname Fname' }, 1, 'select', new Date(), new Date(), '');
+        this.leaves = [
+            { label: 'Submit', value: null },
+            { label: 'Leave', value: { id: 1, name: 'Leave' } },
+            { label: 'Half-day Leave', value: { id: 2, name: 'Half-day Leave' } },
+            { label: 'Absent', value: { id: 3, name: 'Absent' } },
+            { label: 'Half-day Absent', value: { id: 4, name: 'Half-day Absent' } }
+        ];
         this.addLeaveArr = [];
+
+        this.model = {
+            User: {
+                ID: 12345,
+                Name: 'Lname Fname'
+            },
+            numDays: 1,
+            leaveType: null,
+            end: new Date(),
+            start: new Date(),
+            reason: ''
+        };
+
+        this.applyLeaveForm = this.formBuilder.group({
+            numDays: ['', [Validators.required]],
+            leaveType: ['', [Validators.required]],
+            start: ['', [Validators.required]],
+            end: ['', [Validators.required]],
+            reason: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(600)]]
+        });
     }
 
     ngOnInit() {
@@ -109,10 +122,16 @@ export class ApplyLeaveComponent implements OnInit {
                     Comment: 'Approved'
                 }
             ],
-            Type: { ID: this.leaveID, Title: this.model.leaveType }
+            Type: { ID: this.model.leaveType.id, Title: this.model.leaveType.name }
         };
         this.leaveService.addLeaveRecord(params).subscribe(res => {
-            res ? this.router.navigate(['/leave/my-leaves']) : false;
+            if (res) {
+                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave applied!' });
+                this.cancelClick();
+            }
+            else {
+                this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: 'Failed to process your request.' });
+            }
         });
     }
 
@@ -127,67 +146,32 @@ export class ApplyLeaveComponent implements OnInit {
         this.dayDiffCalc();
     }
 
-    addLeaves() {
-        if (this.model.numDays === 0.5) {
-            this.addLeaveArr = [];
-            this.addLeaveArr.push({ leave: this.model.leaveType, numDays: this.model.numDays, reason: this.model.reason, start: this.model.start, end: this.model.end });
-        } else if (this.model.numDays >= 0.5) {
-            this.addLeaveArr = [];
-            var start = this.model.start;
-            var current = this.model.start;
-            var end = this.model.end;
-            for (var i = 0; i < this.model.numDays; i++) {
-                if (current.getDay() < 5) {
-                    this.addLeaveArr.push({ leave: this.model.leaveType, numDays: 1, reason: this.model.reason, start: current, end: current });
-                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
-                } else if (current.getDay() === 5) {
-                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 2);
-                } else if (current.getDay() === 6) {
-                    current = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
-                }
-            }
-        }
-        //TODO : Add leave fuunctinality
-        this.isLeaveAdded = true;
-    }
-
-    daysInMonth(m, y) { // m is 0 indexed: 0-11
-        switch (m) {
-            case 1:
-                return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;
-            case 8: case 3: case 5: case 10:
-                return 30;
-            default:
-                return 31
-        }
-    }
-
-    isValid(d, m, y) {
-        return m >= 0 && m < 12 && d > 0 && d <= this.daysInMonth(m, y);
-    }
-
     validateLeaveType() {
-        switch (this.model.leaveType) {
-            case 'Leave':
+        switch (this.model.leaveType.id) {
+            case 1:
                 this.leaveTypeValid = true;
                 this.isEndDtEnable = true;
                 this.leaveID = 1;
+                this.model.numDays = 1;
                 return;
 
-            case 'Half-day Leave':
+            case 2:
+                debugger;
                 this.leaveTypeValid = true;
                 this.model.numDays = 0.5;
                 this.isEndDtEnable = false;
                 this.leaveID = 2;
                 return;
 
-            case 'Absent':
+            case 3:
                 this.leaveTypeValid = true;
                 this.isEndDtEnable = true;
                 this.leaveID = 3;
+                this.model.numDays = 1;
                 return;
 
-            case 'Half-day Absent':
+            case 4:
+                debugger;
                 this.leaveTypeValid = true;
                 this.model.numDays = 0.5;
                 this.isEndDtEnable = false;
@@ -196,12 +180,13 @@ export class ApplyLeaveComponent implements OnInit {
 
             default:
                 this.leaveTypeValid = false;
+                this.model.numDays = 0;
+                return;
         }
     }
 
     reasonTextChanged() {
         this.charsLeft = 600 - this.model.reason.length;
-        (this.model.reason.length > 3) ? this.isLeaveAdded = true : this.isLeaveAdded = false;
     }
 
     dayDiffCalc() { // input given as Date objects
@@ -236,4 +221,7 @@ export class ApplyLeaveComponent implements OnInit {
         this.router.navigate(['/leave/my-leaves']);
     }
 
+    addLeaves() {
+        console.log('mode : ' + JSON.stringify(this.model));
+    }
 }

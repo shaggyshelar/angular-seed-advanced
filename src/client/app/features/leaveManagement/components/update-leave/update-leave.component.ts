@@ -36,7 +36,7 @@ export class UpdateLeaveComponent {
         private route: ActivatedRoute,
         private leaveService: LeaveService
     ) {
-        this.isCancellable = false;
+        this.isCancellable = true;
         this.errorMsg = '';
         this.today = new Date();
     }
@@ -49,10 +49,7 @@ export class UpdateLeaveComponent {
 
         this.leaveObs = this.leaveService.getLeave(this.leaveID);
         this.leaveObs.subscribe(res => {
-            if (res.StartDate >= new Date())
-                this.setCancellable(true);
-            else
-                this.setCancellable(false);
+            res.Status === 'Approved' ? this.isCancellable = true : this.isCancellable = false;
         });
     }
 

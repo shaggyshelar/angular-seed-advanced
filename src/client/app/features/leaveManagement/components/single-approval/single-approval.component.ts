@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 /** Framework Dependencies */
 import { Component } from '@angular/core';
@@ -19,10 +20,8 @@ import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
-class FormFieldClass {
-    constructor(
-        public comments: string
-    ) { }
+export interface SingleApprovalForm {
+    comments: string;
 }
 
 @Component({
@@ -31,92 +30,102 @@ class FormFieldClass {
     templateUrl: 'single-approval.component.html',
     styleUrls: ['single-approval.component.css']
 })
+
 export class SingleApprovalComponent {
     leaveID: number;
     leaveObs: Observable<Leave>;
     userDetObs: Observable<User>;
     requests: any;
     servRows = 6;
-    model: FormFieldClass;
+    singleApprovalForm: FormGroup;
+    model: any;
+
     validationMessage: string = '';
     approved: boolean = false;
     rejected: boolean = false;
-    
+
     constructor(
         private messageService: MessageService,
         private router: Router,
         private leaveService: LeaveService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private formBuilder: FormBuilder
     ) {
-        this.model = new FormFieldClass('');
+
+        this.model = {
+            comments: ''
+        };
+        this.singleApprovalForm = this.formBuilder.group({
+            comments: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(600)]]
+        })
 
     }
 
     ngOnInit() {
+
         this.route.params.subscribe(params => {
             this.leaveID = +params['id'];
         });
         this.leaveObs = this.leaveService.getLeave(this.leaveID);
+
     }
 
-    approveClicked() {
-        this.rejected = false;
-        this.approved = true;
+    approveClicked({ value, valid }: { value: SingleApprovalForm, valid: boolean }) {
+        if (valid) {
         //    BACKEND CALL HERE
+            this.model.comments = value.comments;
+            var params = [{
+                ID: this.leaveID,
+                Comment: this.model.comments.trim(),
+                Status: 'Approved'
+            }];
 
-        var params = [{
-            ID: this.leaveID,
-            Comment: this.model.comments.trim(),
-            Status: 'Approved'
-        }];
-
-        this.leaveService.updateLeaveRecord(this.leaveID, params)
-            .subscribe(res => {
-                if (res) {
-                    this.rejected = false;
-                    this.approved = true;
-                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
-                    this.closeClicked();
-                } else {
-                    this.rejected = true;
-                    this.approved = false;
-                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
-                }
-            });
+            this.leaveService.updateLeaveRecord(this.leaveID, params)
+                .subscribe(res => {
+                    if (res) {
+                        this.rejected = false;
+                        this.approved = true;
+                        this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave approved!' });
+                        this.closeClicked();
+                    } else {
+                        this.rejected = true;
+                        this.approved = false;
+                        this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    }
+                });
+        }
     }
 
-    rejectClicked() {
-        this.rejected = true;
-        this.approved = false;
+    rejectClicked({ value, valid }: { value: SingleApprovalForm, valid: boolean }) {
+        if (valid) {
         //    BACKEND CALL HERE
 
-        var params = [{
-            ID: this.leaveID,
-            Comment: this.model.comments.trim(),
-            Status: 'Rejected'
-        }];
+            this.model.comments = value.comments;
+            var params = [{
+                ID: this.leaveID,
+                Comment: this.model.comments.trim(),
+                Status: 'Rejected'
+            }];
 
-        this.leaveService.updateLeaveRecord(this.leaveID, params)
-            .subscribe(res => {
-                if (res) {
-                    this.rejected = true;
-                    this.approved = false;
-                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
-                    this.closeClicked();
-                } else {
-                    this.rejected = false;
-                    this.approved = true;
-                    this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
-                }
-            });
+            this.leaveService.updateLeaveRecord(this.leaveID, params)
+                .subscribe(res => {
+                    if (res) {
+                        this.rejected = true;
+                        this.approved = false;
+                        this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Leave rejected!' });
+                        this.closeClicked();
+                        this.singleApprovalForm.reset();
+                    } else {
+                        this.rejected = false;
+                        this.approved = true;
+                        this.messageService.addMessage({ severity: 'error', summary: 'Fail', detail: 'Request not completed.' });
+                    }
+                });
+        }
     }
 
     closeClicked() {
         this.model.comments = '';
         this.router.navigate(['/leave/approve-leave']);
-    }
-
-    submitForm(form) {
-        // BACKEND CALL HERE
     }
 }
