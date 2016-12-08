@@ -1,18 +1,16 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Other Module Dependencies */
 import { Observable } from 'rxjs/Rx';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 import { RoleService } from '../../../services/role.service';
 import { PermissionService } from '../../../services/permission.service';
 import { Role } from '../../../models/role';
 import { MessageService } from '../../../../core/shared/services/message.service';
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'role-add-edit',
     templateUrl: 'role-add-edit.component.html',

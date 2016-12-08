@@ -1,9 +1,6 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit,Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Module Level Dependencies */
 import { Ticket } from '../../../models/ticket';
@@ -14,7 +11,7 @@ import { Observable } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'log-ticket',
   templateUrl: 'log-ticket.component.html',

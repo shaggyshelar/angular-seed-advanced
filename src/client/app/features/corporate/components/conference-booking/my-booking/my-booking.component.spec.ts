@@ -110,7 +110,7 @@ var conferenceList = [
     }
 ];
 class ConferenceBookingServiceStub {
-    getMyBooking(id) {
+    getConferenceBooking() {
         return new Observable<Conference[]>(observer => {
             observer.next(conferenceList);
         });

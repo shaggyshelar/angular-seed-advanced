@@ -18,7 +18,7 @@ export function main() {
     t.describe('Component: ManageTicketComponent', () => {
         t.beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, CoreModule, FormsModule, ReactiveFormsModule, DropdownModule, SharedModule, ButtonModule],
+                imports: [CommonModule, FormsModule, ReactiveFormsModule, DropdownModule, SharedModule, ButtonModule],
                 declarations: [ManageTicketComponent, TestComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [

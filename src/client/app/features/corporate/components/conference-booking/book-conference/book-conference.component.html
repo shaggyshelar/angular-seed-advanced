@@ -46,6 +46,9 @@
               <div class="alert alert-danger" *ngIf="conferenceForm.get('end').hasError('required') && conferenceForm.get('end').touched">
                 Please select End Time
               </div>
+               <div class="alert alert-danger" *ngIf="endTimeError">
+                 The start date and time should be before the end date and time.
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -70,22 +73,23 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" for="description">Description</label>
+            <label class="control-label col-sm-2">Description</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="description"></textarea>
+              <textarea class="form-control" formControlName="Description" id="description"></textarea>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" for="description">All Day Event</label>
+            <label class="control-label col-sm-2">All Day Event</label>
             <div class="col-sm-10">
-              <p><input type="checkbox" id="allDayEvent">Make this an all-day activity that doesn't start or end at a specific
-                hour.</p>
+              <p><input type="checkbox" formControlName="allDay" id="allDayEvent">&nbsp;Make this an all-day activity that doesn't
+                start or end at a specific hour.
+              </p>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" for="description"> Recurrence</label>
+            <label class="control-label col-sm-2"> Recurrence</label>
             <div class="col-sm-10">
-              <p><input type="checkbox" id="recurrance" name="recurrance">Make this a repeating event.</p>
+              <p><input type="checkbox" id="recurrance" name="recurrance">&nbsp;Make this a repeating event.</p>
             </div>
           </div>
           <div class="form-group" *ngIf="recurrance">
@@ -150,22 +154,25 @@
           <div class="form-group">
             <label class="control-label col-sm-2">Special Comments</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="specialComments"></textarea>
+              <textarea class="form-control" formControlName="SpecialComment" id="specialComments"></textarea>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2">Number of Guests</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="noOfGuest">
+              <input type="text" class="form-control" formControlName="NoOfGuest" id="noOfGuest">
+              <div class="alert alert-danger" *ngIf="conferenceForm.get('NoOfGuest').invalid">
+                Only Number allowed
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-offset-1 col-sm-10">IsDeleted  &nbsp;&nbsp;<input type="checkbox"   id="isdeleted"></label>
+            <label class="col-md-offset-1 col-sm-10">IsDeleted  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"   id="isdeleted"></label>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button pButton type="submit" label="Save" id="saveBtn" [disabled]="conferenceForm.invalid"></button>
-              <button pButton type="text" label="Cancel" id="cancelBtn" (cancel)="onCancel()"></button>
+              <button pButton type="button" label="Cancel" id="cancelBtn" (click)="onCancel()"></button>
             </div>
           </div>
         </form>

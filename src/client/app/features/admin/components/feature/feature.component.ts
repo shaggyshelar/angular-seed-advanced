@@ -1,19 +1,17 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /** Other Module Dependencies */
 import * as _ from 'lodash';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../framework.ref';
 
 import { FeatureService } from '../../services/feature.service';
 import { Feature } from '../../models/feature';
 import { MessageService } from '../../../core/shared/services/message.service';
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'admin-feature',
     templateUrl: 'feature.component.html',

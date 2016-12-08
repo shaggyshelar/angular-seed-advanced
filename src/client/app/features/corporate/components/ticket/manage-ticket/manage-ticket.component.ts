@@ -1,9 +1,7 @@
 /** Angular Dependencies */
-import { OnInit } from '@angular/core';
+import { OnInit,Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-/** Framework Dependencies */
-import { BaseComponent } from '../../../../framework.ref';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -15,7 +13,7 @@ import { MessageService } from '../../../../core/shared/services/message.service
 /** Third Party Dependencies */
 
 /** Component Declaration */
-@BaseComponent({
+@Component({
     moduleId: module.id,
     selector: 'manage-ticket',
     templateUrl: 'manage-ticket.component.html'
