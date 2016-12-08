@@ -32,6 +32,12 @@ require('./visa/visa')(app);
 require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
 require('./changePassword/changePassword')(app);
+require('./master/skillMaster/skillMaster')(app);
+require('./master/certificationCodeMaster/certificationCodeMaster')(app);
+require('./master/certificationMaster/certificationMaster')(app);
+require('./master/classMaster/classMaster')(app);
+require('./master/identityTypeMaster/identityTypeMaster')(app);
+require('./master/gradeMaster/gradeMaster')(app);
 
 app.get('/', function (req, res) {
     res.render('index.html');
