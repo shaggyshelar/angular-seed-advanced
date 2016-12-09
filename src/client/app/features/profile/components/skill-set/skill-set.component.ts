@@ -14,6 +14,7 @@ import { Skill } from '../../models/skill';
 import { SkillService } from '../../services/skill.service';
 import { MessageService } from '../../../core/shared/services/message.service';
 import { SkillSetFormValidation } from '../../models/validation/skillSetFormValidation';
+import { SkillMasterService } from '../../../core/shared/services/master/skillMaster.service';
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -27,20 +28,35 @@ import * as _ from 'lodash';
 })
 export class SkillSetComponent implements OnInit {
   public skillSet: Observable<Skill>;
+  public skillMaster: Observable<any>;
   skillTypes: SelectItem[];
   showDiv: boolean;
   skillSetForm: FormGroup;
 
   constructor(
-    private router: Router, private formBuilder: FormBuilder, private skillService: SkillService, private messageService: MessageService) {
+    private router: Router, private formBuilder: FormBuilder, private skillService: SkillService,
+    private messageService: MessageService, private skillMasterService: SkillMasterService) {
     this.skillTypes = [];
     this.showDiv = true;
   }
 
   ngOnInit(): void {
-    this.skillTypes.push({ label: 'Select Skill Type', value: null });
-    this.skillTypes.push({ label: 'Language/Technology', value: { id: 1, name: 'Language/Technology' } });
-    this.skillTypes.push({ label: 'Database', value: { id: 2, name: 'Database' } });
+
+    this.skillMaster = this.skillMasterService.getSkillMaster();
+    this.skillMaster.subscribe(result => {
+      if (result) {
+        this.skillTypes.push({ label: 'Select Skill Type', value: null });
+        result.forEach(element => {
+          this.skillTypes.push({
+            label: element.Name,
+            value: {
+              id: element.ID,
+              name: element.Name
+            }
+          })
+        });
+      }
+    })
 
     this.skillSetForm = this.formBuilder.group({
       id: [null],

@@ -12,11 +12,12 @@ import { EducationService } from '../../services/education.service';
 import { Education } from '../../models/education';
 import { MessageService } from '../../../core/shared/services/message.service';
 import { EducationFormValidation } from '../../models/validation/educationFormValidation';
+import { ClassMasterService } from '../../../core/shared/services/master/classMaster.service';
+import { GradeMasterService } from '../../../core/shared/services/master/gradeMaster.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
 
-/** Module Level Dependencies */
 
 /** Other Module Dependencies */
 import * as _ from 'lodash';
@@ -38,6 +39,8 @@ export interface Select {
 })
 export class EducationComponent implements OnInit {
     education: Observable<Education>;
+    public classMaster: Observable<any>;
+    public gradeMaster: Observable<any>;
     class: SelectItem[];
     grade: SelectItem[];
     showDiv: boolean;
@@ -45,25 +48,45 @@ export class EducationComponent implements OnInit {
     public profile_Observable: Observable<any>;
 
     constructor(
-        private router: Router, private formBuilder: FormBuilder, private educationService: EducationService, private messageService: MessageService) {
+        private router: Router, private formBuilder: FormBuilder, private educationService: EducationService, private messageService: MessageService,
+        private classMasterService: ClassMasterService, private gradeMasterService: GradeMasterService) {
         this.class = [];
         this.grade = [];
         this.showDiv = true;
     }
 
     ngOnInit(): void {
-        this.class.push({ label: 'Select Class', value: null });
-        this.class.push({ label: 'SSC', value: { id: 1, name: 'SSC' } });
-        this.class.push({ label: 'HSC', value: { id: 2, name: 'HSC' } });
-        this.class.push({ label: 'Diploma', value: { id: 3, name: 'Diploma' } });
-        this.class.push({ label: 'Graduation', value: { id: 4, name: 'Graduation' } });
-        this.class.push({ label: 'Post-Graduation', value: { id: 5, name: 'Post-Graduation' } });
+        this.classMaster = this.classMasterService.getClassMaster();
+        this.classMaster.subscribe(result => {
+            if (result) {
+                this.class.push({ label: 'Select', value: null }),
+                    result.forEach(element => {
+                        this.class.push({
+                            label: element.Name,
+                            value: {
+                                id: element.ID,
+                                name: element.Name
+                            }
+                        })
+                    });
+            }
+        })
 
-        this.grade.push({ label: 'Select Grade', value: null });
-        this.grade.push({ label: 'Distinction', value: { id: 1, name: 'Distinction' } });
-        this.grade.push({ label: 'First Class', value: { id: 2, name: 'First Class' } });
-        this.grade.push({ label: 'Second Class', value: { id: 3, name: 'Second Class' } });
-        this.grade.push({ label: 'Pass', value: { id: 4, name: 'Pass' } });
+        this.gradeMaster = this.gradeMasterService.getGradeMaster();
+        this.gradeMaster.subscribe(result => {
+            if (result) {
+                this.grade.push({ label: 'Select', value: null }),
+                    result.forEach(element => {
+                        this.grade.push({
+                            label: element.Name,
+                            value: {
+                                id: element.ID,
+                                name: element.Name
+                            }
+                        })
+                    });
+            }
+        })
 
         this.education = this.educationService.getEducation();
 
