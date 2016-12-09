@@ -35,10 +35,18 @@ import { PassportService } from './services/passport.service';
 import { UanService } from './services/uan.service';
 import { VisaService } from './services/visa.service';
 
+//Master
+import { SkillMasterService } from '../core/shared/services/master/skillMaster.service';
+import { CertificationMasterService } from '../core/shared/services/master/certificationMaster.service';
+import { CertificationCodeMasterService } from '../core/shared/services/master/certificationCodeMaster.service';
+import { IdentityTypeMasterService } from '../core/shared/services/master/identityTypeMaster.service';
+import { ClassMasterService } from '../core/shared/services/master/classMaster.service';
+import { GradeMasterService } from '../core/shared/services/master/gradeMaster.service';
+
 /** Module Definition */
 @NgModule({
     imports: [
-        CommonModule        
+        CommonModule
     ],
     declarations: [
         MyProfileComponent,
@@ -58,7 +66,9 @@ import { VisaService } from './services/visa.service';
         IdentityProofsComponent
     ],
     providers: [ProfileService, AchievementService, CertificateService, SkillService, EducationService, EmploymentHistoryService,
-        ExperienceService, AddressService, IdentityProofService, NomineesService, PassportService, UanService, VisaService]
+        ExperienceService, AddressService, IdentityProofService, NomineesService, PassportService, UanService, VisaService,
+        SkillMasterService, CertificationMasterService, CertificationCodeMasterService, IdentityTypeMasterService, ClassMasterService, GradeMasterService
+    ]
 })
 
 export class ProfileModule {

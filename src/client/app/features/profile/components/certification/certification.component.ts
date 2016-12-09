@@ -10,6 +10,8 @@ import { CertificateService } from '../../services/certificate.service';
 import { Certificate } from '../../models/certificate';
 import { CertificationFormValidation } from '../../models/validation/certificationFormValidation';
 import { MessageService } from '../../../core/shared/services/message.service';
+import { CertificationMasterService } from '../../../core/shared/services/master/certificationMaster.service';
+import { CertificationCodeMasterService } from '../../../core/shared/services/master/certificationCodeMaster.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -27,34 +29,53 @@ import * as moment from 'moment/moment';
 })
 export class CertificationComponent implements OnInit {
     public certifications: Observable<Certificate>;
+    public certificationOptionsMaster: Observable<any>;
+    public certificationCodesMaster: Observable<any>;
     certificationOptions: SelectItem[];
     certificationCodes: SelectItem[];
     showDiv: boolean;
     certificationForm: FormGroup;
     public profile_Observable: Observable<any>;
 
-    constructor(private formBuilder: FormBuilder, private certificateService: CertificateService, private messageService: MessageService) {
+    constructor(private formBuilder: FormBuilder, private certificateService: CertificateService, private messageService: MessageService,
+        private certificationMasterService: CertificationMasterService, private certificationCodeMasterService: CertificationCodeMasterService) {
         this.certificationOptions = [];
         this.certificationCodes = [];
         this.showDiv = true;
     }
 
     ngOnInit(): void {
-        this.certificationOptions = [
-            { label: 'Select', value: null },
-            { label: 'Microsoft', value: { id: 1, name: 'Microsoft' } },
-            { label: 'SalesForce', value: { id: 2, name: 'SalesForce' } },
-            { label: 'CRM', value: { id: 3, name: 'CRM' } },
-            { label: 'SharePoint', value: { id: 4, name: 'SharePoint' } },
-        ];
+        this.certificationOptionsMaster = this.certificationMasterService.getCertificationMaster();
+        this.certificationOptionsMaster.subscribe(result => {
+            if (result) {
+                this.certificationOptions.push({ label: 'Select', value: null }),
+                    result.forEach(element => {
+                        this.certificationOptions.push({
+                            label: element.Name,
+                            value: {
+                                id: element.ID,
+                                name: element.Name
+                            }
+                        })
+                    });
+            }
+        })
 
-        this.certificationCodes = [
-            { label: 'Select', value: null },
-            { label: '11111', value: { id: 1, name: '11111' } },
-            { label: '11111', value: { id: 2, name: '11112' } },
-            { label: '11113', value: { id: 3, name: '11113' } },
-            { label: '11114', value: { id: 4, name: '11114' } },
-        ];
+        this.certificationCodesMaster = this.certificationCodeMasterService.getCertificationCodeMaster();
+        this.certificationCodesMaster.subscribe(result => {
+            if (result) {
+                this.certificationCodes.push({ label: 'Select', value: null }),
+                    result.forEach(element => {
+                        this.certificationCodes.push({
+                            label: element.Name,
+                            value: {
+                                id: element.ID,
+                                name: element.Name
+                            }
+                        })
+                    });
+            }
+        })
 
         this.certificationForm = this.formBuilder.group({
             id: [null],

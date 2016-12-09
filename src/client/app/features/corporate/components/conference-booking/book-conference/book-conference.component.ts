@@ -6,6 +6,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 import * as _ from 'lodash';
 //import * as localForage from 'localforage';
+import { Conference } from '../../../models/conference';
 import { ConferenceBookingService } from '../../../services/conference-booking.service';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import * as moment from 'moment/moment';
@@ -60,7 +61,7 @@ export class BookComponent implements OnInit {
         });
         let event = this.conferenceBookingService.getSelectedSlot();
     }
-    onSubmit({ value, valid }: { value: IConferenceForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: Conference, valid: boolean }) {
         if (moment(value.end).diff(value.start, 'minutes') > 0) {
             value.color = value.Room.Color;
             value.start = moment(value.start).format();
@@ -79,17 +80,3 @@ export class BookComponent implements OnInit {
         this.router.navigate(['/corporate/conferenceBooking']);
     }
 }
-export interface IConferenceForm {
-    id: number;
-    Room: Select;
-    title: string;
-    start: string;
-    end: string;
-    allDay: boolean;
-    color: string;
-}
-interface Select {
-    id: number;
-    Name: string;
-    Color: string;
-};

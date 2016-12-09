@@ -10,6 +10,7 @@ import { IdentityProofService } from '../../../services/identityProof.service';
 import { IdentityProof } from '../../../models/identityProof';
 import { MessageService } from '../../../../core/shared/services/message.service';
 import { IdentityProofsFormValidation } from '../../../models/validation/identityProofsFormValidation';
+import { IdentityTypeMasterService } from '../../../../core/shared/services/master/identityTypeMaster.service';
 
 /** Third Party Dependencies */
 import { SelectItem } from 'primeng/primeng';
@@ -25,6 +26,7 @@ import * as _ from 'lodash';
 export class IdentityProofsComponent implements OnInit {
 
     identityProofs: Observable<IdentityProof>;
+    identityTypesMaster: Observable<any>;
     identityTypes: SelectItem[];
     showDiv: boolean;
     showSubDiv: boolean;
@@ -32,19 +34,30 @@ export class IdentityProofsComponent implements OnInit {
     public profile_Observable: Observable<any>;
     identityProofForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder, private identityProofService: IdentityProofService, private messageService: MessageService) {
+    constructor(private formBuilder: FormBuilder, private identityProofService: IdentityProofService, private messageService: MessageService,
+        private identityTypeMasterService: IdentityTypeMasterService) {
         this.showDiv = false;
         this.showSubDiv = false;
         this.selectedIdentityType = {};
+        this.identityTypes = [];
     }
 
     ngOnInit(): void {
-        this.identityTypes = [
-            { label: 'Select', value: null },
-            { label: 'Aadhaar Card ID', value: { id: 1, name: 'Aadhaar Card ID' } },
-            { label: 'PAN Card', value: { id: 2, name: 'PAN Card' } },
-            { label: 'Voter ID', value: { id: 3, name: 'Voter ID' } }
-        ];
+        this.identityTypesMaster = this.identityTypeMasterService.getIdentityTypeMaster();
+        this.identityTypesMaster.subscribe(result => {
+            if (result) {
+                this.identityTypes.push({ label: 'Select', value: null }),
+                    result.forEach(element => {
+                        this.identityTypes.push({
+                            label: element.Name,
+                            value: {
+                                id: element.ID,
+                                name: element.Name
+                            }
+                        })
+                    });
+            }
+        })
 
         this.identityProofForm = this.formBuilder.group({
             id: null,
