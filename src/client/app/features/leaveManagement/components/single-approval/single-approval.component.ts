@@ -1,6 +1,7 @@
 /** Angular Dependencies */
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 /** Framework Dependencies */
 import { Component } from '@angular/core';
@@ -14,15 +15,13 @@ import { Message } from 'primeng/primeng';
 import { LeaveService } from '../../services/leave.service';
 import { Leave } from '../../models/leave';
 import { User } from '../../models/user';
+import { ApprovalForm } from '../../models/leaveApprovalValidation';
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
 
 /** Component Declaration */
 
-export interface SingleApprovalForm {
-    comments: string;
-}
 
 @Component({
     moduleId: module.id,
@@ -70,7 +69,7 @@ export class SingleApprovalComponent {
 
     }
 
-    approveClicked({ value, valid }: { value: SingleApprovalForm, valid: boolean }) {
+    approveClicked({ value, valid }: { value: ApprovalForm, valid: boolean }) {
         if (valid) {
         //    BACKEND CALL HERE
             this.model.comments = value.comments;
@@ -96,7 +95,7 @@ export class SingleApprovalComponent {
         }
     }
 
-    rejectClicked({ value, valid }: { value: SingleApprovalForm, valid: boolean }) {
+    rejectClicked({ value, valid }: { value: ApprovalForm, valid: boolean }) {
         if (valid) {
         //    BACKEND CALL HERE
 

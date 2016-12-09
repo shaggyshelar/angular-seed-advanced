@@ -32,6 +32,7 @@ require('./visa/visa')(app);
 require('./leaves/leaves')(app);
 require('./holidays/holiday')(app);
 require('./changePassword/changePassword')(app);
+require('./master/leaveTypeMaster/leaveTypeMaster')(app);
 require('./master/skillMaster/skillMaster')(app);
 require('./master/certificationCodeMaster/certificationCodeMaster')(app);
 require('./master/certificationMaster/certificationMaster')(app);

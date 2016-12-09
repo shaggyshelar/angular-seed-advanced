@@ -50,8 +50,6 @@ export class ChangePasswordComponent {
         });
     }
 
-    checkForm() {
-    }
 
     onSubmit({ value, valid }: { value: PasswordForm, valid: boolean }) {
         var params = {
@@ -59,18 +57,24 @@ export class ChangePasswordComponent {
             OldPassword: value.OldPassword,
             ConfirmPassword: value.ConfirmPassword
         };
-        this.passwrdObs = this.passwordService.changePassword(params);
-        this.passwrdObs.subscribe(res => {
-            debugger;
-            if (res.resp === 1) {
-                this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
-                this.passwordForm.reset();
+
+        if (params.ConfirmPassword === params.NewPassword) {
+            this.isConfirmPasswordSame = true;
+            this.passwrdObs = this.passwordService.changePassword(params);
+            this.passwrdObs.subscribe(res => {
                 debugger;
-            } else {
-                this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: res.message });
-                this.passwordForm.reset();
-                debugger;
-            }
-        })
+                if (res.resp === 1) {
+                    this.messageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Password Changed!' });
+                    this.passwordForm.reset();
+                    debugger;
+                } else {
+                    this.messageService.addMessage({ severity: 'error', summary: 'Failed', detail: res.message });
+                    this.passwordForm.reset();
+                    debugger;
+                }
+            })
+        } else {
+            this.isConfirmPasswordSame = false;
+        }
     }
 }

@@ -7,7 +7,6 @@ import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
 import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
-import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 

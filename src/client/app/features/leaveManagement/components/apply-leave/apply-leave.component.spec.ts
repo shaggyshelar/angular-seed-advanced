@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Rx';
 import { LeaveService } from '../../services/leave.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { LeaveTypeMasterService } from '../../../core/shared/services/master/leaveTypeMaster.service';
 // app
 import { ApplyLeaveComponent } from './apply-leave.component';
 
@@ -29,7 +30,8 @@ export function main() {
                     { provide: Router, useClass: RouterStub },
                     { provide: LeaveService, useClass: LeaveServiceStub },
                     { provide: UserService, useClass: UserServiceStub },
-                    { provide: MessageService, useclass: MessageServiceStub }
+                    { provide: MessageService, useclass: MessageServiceStub },
+                    { provide: LeaveTypeMasterService, useclass: LeaveTypeStub }
                 ]
             });
         });
@@ -129,5 +131,28 @@ class LeaveServiceStub {
 class MessageServiceStub {
     addMessage(message) {
         return;
+    }
+}
+
+class LeaveTypeStub {
+    getLeaveTypes() {
+        return [
+            {
+                id: 1,
+                name: 'Leave'
+            },
+            {
+                id: 2,
+                name: 'Half Day Leave'
+            },
+            {
+                id: 3,
+                name: 'Absent'
+            },
+            {
+                id: 4,
+                name: 'Half Day Absent'
+            },
+        ];
     }
 }

@@ -14,6 +14,7 @@ import { ApplyLeaveValidation } from '../../models/applyLeaveValidation';
 
 /** Other Module Dependencies */
 import { MessageService } from '../../../core/shared/services/message.service';
+import { LeaveTypeMasterService } from '../../../core/shared/services/master/leaveTypeMaster.service';
 
 /** Third Party Dependencies */
 import { Observable } from 'rxjs/Rx';
@@ -30,6 +31,7 @@ import { SelectItem } from 'primeng/primeng';
 })
 
 export class ApplyLeaveComponent implements OnInit {
+    leaveTypesObs: Observable<Select>;
     leaveObs: Observable<boolean>;
     userObs: Observable<User>;
     applyLeaveForm: FormGroup;
@@ -45,20 +47,22 @@ export class ApplyLeaveComponent implements OnInit {
     dayCount: any;
     leaves: SelectItem[];
     model: ApplyLeaveValidation;
+    subLeaveType: any;
 
     constructor(
         private messageService: MessageService,
         private router: Router,
         private userService: UserService,
         private leaveService: LeaveService,
+        private leaveTypeService: LeaveTypeMasterService,
         private formBuilder: FormBuilder
     ) {
         this.leaves = [
-            { label: 'Submit', value: null },
-            { label: 'Leave', value: { id: 1, name: 'Leave' } },
-            { label: 'Half-day Leave', value: { id: 2, name: 'Half-day Leave' } },
-            { label: 'Absent', value: { id: 3, name: 'Absent' } },
-            { label: 'Half-day Absent', value: { id: 4, name: 'Half-day Absent' } }
+            // { label: 'Submit', value: null },
+            // { label: 'Leave', value: { id: 1, name: 'Leave' } },
+            // { label: 'Half-day Leave', value: { id: 2, name: 'Half-day Leave' } },
+            // { label: 'Absent', value: { id: 3, name: 'Absent' } },
+            // { label: 'Half-day Absent', value: { id: 4, name: 'Half-day Absent' } }
         ];
         this.addLeaveArr = [];
 
@@ -86,6 +90,14 @@ export class ApplyLeaveComponent implements OnInit {
     ngOnInit() {
 
         this.userObs = this.userService.getUserDetails();
+        this.subLeaveType = this.leaveTypeService.getLeaveTypes().subscribe(res => {
+            for (var index in res)
+                this.leaves.push({ label: res[index].name, value: res[index] });
+        });
+    }
+
+    ngOnDestroy() {
+        this.subLeaveType.unsubscribe();
     }
 
     submitForm(form: NgForm) {
@@ -223,6 +235,6 @@ export class ApplyLeaveComponent implements OnInit {
     }
 
     addLeaves() {
-        
+
     }
 }

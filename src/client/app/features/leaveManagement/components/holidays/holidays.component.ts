@@ -1,5 +1,6 @@
 /** Angular Dependencies */
 import { Router } from '@angular/router';
+import { OnInit } from '@angular/core';
 
 /** Framework Dependencies */
 import { Component } from '@angular/core';

@@ -6,7 +6,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { t } from '../../../../frameworks/test/index';
 import { CoreModule } from '../../../../frameworks/core/core.module';
 
-import { MultilingualModule } from '../../../../frameworks/i18n/multilingual.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../../core/shared/services/message.service';
 
